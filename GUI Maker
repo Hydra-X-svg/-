@@ -1,0 +1,501 @@
+-- [GUI Maker]
+
+local gui = Instance.new("ScreenGui", game.CoreGui)
+
+gui.Name = "Project"
+
+local Toggle = Instance.new("ImageButton", gui)
+
+local mainFrame = Instance.new("Frame", gui)
+
+local KP = Instance.new("Frame", mainFrame)
+
+local KP_2 = Instance.new("Frame", mainFrame)
+
+local KP_3 = Instance.new("Frame", mainFrame)
+
+local KP_4 = Instance.new("Frame", mainFrame)
+
+local KP_5 = Instance.new("Frame", KP_3)
+
+local KP_6 = Instance.new("Frame", KP_3)
+
+local KP_7 = Instance.new("Frame", KP)
+
+local KP_8 = Instance.new("Frame", KP)
+
+local Box = Instance.new("TextBox", mainFrame)
+
+local Exe = Instance.new("TextButton", KP)
+
+local Clear = Instance.new("TextButton", KP)
+
+local Copy = Instance.new("TextButton", KP)
+
+local Cut = Instance.new("TextButton", KP)
+
+local Paste = Instance.new("TextButton", KP)
+
+local Close = Instance.new("TextButton", KP_3)
+
+local Yes = Instance.new("TextButton", KP_4)
+
+local No = Instance.new("TextButton", KP_4)
+
+local title = Instance.new("TextLabel", KP_4)
+
+-- Toggle Button
+
+Toggle.Name = "OpenButton"
+
+Toggle.Size = UDim2.new(0, 50, 0, 50)
+
+Toggle.Position = UDim2.new(0.5, 0, 0.0, 0)
+
+Toggle.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+
+Toggle.Active = true
+
+Toggle.Draggable = true
+
+Toggle.Visible = false
+
+Toggle.Image = "rbxassetid://0"
+
+Instance.new("UIStroke", Toggle).Color =  Color3.new(5, 5, 5)
+
+Instance.new("UICorner", Toggle).CornerRadius = UDim.new(0, 3)
+
+-- Main Frame
+
+mainFrame.Position = UDim2.new(0.5, -0, 0.5, -29)
+
+mainFrame.Size = UDim2.new(0, 782, 0, 385)
+
+mainFrame.BackgroundColor3 = Color3.new(0, 0, 0)
+
+mainFrame.BackgroundTransparency = 0.7
+
+mainFrame.BorderSizePixel = 1
+
+mainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+
+Instance.new("UIStroke", mainFrame).Color =  Color3.new(5, 5, 5)
+
+Instance.new("UICorner", mainFrame).CornerRadius = UDim.new(0, 5)
+
+-- Kotak Panjang
+
+KP.Position = UDim2.new(0, 0, 0, 0)
+
+KP.Size = UDim2.new(0, 782, 0, 55)
+
+KP.BackgroundColor3 = Color3.new(0, 0, 0)
+
+KP.Active = true
+
+Instance.new("UIStroke", KP).Color =  Color3.new(5, 5, 5)
+
+KP_2.Position = UDim2.new(0, 0, 1, -57)
+
+KP_2.Size = UDim2.new(0, 782, 0, 56)
+
+KP_2.BackgroundColor3 = Color3.new(0, 0, 0)
+
+KP_2.Active = true
+
+Instance.new("UIStroke", KP_2).Color =  Color3.new(5, 5, 5)
+
+KP_3.Position = UDim2.new(0, 0, 0, 0)
+
+KP_3.Size = UDim2.new(0, 40, 0, 385)
+
+KP_3.BackgroundColor3 = Color3.new(0, 0, 0)
+
+KP_3.Active = true
+
+Instance.new("UIStroke", KP_3).Color =  Color3.new(5, 5, 5)
+
+KP_4.Position = UDim2.new(0.5, -50, 0.5, -50)
+
+KP_4.Size = UDim2.new(0, 140, 0, 70)
+
+KP_4.BackgroundColor3 = Color3.new(0, 0, 0)
+
+KP_4.Visible = false
+
+Instance.new("UIStroke", KP_4).Color =  Color3.new(5, 5, 5)
+
+KP_5.Position = UDim2.new(0.5, -20, 0.9, -3)
+
+KP_5.Size = UDim2.new(0, 40, 0, 1)
+
+KP_5.BackgroundColor3 = Color3.new(255, 255, 255)
+
+KP_5.BorderSizePixel = 0
+
+KP_6.Position = UDim2.new(0.5, -20, 0.1, 0)
+
+KP_6.Size = UDim2.new(0, 40, 0, 1)
+
+KP_6.BackgroundColor3 = Color3.new(255, 255, 255)
+
+KP_6.BorderSizePixel = 0
+
+KP_7.Position = UDim2.new(0.8, -8, 0.0, 0)
+
+KP_7.Size = UDim2.new(0, 1, 0, 55)
+
+KP_7.BackgroundColor3 = Color3.new(255, 255, 255)
+
+KP_7.BorderSizePixel = 0
+
+KP_8.Position = UDim2.new(0.5, -8, 0.0, 0)
+
+KP_8.Size = UDim2.new(0, 1, 0, 55)
+
+KP_8.BackgroundColor3 = Color3.new(255, 255, 255)
+
+KP_8.BorderSizePixel = 0
+
+-- TextBox
+
+Box.Position = UDim2.new(0, 40, 0.0, 55)
+
+Box.Size = UDim2.new(0, 742, 0, 272)
+
+Box.BackgroundColor3 = Color3.new(255, 255, 255)
+
+Box.BackgroundTransparency = 1
+
+Box.TextSize = 13
+
+Box.TextColor3 = Color3.new(1, 1, 1)
+
+Box.Font = Enum.Font.Gotham
+
+Box.BorderSizePixel = 0
+
+Box.Text = ""
+
+Box.PlaceholderText = "-- GUI Maker v1"
+
+Box.ClearTextOnFocus = false
+
+Box.MultiLine = true
+
+Box.TextWrapped = true
+
+Box.TextXAlignment = Enum.TextXAlignment.Left
+
+Box.TextYAlignment = Enum.TextYAlignment.Top
+
+-- Execute Button
+
+Exe.Position = UDim2.new(0.9, 0, 0, 7)
+
+Exe.Size = UDim2.new(0, 60, 0, 40)
+
+Exe.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+
+Exe.Text = "Execute"
+
+Exe.Font = Enum.Font.Gotham
+
+Exe.TextColor3 = Color3.new(1, 1, 1)
+
+Exe.TextSize = 16
+
+Instance.new("UICorner", Exe).CornerRadius = UDim.new(0, 5)
+
+-- Clear Button
+
+Clear.Position = UDim2.new(0.9, -70, 0, 7)
+
+Clear.Size = UDim2.new(0, 60, 0, 40)
+
+Clear.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+
+Clear.Text = "Clear"
+
+Clear.Font = Enum.Font.Gotham
+
+Clear.TextColor3 = Color3.new(1, 1, 1)
+
+Clear.TextSize = 16
+
+Instance.new("UICorner", Clear).CornerRadius = UDim.new(0, 5)
+
+-- Copy Button
+
+Copy.Position = UDim2.new(0.8, -84, 0, 7)
+
+Copy.Size = UDim2.new(0, 60, 0, 40)
+
+Copy.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+
+Copy.Text = "Copy"
+
+Copy.Font = Enum.Font.Gotham
+
+Copy.TextColor3 = Color3.new(1, 1, 1)
+
+Copy.TextSize = 16
+
+Instance.new("UICorner", Copy).CornerRadius = UDim.new(0, 5)
+
+-- Cut Button
+
+Cut.Position = UDim2.new(0.6, 2, 0, 7)
+
+Cut.Size = UDim2.new(0, 60, 0, 40)
+
+Cut.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+
+Cut.Text = "Cut"
+
+Cut.Font = Enum.Font.Gotham
+
+Cut.TextColor3 = Color3.new(1, 1, 1)
+
+Cut.TextSize = 16
+
+Instance.new("UICorner", Cut).CornerRadius = UDim.new(0, 5)
+
+-- Paste Button
+
+Paste.Position = UDim2.new(0.5, 9, 0, 7)
+
+Paste.Size = UDim2.new(0, 60, 0, 40)
+
+Paste.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+
+Paste.Text = "Paste"
+
+Paste.Font = Enum.Font.Gotham
+
+Paste.TextColor3 = Color3.new(1, 1, 1)
+
+Paste.TextSize = 16
+
+Instance.new("UICorner", Paste).CornerRadius = UDim.new(0, 5)
+
+-- Close Button
+
+Close.Position = UDim2.new(0, 20, 1, -20)
+
+Close.Size = UDim2.new(0, 25, 0, 25)
+
+Close.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+
+Close.Text = "X"
+
+Close.TextSize = 11
+
+Close.TextColor3 = Color3.new(1, 1, 1)
+
+Close.AnchorPoint = Vector2.new(0.5, 0.5)
+
+Instance.new("UICorner", Close).CornerRadius = UDim.new(0, 5)
+
+-- [Yes] Button
+
+Yes.Position = UDim2.new(0.1, -2, 0, 40)
+
+Yes.Size = UDim2.new(0, 30, 0, 20)
+
+Yes.BackgroundColor3 = Color3.fromRGB(31, 128, 29)
+
+Yes.Text = "Yes"
+
+Yes.Font = Enum.Font.Gotham
+
+Yes.TextColor3 = Color3.new(1, 1, 1)
+
+Yes.TextSize = 10
+
+Instance.new("UICorner", Yes).CornerRadius = UDim.new(0, 5)
+
+-- [No] Button
+
+No.Position = UDim2.new(0.7, 0, 0, 40)
+
+No.Size = UDim2.new(0, 30, 0, 20)
+
+No.BackgroundColor3 = Color3.fromRGB(196, 40, 28)
+
+No.Text = "No"
+
+No.Font = Enum.Font.Gotham
+
+No.TextColor3 = Color3.new(1, 1, 1)
+
+No.TextSize = 10
+
+Instance.new("UICorner", No).CornerRadius = UDim.new(0, 5)
+
+-- Title
+
+title.Text = "Are You Sure?"
+
+title.Font = Enum.Font.GothamBold
+
+title.TextSize = 17
+
+title.TextColor3 = Color3.new(1, 1, 1)
+
+title.BackgroundTransparency = 1
+
+title.Size = UDim2.new(0 , 30, 0, 30)
+
+title.Position = UDim2.new(0.5, -15, 0.0, 2)
+
+-- UIStroke
+
+local Stroke = Instance.new("UIStroke", Exe)
+
+Stroke.Color = Color3.new(255, 255, 255)
+
+Stroke.Thickness = 1
+
+Stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+local Stroke = Instance.new("UIStroke", Clear)
+
+Stroke.Color = Color3.new(255, 255, 255)
+
+Stroke.Thickness = 1
+
+Stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+local Stroke = Instance.new("UIStroke", Copy)
+
+Stroke.Color = Color3.new(255, 255, 255)
+
+Stroke.Thickness = 1
+
+Stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+local Stroke = Instance.new("UIStroke", Cut)
+
+Stroke.Color = Color3.new(255, 255, 255)
+
+Stroke.Thickness = 1
+
+Stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+local Stroke = Instance.new("UIStroke", Paste)
+
+Stroke.Color = Color3.new(255, 255, 255)
+
+Stroke.Thickness = 1
+
+Stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+local Stroke = Instance.new("UIStroke", Color)
+
+Stroke.Color = Color3.new(255, 255, 255)
+
+Stroke.Thickness = 1
+
+Stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+local Stroke = Instance.new("UIStroke", script)
+
+Stroke.Color = Color3.new(255, 255, 255)
+
+Stroke.Thickness = 1
+
+Stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+local Stroke = Instance.new("UIStroke", setting)
+
+Stroke.Color = Color3.new(255, 255, 255)
+
+Stroke.Thickness = 1
+
+Stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+local Stroke = Instance.new("UIStroke", Close)
+
+Stroke.Color = Color3.new(255, 255, 255)
+
+Stroke.Thickness = 1
+
+Stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+-- Function
+
+Toggle.MouseButton1Click:Connect(function()
+
+		  mainFrame.Visible = true		  Toggle.Visible = false
+
+end)
+
+Close.MouseButton1Click:Connect(function()
+
+		  mainFrame.Visible = false
+
+		  Toggle.Visible = true
+
+end)
+
+Exe.MouseButton1Click:Connect(function()
+
+		  assert(loadstring(Box.Text))()
+
+end)
+
+Clear.MouseButton1Click:Connect(function()
+
+if KP_4.Visible then
+
+		  KP_4.Visible = false
+
+      Box.Visible = true
+
+   else
+
+		  KP_4.Visible = true
+
+      Box.Visible = false
+
+   end
+
+end)
+
+Copy.MouseButton1Click:Connect(function()
+
+		  setclipboard(Box.Text)
+
+end)
+
+Cut.MouseButton1Click:Connect(function()
+
+		  setclipboard(Box.Text)
+
+		  Box.Text = ""
+
+end)
+
+Paste.MouseButton1Click:Connect(function()
+		  
+end)
+
+Yes.MouseButton1Click:Connect(function()
+
+		  KP_4.Visible = false
+
+		  Box.Text = ""
+
+      Box.Visible = true
+
+end)
+
+No.MouseButton1Click:Connect(function()
+
+		  KP_4.Visible = false
+
+      Box.Visible = true
+
+end)
