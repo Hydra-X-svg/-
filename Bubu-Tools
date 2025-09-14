@@ -71,8 +71,12 @@ end)
 
 local Section = Window:NewSection("Tools")
 
+Section:CreateButton("Permanent TpTool", function()
+loadstring(game:HttpGet("https://pastefy.app/OsnRSpEA/raw"))();
+end)
+
 Section:CreateButton("TpTool", function()
-loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Tptools-41801"))()
+loadstring(game:HttpGet("https://pastefy.app/BRd8i86J/raw"))();
 end)
 
 Section:CreateButton("Fire Part", function()
