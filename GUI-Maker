@@ -394,37 +394,37 @@ Btn12.TextSize = 9
 Instance.new("UIStroke", Btn12).Color =  Color3.new(5, 5, 5)
 Instance.new("UICorner", Btn12).CornerRadius = UDim.new(0, 3)
 
--- Function
+-- file
 Btn.MouseButton1Click:Connect(function()
-    setclipboard('local Players = game:GetService("Players")\nlocal player = Players.LocalPlayer\nlocal gui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))\ngui.Name = "Project"\ngui.ResetOnSpawn = false')
+    setclipboard('local Players = game:GetService("Players")\nlocal player = Players.LocalPlayer\nlocal gui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))\ngui.Name = "Project"\ngui.ResetOnSpawn = false\n\n')
 end)
 
 Btn2.MouseButton1Click:Connect(function()
-    setclipboard('local frame = Instance.new("Frame", gui)\nframe.Position = UDim2.new(0.0, 0, 0.0, 0)\nframe.Size = UDim2.new(0.0, 0, 0.0, 0)\nframe.BackgroundColor3 = Color3.new(250, 250, 250)\nframe.Active = true\nframe.Draggable = true\nframe.BackgroundTransparency = 0')
+    setclipboard('local frame = Instance.new("Frame", gui)\nframe.Position = UDim2.new(0.0, 0, 0.0, 0)\nframe.Size = UDim2.new(460, 0, 300, 0)\nframe.BackgroundColor3 = Color3.new(0, 0, 0)\nframe.Active = true\nframe.Draggable = true\nframe.BackgroundTransparency = 0\n\nInstance.new("UIStroke", frame).Color =  Color3.new(5, 5, 5)\nInstance.new("UICorner", frame).CornerRadius = UDim.new(0, 3)\n\n')
 end)
 
 Btn3.MouseButton1Click:Connect(function()
-    setclipboard('local Btn = Instance.new("TextButton", frame)\nBtn.Position = UDim2.new(0.0, 0, 0.0, 0)\nBtn.Size = UDim2.new(0, 80, 0, 35)\nBtn.BackgroundColor3 = Color3.new(255, 255, 255)\nBtn.Text = "Button"\nBtn.Font = Enum.Font.Gotham\nBtn.TextColor3 = Color3.new(0, 0, 0)\nBtn.TextSize = 14\nInstance.new("UIStroke", Btn).Color =  Color3.new(5, 5, 5)\nInstance.new("UICorner", Btn).CornerRadius = UDim.new(0, 3)')
+    setclipboard('local Btn = Instance.new("TextButton", frame)\nBtn.Position = UDim2.new(0.0, 0, 0.0, 0)\nBtn.Size = UDim2.new(0, 75, 0, 35)\nBtn.BackgroundColor3 = Color3.new(0, 0, 0)\nBtn.Text = "Button"\nBtn.Font = Enum.Font.Gotham\nBtn.TextColor3 = Color3.new(0, 0, 0)\nBtn.TextSize = 14\nInstance.new("UIStroke", Btn).Color =  Color3.new(5, 5, 5)\nInstance.new("UICorner", Btn).CornerRadius = UDim.new(0, 3)\n\n')
 end)
 
 Btn4.MouseButton1Click:Connect(function()
-    setclipboard('local Label = Instance.new("TextLabel", frame)\nLabel.Size = UDim2.new(0.3, 0, 0.2, 0)\nLabel.Position = UDim2.new(0.5, 0, 0.5, 0)\nLabel.BackgroundColor3 = Color3.new(0, 0, 0)\nLabel.Text = "Text"\nLabel.BackgroundTransparency = 0\nLabel.TextColor3 = Color3.new(255, 255, 255)\nLabel.Font = Enum.Font.Code')
+    setclipboard('local Label = Instance.new("TextLabel", frame)\nLabel.Size = UDim2.new(0, 75, 0, 30)\nLabel.Position = UDim2.new(0.5, 0, 0.5, 0)\nLabel.BackgroundColor3 = Color3.new(0, 0, 0)\nLabel.Text = "Text"\nLabel.BackgroundTransparency = 0\nLabel.TextColor3 = Color3.new(255, 255, 255)\nLabel.Font = Enum.Font.Code\n\n')
 end)
 
 Btn5.MouseButton1Click:Connect(function()
-    setclipboard('local Box = Instance.new("TextBox", Parent)\nBox.PlaceholderText = "TextBox"\nBox.Position = UDim2.new(0.0, 0, 0.0, 0)\nBox.Size = UDim2.new(0.0, 120, 0.0, 120)\nBox.TextSize = 16\nBox.TextColor3 = Color3.new(1, 1, 1)\nBox.BackgroundColor3 = Color3.fromRGB(0, 0, 0)\Box.Font = Enum.Font.Gotham\nBox.Text = ""\nBox.TextTransparency = 0\nBox.TextXAlignment = Enum.TextXAlignment.Left\nBox.TextYAlignment = Enum.TextYAlignment.Top\nBox.ClearTextOnFocus = false\nBox.MultiLine = true\nBox.TextWrapped = true\nInstance.new("UICorner", Box).CornerRadius = UDim.new(0, 4)')
+    setclipboard('local Box = Instance.new("TextBox", Parent)\nBox.PlaceholderText = "TextBox"\nBox.Position = UDim2.new(0.0, 0, 0.0, 0)\nBox.Size = UDim2.new(0.0, 120, 0.0, 120)\nBox.TextSize = 16\nBox.TextColor3 = Color3.new(1, 1, 1)\nBox.BackgroundColor3 = Color3.fromRGB(0, 0, 0)\Box.Font = Enum.Font.Gotham\nBox.Text = ""\nBox.TextTransparency = 0\nBox.TextXAlignment = Enum.TextXAlignment.Left\nBox.TextYAlignment = Enum.TextYAlignment.Top\nBox.ClearTextOnFocus = false\nBox.MultiLine = true\nBox.TextWrapped = true\nInstance.new("UICorner", Box).CornerRadius = UDim.new(0, 4)\n\n')
 end)
 
 Btn6.MouseButton1Click:Connect(function()
-    setclipboard('local imageBtn = Instance.new("ImageButton", Parent)\nimageBtn.Size = UDim2.new(0.3, 0, 0.2, 0)\nimageBtn.Position = UDim2.new(0.5, 0, 0.5, 0)\nimageBtn.BackgroundColor3 = Color3.new(0, 0, 0)\nimageBtn.ImageColor3 = Color3.new(1, 0, 0)\nimageBtn.Image = "rbxassetid://0"\nimageBtn.ImageTransparency = 0\nimageBtn.ScaleType = Enum.ScaleType.Sliced\nimageBtn.BackgroundTransparency = 0')
+    setclipboard('local imageBtn = Instance.new("ImageButton", Parent)\nimageBtn.Size = UDim2.new(0.3, 0, 0.2, 0)\nimageBtn.Position = UDim2.new(0.5, 0, 0.5, 0)\nimageBtn.BackgroundColor3 = Color3.new(0, 0, 0)\nimageBtn.ImageColor3 = Color3.new(1, 0, 0)\nimageBtn.Image = "rbxassetid://0"\nimageBtn.ImageTransparency = 0\nimageBtn.ScaleType = Enum.ScaleType.Sliced\nimageBtn.BackgroundTransparency = 0\n\n')
 end)
 
 Btn7.MouseButton1Click:Connect(function()
-    setclipboard('local imageLabel = Instance.new("ImageLabel", Parent)\nimageLabel.Size = UDim2.new(0.3, 0, 0.2, 0)\nimageLabel.Position = UDim2.new(0.5, 0, 0.5, 0)\nimageLabel.BackgroundColor3 = Color3.new(0, 0, 0)\nimageLabel.ImageColor3 = Color3.new(1, 0, 0)\nimageLabel.Image = "rbxassetid://0"\nimageLabel.ImageTransparency = 0\nimageLabel.ScaleType = Enum.ScaleType.Sliced\nimageLabel.BackgroundTransparency = 0')
+    setclipboard('local imageLabel = Instance.new("ImageLabel", Parent)\nimageLabel.Size = UDim2.new(0.3, 0, 0.2, 0)\nimageLabel.Position = UDim2.new(0.5, 0, 0.5, 0)\nimageLabel.BackgroundColor3 = Color3.new(0, 0, 0)\nimageLabel.ImageColor3 = Color3.new(1, 0, 0)\nimageLabel.Image = "rbxassetid://0"\nimageLabel.ImageTransparency = 0\nimageLabel.ScaleType = Enum.ScaleType.Sliced\nimageLabel.BackgroundTransparency = 0\n\n')
 end)
 
 Btn8.MouseButton1Click:Connect(function()
-    setclipboard('local scroll = Instance.new("ScrollingFrame", Parent)\nscroll.Size = UDim2.new(0, 120, 0, 160)\nscroll.Position = UDim2.new(0.0, 0, 0.0, 0)\nscroll.BackgroundColor3 = Color3.fromRGB(255, 255, 255)\nscroll.ScrollBarThickness = 0\nscroll.CanvasSize = UDim2.new(0, 0, 0, 0)\nscroll.BackgroundTransparency = 0\nInstance.new("UIStroke", scroll).Color =  Color3.new(0, 0, 0)\nInstance.new("UICorner", scroll).CornerRadius =  UDim.new(0, 5)')
+    setclipboard('local scroll = Instance.new("ScrollingFrame", Parent)\nscroll.Size = UDim2.new(0, 120, 0, 160)\nscroll.Position = UDim2.new(0.0, 0, 0.0, 0)\nscroll.BackgroundColor3 = Color3.fromRGB(255, 255, 255)\nscroll.ScrollBarThickness = 0\nscroll.CanvasSize = UDim2.new(0, 0, 0, 0)\nscroll.BackgroundTransparency = 0\nInstance.new("UIStroke", scroll).Color =  Color3.new(0, 0, 0)\nInstance.new("UICorner", scroll).CornerRadius =  UDim.new(0, 5)\n\n')
 end)
 
 Btn9.MouseButton1Click:Connect(function()
@@ -432,15 +432,15 @@ Btn9.MouseButton1Click:Connect(function()
 end)
 
 Btn10.MouseButton1Click:Connect(function()
-    setclipboard('local Uis = Instance.new("UIStroke", Parent)\nUis.Color = Color3.new(255, 255, 255)\nUis.Thickness = 1\nUis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border')
+    setclipboard('local Uis = Instance.new("UIStroke", Parent)\nUis.Color = Color3.new(255, 255, 255)\nUis.Thickness = 1\nUis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border\n\n')
 end)
 
 Btn11.MouseButton1Click:Connect(function()
-    setclipboard('local Uil = Instance.new("UIListLayout", Parent)\nUil.HorizontalAlignment = Enum.HorizontalAlignment.Center\nUil.SortOrder = Enum.SortOrder.LayoutOrder\nUil.Padding = UDim.new(0, 10)')
+    setclipboard('local Uil = Instance.new("UIListLayout", Parent)\nUil.HorizontalAlignment = Enum.HorizontalAlignment.Center\nUil.SortOrder = Enum.SortOrder.LayoutOrder\nUil.Padding = UDim.new(0, 10)\n\n')
 end)
 
 Btn12.MouseButton1Click:Connect(function()
-    setclipboard('local Uig = Instance.new("UIGradient", Parent)\nUig.ColorSequence = {Color3.fromRGB(255, 0, 0), Color3.fromRGB(0, 255, 0), Color3.fromRGB(0, 0, 255)}\nUig.Transparency = 0.5\nUig.Rotation = 90')
+    setclipboard('local Uig = Instance.new("UIGradient", Parent)\nUig.ColorSequence = {Color3.fromRGB(255, 0, 0), Color3.fromRGB(0, 255, 0), Color3.fromRGB(0, 0, 255)}\nUig.Transparency = 0.5\nUig.Rotation = 90\n\n')
 end)
 
 -- Function
