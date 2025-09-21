@@ -405,7 +405,7 @@ Btn2.MouseButton1Click:Connect(function()
 end)
 
 Btn3.MouseButton1Click:Connect(function()
-    setclipboard('local Btn = Instance.new("TextButton", frame)\nBtn.Position = UDim2.new(0.0, 0, 0.0, 0)\nBtn.Size = UDim2.new(0, 75, 0, 35)\nBtn.BackgroundColor3 = Color3.new(0, 0, 0)\nBtn.Text = "Button"\nBtn.Font = Enum.Font.Gotham\nBtn.TextColor3 = Color3.new(0, 0, 0)\nBtn.TextSize = 14\n\nlocal Uis = Instance.new("UIStroke", Parent)\nUis.Color = Color3.new(255, 255, 255)\nUis.Thickness = 1\nUis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border\nInstance.new("UICorner", Btn).CornerRadius = UDim.new(0, 3)\n\n')
+    setclipboard('local Btn = Instance.new("TextButton", frame)\nBtn.Position = UDim2.new(0.0, 0, 0.0, 0)\nBtn.Size = UDim2.new(0, 75, 0, 35)\nBtn.BackgroundColor3 = Color3.new(0, 0, 0)\nBtn.Text = "Button"\nBtn.Font = Enum.Font.Gotham\nBtn.TextColor3 = Color3.new(0, 0, 0)\nBtn.TextSize = 14\n\nlocal Uis = Instance.new("UIStroke", Btn)\nUis.Color = Color3.new(255, 255, 255)\nUis.Thickness = 1\nUis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border\nInstance.new("UICorner", Btn).CornerRadius = UDim.new(0, 3)\n\n')
 end)
 
 Btn4.MouseButton1Click:Connect(function()
