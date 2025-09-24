@@ -573,4 +573,294 @@ function MenuLib:_createSlider(name, min, max, default, section, callback)
     createCorner(sliderFill, 2)
     
     local sliderButton = Instance.new("TextButton")
-    sliderButton.Size = UDim2.new(0, 20,
+    sliderButton.Size = UDim2.new(0, 20, 0, 20)
+    sliderButton.Position = UDim2.new(sliderFill.Size.X.Scale, -10, 0, -7)
+    sliderButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    sliderButton.Text = ""
+    sliderButton.ZIndex = 2
+    sliderButton.Parent = sliderBar
+    
+    createCorner(sliderButton, 10)
+    
+    local dragging = false
+    local currentValue = default
+    
+    local function updateSlider(value)
+        currentValue = math.clamp(math.floor(value), min, max)
+        local percent = (currentValue - min) / (max - min)
+        sliderFill.Size = UDim2.new(percent, 0, 1, 0)
+        sliderButton.Position = UDim2.new(percent, -10, 0, -7)
+        sliderValue.Text = tostring(currentValue)
+        if callback then callback(currentValue) end
+    end
+    
+    sliderButton.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            dragging = true
+        end
+    end)
+    
+    local function updateSliderFromInput(input)
+        if dragging then
+            local pos = input.Position
+            local relativeX = (pos.X - sliderBar.AbsolutePosition.X) / sliderBar.AbsoluteSize.X
+            local value = min + (max - min) * math.clamp(relativeX, 0, 1)
+            updateSlider(value)
+        end
+    end
+    
+    self.UIS.InputChanged:Connect(function(input)
+        if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+            updateSliderFromInput(input)
+        end
+    end)
+    
+    self.UIS.InputEnded:Connect(function(input)
+        if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and dragging then
+            dragging = false
+        end
+    end)
+    
+    sliderBar.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            dragging = true
+            updateSliderFromInput(input)
+        end
+    end)
+    
+    updateSlider(default)
+    
+    local sliderObj = {
+        SetValue = function(_, value)
+            updateSlider(value)
+        end,
+        GetValue = function()
+            return currentValue
+        end
+    }
+    
+    return sliderObj
+end
+
+function MenuLib:_createDropdown(name, options, defaultIndex, section, callback)
+    local dropdownFrame = Instance.new("Frame")
+    dropdownFrame.Size = UDim2.new(1, 0, 0, 30)
+    dropdownFrame.AutomaticSize = Enum.AutomaticSize.Y
+    dropdownFrame.BackgroundTransparency = 1
+    dropdownFrame.LayoutOrder = #section:GetChildren() + 1
+    dropdownFrame.Parent = section
+    
+    local dropdownName = Instance.new("TextLabel")
+    dropdownName.Text = name
+    dropdownName.Font = Enum.Font.SourceSans
+    dropdownName.TextSize = 16
+    dropdownName.TextColor3 = COLORS.Text
+    dropdownName.TextXAlignment = Enum.TextXAlignment.Left
+    dropdownName.BackgroundTransparency = 1
+    dropdownName.Size = UDim2.new(0.7, 0, 0, 30)
+    dropdownName.Parent = dropdownFrame
+    
+    -- Контейнер для кнопки и текста
+    local dropdownButtonContainer = Instance.new("Frame")
+    dropdownButtonContainer.Size = UDim2.new(0.3, 0, 0, 30)
+    dropdownButtonContainer.Position = UDim2.new(0.7, 0, 0, 0)
+    dropdownButtonContainer.BackgroundTransparency = 1
+    dropdownButtonContainer.Parent = dropdownFrame
+    
+    local dropdownButton = Instance.new("TextButton")
+    dropdownButton.Name = "DropdownButton"
+    dropdownButton.Text = ""
+    dropdownButton.BackgroundColor3 = COLORS.Header
+    dropdownButton.Size = UDim2.new(1, 0, 1, 0)
+    dropdownButton.Parent = dropdownButtonContainer
+    
+    createCorner(dropdownButton, 8)
+    createStroke(dropdownButton, 1)
+    
+    -- Текстовый элемент для отображения выбранного значения
+    local dropdownText = Instance.new("TextLabel")
+    dropdownText.Name = "DropdownText"
+    dropdownText.Text = options[defaultIndex] or "Select"
+    dropdownText.Font = Enum.Font.SourceSans
+    dropdownText.TextSize = 16
+    dropdownText.TextColor3 = COLORS.SecondaryText
+    dropdownText.TextXAlignment = Enum.TextXAlignment.Center
+    dropdownText.BackgroundTransparency = 1
+    dropdownText.Size = UDim2.new(1, -25, 1, 0)
+    dropdownText.Parent = dropdownButton
+    
+    local dropdownIcon = Instance.new("ImageLabel")
+    dropdownIcon.Image = "rbxassetid://3926307971"
+    dropdownIcon.ImageRectOffset = Vector2.new(364, 284)
+    dropdownIcon.ImageRectSize = Vector2.new(36, 36)
+    dropdownIcon.Size = UDim2.new(0, 15, 0, 15)
+    dropdownIcon.Position = UDim2.new(1, -20, 0.5, -7.5)
+    dropdownIcon.BackgroundTransparency = 1
+    dropdownIcon.Parent = dropdownButton
+    
+    -- Создаем контейнер для списка
+    local dropdownList = Instance.new("Frame")
+    dropdownList.Name = "DropdownList"
+    dropdownList.Size = UDim2.new(0, dropdownButton.AbsoluteSize.X, 0, 0)
+    dropdownList.AutomaticSize = Enum.AutomaticSize.Y
+    dropdownList.BackgroundColor3 = COLORS.Header
+    dropdownList.Visible = false
+    dropdownList.ZIndex = 1001 -- Очень высокий ZIndex
+    dropdownList.Parent = self.dropDownContainer
+    
+    local dropdownListLayout = Instance.new("UIListLayout")
+    dropdownListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+    dropdownListLayout.Parent = dropdownList
+    
+    createCorner(dropdownList, 8)
+    createStroke(dropdownList, 1)
+    
+    -- Функция для обновления позиции DropDown
+    local function updateDropdownPosition()
+        if dropdownButton and dropdownButton:IsDescendantOf(game) then
+            local buttonPos = dropdownButton.AbsolutePosition
+            local buttonSize = dropdownButton.AbsoluteSize
+            dropdownList.Position = UDim2.new(0, buttonPos.X, 0, buttonPos.Y + buttonSize.Y + 5)
+            dropdownList.Size = UDim2.new(0, buttonSize.X, 0, 0)
+        end
+    end
+    
+    -- Обновляем позицию при изменении
+    local conn
+    conn = self.RunService.Heartbeat:Connect(function()
+        if dropdownButton:IsDescendantOf(game) then
+            updateDropdownPosition()
+        else
+            conn:Disconnect()
+        end
+    end)
+    
+    -- Создаем элементы списка
+    for i, option in ipairs(options) do
+        local optionButton = Instance.new("TextButton")
+        optionButton.Text = option
+        optionButton.Font = Enum.Font.SourceSans
+        optionButton.TextSize = 16
+        optionButton.TextColor3 = COLORS.SecondaryText
+        optionButton.BackgroundColor3 = COLORS.Header
+        optionButton.BackgroundTransparency = 0
+        optionButton.Size = UDim2.new(1, 0, 0, 30)
+        optionButton.LayoutOrder = i
+        optionButton.ZIndex = 1002 -- Высокий ZIndex
+        optionButton.TextWrapped = true -- Перенос текста
+        optionButton.Parent = dropdownList
+        
+        optionButton.MouseButton1Click:Connect(function()
+            dropdownText.Text = option
+            dropdownList.Visible = false
+            if callback then callback(option, i) end
+        end)
+        
+        -- Подсветка при наведении
+        optionButton.MouseEnter:Connect(function()
+            optionButton.BackgroundColor3 = COLORS.ToggleOff
+        end)
+        
+        optionButton.MouseLeave:Connect(function()
+            optionButton.BackgroundColor3 = COLORS.Header
+        end)
+    end
+    
+    dropdownListLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+        dropdownList.Size = UDim2.new(0, dropdownButton.AbsoluteSize.X, 0, dropdownListLayout.AbsoluteContentSize.Y)
+    end)
+    
+    dropdownButton.MouseButton1Click:Connect(function()
+        dropdownList.Visible = not dropdownList.Visible
+        updateDropdownPosition()
+    end)
+    
+    -- Закрываем выпадающий список при клике вне его
+    local closeConn
+    closeConn = self.UIS.InputBegan:Connect(function(input)
+        if dropdownList.Visible and input.UserInputType == Enum.UserInputType.MouseButton1 then
+            local mousePos = input.Position
+            local listPos = dropdownList.AbsolutePosition
+            local listSize = dropdownList.AbsoluteSize
+            
+            if mousePos.X < listPos.X or mousePos.X > listPos.X + listSize.X or
+               mousePos.Y < listPos.Y or mousePos.Y > listPos.Y + listSize.Y then
+                dropdownList.Visible = false
+            end
+        end
+    end)
+    
+    dropdownList.Destroying:Connect(function()
+        if closeConn then
+            closeConn:Disconnect()
+        end
+    end)
+    
+    local dropdownObj = {
+        SetSelected = function(_, index)
+            if options[index] then
+                dropdownText.Text = options[index]
+                if callback then callback(options[index], index) end
+            end
+        end,
+        GetSelected = function()
+            return dropdownText.Text
+        end
+    }
+    
+    return dropdownObj
+end
+
+function MenuLib:_createButton(name, section, callback)
+    local buttonFrame = Instance.new("Frame")
+    buttonFrame.Size = UDim2.new(1, 0, 0, 35)
+    buttonFrame.AutomaticSize = Enum.AutomaticSize.Y
+    buttonFrame.BackgroundTransparency = 1
+    buttonFrame.LayoutOrder = #section:GetChildren() + 1
+    buttonFrame.Parent = section
+    
+    local button = Instance.new("TextButton")
+    button.Text = name
+    button.Font = Enum.Font.SourceSansSemibold
+    button.TextSize = 16
+    button.TextColor3 = COLORS.Text
+    button.BackgroundColor3 = COLORS.Button
+    button.AutoButtonColor = false
+    button.Size = UDim2.new(1, 0, 0, 35)
+    button.Parent = buttonFrame
+    
+    -- Стилизация
+    createCorner(button, 8)
+    createStroke(button, 1, COLORS.ToggleOff)
+    
+    -- Анимации
+    button.MouseEnter:Connect(function()
+        self.TweenService:Create(button, TweenInfo.new(0.1), {BackgroundColor3 = COLORS.ButtonHover}):Play()
+    end)
+    
+    button.MouseLeave:Connect(function()
+        self.TweenService:Create(button, TweenInfo.new(0.1), {BackgroundColor3 = COLORS.Button}):Play()
+    end)
+    
+    button.MouseButton1Down:Connect(function()
+        self.TweenService:Create(button, TweenInfo.new(0.1), {BackgroundColor3 = COLORS.ButtonPressed}):Play()
+    end)
+    
+    button.MouseButton1Up:Connect(function()
+        self.TweenService:Create(button, TweenInfo.new(0.1), {BackgroundColor3 = COLORS.Button}):Play()
+    end)
+    
+    -- Обработка клика
+    button.MouseButton1Click:Connect(function()
+        if callback then callback() end
+    end)
+    
+    -- Адаптация для мобильных устройств
+    if self.UIS.TouchEnabled then
+        button.Size = UDim2.new(1, 0, 0, 45)
+    end
+    
+    return button
+end
+
+return MenuLib
