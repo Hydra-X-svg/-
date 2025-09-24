@@ -1,0 +1,576 @@
+-- iOS Style Menu Library v1.1 (Fixed DropDown)
+local MenuLib = {}
+MenuLib.__index = MenuLib
+
+-- Константы стиля
+local COLORS = {
+    Background = Color3.fromRGB(28, 28, 30),
+    Header = Color3.fromRGB(44, 44, 46),
+    Text = Color3.fromRGB(240, 240, 240),
+    SecondaryText = Color3.fromRGB(200, 200, 200),
+    Accent = Color3.fromRGB(0, 122, 255),
+    ToggleOff = Color3.fromRGB(60, 60, 65),
+    ToggleOn = Color3.fromRGB(0, 122, 255),
+    ToggleCircle = Color3.fromRGB(220, 220, 220),
+    Button = Color3.fromRGB(0, 122, 255),
+    ButtonHover = Color3.fromRGB(10, 132, 255),
+    ButtonPressed = Color3.fromRGB(5, 100, 200)
+}
+
+-- Вспомогательные функции
+local function createCorner(parent, radius)
+    local corner = Instance.new("UICorner")
+    corner.CornerRadius = UDim.new(0, radius or 8)
+    corner.Parent = parent
+    return corner
+end
+
+local function createStroke(parent, thickness, color)
+    local stroke = Instance.new("UIStroke")
+    stroke.Thickness = thickness or 1
+    stroke.Color = color or Color3.fromRGB(60, 60, 65)
+    stroke.Parent = parent
+    return stroke
+end
+
+local function createShadow(parent)
+    local shadow = Instance.new("ImageLabel")
+    shadow.Name = "DropShadow"
+    shadow.Image = "rbxassetid://1316045217"
+    shadow.ImageColor3 = Color3.new(0, 0, 0)
+    shadow.ImageTransparency = 0.8
+    shadow.ScaleType = Enum.ScaleType.Slice
+    shadow.SliceCenter = Rect.new(10, 10, 118, 118)
+    shadow.Size = UDim2.new(1, 20, 1, 20)
+    shadow.Position = UDim2.new(0, -10, 0, -10)
+    shadow.BackgroundTransparency = 1
+    shadow.ZIndex = -1
+    shadow.Parent = parent
+    return shadow
+end
+
+-- Основной конструктор
+function MenuLib.new(title, tabs)
+    local self = setmetatable({}, MenuLib)
+    
+    -- Сервисы
+    self.CoreGui = game:GetService("CoreGui")
+    self.UIS = game:GetService("UserInputService")
+    self.TweenService = game:GetService("TweenService")
+    self.RunService = game:GetService("RunService")
+    
+    -- Состояние
+    self.title = title or "iOS Premium Menu"
+    self.tabs = tabs or {"Main", "Settings"}
+    self.currentTab = self.tabs[1]
+    self.elements = {}
+    self.openIcon = nil
+    self.screenGui = nil
+    self.mainFrame = nil
+    self.tabButtons = {}
+    self.dropDownContainer = nil
+    
+    -- Инициализация интерфейса
+    self:_initScreenGui()
+    self:_initMainFrame()
+    self:_initHeader()
+    self:_initTabContainer()
+    self:_initContentFrame()
+    self:_initOpenIcon()
+    
+    -- Обновление контента
+    self:UpdateTabContent()
+    
+    return self
+end
+
+-- Внутренние методы инициализации
+function MenuLib:_initScreenGui()
+    self.screenGui = Instance.new("ScreenGui")
+    self.screenGui.Name = "iOS_Style_Menu"
+    self.screenGui.Parent = self.CoreGui
+    self.screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+    self.screenGui.DisplayOrder = 10
+    self.screenGui.ResetOnSpawn = false
+    
+    -- Контейнер для DropDown (с высоким ZIndex)
+    self.dropDownContainer = Instance.new("Frame")
+    self.dropDownContainer.Name = "DropDownContainer"
+    self.dropDownContainer.Size = UDim2.new(1, 0, 1, 0)
+    self.dropDownContainer.BackgroundTransparency = 1
+    self.dropDownContainer.ClipsDescendants = false
+    self.dropDownContainer.ZIndex = 100 -- Высокий приоритет
+    self.dropDownContainer.Parent = self.screenGui
+end
+
+function MenuLib:_initMainFrame()
+    self.mainFrame = Instance.new("Frame")
+    self.mainFrame.Name = "MainFrame"
+    self.mainFrame.Size = UDim2.new(0, 350, 0, 500)
+    self.mainFrame.Position = UDim2.new(0.5, -175, 0.5, -250)
+    self.mainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+    self.mainFrame.BackgroundColor3 = COLORS.Background
+    self.mainFrame.BackgroundTransparency = 0.05
+    self.mainFrame.ClipsDescendants = true
+    self.mainFrame.Parent = self.screenGui
+    
+    -- Стилизация
+    createCorner(self.mainFrame, 14)
+    createStroke(self.mainFrame, 2)
+    createShadow(self.mainFrame)
+end
+
+function MenuLib:_initHeader()
+    local header = Instance.new("Frame")
+    header.Name = "Header"
+    header.Size = UDim2.new(1, 0, 0, 40)
+    header.BackgroundColor3 = COLORS.Header
+    header.BorderSizePixel = 0
+    header.Parent = self.mainFrame
+    
+    createCorner(header, 12)
+    
+    local title = Instance.new("TextLabel")
+    title.Name = "Title"
+    title.Text = self.title
+    title.Font = Enum.Font.SourceSansSemibold
+    title.TextSize = 18
+    title.TextColor3 = COLORS.Text
+    title.BackgroundTransparency = 1
+    title.Size = UDim2.new(1, -40, 1, 0)
+    title.Position = UDim2.new(0, 20, 0, 0)
+    title.TextXAlignment = Enum.TextXAlignment.Left
+    title.Parent = header
+    
+    local closeButton = Instance.new("ImageButton")
+    closeButton.Name = "CloseButton"
+    closeButton.Image = "rbxassetid://3926305904"
+    closeButton.ImageRectOffset = Vector2.new(284, 4)
+    closeButton.ImageRectSize = Vector2.new(24, 24)
+    closeButton.Size = UDim2.new(0, 30, 0, 30)
+    closeButton.Position = UDim2.new(1, -35, 0.5, -15)
+    closeButton.BackgroundTransparency = 1
+    closeButton.Parent = header
+    
+    -- Функционал закрытия
+    closeButton.MouseButton1Click:Connect(function()
+        self:Toggle()
+    end)
+    
+    -- Функционал перемещения
+    local dragging = false
+    local dragInput, dragStart, startPos
+    
+    header.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            dragging = true
+            dragStart = input.Position
+            startPos = self.mainFrame.Position
+            
+            input.Changed:Connect(function()
+                if input.UserInputState == Enum.UserInputState.End then
+                    dragging = false
+                end
+            end)
+        end
+    end)
+    
+    header.InputChanged:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+            dragInput = input
+        end
+    end)
+    
+    self.UIS.InputChanged:Connect(function(input)
+        if input == dragInput and dragging then
+            local delta = input.Position - dragStart
+            self.mainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+        end
+    end)
+end
+
+function MenuLib:_initTabContainer()
+    self.tabContainer = Instance.new("Frame")
+    self.tabContainer.Name = "TabContainer"
+    self.tabContainer.Size = UDim2.new(1, -20, 0, 30)
+    self.tabContainer.Position = UDim2.new(0, 10, 0, 45)
+    self.tabContainer.BackgroundTransparency = 1
+    self.tabContainer.Parent = self.mainFrame
+    
+    -- Создание вкладок
+    for i, tabName in ipairs(self.tabs) do
+        local tabButton = Instance.new("TextButton")
+        tabButton.Name = tabName.."Tab"
+        tabButton.Text = tabName
+        tabButton.Font = Enum.Font.SourceSansSemibold
+        tabButton.TextSize = 16
+        tabButton.TextColor3 = COLORS.SecondaryText
+        tabButton.BackgroundTransparency = 1
+        tabButton.Size = UDim2.new(0, 70, 1, 0)
+        tabButton.Position = UDim2.new(0, (i-1)*75, 0, 0)
+        tabButton.LayoutOrder = i
+        tabButton.Parent = self.tabContainer
+        
+        self.tabButtons[tabName] = tabButton
+        
+        tabButton.MouseButton1Click:Connect(function()
+            for _, btn in pairs(self.tabButtons) do
+                btn.TextColor3 = COLORS.SecondaryText
+            end
+            tabButton.TextColor3 = COLORS.Accent
+            self.currentTab = tabName
+            self:UpdateTabContent()
+        end)
+    end
+end
+
+function MenuLib:_initContentFrame()
+    self.contentFrame = Instance.new("Frame")
+    self.contentFrame.Name = "ContentFrame"
+    self.contentFrame.Size = UDim2.new(1, -20, 1, -110)
+    self.contentFrame.Position = UDim2.new(0, 10, 0, 80)
+    self.contentFrame.BackgroundTransparency = 1
+    self.contentFrame.ClipsDescendants = true
+    self.contentFrame.Parent = self.mainFrame
+    
+    self.scrollingFrame = Instance.new("ScrollingFrame")
+    self.scrollingFrame.Size = UDim2.new(1, 0, 1, 0)
+    self.scrollingFrame.BackgroundTransparency = 1
+    self.scrollingFrame.ScrollBarThickness = 5
+    self.scrollingFrame.BorderSizePixel = 0
+    self.scrollingFrame.Parent = self.contentFrame
+    
+    self.contentLayout = Instance.new("UIListLayout")
+    self.contentLayout.Padding = UDim.new(0, 15)
+    self.contentLayout.SortOrder = Enum.SortOrder.LayoutOrder
+    self.contentLayout.Parent = self.scrollingFrame
+    
+    -- Обновление скроллинга
+    self.contentLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+        self.scrollingFrame.CanvasSize = UDim2.new(0, 0, 0, self.contentLayout.AbsoluteContentSize.Y)
+    end)
+end
+
+function MenuLib:_initOpenIcon()
+    self.openIcon = Instance.new("ImageButton")
+    self.openIcon.Name = "OpenIcon"
+    self.openIcon.Image = "rbxassetid://3926305904"
+    self.openIcon.ImageRectOffset = Vector2.new(884, 4)
+    self.openIcon.ImageRectSize = Vector2.new(24, 24)
+    self.openIcon.Size = UDim2.new(0, 40, 0, 40)
+    self.openIcon.Position = UDim2.new(0, 20, 0, 20)
+    self.openIcon.BackgroundColor3 = COLORS.Background
+    self.openIcon.BackgroundTransparency = 0.05
+    self.openIcon.Visible = false
+    self.openIcon.Parent = self.screenGui
+    
+    -- Стиль для иконки
+    createCorner(self.openIcon, 20)
+    createStroke(self.openIcon, 1.5)
+    createShadow(self.openIcon)
+    
+    -- Функционал открытия
+    self.openIcon.MouseButton1Click:Connect(function()
+        self:Toggle()
+    end)
+    
+    -- Адаптация под мобильные устройства
+    if self.UIS.TouchEnabled then
+        self.openIcon.Size = UDim2.new(0, 50, 0, 50)
+        self.mainFrame.Size = UDim2.new(0, 300, 0, 450)
+        self.mainFrame.Position = UDim2.new(0.5, -150, 0.5, -225)
+    end
+end
+
+-- Публичные методы
+function MenuLib:Toggle()
+    if self.mainFrame.Visible then
+        self.mainFrame.Visible = false
+        self.openIcon.Visible = true
+        
+        -- Скрываем все открытые DropDown
+        for _, child in ipairs(self.dropDownContainer:GetChildren()) do
+            if child:IsA("Frame") and child.Name == "DropdownList" then
+                child.Visible = false
+            end
+        end
+    else
+        self.mainFrame.Visible = true
+        self.openIcon.Visible = false
+    end
+end
+
+function MenuLib:Destroy()
+    if self.screenGui then
+        self.screenGui:Destroy()
+    end
+end
+
+function MenuLib:UpdateTabContent()
+    -- Очищаем предыдущий контент
+    for _, child in ipairs(self.scrollingFrame:GetChildren()) do
+        if child:IsA("Frame") then
+            child:Destroy()
+        end
+    end
+    
+    -- Создаем новый контент для текущей вкладки
+    if self.elements[self.currentTab] then
+        for _, sectionData in ipairs(self.elements[self.currentTab]) do
+            local section = self:_createSection(sectionData.name, self.scrollingFrame)
+            
+            for _, element in ipairs(sectionData.elements) do
+                if element.type == "Toggle" then
+                    element.object = self:_createToggle(element.name, section, element.callback)
+                elseif element.type == "Slider" then
+                    element.object = self:_createSlider(element.name, element.min, element.max, element.default, section, element.callback)
+                elseif element.type == "Dropdown" then
+                    element.object = self:_createDropdown(element.name, element.options, element.default, section, element.callback)
+                elseif element.type == "Button" then
+                    element.object = self:_createButton(element.name, section, element.callback)
+                end
+            end
+        end
+    end
+end
+
+function MenuLib:AddTab(tabName)
+    if not table.find(self.tabs, tabName) then
+        table.insert(self.tabs, tabName)
+        self.tabButtons[tabName] = nil -- Сброс кнопок
+        self.elements[tabName] = self.elements[tabName] or {}
+        
+        -- Пересоздаем вкладки
+        for _, child in ipairs(self.tabContainer:GetChildren()) do
+            if child:IsA("TextButton") then
+                child:Destroy()
+            end
+        end
+        
+        self:_initTabContainer()
+        self:UpdateTabContent()
+    end
+    return {
+        AddSection = function(_, sectionName)
+            return self:AddSection(tabName, sectionName)
+        end
+    }
+end
+
+function MenuLib:AddSection(tabName, sectionName)
+    if not self.elements[tabName] then
+        self.elements[tabName] = {}
+    end
+    
+    local sectionData = {
+        name = sectionName,
+        elements = {}
+    }
+    
+    table.insert(self.elements[tabName], sectionData)
+    
+    return {
+        AddToggle = function(_, name, callback)
+            local toggle = {
+                type = "Toggle",
+                name = name,
+                callback = callback
+            }
+            table.insert(sectionData.elements, toggle)
+            return toggle
+        end,
+        
+        AddSlider = function(_, name, min, max, default, callback)
+            local slider = {
+                type = "Slider",
+                name = name,
+                min = min,
+                max = max,
+                default = default,
+                callback = callback
+            }
+            table.insert(sectionData.elements, slider)
+            return slider
+        end,
+        
+        AddDropdown = function(_, name, options, default, callback)
+            local dropdown = {
+                type = "Dropdown",
+                name = name,
+                options = options,
+                default = default or 1,
+                callback = callback
+            }
+            table.insert(sectionData.elements, dropdown)
+            return dropdown
+        end,
+        
+        AddButton = function(_, name, callback)
+            local button = {
+                type = "Button",
+                name = name,
+                callback = callback
+            }
+            table.insert(sectionData.elements, button)
+            return button
+        end
+    }
+end
+
+-- Внутренние методы создания элементов
+function MenuLib:_createSection(title, parent)
+    local sectionFrame = Instance.new("Frame")
+    sectionFrame.Size = UDim2.new(1, 0, 0, 0)
+    sectionFrame.AutomaticSize = Enum.AutomaticSize.Y
+    sectionFrame.BackgroundTransparency = 1
+    sectionFrame.LayoutOrder = #parent:GetChildren() + 1
+    sectionFrame.Parent = parent
+    
+    local sectionTitle = Instance.new("TextLabel")
+    sectionTitle.Text = "    "..title
+    sectionTitle.Font = Enum.Font.SourceSansSemibold
+    sectionTitle.TextSize = 16
+    sectionTitle.TextColor3 = COLORS.Text
+    sectionTitle.TextXAlignment = Enum.TextXAlignment.Left
+    sectionTitle.BackgroundTransparency = 1
+    sectionTitle.Size = UDim2.new(1, 0, 0, 20)
+    sectionTitle.Parent = sectionFrame
+    
+    local sectionContent = Instance.new("Frame")
+    sectionContent.Name = "Content"
+    sectionContent.Size = UDim2.new(1, 0, 0, 0)
+    sectionContent.AutomaticSize = Enum.AutomaticSize.Y
+    sectionContent.Position = UDim2.new(0, 0, 0, 25)
+    sectionContent.BackgroundTransparency = 1
+    sectionContent.Parent = sectionFrame
+    
+    local sectionLayout = Instance.new("UIListLayout")
+    sectionLayout.Padding = UDim.new(0, 10)
+    sectionLayout.SortOrder = Enum.SortOrder.LayoutOrder
+    sectionLayout.Parent = sectionContent
+    
+    sectionLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+        sectionContent.Size = UDim2.new(1, 0, 0, sectionLayout.AbsoluteContentSize.Y)
+    end)
+    
+    return sectionContent
+end
+
+function MenuLib:_createToggle(name, section, callback)
+    local toggleFrame = Instance.new("Frame")
+    toggleFrame.Size = UDim2.new(1, 0, 0, 30)
+    toggleFrame.AutomaticSize = Enum.AutomaticSize.Y
+    toggleFrame.BackgroundTransparency = 1
+    toggleFrame.LayoutOrder = #section:GetChildren() + 1
+    toggleFrame.Parent = section
+    
+    local toggleName = Instance.new("TextLabel")
+    toggleName.Text = name
+    toggleName.Font = Enum.Font.SourceSans
+    toggleName.TextSize = 16
+    toggleName.TextColor3 = COLORS.Text
+    toggleName.TextXAlignment = Enum.TextXAlignment.Left
+    toggleName.BackgroundTransparency = 1
+    toggleName.Size = UDim2.new(0.7, 0, 1, 0)
+    toggleName.Parent = toggleFrame
+    
+    local toggleButton = Instance.new("Frame")
+    toggleButton.Size = UDim2.new(0, 50, 0, 28)
+    toggleButton.Position = UDim2.new(1, -50, 0, 1)
+    toggleButton.BackgroundColor3 = COLORS.ToggleOff
+    toggleButton.Parent = toggleFrame
+    
+    createCorner(toggleButton, 14)
+    
+    local toggleCircle = Instance.new("Frame")
+    toggleCircle.Size = UDim2.new(0, 24, 0, 24)
+    toggleCircle.Position = UDim2.new(0, 2, 0, 2)
+    toggleCircle.BackgroundColor3 = COLORS.ToggleCircle
+    toggleCircle.Parent = toggleButton
+    
+    createCorner(toggleCircle, 12)
+    
+    local isToggled = false
+    
+    local function updateToggle()
+        if isToggled then
+            self.TweenService:Create(toggleCircle, TweenInfo.new(0.2), {Position = UDim2.new(0, 24, 0, 2)}):Play()
+            self.TweenService:Create(toggleButton, TweenInfo.new(0.2), {BackgroundColor3 = COLORS.ToggleOn}):Play()
+        else
+            self.TweenService:Create(toggleCircle, TweenInfo.new(0.2), {Position = UDim2.new(0, 2, 0, 2)}):Play()
+            self.TweenService:Create(toggleButton, TweenInfo.new(0.2), {BackgroundColor3 = COLORS.ToggleOff}):Play()
+        end
+        if callback then callback(isToggled) end
+    end
+    
+    toggleButton.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            isToggled = not isToggled
+            updateToggle()
+        end
+    end)
+    
+    local toggleObj = {
+        SetState = function(_, state)
+            isToggled = state
+            updateToggle()
+        end,
+        GetState = function()
+            return isToggled
+        end
+    }
+    
+    return toggleObj
+end
+
+function MenuLib:_createSlider(name, min, max, default, section, callback)
+    local sliderFrame = Instance.new("Frame")
+    sliderFrame.Size = UDim2.new(1, 0, 0, 50)
+    sliderFrame.AutomaticSize = Enum.AutomaticSize.Y
+    sliderFrame.BackgroundTransparency = 1
+    sliderFrame.LayoutOrder = #section:GetChildren() + 1
+    sliderFrame.Parent = section
+    
+    local sliderTop = Instance.new("Frame")
+    sliderTop.Size = UDim2.new(1, 0, 0, 20)
+    sliderTop.BackgroundTransparency = 1
+    sliderTop.Parent = sliderFrame
+    
+    local sliderName = Instance.new("TextLabel")
+    sliderName.Text = name
+    sliderName.Font = Enum.Font.SourceSans
+    sliderName.TextSize = 16
+    sliderName.TextColor3 = COLORS.Text
+    sliderName.TextXAlignment = Enum.TextXAlignment.Left
+    sliderName.BackgroundTransparency = 1
+    sliderName.Size = UDim2.new(0.6, 0, 1, 0)
+    sliderName.Parent = sliderTop
+    
+    local sliderValue = Instance.new("TextLabel")
+    sliderValue.Text = tostring(default)
+    sliderValue.Font = Enum.Font.SourceSans
+    sliderValue.TextSize = 16
+    sliderValue.TextColor3 = COLORS.SecondaryText
+    sliderValue.TextXAlignment = Enum.TextXAlignment.Right
+    sliderValue.BackgroundTransparency = 1
+    sliderValue.Size = UDim2.new(0.4, 0, 1, 0)
+    sliderValue.Position = UDim2.new(0.6, 0, 0, 0)
+    sliderValue.Parent = sliderTop
+    
+    local sliderBar = Instance.new("Frame")
+    sliderBar.Size = UDim2.new(1, 0, 0, 5)
+    sliderBar.Position = UDim2.new(0, 0, 0, 30)
+    sliderBar.BackgroundColor3 = COLORS.ToggleOff
+    sliderBar.Parent = sliderFrame
+    
+    createCorner(sliderBar, 2)
+    
+    local sliderFill = Instance.new("Frame")
+    sliderFill.Size = UDim2.new((default - min) / (max - min), 0, 1, 0)
+    sliderFill.BackgroundColor3 = COLORS.Accent
+    sliderFill.Parent = sliderBar
+    
+    createCorner(sliderFill, 2)
+    
+    local sliderButton = Instance.new("TextButton")
+    sliderButton.Size = UDim2.new(0, 20,
