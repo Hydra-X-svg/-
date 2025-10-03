@@ -1,0 +1,767 @@
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local RequestCommand = ReplicatedStorage:WaitForChild("HDAdminHDClient").Signals.RequestCommandSilent
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local gui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
+gui.Name = "Project"
+gui.ResetOnSpawn = false
+
+local frame = Instance.new("Frame", gui)
+frame.Position = UDim2.new(0, 50, 0, 50)
+frame.Size = UDim2.new(0, 150, 0, 220)
+frame.BackgroundColor3 = Color3.new(0, 0, 0)
+frame.Active = true
+frame.Draggable = true
+frame.BackgroundTransparency = 0
+Instance.new("UIStroke", frame).Color =  Color3.new(5, 5, 5)
+Instance.new("UICorner", frame).CornerRadius = UDim.new(0, 3)
+
+local frame2 = Instance.new("Frame", frame)
+frame2.Position = UDim2.new(0, 0, 0, 0)
+frame2.Size = UDim2.new(0, 150, 0, 220)
+frame2.BackgroundColor3 = Color3.new(0, 0, 0)
+Instance.new("UICorner", frame2).CornerRadius = UDim.new(0, 3)
+
+local KP = Instance.new("Frame", frame2)
+KP.Position = UDim2.new(0, 0, 0, 35)
+KP.Size = UDim2.new(0, 150, 0, 1)
+KP.BackgroundColor3 = Color3.new(1, 1, 1)
+KP.BorderSizePixel = 0
+
+local KP2 = Instance.new("Frame", frame2)
+KP2.Position = UDim2.new(0, 0, 0, 185)
+KP2.Size = UDim2.new(0, 150, 0, 1)
+KP2.BackgroundColor3 = Color3.new(1, 1, 1)
+KP2.BorderSizePixel = 0
+
+local toggle = Instance.new("TextButton", frame)
+toggle.Position = UDim2.new(0, 122, 0, 8)
+toggle.Size = UDim2.new(0, 20, 0, 20)
+toggle.BackgroundColor3 = Color3.new(0, 0, 0)
+toggle.Text = "+"
+toggle.Font = Enum.Font.Gotham
+toggle.TextColor3 = Color3.new(255, 255, 255)
+toggle.TextSize = 19
+
+local Uis = Instance.new("UIStroke", toggle)
+Uis.Color = Color3.new(1, 1, 1)
+Uis.Thickness = 1
+Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Instance.new("UICorner", toggle).CornerRadius = UDim.new(0, 3)
+
+local scroll = Instance.new("ScrollingFrame", frame2)
+scroll.Size = UDim2.new(0, 148, 0, 146)
+scroll.Position = UDim2.new(0, 1, 0, 37)
+scroll.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+scroll.ScrollBarThickness = 0
+scroll.CanvasSize = UDim2.new(0, 0, 4, 0)
+scroll.BackgroundTransparency = 0
+Instance.new("UIStroke", scroll).Color =  Color3.new(0, 0, 0)
+
+local cmdb2 = Instance.new("TextButton", frame2)
+cmdb2.Position = UDim2.new(0, 118, 0, 188)
+cmdb2.Size = UDim2.new(0, 30, 0, 30)
+cmdb2.BackgroundColor3 = Color3.new(0, 0, 0)
+cmdb2.Text = "Cmdbar2"
+cmdb2.Font = Enum.Font.Gotham
+cmdb2.TextColor3 = Color3.new(255, 255, 255)
+cmdb2.TextSize = 6
+
+local Uis = Instance.new("UIStroke", cmdb2)
+Uis.Color = Color3.new(255, 255, 255)
+Uis.Thickness = 1
+Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Instance.new("UICorner", cmdb2).CornerRadius = UDim.new(0, 1)
+
+local Box = Instance.new("TextBox", frame2)
+Box.PlaceholderText = "ID..."
+Box.Position = UDim2.new(0, 35, 0, 188)
+Box.Size = UDim2.new(0, 80, 0, 30)
+Box.TextSize = 12
+Box.TextColor3 = Color3.new(1, 1, 1)
+Box.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Box.Font = Enum.Font.Gotham
+Box.Text = ""
+Box.ClearTextOnFocus = true
+Box.TextWrapped = true
+
+local Uis = Instance.new("UIStroke", Box)
+Uis.Color = Color3.new(1, 1, 1)
+Uis.Thickness = 1
+Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Instance.new("UICorner", Box).CornerRadius = UDim.new(0, 2)
+
+local f3x = Instance.new("TextButton", frame2)
+f3x.Position = UDim2.new(0, 2, 0, 188)
+f3x.Size = UDim2.new(0, 30, 0, 30)
+f3x.BackgroundColor3 = Color3.new(0, 0, 0)
+f3x.Text = "F3X"
+f3x.Font = Enum.Font.Gotham
+f3x.TextColor3 = Color3.new(255, 255, 255)
+f3x.TextSize = 14
+
+local Uis = Instance.new("UIStroke", f3x)
+Uis.Color = Color3.new(255, 255, 255)
+Uis.Thickness = 1
+Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Instance.new("UICorner", f3x).CornerRadius = UDim.new(0, 1)
+
+local sky = Instance.new("TextButton", scroll)
+sky.Position = UDim2.new(0, 3, 0, 3)
+sky.Size = UDim2.new(0, 70, 0, 35)
+sky.BackgroundColor3 = Color3.new(0, 0, 0)
+sky.Text = "Skybox"
+sky.Font = Enum.Font.Gotham
+sky.TextColor3 = Color3.new(255, 255, 255)
+sky.TextSize = 14
+
+local Uis = Instance.new("UIStroke", sky)
+Uis.Color = Color3.new(255, 255, 255)
+Uis.Thickness = 1
+Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Instance.new("UICorner", sky).CornerRadius = UDim.new(0, 3)
+
+local decal = Instance.new("TextButton", scroll)
+decal.Position = UDim2.new(0, 76, 0, 3)
+decal.Size = UDim2.new(0, 70, 0, 35)
+decal.BackgroundColor3 = Color3.new(0, 0, 0)
+decal.Text = "Decal"
+decal.Font = Enum.Font.Gotham
+decal.TextColor3 = Color3.new(255, 255, 255)
+decal.TextSize = 14
+
+local Uis = Instance.new("UIStroke", decal)
+Uis.Color = Color3.new(255, 255, 255)
+Uis.Thickness = 1
+Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Instance.new("UICorner", decal).CornerRadius = UDim.new(0, 3)
+
+local s = Instance.new("TextButton", scroll)
+s.Position = UDim2.new(0, 3, 0, 41)
+s.Size = UDim2.new(0, 70, 0, 35)
+s.BackgroundColor3 = Color3.new(0, 0, 0)
+s.Text = "Sound"
+s.Font = Enum.Font.Gotham
+s.TextColor3 = Color3.new(255, 255, 255)
+s.TextSize = 14
+
+local Uis = Instance.new("UIStroke", s)
+Uis.Color = Color3.new(255, 255, 255)
+Uis.Thickness = 1
+Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Instance.new("UICorner", s).CornerRadius = UDim.new(0, 3)
+
+local board = Instance.new("TextButton", scroll)
+board.Position = UDim2.new(0, 76, 0, 41)
+board.Size = UDim2.new(0, 70, 0, 35)
+board.BackgroundColor3 = Color3.new(0, 0, 0)
+board.Text = "Billboard"
+board.Font = Enum.Font.Gotham
+board.TextColor3 = Color3.new(255, 255, 255)
+board.TextSize = 14
+
+local Uis = Instance.new("UIStroke", board)
+Uis.Color = Color3.new(255, 255, 255)
+Uis.Thickness = 1
+Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Instance.new("UICorner", board).CornerRadius = UDim.new(0, 3)
+
+local chr = Instance.new("TextButton", scroll)
+chr.Position = UDim2.new(0, 3, 0, 79)
+chr.Size = UDim2.new(0, 70, 0, 35)
+chr.BackgroundColor3 = Color3.new(0, 0, 0)
+chr.Text = "Be Selected User"
+chr.Font = Enum.Font.Gotham
+chr.TextColor3 = Color3.new(255, 255, 255)
+chr.TextSize = 8
+
+local Uis = Instance.new("UIStroke", chr)
+Uis.Color = Color3.new(255, 255, 255)
+Uis.Thickness = 1
+Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Instance.new("UICorner", chr).CornerRadius = UDim.new(0, 3)
+
+local base = Instance.new("TextButton", scroll)
+base.Position = UDim2.new(0, 76, 0, 79)
+base.Size = UDim2.new(0, 70, 0, 35)
+base.BackgroundColor3 = Color3.new(0, 0, 0)
+base.Text = "Baseplate"
+base.Font = Enum.Font.Gotham
+base.TextColor3 = Color3.new(255, 255, 255)
+base.TextSize = 14
+
+local Uis = Instance.new("UIStroke", base)
+Uis.Color = Color3.new(255, 255, 255)
+Uis.Thickness = 1
+Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Instance.new("UICorner", base).CornerRadius = UDim.new(0, 3)
+
+-- Function
+toggle.MouseButton1Click:Connect(function()
+if frame2.Visible then
+    frame2.Visible = false
+    frame:TweenSize(UDim2.new(0, 150, 0, 35), "Out", "Quart", 0.4, true)
+else
+    frame:TweenSize(UDim2.new(0, 150, 0, 220), "Out", "Quart", 0.4, true)
+wait(0.2)
+    frame2.Visible = true
+    end
+end)
+
+f3x.MouseButton1Click:Connect(function()
+		RequestCommand:InvokeServer(";btools")
+end)
+
+cmdb2.MouseButton1Click:Connect(function()
+		RequestCommand:InvokeServer(";cmdbar2")
+end)
+
+sky.MouseButton1Click:Connect(function()
+		local player = game.Players.LocalPlayer
+		local char = player.Character
+		local tool
+		for i,v in player:GetDescendants() do
+			if v.Name == "SyncAPI" then
+				tool = v.Parent
+			end
+		end
+		for i,v in game.ReplicatedStorage:GetDescendants() do
+			if v.Name == "SyncAPI" then
+				tool = v.Parent
+			end
+		end
+		remote = tool.SyncAPI.ServerEndpoint
+		function _(args)
+			remote:InvokeServer(unpack(args))
+		end
+		function SetCollision(part,boolean)
+			local args = {
+				[1] = "SyncCollision",
+				[2] = {
+					[1] = {
+						["Part"] = part,
+						["CanCollide"] = boolean
+					}
+				}
+			}
+			_(args)
+		end
+		function SetAnchor(boolean,part)
+			local args = {
+				[1] = "SyncAnchor",
+				[2] = {
+					[1] = {
+						["Part"] = part,
+						["Anchored"] = boolean
+					}
+				}
+			}
+			_(args)
+		end
+		function CreatePart(cf,parent)
+			local args = {
+				[1] = "CreatePart",
+				[2] = "Normal",
+				[3] = cf,
+				[4] = parent
+			}
+			_(args)
+		end
+		function DestroyPart(part)
+			local args = {
+				[1] = "Remove",
+				[2] = {
+					[1] = part
+				}
+			}
+			_(args)
+		end
+		function MovePart(part,cf)
+			local args = {
+				[1] = "SyncMove",
+				[2] = {
+					[1] = {
+						["Part"] = part,
+						["CFrame"] = cf
+					}
+				}
+			}
+			_(args)
+		end
+		function Resize(part,size,cf)
+			local args = {
+				[1] = "SyncResize",
+				[2] = {
+					[1] = {
+						["Part"] = part,
+						["CFrame"] = cf,
+						["Size"] = size
+					}
+				}
+			}
+			_(args)
+		end
+		function AddMesh(part)
+			local args = {
+				[1] = "CreateMeshes",
+				[2] = {
+					[1] = {
+						["Part"] = part
+					}
+				}
+			}
+			_(args)
+		end
+	
+		function SetMesh(part,meshid)
+			local args = {
+				[1] = "SyncMesh",
+				[2] = {
+					[1] = {
+						["Part"] = part,
+						["MeshId"] = "rbxassetid://"..meshid
+					}
+				}
+			}
+			_(args)
+		end
+		function SetTexture(part, texid)
+			local args = {
+				[1] = "SyncMesh",
+				[2] = {
+					[1] = {
+						["Part"] = part,
+						["TextureId"] = "rbxassetid://"..texid
+					}
+				}
+			}
+			_(args)
+		end
+		function SetName(part, stringg)
+			local args = {
+				[1] = "SetName",
+				[2] = {
+					[1] = part
+				},
+				[3] = stringg
+			}
+	
+			_(args)
+		end
+		function MeshResize(part,size)
+			local args = {
+				[1] = "SyncMesh",
+				[2] = {
+					[1] = {
+						["Part"] = part,
+						["Scale"] = size
+					}
+				}
+			}
+			_(args)
+		end
+		function Weld(part1, part2,lead)
+			local args = {
+				[1] = "CreateWelds",
+				[2] = {
+					[1] = part1,
+					[2] = part2
+				},
+				[3] = lead
+			}
+			_(args)
+	
+		end
+		function SetLocked(part,boolean)
+			local args = {
+				[1] = "SetLocked",
+				[2] = {
+					[1] = part
+				},
+				[3] = boolean
+			}
+			_(args)
+		end
+		function SetTrans(part,int)
+			local args = {
+				[1] = "SyncMaterial",
+				[2] = {
+					[1] = {
+						["Part"] = part,
+						["Transparency"] = int
+					}
+				}
+			}
+			_(args)
+		end
+		function CreateSpotlight(part)
+			local args = {
+				[1] = "CreateLights",
+				[2] = {
+					[1] = {
+						["Part"] = part,
+						["LightType"] = "SpotLight"
+					}
+				}
+			}
+			_(args)
+		end
+		function SyncLighting(part,brightness)
+			local args = {
+				[1] = "SyncLighting",
+				[2] = {
+					[1] = {
+						["Part"] = part,
+						["LightType"] = "SpotLight",
+						["Brightness"] = brightness
+					}
+				}
+			}
+			_(args)
+		end
+		function Color(part,color)
+			local args = {
+				[1] = "SyncColor",
+				[2] = {
+					[1] = {
+						["Part"] = part,
+						["Color"] = color --[[Color3]],
+						["UnionColoring"] = false
+					}
+				}
+			}
+			_(args)
+		end
+		function SpawnDecal(part,side)
+			local args = {
+				[1] = "CreateTextures",
+				[2] = {
+					[1] = {
+						["Part"] = part,
+						["Face"] = side,
+						["TextureType"] = "Decal"
+					}
+				}
+			}
+	
+			_(args)
+		end
+		function AddDecal(part,asset,side)
+			local args = {
+				[1] = "SyncTexture",
+				[2] = {
+					[1] = {
+						["Part"] = part,
+						["Face"] = side,
+						["TextureType"] = "Decal",
+						["Texture"] = "rbxassetid://".. asset
+					}
+				}
+			}
+			_(args)
+		end
+	
+		function Sky(id)
+			e = char.HumanoidRootPart.CFrame.x
+			f = char.HumanoidRootPart.CFrame.y
+			g = char.HumanoidRootPart.CFrame.z
+			CreatePart(CFrame.new(math.floor(e),math.floor(f),math.floor(g)) + Vector3.new(0,6,0),workspace)
+			for i,v in game.Workspace:GetDescendants() do
+				if v:IsA("BasePart") and v.CFrame.x == math.floor(e) and v.CFrame.z == math.floor(g) then
+					SetName(v,"Sky")
+					AddMesh(v)
+					SetMesh(v,"111891702759441")
+					SetTexture(v,id)
+					MeshResize(v,Vector3.new(99999,99999,99999))
+					SetLocked(v,true)
+			end
+		end
+	end
+	Sky(Box.Text)
+end)
+
+decal.MouseButton1Click:Connect(function()
+		print("Button clicked!")
+		local player = game.Players.LocalPlayer
+		local char = player.Character
+		local tool
+		for i,v in player:GetDescendants() do
+			if v.Name == "SyncAPI" then
+				tool = v.Parent
+			end
+		end
+		for i,v in game.ReplicatedStorage:GetDescendants() do
+			if v.Name == "SyncAPI" then
+				tool = v.Parent
+			end
+		end
+		remote = tool.SyncAPI.ServerEndpoint
+		function _(args)
+			remote:InvokeServer(unpack(args))
+		end
+		function SetCollision(part,boolean)
+			local args = {
+				[1] = "SyncCollision",
+				[2] = {
+					[1] = {
+						["Part"] = part,
+						["CanCollide"] = boolean
+					}
+				}
+			}
+			_(args)
+		end
+		function SetAnchor(boolean,part)
+			local args = {
+				[1] = "SyncAnchor",
+				[2] = {
+					[1] = {
+						["Part"] = part,
+						["Anchored"] = boolean
+					}
+				}
+			}
+			_(args)
+		end
+		function CreatePart(cf,parent)
+			local args = {
+				[1] = "CreatePart",
+				[2] = "Normal",
+				[3] = cf,
+				[4] = parent
+			}
+			_(args)
+		end
+		function DestroyPart(part)
+			local args = {
+				[1] = "Remove",
+				[2] = {
+					[1] = part
+				}
+			}
+			_(args)
+		end
+		function MovePart(part,cf)
+			local args = {
+				[1] = "SyncMove",
+				[2] = {
+					[1] = {
+						["Part"] = part,
+						["CFrame"] = cf
+					}
+				}
+			}
+			_(args)
+		end
+		function Resize(part,size,cf)
+			local args = {
+				[1] = "SyncResize",
+				[2] = {
+					[1] = {
+						["Part"] = part,
+						["CFrame"] = cf,
+						["Size"] = size
+					}
+				}
+			}
+			_(args)
+		end
+		function AddMesh(part)
+			local args = {
+				[1] = "CreateMeshes",
+				[2] = {
+					[1] = {
+						["Part"] = part
+					}
+				}
+			}
+			_(args)
+		end
+	
+		function SetMesh(part,meshid)
+			local args = {
+				[1] = "SyncMesh",
+				[2] = {
+					[1] = {
+						["Part"] = part,
+						["MeshId"] = "rbxassetid://"..meshid
+					}
+				}
+			}
+			_(args)
+		end
+		function SetTexture(part, texid)
+			local args = {
+				[1] = "SyncMesh",
+				[2] = {
+					[1] = {
+						["Part"] = part,
+						["TextureId"] = "rbxassetid://"..texid
+					}
+				}
+			}
+			_(args)
+		end
+		function SetName(part, stringg)
+			local args = {
+				[1] = "SetName",
+				[2] = {
+					[1] = part
+				},
+				[3] = stringg
+			}
+	
+			_(args)
+		end
+		function MeshResize(part,size)
+			local args = {
+				[1] = "SyncMesh",
+				[2] = {
+					[1] = {
+						["Part"] = part,
+						["Scale"] = size
+					}
+				}
+			}
+			_(args)
+		end
+		function Weld(part1, part2,lead)
+			local args = {
+				[1] = "CreateWelds",
+				[2] = {
+					[1] = part1,
+					[2] = part2
+				},
+				[3] = lead
+			}
+			_(args)
+	
+		end
+		function SetLocked(part,boolean)
+			local args = {
+				[1] = "SetLocked",
+				[2] = {
+					[1] = part
+				},
+				[3] = boolean
+			}
+			_(args)
+		end
+		function SetTrans(part,int)
+			local args = {
+				[1] = "SyncMaterial",
+				[2] = {
+					[1] = {
+						["Part"] = part,
+						["Transparency"] = int
+					}
+				}
+			}
+			_(args)
+		end
+		function CreateSpotlight(part)
+			local args = {
+				[1] = "CreateLights",
+				[2] = {
+					[1] = {
+						["Part"] = part,
+						["LightType"] = "SpotLight"
+					}
+				}
+			}
+			_(args)
+		end
+		function SyncLighting(part,brightness)
+			local args = {
+				[1] = "SyncLighting",
+				[2] = {
+					[1] = {
+						["Part"] = part,
+						["LightType"] = "SpotLight",
+						["Brightness"] = brightness
+					}
+				}
+			}
+			_(args)
+		end
+		function Color(part,color)
+			local args = {
+				[1] = "SyncColor",
+				[2] = {
+					[1] = {
+						["Part"] = part,
+						["Color"] = color --[[Color3]],
+						["UnionColoring"] = false
+					}
+				}
+			}
+			_(args)
+		end
+		function SpawnDecal(part,side)
+			local args = {
+				[1] = "CreateTextures",
+				[2] = {
+					[1] = {
+						["Part"] = part,
+						["Face"] = side,
+						["TextureType"] = "Decal"
+					}
+				}
+			}
+	
+			_(args)
+		end
+		function AddDecal(part,asset,side)
+			local args = {
+				[1] = "SyncTexture",
+				[2] = {
+					[1] = {
+						["Part"] = part,
+						["Face"] = side,
+						["TextureType"] = "Decal",
+						["Texture"] = "rbxassetid://".. asset
+					}
+				}
+			}
+			_(args)
+		end
+	
+		function spam(id)
+			for i,v in game.workspace:GetDescendants() do
+				if v:IsA("BasePart") then
+					spawn(function()
+						SetLocked(v,false)
+						SpawnDecal(v,Enum.NormalId.Front)
+						AddDecal(v,id,Enum.NormalId.Front)
+						SpawnDecal(v,Enum.NormalId.Back)
+						AddDecal(v,id,Enum.NormalId.Back)
+						SpawnDecal(v,Enum.NormalId.Right)
+						AddDecal(v,id,Enum.NormalId.Right)
+						SpawnDecal(v,Enum.NormalId.Left)
+						AddDecal(v,id,Enum.NormalId.Left)
+						SpawnDecal(v,Enum.NormalId.Bottom)
+						AddDecal(v,id,Enum.NormalId.Bottom)
+						SpawnDecal(v,Enum.NormalId.Top)
+						AddDecal(v,id,Enum.NormalId.Top)
+				end)
+			end
+		end 
+	end
+	spam(Box.Text)
+end)
+
+s.MouseButton1Click:Connect(function()
+		RequestCommand:InvokeServer(";music " ..Box.Text)
+end)
+
+board.MouseButton1Click:Connect(function()
+		RequestCommand:InvokeServer(";name all " ..Box.Text)
+		RequestCommand:InvokeServer(";titler all " ..Box.Text)
+		RequestCommand:InvokeServer(";ctag all " ..Box.Text.. " red")
+		RequestCommand:InvokeServer(";cname all " ..Box.Text.. " red")
+end)
+
+chr.MouseButton1Click:Connect(function()
+		RequestCommand:InvokeServer(";char all " ..Box.Text)
+end)
+
