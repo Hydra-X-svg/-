@@ -1,1 +1,91 @@
+--[[ Main
 
+getgenv().enabled = true -- Toggle true/false
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Vcsk/RobloxScripts/main/Highlight-ESP.lua"))()
+
+]]
+
+local Players = game:GetService("Players")
+local player = game.Players.LocalPlayer
+local userInputService = game:GetService("UserInputService")
+local runService = game:GetService("RunService")
+local holder = game.CoreGui:FindFirstChild("ESPHolder") or Instance.new("Folder")
+if enabled == false then
+    holder:Destroy()
+end
+
+if holder.Name == "Folder" then
+    holder.Name = "ESPHolder"
+    holder.Parent = game.CoreGui
+end
+
+if uselocalplayer == false and holder:FindFirstChild(game.Players.LocalPlayer.Name) then
+    holder:FindFirstChild(game.Players.LocalPlayer.Name):Destroy()
+end
+
+if getgenv().enabled == true then 
+    getgenv().enabled = false
+    getgenv().enabled = true
+end
+game:GetService("RunService").Heartbeat:Connect(function()
+    if getgenv().enabled then
+        task.wait()
+        for _,v in pairs(game.Players:GetChildren()) do
+           local espEnabled = false
+           local espObjects = {}
+           local function applyESP(character)
+               if character and character:FindFirstChild("HumanoidRootPart") then
+                   local billboard = Instance.new("BillboardGui", character)
+                   billboard.Adornee = character:FindFirstChild("Head")
+                   billboard.Size = UDim2.new(0, 200, 0, 50)
+                   billboard.StudsOffset = Vector3.new(0, 2, 0)
+                   billboard.AlwaysOnTop = true
+
+                   local textLabel = Instance.new("TextLabel", billboard)
+                   textLabel.Size = UDim2.new(1, 0, 1, 0)
+                   textLabel.BackgroundTransparency = 1
+                   textLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+                   textLabel.Font = Enum.Font.GothamBold
+                   textLabel.TextSize = 14
+                   textLabel.TextStrokeTransparency = 0.5
+                   textLabel.Text = "Loading..."
+                   espObjects[character] = {highlight, billboard, textLabel}
+    end
+end
+
+local function updateESP()
+    for _, plr in pairs(game.Players:GetPlayers()) do
+
+        if plr ~= player and plr.Character and plr.Character:FindFirstChild("HumanoidRootPart") then
+            local char = plr.Character
+            local rootPart = char:FindFirstChild("HumanoidRootPart")
+            local humanoid = char:FindFirstChild("Humanoid")
+            local espData = espObjects[char]
+
+            if rootPart and humanoid and espData then
+                local distance = (rootPart.Position - player.Character.HumanoidRootPart.Position).Magnitude
+                local health = math.floor(humanoid.Health)
+                local maxHealth = math.floor(humanoid.MaxHealth)
+                espData[3].Text = string.format("%.1fm | %d/%d HP | %s", distance, health, maxHealth, plr.Name)
+            end
+        end
+    end
+end
+
+local function refreshESP()
+    for _, data in pairs(espObjects) do
+        for _, obj in pairs(data) do
+            obj:Destroy()
+        end
+    end
+
+    espObjects = {}
+
+    for _, plr in pairs(game.Players:GetPlayers()) do
+        if plr ~= player and plr.Character then
+            applyESP(plr.Character)
+            end
+        end
+    end
+end
