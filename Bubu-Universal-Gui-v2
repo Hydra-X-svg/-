@@ -1,0 +1,360 @@
+local userInputService = game:GetService("UserInputService")
+local runService = game:GetService("RunService")
+local player = game.Players.LocalPlayer
+local Players = game:GetService("Players")
+local function isNumber(str)
+  if tonumber(str) ~= nil or str == 'inf' then
+    return true
+  end
+end
+
+getgenv().HitboxSize = 13
+getgenv().HitboxTransparency = 0.9
+getgenv().HitboxStatus = false
+getgenv().TeamCheck = false
+getgenv().Walkspeed = player.Character.Humanoid.WalkSpeed
+getgenv().Jumppower = player.Character.Humanoid.JumpPower
+getgenv().TPSpeed = 3
+getgenv().TPWalk = false
+
+local Library = loadstring(game:HttpGet("https://pastefy.app/Y5sM87LT/raw"))();
+local Window = Library:Create("Window")
+
+function god()
+    for _, part in pairs(workspace:GetDescendants()) do
+        if part:IsA("BasePart") then
+            if string.find(part.Name:lower(), "kill") or string.find(part.Name:lower(), "lava") or part.Material == Enum.Material.Neon then
+                part.CanTouch = false
+                part.CanCollide = true
+                part.Transparency = 0.5
+            end
+        end
+    end
+end
+
+function ungod()
+    for _, part in pairs(workspace:GetDescendants()) do
+        if part:IsA("BasePart") then
+            if string.find(part.Name:lower(), "kill") or string.find(part.Name:lower(), "lava") or part.Material == Enum.Material.Neon then
+                part.CanTouch = true
+                part.CanCollide = true
+                part.Transparency = 0
+            end
+        end
+    end
+end
+
+local espEnabled = false
+local espObjects = {}
+local function applyESP(character)
+    if character and character:FindFirstChild("HumanoidRootPart") then
+        local billboard = Instance.new("BillboardGui", character)
+        billboard.Adornee = character:FindFirstChild("Head")
+        billboard.Size = UDim2.new(0, 180, 0, 40)
+        billboard.StudsOffset = Vector3.new(0, 2, 0)
+        billboard.AlwaysOnTop = true
+
+        local textLabel = Instance.new("TextLabel", billboard)
+        textLabel.Size = UDim2.new(1, 0, 1, 0)
+        textLabel.BackgroundTransparency = 1
+        textLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+        textLabel.Font = Enum.Font.GothamBold
+        textLabel.TextSize = 14
+        textLabel.TextStrokeTransparency = 0.5
+        textLabel.Text = "Loading..."
+        espObjects[character] = {highlight, billboard, textLabel}
+    end
+end
+
+local function updateESP()
+    for _, plr in pairs(game.Players:GetPlayers()) do
+
+        if plr ~= player and plr.Character and plr.Character:FindFirstChild("HumanoidRootPart") then
+            local char = plr.Character
+            local rootPart = char:FindFirstChild("HumanoidRootPart")
+            local humanoid = char:FindFirstChild("Humanoid")
+            local espData = espObjects[char]
+
+            if rootPart and humanoid and espData then
+                local distance = (rootPart.Position - player.Character.HumanoidRootPart.Position).Magnitude
+                local health = math.floor(humanoid.Health)
+                local maxHealth = math.floor(humanoid.MaxHealth)
+                espData[3].Text = string.format("%.1fm | %d/%d HP | %s", distance, health, maxHealth, plr.Name)
+            end
+        end
+    end
+end
+
+local function refreshESP()
+    for _, data in pairs(espObjects) do
+        for _, obj in pairs(data) do
+            obj:Destroy()
+        end
+    end
+
+    espObjects = {}
+
+    for _, plr in pairs(game.Players:GetPlayers()) do
+        if plr ~= player and plr.Character then
+            applyESP(plr.Character)
+        end
+    end
+end
+
+function toggleESP()
+    espEnabled = not espEnabled
+
+    if espEnabled then
+        refreshESP()
+
+        runService.RenderStepped:Connect(function()
+            if espEnabled then
+                updateESP()
+            end
+        end)
+    else
+        for _, data in pairs(espObjects) do
+            for _, obj in pairs(data) do
+                obj:Destroy()
+            end
+        end
+        espObjects = {}
+    end
+end
+
+local Home = Window:Tab("Home","rbxassetid://78780430891192")
+local Player = Window:Tab("Players","rbxassetid://112609464524168")
+local Visual = Window:Tab("Visuals","rbxassetid://133040688818305")
+local Hub = Window:Tab("Script/Hub","rbxassetid://9940330045")
+Home:InfoLabel("Wellcome back "..player.Name.."!")
+Home:Section("Map Info")
+Home:Button("Name: "..game.MarketplaceService:GetProductInfo(game.PlaceId).Name.."", function()
+    setclipboard(game.MarketplaceService:GetProductInfo(game.PlaceId).Name)
+end)
+
+Home:Label("Max Players: "..game.Players.MaxPlayers.."")
+Home:Button("ID: "..game.PlaceId.."", function()
+    setclipboard(game.PlaceId)
+end)
+
+Home:Button("Job ID: \n"..game.JobId.."", function()
+    setclipboard(game.JobId)
+end)
+
+Home:Section("Setting")
+Home:Keybind("Toggle UI", Enum.KeyCode.F, function()
+    Library:ToggleUI()
+end)
+
+Home:Button("Rejoin", function()
+    game:GetService("TeleportService"):Teleport(game.PlaceId, player)
+end)
+
+Player:InfoLabel("some script might be error!")
+Player:Section("About you")
+Player:Label("Username: "..player.Name.."")
+Player:Label("Display Name: "..player.DisplayName.."")
+Player:Label("ID: "..player.UserId.."")
+Player:Label("Acc Age: "..player.AccountAge.."")
+Player:Label("Language: "..game.LocalizationService.RobloxLocaleId.."")
+Player:Label("Client ID: \n"..game:GetService("RbxAnalyticsService"):GetClientId().."")
+Player:Label("MemberShip: "..player.MembershipType.Name.."")
+Player:Section("LocalPlayer")
+Player:Button("FPS Boost", function()
+loadstring(game:HttpGet("https://pastefy.app/Uu0LK378/raw"))();
+end)
+
+Player:Button("Anti-bang", function()
+loadstring(game:HttpGet("https://pastefy.app/EYXzo3lX/raw"))();
+end)
+
+Player:TextBox("WalkSpeed", function(v)
+    getgenv().Walkspeed = v
+    pcall(function()
+        player.Character.Humanoid.WalkSpeed = v
+    end)
+end)
+
+Player:TextBox("JumpPower", function(v)
+    getgenv().Jumppower = v
+    pcall(function()
+        player.Character.Humanoid.JumpPower = v
+    end)
+end)
+
+Player:TextBox("TP Speed", function(v)
+getgenv().TPSpeed = v
+end)
+
+Player:Toggle("Loop WalkSpeed", function(s)
+    getgenv().loopW = s
+    game:GetService("RunService").Heartbeat:Connect(function()
+        if loopW == true then
+            pcall(function()
+                player.Character.Humanoid.WalkSpeed = Walkspeed
+            end)
+        end
+    end)
+end)
+
+Player:Toggle("Loop JumpPower", function(s)
+    getgenv().loopJ = s
+    game:GetService("RunService").Heartbeat:Connect(function()
+        if loopJ == true then
+            pcall(function()
+                player.Character.Humanoid.JumpPower = Jumppower
+            end)
+        end
+    end)
+end)
+
+Player:Toggle("TP Walk", function(s)
+getgenv().TPWalk = s
+local hb = game:GetService("RunService").Heartbeat
+local chr = player.Character
+local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
+while getgenv().TPWalk and hb:Wait() and chr and hum and hum.Parent do
+  if hum.MoveDirection.Magnitude > 0 then
+    if getgenv().TPSpeed and isNumber(getgenv().TPSpeed) then
+      chr:TranslateBy(hum.MoveDirection * tonumber(getgenv().TPSpeed))
+    else
+      chr:TranslateBy(hum.MoveDirection)
+    end
+  end
+end
+end)
+
+Player:Slider("Fov", game.Workspace.CurrentCamera.FieldOfView,120, function(v)
+     game.Workspace.CurrentCamera.FieldOfView = v
+end)
+
+Player:Toggle("Noclip", function(s)
+    getgenv().Noclip = s
+    game:GetService("RunService").Heartbeat:Connect(function()
+        if Noclip == true then
+            game:GetService("RunService").Stepped:wait()
+            playerCharacter.Head.CanCollide = false
+            player.Character.Torso.CanCollide = false
+        end
+    end)
+end)
+
+Player:Toggle("Inf Jump", function(s)
+getgenv().InfJ = s
+    game:GetService("UserInputService").JumpRequest:connect(function()
+        if InfJ == true then
+            player.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
+        end
+    end)
+end)
+
+Visual:InfoLabel("some script might be error!")
+Visual:Section("Visuals")
+Visual:TextBox("Hitbox Size", function(v)
+    getgenv().HitboxSize = v
+end)
+
+Visual:TextBox("Hitbox Transparency", function(n)
+    getgenv().HitboxTransparency = n
+end)
+
+Visual:Toggle("Status: ", function(s)
+	getgenv().HitboxStatus = s
+    game:GetService('RunService').RenderStepped:connect(function()
+		if HitboxStatus == true and TeamCheck == false then
+			for i,v in next, game:GetService('Players'):GetPlayers() do
+				if v.Name ~= player.Name then
+					pcall(function()
+						v.Character.HumanoidRootPart.Size = Vector3.new(HitboxSize, HitboxSize, HitboxSize)
+						v.Character.HumanoidRootPart.Transparency = HitboxTransparency
+						v.Character.HumanoidRootPart.BrickColor = BrickColor.new("Really black")
+						v.Character.HumanoidRootPart.Material = "Neon"
+						v.Character.HumanoidRootPart.CanCollide = false
+					end)
+				end
+			end
+		elseif HitboxStatus == true and TeamCheck == true then
+			for i,v in next, game:GetService('Players'):GetPlayers() do
+				if player.Team ~= v.Team then
+					pcall(function()
+						v.Character.HumanoidRootPart.Size = Vector3.new(HitboxSize, HitboxSize, HitboxSize)
+						v.Character.HumanoidRootPart.Transparency = HitboxTransparency1
+						v.Character.HumanoidRootPart.BrickColor = BrickColor.new("Really black")
+						v.Character.HumanoidRootPart.Material = "Neon"
+						v.Character.HumanoidRootPart.CanCollide = false
+					end)
+				end
+			end
+		else
+		    for i,v in next, game:GetService('Players'):GetPlayers() do
+				if v.Name ~= player.Name then
+					pcall(function()
+						v.Character.HumanoidRootPart.Size = Vector3.new(2,2,1)
+						v.Character.HumanoidRootPart.Transparency = 1
+						v.Character.HumanoidRootPart.BrickColor = BrickColor.new("Medium stone grey")
+						v.Character.HumanoidRootPart.Material = "Plastic"
+						v.Character.HumanoidRootPart.CanCollide = false
+					end)
+				end
+			end
+		end
+	end)
+end)
+
+Visual:Toggle("ESP", function(s)
+getgenv().enabled = s
+getgenv().filluseteamcolor = true
+getgenv().outlineuseteamcolor = true
+getgenv().fillcolor = Color3.new(0, 0, 0)
+getgenv().outlinecolor = Color3.new(1, 1, 1)
+getgenv().filltrans = 0.5
+getgenv().outlinetrans = 0
+loadstring(game:HttpGet("https://pastefy.app/aJ3BALWS/raw"))();
+end)
+
+Visual:Toggle("Team Check", function(s)
+    getgenv().TeamCheck = s
+end)
+
+Visual:Toggle("Billboard Text", function(s)
+if s == true then
+    toggleESP()
+elseif s == false then
+    toggleESP()
+end
+end)
+
+Visual:Toggle("Killbrick", function(s)
+if s == true then
+    god()
+elseif s == false then
+    ungod()
+end
+end)
+
+Hub:InfoLabel("some script might be error!")
+Hub:Section("Hub/Gui")
+Hub:Button("Reach GUI v3", function()
+loadstring(game:HttpGet("https://pastefy.app/rw50KS5g/raw"))();
+end)
+
+Hub:Button("MinhNhat Hub | TSB", function()
+loadstring(game:HttpGet("https://pastefy.app/mzb1Xf1I/raw"))();
+end)
+
+Hub:Button("Admin/F3X Panel", function()
+
+end)
+
+Hub:Section("Random Script")
+Hub:Button("Free Cam", function()
+loadstring(game:HttpGet("https://pastefy.app/Wfyo44ZS/raw"))();
+end)
+
+Hub:Button("Mobile Fly", function()
+loadstring(game:HttpGet("https://pastefy.app/RKQQB08G/raw"))();
+end)
+
+Hub:Button("Spectate Gui", function()
+loadstring(game:HttpGet("https://pastefy.app/gGIJypXm/raw"))();
+end)
