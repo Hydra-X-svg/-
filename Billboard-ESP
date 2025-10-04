@@ -32,9 +32,11 @@ game:GetService("RunService").Heartbeat:Connect(function()
     if getgenv().enabled then
         task.wait()
         for _,v in pairs(game.Players:GetChildren()) do
-           local espEnabled = false
-           local espObjects = {}
-           local function applyESP(character)
+            local chr = v.Character
+            if chr ~= nil then
+               local espEnabled = false
+               local espObjects = {}
+               local function applyESP(character)
                if character and character:FindFirstChild("HumanoidRootPart") then
                    local billboard = Instance.new("BillboardGui", character)
                    billboard.Adornee = character:FindFirstChild("Head")
@@ -72,20 +74,4 @@ local function updateESP()
         end
     end
 end
-
-local function refreshESP()
-    for _, data in pairs(espObjects) do
-        for _, obj in pairs(data) do
-            obj:Destroy()
-        end
-    end
-
-    espObjects = {}
-
-    for _, plr in pairs(game.Players:GetPlayers()) do
-        if plr ~= player and plr.Character then
-            applyESP(plr.Character)
-            end
-        end
-    end
-end
+end)
