@@ -38,7 +38,11 @@ game:GetService("RunService").Heartbeat:Connect(function()
                local espObjects = {}
                local function applyESP(character)
                if character and character:FindFirstChild("HumanoidRootPart") then
-                   local billboard = Instance.new("BillboardGui", character)
+                   local billboard = Instance.new("BillboardGui")
+                   billboard.Name = v.Name
+                   if uselocalplayer == false and billboard.Name == game.Players.LocalPlayer.Name then
+                   else
+                   billboard.Parent = holder
                    billboard.Adornee = character:FindFirstChild("Head")
                    billboard.Size = UDim2.new(0, 200, 0, 50)
                    billboard.StudsOffset = Vector3.new(0, 2, 0)
