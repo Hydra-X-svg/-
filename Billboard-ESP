@@ -53,23 +53,21 @@ game:GetService("RunService").Heartbeat:Connect(function()
                    textLabel.TextStrokeTransparency = 0.5
                    textLabel.Text = "Loading..."
                    espObjects[character] = {highlight, billboard, textLabel}
-    end
-end
 
-local function updateESP()
-    for _, plr in pairs(game.Players:GetPlayers()) do
+               local function updateESP()
+               for _, plr in pairs(game.Players:GetPlayers()) do
 
-        if plr ~= player and plr.Character and plr.Character:FindFirstChild("HumanoidRootPart") then
-            local char = plr.Character
-            local rootPart = char:FindFirstChild("HumanoidRootPart")
-            local humanoid = char:FindFirstChild("Humanoid")
-            local espData = espObjects[char]
+              if plr ~= player and plr.Character and plr.Character:FindFirstChild("HumanoidRootPart") then
+                 local char = plr.Character
+                 local rootPart = char:FindFirstChild("HumanoidRootPart")
+                 local humanoid = char:FindFirstChild("Humanoid")
+                 local espData = espObjects[char]
 
-            if rootPart and humanoid and espData then
-                local distance = (rootPart.Position - player.Character.HumanoidRootPart.Position).Magnitude
-                local health = math.floor(humanoid.Health)
-                local maxHealth = math.floor(humanoid.MaxHealth)
-                espData[3].Text = string.format("%.1fm | %d/%d HP | %s", distance, health, maxHealth, plr.Name)
+              if rootPart and humanoid and espData then
+                 local distance = (rootPart.Position - player.Character.HumanoidRootPart.Position).Magnitude
+                 local health = math.floor(humanoid.Health)
+                 local maxHealth = math.floor(humanoid.MaxHealth)
+                 espData[3].Text = string.format("%.1fm | %d/%d HP | %s", distance, health, maxHealth, plr.Name)
             end
         end
     end
