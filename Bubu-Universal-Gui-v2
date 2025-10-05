@@ -343,7 +343,7 @@ loadstring(game:HttpGet("https://pastefy.app/mzb1Xf1I/raw"))();
 end)
 
 Hub:Button("Admin/F3X Panel", function()
-
+loadstring(game:HttpGet(""))();
 end)
 
 Hub:Section("Random Script")
