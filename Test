@@ -1,354 +1,475 @@
-local userInputService = game:GetService("UserInputService")
-local runService = game:GetService("RunService")
-local player = game.Players.LocalPlayer
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local RequestCommand = ReplicatedStorage:WaitForChild("HDAdminHDClient").Signals.RequestCommandSilent
 local Players = game:GetService("Players")
-local gui = Instance.new("ScreenGui", game.CoreGui)
+local player = game.Players.LocalPlayer
+local char = player.Character
+local backpack = player.Backpack
+local gui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
 gui.Name = "Project"
-local function isNumber(str)
-  if tonumber(str) ~= nil or str == 'inf' then
-    return true
-  end
-end
+gui.ResetOnSpawn = false
 
-getgenv().HitboxSize = 13
-getgenv().HitboxTransparency = 0.9
-getgenv().HitboxStatus = false
-getgenv().TeamCheck = false
-getgenv().Walkspeed = game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed
-getgenv().Jumppower = game:GetService("Players").LocalPlayer.Character.Humanoid.JumpPower
-getgenv().TPSpeed = 3
-getgenv().TPWalk = false
+local frame = Instance.new("Frame", gui)
+frame.Position = UDim2.new(0, 350, 0, 50)
+frame.Size = UDim2.new(0, 150, 0, 220)
+frame.BackgroundColor3 = Color3.new(0, 0, 0)
+frame.Active = true
+frame.Draggable = true
+frame.BackgroundTransparency = 0
+Instance.new("UIStroke", frame).Color =  Color3.new(5, 5, 5)
+Instance.new("UICorner", frame).CornerRadius = UDim.new(0, 3)
 
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Vcsk/UI-Library/main/Source/MyUILib(Unamed).lua"))();
-local Window = Library:Create("Window")
-local Toggle = Instance.new("TextButton", gui)
-Toggle.Name = "Toggle"
-Toggle.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
-Toggle.BackgroundTransparency = 0.9
-Toggle.Position = UDim2.new(0, 0, 0, 80)
-Toggle.Size = UDim2.new(0, 60, 0, 30)
-Toggle.Text = "Toggle"
-Toggle.TextSize = 24
-Toggle.TextColor3 = Color3.fromRGB(40, 40, 40)
-Toggle.Font = Enum.Font.SourceSans
-Toggle.Active = true
-Toggle.Draggable = true
-Toggle.MouseButton1Click:connect(function()
-    Library:ToggleUI()
+local frame2 = Instance.new("Frame", frame)
+frame2.Position = UDim2.new(0, 0, 0, 0)
+frame2.Size = UDim2.new(0, 150, 0, 220)
+frame2.BackgroundColor3 = Color3.new(0, 0, 0)
+Instance.new("UICorner", frame2).CornerRadius = UDim.new(0, 3)
+
+local KP = Instance.new("Frame", frame2)
+KP.Position = UDim2.new(0, 0, 0, 35)
+KP.Size = UDim2.new(0, 150, 0, 1)
+KP.BackgroundColor3 = Color3.new(1, 1, 1)
+KP.BorderSizePixel = 0
+
+local KP2 = Instance.new("Frame", frame2)
+KP2.Position = UDim2.new(0, 0, 0, 185)
+KP2.Size = UDim2.new(0, 150, 0, 1)
+KP2.BackgroundColor3 = Color3.new(1, 1, 1)
+KP2.BorderSizePixel = 0
+
+local toggle = Instance.new("TextButton", frame)
+toggle.Position = UDim2.new(0, 122, 0, 8)
+toggle.Size = UDim2.new(0, 20, 0, 20)
+toggle.BackgroundColor3 = Color3.new(0, 0, 0)
+toggle.Text = "+"
+toggle.Font = Enum.Font.Gotham
+toggle.TextColor3 = Color3.new(255, 255, 255)
+toggle.TextSize = 19
+
+local Uis = Instance.new("UIStroke", toggle)
+Uis.Color = Color3.new(1, 1, 1)
+Uis.Thickness = 1
+Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Instance.new("UICorner", toggle).CornerRadius = UDim.new(0, 3)
+
+local scroll = Instance.new("ScrollingFrame", frame2)
+scroll.Size = UDim2.new(0, 148, 0, 146)
+scroll.Position = UDim2.new(0, 1, 0, 37)
+scroll.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+scroll.ScrollBarThickness = 0
+scroll.CanvasSize = UDim2.new(0, 0, 4, 0)
+scroll.BackgroundTransparency = 0
+Instance.new("UIStroke", scroll).Color =  Color3.new(0, 0, 0)
+
+local cmdb2 = Instance.new("TextButton", frame2)
+cmdb2.Position = UDim2.new(0, 118, 0, 188)
+cmdb2.Size = UDim2.new(0, 30, 0, 30)
+cmdb2.BackgroundColor3 = Color3.new(0, 0, 0)
+cmdb2.Text = "Cmdbar2"
+cmdb2.Font = Enum.Font.Gotham
+cmdb2.TextColor3 = Color3.new(255, 255, 255)
+cmdb2.TextSize = 6
+
+local Uis = Instance.new("UIStroke", cmdb2)
+Uis.Color = Color3.new(255, 255, 255)
+Uis.Thickness = 1
+Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Instance.new("UICorner", cmdb2).CornerRadius = UDim.new(0, 1)
+
+local Box = Instance.new("TextBox", frame2)
+Box.PlaceholderText = "Text/ID..."
+Box.Position = UDim2.new(0, 35, 0, 188)
+Box.Size = UDim2.new(0, 80, 0, 30)
+Box.TextSize = 12
+Box.TextColor3 = Color3.new(1, 1, 1)
+Box.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Box.Font = Enum.Font.Gotham
+Box.Text = "129988826233934"
+Box.ClearTextOnFocus = true
+Box.TextWrapped = true
+
+local Uis = Instance.new("UIStroke", Box)
+Uis.Color = Color3.new(1, 1, 1)
+Uis.Thickness = 1
+Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Instance.new("UICorner", Box).CornerRadius = UDim.new(0, 2)
+
+local f3x = Instance.new("TextButton", frame2)
+f3x.Position = UDim2.new(0, 2, 0, 188)
+f3x.Size = UDim2.new(0, 30, 0, 30)
+f3x.BackgroundColor3 = Color3.new(0, 0, 0)
+f3x.Text = "F3X"
+f3x.Font = Enum.Font.Gotham
+f3x.TextColor3 = Color3.new(255, 255, 255)
+f3x.TextSize = 14
+
+local Uis = Instance.new("UIStroke", f3x)
+Uis.Color = Color3.new(255, 255, 255)
+Uis.Thickness = 1
+Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Instance.new("UICorner", f3x).CornerRadius = UDim.new(0, 1)
+
+local Sky = Instance.new("TextButton", scroll)
+Sky.Position = UDim2.new(0, 3, 0, 3)
+Sky.Size = UDim2.new(0, 70, 0, 35)
+Sky.BackgroundColor3 = Color3.new(0, 0, 0)
+Sky.Text = "Skybox"
+Sky.Font = Enum.Font.Gotham
+Sky.TextColor3 = Color3.new(255, 255, 255)
+Sky.TextSize = 14
+
+local Uis = Instance.new("UIStroke", Sky)
+Uis.Color = Color3.new(255, 255, 255)
+Uis.Thickness = 1
+Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Instance.new("UICorner", Sky).CornerRadius = UDim.new(0, 3)
+
+local Decal = Instance.new("TextButton", scroll)
+Decal.Position = UDim2.new(0, 76, 0, 3)
+Decal.Size = UDim2.new(0, 70, 0, 35)
+Decal.BackgroundColor3 = Color3.new(0, 0, 0)
+Decal.Text = "Decal"
+Decal.Font = Enum.Font.Gotham
+Decal.TextColor3 = Color3.new(255, 255, 255)
+Decal.TextSize = 14
+
+local Uis = Instance.new("UIStroke", Decal)
+Uis.Color = Color3.new(255, 255, 255)
+Uis.Thickness = 1
+Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Instance.new("UICorner", Decal).CornerRadius = UDim.new(0, 3)
+
+local s = Instance.new("TextButton", scroll)
+s.Position = UDim2.new(0, 3, 0, 41)
+s.Size = UDim2.new(0, 70, 0, 35)
+s.BackgroundColor3 = Color3.new(0, 0, 0)
+s.Text = "Sound"
+s.Font = Enum.Font.Gotham
+s.TextColor3 = Color3.new(255, 255, 255)
+s.TextSize = 14
+
+local Uis = Instance.new("UIStroke", s)
+Uis.Color = Color3.new(255, 255, 255)
+Uis.Thickness = 1
+Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Instance.new("UICorner", s).CornerRadius = UDim.new(0, 3)
+
+local board = Instance.new("TextButton", scroll)
+board.Position = UDim2.new(0, 76, 0, 41)
+board.Size = UDim2.new(0, 70, 0, 35)
+board.BackgroundColor3 = Color3.new(0, 0, 0)
+board.Text = "Billboard"
+board.Font = Enum.Font.Gotham
+board.TextColor3 = Color3.new(255, 255, 255)
+board.TextSize = 14
+
+local Uis = Instance.new("UIStroke", board)
+Uis.Color = Color3.new(255, 255, 255)
+Uis.Thickness = 1
+Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Instance.new("UICorner", board).CornerRadius = UDim.new(0, 3)
+
+local chr = Instance.new("TextButton", scroll)
+chr.Position = UDim2.new(0, 3, 0, 79)
+chr.Size = UDim2.new(0, 70, 0, 35)
+chr.BackgroundColor3 = Color3.new(0, 0, 0)
+chr.Text = "Char All"
+chr.Font = Enum.Font.Gotham
+chr.TextColor3 = Color3.new(255, 255, 255)
+chr.TextSize = 14
+
+local Uis = Instance.new("UIStroke", chr)
+Uis.Color = Color3.new(255, 255, 255)
+Uis.Thickness = 1
+Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Instance.new("UICorner", chr).CornerRadius = UDim.new(0, 3)
+
+local base = Instance.new("TextButton", scroll)
+base.Position = UDim2.new(0, 76, 0, 79)
+base.Size = UDim2.new(0, 70, 0, 35)
+base.BackgroundColor3 = Color3.new(0, 0, 0)
+base.Text = "Baseplate"
+base.Font = Enum.Font.Gotham
+base.TextColor3 = Color3.new(255, 255, 255)
+base.TextSize = 14
+
+local Uis = Instance.new("UIStroke", base)
+Uis.Color = Color3.new(255, 255, 255)
+Uis.Thickness = 1
+Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Instance.new("UICorner", base).CornerRadius = UDim.new(0, 3)
+
+local kill = Instance.new("TextButton", scroll)
+kill.Position = UDim2.new(0, 3, 0, 117)
+kill.Size = UDim2.new(0, 70, 0, 35)
+kill.BackgroundColor3 = Color3.new(0, 0, 0)
+kill.Text = "Kill All"
+kill.Font = Enum.Font.Gotham
+kill.TextColor3 = Color3.new(255, 255, 255)
+kill.TextSize = 14
+
+local Uis = Instance.new("UIStroke", kill)
+Uis.Color = Color3.new(255, 255, 255)
+Uis.Thickness = 1
+Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Instance.new("UICorner", kill).CornerRadius = UDim.new(0, 3)
+
+local color = Instance.new("TextButton", scroll)
+color.Position = UDim2.new(0, 76, 0, 117)
+color.Size = UDim2.new(0, 70, 0, 35)
+color.BackgroundColor3 = Color3.new(0, 0, 0)
+color.Text = "Color Part"
+color.Font = Enum.Font.Gotham
+color.TextColor3 = Color3.new(255, 255, 255)
+color.TextSize = 14
+
+local Uis = Instance.new("UIStroke", color)
+Uis.Color = Color3.new(255, 255, 255)
+Uis.Thickness = 1
+Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Instance.new("UICorner", color).CornerRadius = UDim.new(0, 3)
+
+local unc = Instance.new("TextButton", scroll)
+unc.Position = UDim2.new(0, 3, 0, 155)
+unc.Size = UDim2.new(0, 143, 0, 35)
+unc.BackgroundColor3 = Color3.new(0, 0, 0)
+unc.Text = "UnAnchor"
+unc.Font = Enum.Font.Gotham
+unc.TextColor3 = Color3.new(255, 255, 255)
+unc.TextSize = 14
+
+local Uis = Instance.new("UIStroke", unc)
+Uis.Color = Color3.new(255, 255, 255)
+Uis.Thickness = 1
+Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Instance.new("UICorner", unc).CornerRadius = UDim.new(0, 3)
+
+local delete = Instance.new("TextButton", scroll)
+delete.Position = UDim2.new(0, 3, 0, 193)
+delete.Size = UDim2.new(0, 70, 0, 35)
+delete.BackgroundColor3 = Color3.new(0, 0, 0)
+delete.Text = "Delete Map"
+delete.Font = Enum.Font.Gotham
+delete.TextColor3 = Color3.new(255, 255, 255)
+delete.TextSize = 12
+
+local Uis = Instance.new("UIStroke", delete)
+Uis.Color = Color3.new(255, 255, 255)
+Uis.Thickness = 1
+Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Instance.new("UICorner", delete).CornerRadius = UDim.new(0, 3)
+
+local nuke = Instance.new("TextButton", scroll)
+nuke.Position = UDim2.new(0, 76, 0, 193)
+nuke.Size = UDim2.new(0, 70, 0, 35)
+nuke.BackgroundColor3 = Color3.new(0, 0, 0)
+nuke.Text = "Nuke"
+nuke.Font = Enum.Font.Gotham
+nuke.TextColor3 = Color3.new(255, 255, 255)
+nuke.TextSize = 14
+
+local Uis = Instance.new("UIStroke", nuke)
+Uis.Color = Color3.new(255, 255, 255)
+Uis.Thickness = 1
+Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Instance.new("UICorner", nuke).CornerRadius = UDim.new(0, 3)
+
+-- Function
+toggle.MouseButton1Click:Connect(function()
+if frame2.Visible then
+    frame2.Visible = false
+    frame:TweenSize(UDim2.new(0, 150, 0, 35), "Out", "Quart", 0.4, true)
+else
+    frame:TweenSize(UDim2.new(0, 150, 0, 220), "Out", "Quart", 0.4, true)
+wait(0.2)
+    frame2.Visible = true
+    end
 end)
 
-function god()
-    for _, part in pairs(workspace:GetDescendants()) do
-        if part:IsA("BasePart") then
-            if string.find(part.Name:lower(), "kill") or string.find(part.Name:lower(), "lava") or part.Material == Enum.Material.Neon then
-                part.CanTouch = false
-                part.CanCollide = true
-                part.Transparency = 0.5
+f3x.MouseButton1Click:Connect(function()
+		RequestCommand:InvokeServer(";btools")
+end)
+
+cmdb2.MouseButton1Click:Connect(function()
+		RequestCommand:InvokeServer(";cmdbar2")
+end)
+
+Sky.MouseButton1Click:Connect(function()
+local function getf3x()
+         for _, v in ipairs(backpack:GetChildren()) do
+            if v:FindFirstChild("SyncAPI") then
+               return v
             end
-        end
-    end
-end
-
-function ungod()
-    for _, part in pairs(workspace:GetDescendants()) do
-        if part:IsA("BasePart") then
-            if string.find(part.Name:lower(), "kill") or string.find(part.Name:lower(), "lava") or part.Material == Enum.Material.Neon then
-                part.CanTouch = true
-                part.CanCollide = true
-                part.Transparency = 0
+         end
+         for _, v in ipairs(char:GetChildren()) do
+            if v:FindFirstChild("SyncAPI") then
+               return v
             end
-        end
+         end
+         return nil
+      end
+      local f3x = getf3x()
+      if not f3x then
+         warn("you dont have f3x")
     end
-end
+      local syncapi = f3x.SyncAPI
+      local serverendpoint = syncapi.ServerEndpoint
+      local function sky()
+         spawn(function()
+            local position = char.Head.Position
+            local part = serverendpoint:InvokeServer("CreatePart", "Normal", CFrame.new(position + Vector3.new(0, 2, 0)), workspace)
+            local args = {
+               [1] = "CreateMeshes",
+               [2] = {
+                  [1] = {
+                     ["Part"] = part
+                  }
+               }
+            }
+            serverendpoint:InvokeServer(unpack(args))
+            local args = {
+               [1] = "SyncMesh",
+               [2] = {
+                  [1] = {
+                     ["Part"] = part,
+                     ["MeshId"] = "rbxassetid://8006679977"
+                  }
+               }
+            }
+            serverendpoint:InvokeServer(unpack(args))
+            local args = {
+               [1] = "SyncMesh",
+               [2] = {
+                  [1] = {
+                     ["Part"] = part,
+                     ["Scale"] = Vector3.new(500, 500, 500)
+                  }
+               }
+            }
+            serverendpoint:InvokeServer(unpack(args))
+            local args = {
+               [1] = "SyncMesh",
+               [2] = {
+                  [1] = {
+                     ["Part"] = part,
+                     ["TextureId"] = "rbxassetid://"..Box.Text
+                  }
+               }
+            }
+            serverendpoint:InvokeServer(unpack(args))
+            name(part, "Sky")
+            lock(part, true)
+            setcollision(part, false)
+      end)
+   end
+   sky()
+end)
 
-local espEnabled = false
-local espObjects = {}
-local function applyESP(character)
-    if character and character:FindFirstChild("HumanoidRootPart") then
-        local billboard = Instance.new("BillboardGui", character)
-        billboard.Adornee = character:FindFirstChild("Head")
-        billboard.Size = UDim2.new(0, 180, 0, 40)
-        billboard.StudsOffset = Vector3.new(0, 2, 0)
-        billboard.AlwaysOnTop = true
-
-        local textLabel = Instance.new("TextLabel", billboard)
-        textLabel.Size = UDim2.new(1, 0, 1, 0)
-        textLabel.BackgroundTransparency = 1
-        textLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-        textLabel.Font = Enum.Font.GothamBold
-        textLabel.TextSize = 14
-        textLabel.TextStrokeTransparency = 0.5
-        textLabel.Text = "Loading..."
-        espObjects[character] = {highlight, billboard, textLabel}
-    end
-end
-
-local function updateESP()
-    for _, plr in pairs(game.Players:GetPlayers()) do
-
-        if plr ~= player and plr.Character and plr.Character:FindFirstChild("HumanoidRootPart") then
-            local char = plr.Character
-            local rootPart = char:FindFirstChild("HumanoidRootPart")
-            local humanoid = char:FindFirstChild("Humanoid")
-            local espData = espObjects[char]
-
-            if rootPart and humanoid and espData then
-                local distance = (rootPart.Position - player.Character.HumanoidRootPart.Position).Magnitude
-                local health = math.floor(humanoid.Health)
-                local maxHealth = math.floor(humanoid.MaxHealth)
-                espData[3].Text = string.format("%.1fm | %d/%d HP | %s", distance, health, maxHealth, plr.Name)
+Decal.MouseButton1Click:Connect(function()
+local function getf3x()
+         for _, v in ipairs(backpack:GetChildren()) do
+            if v:FindFirstChild("SyncAPI") then
+               return v
             end
-        end
-    end
-end
-
-local function refreshESP()
-    for _, data in pairs(espObjects) do
-        for _, obj in pairs(data) do
-            obj:Destroy()
-        end
-    end
-
-    espObjects = {}
-
-    for _, plr in pairs(game.Players:GetPlayers()) do
-        if plr ~= player and plr.Character then
-            applyESP(plr.Character)
-        end
-    end
-end
-
-function toggleESP()
-    espEnabled = not espEnabled
-
-    if espEnabled then
-        refreshESP()
-
-        runService.RenderStepped:Connect(function()
-            if espEnabled then
-                updateESP()
+         end
+         for _, v in ipairs(char:GetChildren()) do
+            if v:FindFirstChild("SyncAPI") then
+               return v
             end
-        end)
-    else
-        for _, data in pairs(espObjects) do
-            for _, obj in pairs(data) do
-                obj:Destroy()
-            end
-        end
-        espObjects = {}
+         end
+         return nil
+      end
+      local f3x = getf3x()
+      if not f3x then
+         warn("you dont have f3x")
     end
-end
-
-local HomeTab = Window:Tab("Home","rbxassetid://78780430891192")
-local PlayerTab = Window:Tab("Players","rbxassetid://112609464524168")
-local VisualTab = Window:Tab("Visuals","rbxassetid://133040688818305")
-local HubTab = Window:Tab("Script/Hub","rbxassetid://9940330045")
-HomeTab:InfoLabel("Wellcome back "..player.Name.."!")
-HomeTab:Section("Map Info")
-HomeTab:Button("Name: "..game.MarketplaceService:GetProductInfo(game.PlaceId).Name.."", function()
-    setclipboard(game.MarketplaceService:GetProductInfo(game.PlaceId).Name)
-end)
-
-HomeTab:Label("Max Players: "..game.Players.MaxPlayers.."")
-
-HomeTab:Button("ID: "..game.PlaceId.."", function()
-    setclipboard(game.PlaceId)
-end)
-
-HomeTab:Button("Job ID: \n"..game.JobId.."", function()
-    setclipboard(game.JobId)
-end)
-
-HomeTab:Section("Setting")
-
-HomeTab:Keybind("Toggle UI", Enum.KeyCode.F, function()
-    Library:ToggleUI()
-end)
-
-HomeTab:Button("Rejoin", function()
-    game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
-end)
-
-
-PlayerTab:InfoLabel("some script might be error!")
-PlayerTab:Section("About you")
-PlayerTab:Label("Username: "..player.Name.."")
-PlayerTab:Label("Display Name: "..player.DisplayName.."")
-PlayerTab:Label("ID: "..player.UserId.."")
-PlayerTab:Label("Acc Age: "..player.AccountAge.."")
-PlayerTab:Label("Language: "..game.LocalizationService.RobloxLocaleId.."")
-PlayerTab:Label("Client ID: \n"..game:GetService("RbxAnalyticsService"):GetClientId().."")
-PlayerTab:Label("MemberShip: "..player.MembershipType.Name.."")
-PlayerTab:Section("LocalPlayer")
-PlayerTab:TextBox("WalkSpeed", function(value)
-    getgenv().Walkspeed = value
-    pcall(function()
-        game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = value
-    end)
-end)
-
-PlayerTab:TextBox("JumpPower", function(value)
-    getgenv().Jumppower = value
-    pcall(function()
-        game:GetService("Players").LocalPlayer.Character.Humanoid.JumpPower = value
-    end)
-end)
-
-PlayerTab:TextBox("TP Speed", function(value)
-getgenv().TPSpeed = value
-end)
-
-PlayerTab:Toggle("Loop WalkSpeed", function(state)
-    getgenv().loopW = state
-    game:GetService("RunService").Heartbeat:Connect(function()
-        if loopW == true then
-            pcall(function()
-                game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = Walkspeed
+      local syncapi = f3x.SyncAPI
+      local serverendpoint = syncapi.ServerEndpoint
+      local function createdecal(part, side)
+         local args = {
+            [1] = "CreateTextures",
+            [2] = {
+               [1] = {
+                  ["Part"] = part,
+                  ["Face"] = side,
+                  ["TextureType"] = "Decal"
+               }
+            }
+         }
+         serverendpoint:InvokeServer(unpack(args))
+      end
+      local function setdecal(part, asset, side)
+         local args = {
+            [1] = "SyncTexture",
+            [2] = {
+               [1] = {
+                  ["Part"] = part,
+                  ["Face"] = side,
+                  ["TextureType"] = "Decal",
+                  ["Texture"] = "rbxassetid://".. asset
+               }
+            }
+         }
+         serverendpoint:InvokeServer(unpack(args))
+      end
+      local function decalspam()
+         local decalid = Box.Text
+         for _, v in ipairs(workspace:GetDescendants()) do
+            if v:IsA("BasePart") or v:IsA("UnionOperation") then
+               spawn(function()
+                  createdecal(v, Enum.NormalId.Front)
+                  createdecal(v, Enum.NormalId.Back)
+                  createdecal(v, Enum.NormalId.Left)
+                  createdecal(v, Enum.NormalId.Right)
+                  createdecal(v, Enum.NormalId.Bottom)
+                  createdecal(v, Enum.NormalId.Top)
+                  setdecal(v, decalid, Enum.NormalId.Front)
+                  setdecal(v, decalid, Enum.NormalId.Back)
+                  setdecal(v, decalid, Enum.NormalId.Left)
+                  setdecal(v, decalid, Enum.NormalId.Right)
+                  setdecal(v, decalid, Enum.NormalId.Bottom)
+                  setdecal(v, decalid, Enum.NormalId.Top)
             end)
-        end
-    end)
+         end
+      end
+   end
+   decalspam()
 end)
 
-PlayerTab:Toggle("Loop JumpPower", function(state)
-    getgenv().loopJ = state
-    game:GetService("RunService").Heartbeat:Connect(function()
-        if loopJ == true then
-            pcall(function()
-                game:GetService("Players").LocalPlayer.Character.Humanoid.JumpPower = Jumppower
-            end)
-        end
-    end)
+s.MouseButton1Click:Connect(function()
+		RequestCommand:InvokeServer(";music "..Box.Text)
 end)
 
-PlayerTab:Toggle("TP Walk", function(s)
-getgenv().TPWalk = s
-local hb = game:GetService("RunService").Heartbeat
-local player = game:GetService("Players")
-local lplr = player.LocalPlayer
-local chr = lplr.Character
-local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
-while getgenv().TPWalk and hb:Wait() and chr and hum and hum.Parent do
-  if hum.MoveDirection.Magnitude > 0 then
-    if getgenv().TPSpeed and isNumber(getgenv().TPSpeed) then
-      chr:TranslateBy(hum.MoveDirection * tonumber(getgenv().TPSpeed))
-    else
-      chr:TranslateBy(hum.MoveDirection)
-    end
-  end
-end
+board.MouseButton1Click:Connect(function()
+		RequestCommand:InvokeServer(";name all "..Box.Text)
+		RequestCommand:InvokeServer(";titler all "..Box.Text)
+		RequestCommand:InvokeServer(";ctag all "..Box.Text.." red")
+		RequestCommand:InvokeServer(";cname all "..Box.Text.." red")
 end)
 
-PlayerTab:Slider("Fov", game.Workspace.CurrentCamera.FieldOfView,120, function(v)
-     game.Workspace.CurrentCamera.FieldOfView = v
+chr.MouseButton1Click:Connect(function()
+		RequestCommand:InvokeServer(";char all "..Box.Text)
 end)
 
-PlayerTab:Toggle("Noclip", function(s)
-    getgenv().Noclip = s
-    game:GetService("RunService").Heartbeat:Connect(function()
-        if Noclip == true then
-            game:GetService("RunService").Stepped:wait()
-            game.Players.LocalPlayer.Character.Head.CanCollide = false
-            game.Players.LocalPlayer.Character.Torso.CanCollide = false
-        end
-    end)
+base.MouseButton1Click:Connect(function()
+loadstring(game:HttpGet("https://pastefy.app/A9Yzicrs/raw"))();
 end)
 
-PlayerTab:Toggle("Infinite Jump", function(s)
-getgenv().InfJ = s
-    game:GetService("UserInputService").JumpRequest:connect(function()
-        if InfJ == true then
-            game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
-        end
-    end)
+kill.MouseButton1Click:Connect(function()
+loadstring(game:HttpGet("https://pastefy.app/bsfsgJnD/raw"))();
 end)
 
-VisualTab:InfoLabel("some script might be error!")
-VisualTab:Section("Visuals")
-VisualTab:TextBox("Hitbox Size", function(value)
-    getgenv().HitboxSize = value
+color.MouseButton1Click:Connect(function()
+loadstring(game:HttpGet("https://pastefy.app/kzTbADqG/raw"))();
 end)
 
-VisualTab:TextBox("Hitbox Transparency", function(number)
-    getgenv().HitboxTransparency = number
+unc.MouseButton1Click:Connect(function()
+loadstring(game:HttpGet("https://pastefy.app/loZZ2WYK/raw"))();
 end)
 
-VisualTab:Toggle("Status: ", function(state)
-	getgenv().HitboxStatus = state
-    game:GetService('RunService').RenderStepped:connect(function()
-		if HitboxStatus == true and TeamCheck == false then
-			for i,v in next, game:GetService('Players'):GetPlayers() do
-				if v.Name ~= game:GetService('Players').LocalPlayer.Name then
-					pcall(function()
-						v.Character.HumanoidRootPart.Size = Vector3.new(HitboxSize, HitboxSize, HitboxSize)
-						v.Character.HumanoidRootPart.Transparency = HitboxTransparency
-						v.Character.HumanoidRootPart.BrickColor = BrickColor.new("Really black")
-						v.Character.HumanoidRootPart.Material = "Neon"
-						v.Character.HumanoidRootPart.CanCollide = false
-					end)
-				end
-			end
-		elseif HitboxStatus == true and TeamCheck == true then
-			for i,v in next, game:GetService('Players'):GetPlayers() do
-				if game:GetService('Players').LocalPlayer.Team ~= v.Team then
-					pcall(function()
-						v.Character.HumanoidRootPart.Size = Vector3.new(HitboxSize, HitboxSize, HitboxSize)
-						v.Character.HumanoidRootPart.Transparency = HitboxTransparency
-						v.Character.HumanoidRootPart.BrickColor = BrickColor.new("Really black")
-						v.Character.HumanoidRootPart.Material = "Neon"
-						v.Character.HumanoidRootPart.CanCollide = false
-					end)
-				end
-			end
-		else
-		    for i,v in next, game:GetService('Players'):GetPlayers() do
-				if v.Name ~= game:GetService('Players').LocalPlayer.Name then
-					pcall(function()
-						v.Character.HumanoidRootPart.Size = Vector3.new(2,2,1)
-						v.Character.HumanoidRootPart.Transparency = 1
-						v.Character.HumanoidRootPart.BrickColor = BrickColor.new("Medium stone grey")
-						v.Character.HumanoidRootPart.Material = "Plastic"
-						v.Character.HumanoidRootPart.CanCollide = false
-					end)
-				end
-			end
-		end
-	end)
+delete.MouseButton1Click:Connect(function()
+loadstring(game:HttpGet("https://pastefy.app/pnJkjxAs/raw"))();
 end)
 
-VisualTab:Toggle("ESP", function(state)
-getgenv().enabled = state
-getgenv().filluseteamcolor = true
-getgenv().outlineuseteamcolor = true
-getgenv().fillcolor = Color3.new(255, 0, 0)
-getgenv().outlinecolor = Color3.new(1, 1, 1)
-getgenv().filltrans = 0.5
-getgenv().outlinetrans = 0
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Vcsk/RobloxScripts/main/Highlight-ESP.lua"))()
+nuke.MouseButton1Click:Connect(function()
+
 end)
-
-VisualTab:Toggle("Team Check", function(state)
-    getgenv().TeamCheck = state
-end)
-
-VisualTab:Toggle("Billboard Text", function(state)
-   local On = state
-if On == true then
-    toggleESP()
-elseif On == false then
-    toggleESP()
-end
-end)
-
-VisualTab:Toggle("Killbrick", function(state2)
-   local On = state2
-if On == true then
-    god()
-elseif On == false then
-    ungod()
-end
-end)
-
-HubTab:InfoLabel("some script might be error!")
-HubTab:Section("Hub/Gui")
-HubTab:Section("Random Script")
-
