@@ -334,6 +334,7 @@ end)
 
 Hub:InfoLabel("some script might be error!")
 Hub:Section("Hub/Gui")
+Hub:Label("Credits to owner of the Script/Hub/Gui!")
 Hub:Button("Reach GUI v3", function()
 loadstring(game:HttpGet("https://pastefy.app/rw50KS5g/raw"))();
 end)
@@ -357,4 +358,28 @@ end)
 
 Hub:Button("Spectate Gui", function()
 loadstring(game:HttpGet("https://pastefy.app/gGIJypXm/raw"))();
+end)
+
+-- Toggle
+local gui = Instance.new("ScreenGui", game.CoreGui)
+gui.Name = "Toggle"
+local Toggle = Instance.new("TextButton", gui)
+Toggle.Name = "Toggle"
+Toggle.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
+Toggle.BackgroundTransparency = 0.9
+Toggle.Position = UDim2.new(0, 0, 0, 80)
+Toggle.Size = UDim2.new(0, 60, 0, 30)
+Toggle.Text = "Open"
+Toggle.TextSize = 24
+Toggle.TextColor3 = Color3.fromRGB(40, 40, 40)
+Toggle.Font = Enum.Font.SourceSans
+Toggle.Active = true
+Toggle.Draggable = true
+Instance.new("UICorner", Toggle).CornerRadius = UDim.new(0, 3)
+local Uis = Instance.new("UIStroke", Toggle)
+Uis.Color = Color3.new(1, 1, 1)
+Uis.Thickness = 1
+Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Toggle.MouseButton1Click:Connect(function()
+    Library:ToggleUI()
 end)
