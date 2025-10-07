@@ -209,7 +209,7 @@ Instance.new("UIStroke", KP9).Color =  Color3.new(5, 5, 5)
 Instance.new("UICorner", KP9).CornerRadius = UDim.new(0, 5)
 
 local scroll = Instance.new("ScrollingFrame", KP9)
-scroll.Size = UDim2.new(0, 123, 0, 163)
+scroll.Size = UDim2.new(0, 123, 0, 128)
 scroll.Position = UDim2.new(0, 8, 0, 8)
 scroll.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 scroll.ScrollBarThickness = 0
@@ -217,6 +217,20 @@ scroll.CanvasSize = UDim2.new(0, 0, 3, 0)
 scroll.BackgroundTransparency = 0
 Instance.new("UIStroke", scroll).Color =  Color3.new(0, 0, 0)
 Instance.new("UICorner", scroll).CornerRadius =  UDim.new(0, 5)
+
+local Box2 = Instance.new("TextBox", KP9)
+Box2.Position = UDim2.new(0, 8, 0, 143)
+Box2.Size = UDim2.new(0, 123, 0, 30)
+Box2.BackgroundColor3 = Color3.new(1, 1, 1)
+Box2.TextSize = 13
+Box2.TextColor3 = Color3.new(0, 0, 0)
+Box2.Font = Enum.Font.Gotham
+Box2.Text = ""
+Box2.PlaceholderText = "Put Name..."
+Box2.ClearTextOnFocus = true
+Box2.MultiLine = true
+Box2.TextWrapped = true
+Instance.new("UICorner", Box2).CornerRadius = UDim.new(0, 5)
 
 local Btn = Instance.new("TextButton", scroll)
 Btn.Position = UDim2.new(0.0, 5, 0, 6)
@@ -409,31 +423,31 @@ Btn.MouseButton1Click:Connect(function()
 end)
 
 Btn2.MouseButton1Click:Connect(function()
-    setclipboard('local frame = Instance.new("Frame", gui)\nframe.Position = UDim2.new(0, 270, 0, 50)\nframe.Size = UDim2.new(0, 260, 0, 200)\nframe.BackgroundColor3 = Color3.fromRGB(0, 0, 0)\nframe.Active = true\nframe.Draggable = true\nframe.BackgroundTransparency = 0\nInstance.new("UICorner",frame).CornerRadius=UDim.new(0,3)\nInstance.new("UIStroke",frame).Color=Color3.new(1,1,1)\n\n')
+    setclipboard('local '..Box2.Text..' = Instance.new("Frame", gui)\n'..Box2.Text..'.Position = UDim2.new(0, 270, 0, 50)\n'..Box2.Text..'.Size = UDim2.new(0, 260, 0, 200)\n'..Box2.Text..'.BackgroundColor3 = Color3.fromRGB(0, 0, 0)\n'..Box2.Text..'.Active = true\n'..Box2.Text..'.Draggable = true\n'..Box2.Text..'.BackgroundTransparency = 0\nInstance.new("UICorner",'..Box2.Text..').CornerRadius=UDim.new(0,3)\nInstance.new("UIStroke",'..Box2.Text..').Color=Color3.new(1,1,1)\n\n')
 end)
 
 Btn3.MouseButton1Click:Connect(function()
-    setclipboard('local Btn = Instance.new("TextButton", frame)\nBtn.Position = UDim2.new(0, 0, 0, 0)\nBtn.Size = UDim2.new(0, 80, 0, 35)\nBtn.BackgroundColor3 = Color3.fromRGB(0, 0, 0)\nBtn.Text = "Button"\nBtn.TextColor3 = Color3.new(1, 1, 1)\nBtn.TextSize = 14\nBtn.Font = Enum.Font.Gotham\nlocal Uis = Instance.new("UIStroke", Btn)\nUis.Color = Color3.fromRGB(255, 255, 255)\nUis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border\nInstance.new("UICorner",Btn).CornerRadius=UDim.new(0,3)\nBtn.MouseButton1Click:Connect(function()\n   \nend)\n\n')
+    setclipboard('local '..Box2.Text..' = Instance.new("TextButton", frame)\n'..Box2.Text..'.Position = UDim2.new(0, 0, 0, 0)\n'..Box2.Text..'.Size = UDim2.new(0, 80, 0, 35)\n'..Box2.Text..'.BackgroundColor3 = Color3.fromRGB(0, 0, 0)\n'..Box2.Text..'.Text = "Button"\n'..Box2.Text..'.TextColor3 = Color3.new(1, 1, 1)\n'..Box2.Text..'.TextSize = 14\n'..Box2.Text..'.Font = Enum.Font.Gotham\nlocal Uis = Instance.new("UIStroke", '..Box2.Text..')\nUis.Color = Color3.fromRGB(255, 255, 255)\nUis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border\nInstance.new("UICorner",'..Box2.Text..').CornerRadius=UDim.new(0,3)\n'..Box2.Text..'.MouseButton1Click:Connect(function()\n   \nend)\n\n')
 end)
 
 Btn4.MouseButton1Click:Connect(function()
-    setclipboard('local Label = Instance.new("TextLabel", frame)\nLabel.Position = UDim2.new(0, 0, 0, 0)\Label.Size = UDim2.new(0, 80, 0, 35)\nLabel.BackgroundColor3 = Color3.new(0, 0, 0)\nLabel.Text = "Text"\nLabel.TextColor3 = Color3.new(0, 0, 0)\nLabel.TextSize = 14\nLabel.Font = Enum.Font.Code\nLabel.BackgroundTransparency = 0\nInstance.new("UICorner",Label).CornerRadius=UDim.new(0,3)\nInstance.new("UIStroke",Label).Color=Color3.new(1,1,1)\n\n')
+    setclipboard('local '..Box2.Text..' = Instance.new("TextLabel", frame)\n'..Box2.Text..'.Position = UDim2.new(0, 0, 0, 0)\n'..Box2.Text..'.Size = UDim2.new(0, 80, 0, 35)\n'..Box2.Text..'.BackgroundColor3 = Color3.new(0, 0, 0)\n'..Box2.Text..'.Text = "Text"\n'..Box2.Text..'.TextColor3 = Color3.new(0, 0, 0)\n'..Box2.Text..'.TextSize = 14\n'..Box2.Text..'.Font = Enum.Font.Code\n'..Box2.Text..'.BackgroundTransparency = 0\nInstance.new("UICorner",'..Box2.Text..').CornerRadius=UDim.new(0,3)\nInstance.new("UIStroke",'..Box2.Text..').Color=Color3.new(1,1,1)\n\n')
 end)
 
 Btn5.MouseButton1Click:Connect(function()
-    setclipboard('local Box = Instance.new("TextBox", frame)\nBox.Position = UDim2.new(0, 0, 0, 0)\nBox.Size = UDim2.new(0, 80, 0, 35)\nBox.BackgroundColor3 = Color3.fromRGB(0, 0, 0)\Box.Font = Enum.Font.Gotham\nBox.Text = ""\nBox.PlaceholderText = "TextBox"\nBox.TextSize = 16\nBox.TextColor3 = Color3.new(1, 1, 1)\nBox.TextTransparency = 0\nBox.TextXAlignment = Enum.TextXAlignment.Left\nBox.TextYAlignment = Enum.TextYAlignment.Top\nBox.ClearTextOnFocus = true\nBox.MultiLine = true\nBox.TextWrapped = true\nlocal Uis = Instance.new("UIStroke", Box)\nUis.Color = Color3.fromRGB(255, 255, 255)\nUis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border\nInstance.new("UICorner",Box).CornerRadius=UDim.new(0,3)\n\n')
+    setclipboard('local '..Box2.Text..' = Instance.new("TextBox", frame)\n'..Box2.Text..'.Position = UDim2.new(0, 0, 0, 0)\n'..Box2.Text..'.Size = UDim2.new(0, 80, 0, 35)\n'..Box2.Text..'.BackgroundColor3 = Color3.fromRGB(0, 0, 0)\n'..Box2.Text..'.Font = Enum.Font.Gotham\n'..Box2.Text..'.Text = ""\n'..Box2.Text..'.PlaceholderText = "TextBox"\n'..Box2.Text..'.TextSize = 16\n'..Box2.Text..'.TextColor3 = Color3.new(1, 1, 1)\n'..Box2.Text..'.TextTransparency = 0\n'..Box2.Text..'.TextXAlignment = Enum.TextXAlignment.Left\n'..Box2.Text..'.TextYAlignment = Enum.TextYAlignment.Top\n'..Box2.Text..'.ClearTextOnFocus = true\n'..Box2.Text..'.MultiLine = true\n'..Box2.Text..'.TextWrapped = true\nlocal Uis = Instance.new("UIStroke", '..Box2.Text..')\nUis.Color = Color3.fromRGB(255, 255, 255)\nUis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border\nInstance.new("UICorner",'..Box2.Text..').CornerRadius=UDim.new(0,3)\n\n')
 end)
 
 Btn6.MouseButton1Click:Connect(function()
-    setclipboard('local imageBtn = Instance.new("ImageButton", frame)\nimageBtn.Position = UDim2.new(0, 0, 0, 0)\nimageBtn.Size = UDim2.new(0, 80, 0, 35)\nimageBtn.BackgroundColor3 = Color3.new(0, 0, 0)\nimageBtn.Image = "rbxassetid://10367063073"\nimageBtn.ImageColor3 = Color3.new(1, 1, 1)\nimageBtn.ImageTransparency = 0\nimageBtn.BackgroundTransparency = 0\nInstance.new("UICorner",imageBtn).CornerRadius=UDim.new(0,3)\nInstance.new("UIStroke",imageBtn).Color=Color3.new(1,1,1)\nimageBtn.MouseButton1Click:Connect(function()\n   \nend)\n\n')
+    setclipboard('local '..Box2.Text..' = Instance.new("ImageButton", frame)\n'..Box2.Text..'.Position = UDim2.new(0, 0, 0, 0)\n'..Box2.Text..'.Size = UDim2.new(0, 80, 0, 35)\n'..Box2.Text..'.BackgroundColor3 = Color3.new(0, 0, 0)\n'..Box2.Text..'.Image = "rbxassetid://10367063073"\n'..Box2.Text..'.ImageColor3 = Color3.new(1, 1, 1)\n'..Box2.Text..'.ImageTransparency = 0\n'..Box2.Text..'.BackgroundTransparency = 0\nInstance.new("UICorner",'..Box2.Text..').CornerRadius=UDim.new(0,3)\nInstance.new("UIStroke",'..Box2.Text..').Color=Color3.new(1,1,1)\n'..Box2.Text..'.MouseButton1Click:Connect(function()\n   \nend)\n\n')
 end)
 
 Btn7.MouseButton1Click:Connect(function()
-    setclipboard('local imageLabel = Instance.new("ImageLabel", frame)\nimageLabel.Position = UDim2.new(0, 0, 0, 0)\nimageLabel.Size = UDim2.new(0, 80, 0, 35)\nimageLabel.BackgroundColor3 = Color3.new(1, 1, 1)\nimageLabel.Image = "rbxassetid://10367063073"\nimageLabel.ImageColor3 = Color3.new(1, 1, 1)\nimageLabel.ImageTransparency = 0\nimageLabel.BackgroundTransparency = 0\nInstance.new("UICorner",imageLabel).CornerRadius=UDim.new(0,3)\nInstance.new("UIStroke",imageLabel).Color=Color3.new(1,1,1)\n\n')
+    setclipboard('local '..Box2.Text..' = Instance.new("ImageLabel", frame)\n'..Box2.Text..'.Position = UDim2.new(0, 0, 0, 0)\n'..Box2.Text..'.Size = UDim2.new(0, 80, 0, 35)\n'..Box2.Text..'.BackgroundColor3 = Color3.new(1, 1, 1)\n'..Box2.Text..'.Image = "rbxassetid://10367063073"\n'..Box2.Text..'.ImageColor3 = Color3.new(1, 1, 1)\n'..Box2.Text..'.ImageTransparency = 0\n'..Box2.Text..'.BackgroundTransparency = 0\nInstance.new("UICorner",'..Box2.Text..').CornerRadius=UDim.new(0,3)\nInstance.new("UIStroke",'..Box2.Text..').Color=Color3.new(1,1,1)\n\n')
 end)
 
 Btn8.MouseButton1Click:Connect(function()
-    setclipboard('local scroll = Instance.new("ScrollingFrame", frame)\nscroll.Position = UDim2.new(0, 0, 0, 0)\nscroll.Size = UDim2.new(0, 120, 0, 160)\nscroll.BackgroundColor3 = Color3.fromRGB(255, 255, 255)\nscroll.ScrollBarThickness = 0\nscroll.CanvasSize = UDim2.new(0, 0, 4, 0)\nscroll.BackgroundTransparency = 1\nInstance.new("UICorner",scroll).CornerRadius=UDim.new(0,3)\nInstance.new("UIStroke",scroll).Color=Color3.new(1,1,1)\n\n')
+    setclipboard('local '..Box2.Text..' = Instance.new("ScrollingFrame", frame)\n'..Box2.Text..'.Position = UDim2.new(0, 0, 0, 0)\n'..Box2.Text..'.Size = UDim2.new(0, 120, 0, 160)\n'..Box2.Text..'.BackgroundColor3 = Color3.fromRGB(255, 255, 255)\n'..Box2.Text..'.ScrollBarThickness = 0\n'..Box2.Text..'.CanvasSize = UDim2.new(0, 0, 4, 0)\n'..Box2.Text..'.BackgroundTransparency = 1\nInstance.new("UICorner",'..Box2.Text..').CornerRadius=UDim.new(0,3)\nInstance.new("UIStroke",'..Box2.Text..').Color=Color3.new(1,1,1)\n\n')
 end)
 
 Btn9.MouseButton1Click:Connect(function()
