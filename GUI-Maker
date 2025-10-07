@@ -13,35 +13,35 @@ Toggle.Image = "rbxassetid://0"
 Instance.new("UIStroke", Toggle).Color =  Color3.new(5, 5, 5)
 Instance.new("UICorner", Toggle).CornerRadius = UDim.new(0, 3)
 
-local mainFrame = Instance.new("Frame", gui)
-mainFrame.Position = UDim2.new(0.5, -0, 0.5, -29)
-mainFrame.Size = UDim2.new(0, 782, 0, 385)
-mainFrame.BackgroundColor3 = Color3.new(0, 0, 0)
-mainFrame.BackgroundTransparency = 0.7
-mainFrame.BorderSizePixel = 1
-mainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
-Instance.new("UIStroke", mainFrame).Color =  Color3.new(5, 5, 5)
-Instance.new("UICorner", mainFrame).CornerRadius = UDim.new(0, 5)
+local frame = Instance.new("Frame", gui)
+frame.Position = UDim2.new(0.5, -0, 0.5, -29)
+frame.Size = UDim2.new(0, 782, 0, 385)
+frame.BackgroundColor3 = Color3.new(0, 0, 0)
+frame.BackgroundTransparency = 0.7
+frame.BorderSizePixel = 1
+frame.AnchorPoint = Vector2.new(0.5, 0.5)
+Instance.new("UIStroke", frame).Color =  Color3.new(5, 5, 5)
+Instance.new("UICorner", frame).CornerRadius = UDim.new(0, 5)
 
-local KP = Instance.new("Frame", mainFrame)
+local KP = Instance.new("Frame", frame)
 KP.Position = UDim2.new(0, 0, 0, 0)
 KP.Size = UDim2.new(0, 782, 0, 55)
 KP.BackgroundColor3 = Color3.new(0, 0, 0)
 KP.Active = true
 Instance.new("UIStroke", KP).Color =  Color3.new(5, 5, 5)
-local KP_2 = Instance.new("Frame", mainFrame)
+local KP_2 = Instance.new("Frame", frame)
 KP_2.Position = UDim2.new(0, 0, 1, -57)
 KP_2.Size = UDim2.new(0, 782, 0, 56)
 KP_2.BackgroundColor3 = Color3.new(0, 0, 0)
 KP_2.Active = true
 Instance.new("UIStroke", KP_2).Color =  Color3.new(5, 5, 5)
-local KP_3 = Instance.new("Frame", mainFrame)
+local KP_3 = Instance.new("Frame", frame)
 KP_3.Position = UDim2.new(0, 0, 0, 0)
 KP_3.Size = UDim2.new(0, 40, 0, 385)
 KP_3.BackgroundColor3 = Color3.new(0, 0, 0)
 KP_3.Active = true
 Instance.new("UIStroke", KP_3).Color =  Color3.new(5, 5, 5)
-local KP_4 = Instance.new("Frame", mainFrame)
+local KP_4 = Instance.new("Frame", frame)
 KP_4.Position = UDim2.new(0.5, -50, 0.5, -50)
 KP_4.Size = UDim2.new(0, 140, 0, 70)
 KP_4.BackgroundColor3 = Color3.new(0, 0, 0)
@@ -68,7 +68,7 @@ KP_8.Size = UDim2.new(0, 1, 0, 55)
 KP_8.BackgroundColor3 = Color3.new(255, 255, 255)
 KP_8.BorderSizePixel = 0
 
-local Box = Instance.new("TextBox", mainFrame)
+local Box = Instance.new("TextBox", frame)
 Box.Position = UDim2.new(0, 40, 0.0, 55)
 Box.Size = UDim2.new(0, 742, 0, 272)
 Box.BackgroundColor3 = Color3.new(255, 255, 255)
@@ -78,7 +78,7 @@ Box.TextColor3 = Color3.new(1, 1, 1)
 Box.Font = Enum.Font.Gotham
 Box.BorderSizePixel = 0
 Box.Text = ""
-Box.PlaceholderText = "-- GUI Maker v1"
+Box.PlaceholderText = "-- GUI Maker"
 Box.ClearTextOnFocus = false
 Box.MultiLine = true
 Box.TextWrapped = true
@@ -352,12 +352,12 @@ Instance.new("UICorner", Btn12).CornerRadius = UDim.new(0, 3)
 
 -- Function
 Toggle.MouseButton1Click:Connect(function()
-		  mainFrame.Visible = true
+		  frame.Visible = true
 		  Toggle.Visible = false
 end)
 
 Close.MouseButton1Click:Connect(function()
-		  mainFrame.Visible = false
+		  frame.Visible = false
 		  Toggle.Visible = true
        KP9.Visible = false
 end)
