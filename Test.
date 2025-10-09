@@ -1,7 +1,7 @@
 local userInputService = game:GetService("UserInputService")
 local runService = game:GetService("RunService")
-local player = game.Players.LocalPlayer
 local Players = game:GetService("Players")
+local player = Players.LocalPlayer
 local function isNumber(str)
   if tonumber(str) ~= nil or str == 'inf' then
     return true
@@ -123,22 +123,30 @@ function toggleESP()
 end
 
 local Home = Window:Tab("Home","rbxassetid://78780430891192")
-local Player = Window:Tab("Players","rbxassetid://112609464524168")
+local Player = Window:Tab("Player","rbxassetid://112609464524168")
 local Visual = Window:Tab("Visuals","rbxassetid://133040688818305")
 local Hub = Window:Tab("Script/Hub","rbxassetid://9940330045")
 Home:InfoLabel("Wellcome back "..player.Name.."!")
 Home:Section("Map Info")
+Home:Label("Creator: "..game.MarketplaceService:GetProductInfo(game.PlaceId).Creator.Name.."")
 Home:Button("Name: "..game.MarketplaceService:GetProductInfo(game.PlaceId).Name.."", function()
-    setclipboard(game.MarketplaceService:GetProductInfo(game.PlaceId).Name)
+setclipboard(game.MarketplaceService:GetProductInfo(game.PlaceId).Name)
 end)
 
-Home:Label("Max Players: "..game.Players.MaxPlayers.."")
 Home:Button("ID: "..game.PlaceId.."", function()
-    setclipboard(game.PlaceId)
+setclipboard(game.PlaceId)
 end)
 
 Home:Button("Job ID: \n"..game.JobId.."", function()
-    setclipboard(game.JobId)
+setclipboard(game.JobId)
+end)
+
+Home:Button("Server Players Info", function()
+loadstring(game:HttpGet("https://pastefy.app/ZjO86qyb/raw"))();
+end)
+
+Home:Button("Scan Server", function()
+loadstring(game:HttpGet("https://pastefy.app/R4uJrolf/raw"))();
 end)
 
 Home:Section("Setting")
@@ -152,13 +160,13 @@ end)
 
 Player:InfoLabel("some script might be error!")
 Player:Section("About you")
-Player:Label("Username: "..player.Name.."")
-Player:Label("Display Name: "..player.DisplayName.."")
-Player:Label("ID: "..player.UserId.."")
-Player:Label("Acc Age: "..player.AccountAge.."")
-Player:Label("Language: "..game.LocalizationService.RobloxLocaleId.."")
-Player:Label("Client ID: \n"..game:GetService("RbxAnalyticsService"):GetClientId().."")
-Player:Label("MemberShip: "..player.MembershipType.Name.."")
+Player:Label("Today: ")
+Player:Label("Name: "..player.DisplayName.." (@"..player.Name..")")
+Player:Label("ID: "..player.UserId)
+Player:Label("Acc Age: "..player.AccountAge)
+Player:Label("Language: "..game.LocalizationService.RobloxLocaleId)
+Player:Label("Client ID: \n"..game:GetService("RbxAnalyticsService"):GetClientId())
+Player:Label("MemberShip: "..player.MembershipType.Name)
 Player:Section("LocalPlayer")
 Player:Button("FPS Boost", function()
 loadstring(game:HttpGet("https://pastefy.app/Uu0LK378/raw"))();
@@ -248,6 +256,10 @@ getgenv().InfJ = s
     end)
 end)
 
+Player:Button("Copy Position", function()
+setclipboard(""..math.floor(player.Character.HumanoidRootPart.Position.X)..","..math.floor(player.Character.HumanoidRootPart.Position.Y)..","..math.floor(player.Character.HumanoidRootPart.Position.Z).."")
+end)
+
 Visual:InfoLabel("some script might be error!")
 Visual:Section("Visuals")
 Visual:TextBox("Hitbox Size", function(v)
@@ -333,7 +345,7 @@ end
 end)
 
 Hub:InfoLabel("some script might be error!")
-Hub:Section("Hub/Gui")
+Hub:Section("Universal")
 Hub:Label("Credits to owner of the Script/Hub/Gui!")
 Hub:Button("Universal Fling GUI", function()
 loadstring(game:HttpGet("https://pastefy.app/ZBUDxLrc/raw"))();
@@ -343,21 +355,38 @@ Hub:Button("Reach GUI v3", function()
 loadstring(game:HttpGet("https://pastefy.app/rw50KS5g/raw"))();
 end)
 
-Hub:Button("MinhNhat Hub | TSB", function()
-loadstring(game:HttpGet("https://pastefy.app/mzb1Xf1I/raw"))();
-end)
-
 Hub:Button("Slicer FE V8.0.0", function()
 loadstring(game:HttpGet("https://pastefy.app/RjcxZ9hE/raw"))();
+end)
+
+Hub:Button("Emote (Beta) | R15", function()
+loadstring(game:HttpGet("https://api.droply.fun/raw/Emotes.lua"))()
+end)
+
+Hub:Button("P.Shader Ultimate", function()
+loadstring(game:HttpGet("https://pastefy.app/Y2VVS5DC/raw"))();
+end)
+
+Hub:Section("Game Hub")
+Hub:Button("Six Hub | NSS", function()
+loadstring(game:HttpGet("https://pastefy.app/KvIrfhdW/raw"))();
+end)
+
+Hub:Button("MinhNhat Hub | TSB", function()
+loadstring(game:HttpGet("https://pastefy.app/mzb1Xf1I/raw"))();
 end)
 
 Hub:Button("Fur Infection Outbreak", function()
 loadstring(game:HttpGet("https://pastefy.app/w9UImTxb/raw"))();
 end)
 
+Hub:Button("[2x💪] Get Big Simulator", function()
+loadstring(game:HttpGet("https://pastefy.app/yLSy7HFi/raw"))();
+end)
+
 Hub:Section("Random Script")
 Hub:Button("Free Cam", function()
-loadstring(game:HttpGet("https://pastefy.app/Wfyo44ZS/raw"))();
+loadstring(game:HttpGet("https://pastefy.app/RpSowSmc/raw"))();
 end)
 
 Hub:Button("Mobile Fly", function()
@@ -368,8 +397,16 @@ Hub:Button("Spectate Gui", function()
 loadstring(game:HttpGet("https://pastefy.app/gGIJypXm/raw"))();
 end)
 
+Hub:Button("Ping & FPS Watermark", function()
+loadstring(game:HttpGet("https://pastefy.app/lkK3efKG/raw"))();
+end)
+
 Hub:Button("Nox ss", function()
 loadstring(game:HttpGet("https://pastefy.app/nnbXkxc8/raw"))();
+end)
+
+Hub:Button("Destruction_Hex GUI", function()
+loadstring(game:HttpGet("https://pastefy.app/ZitGFpAy/raw"))();
 end)
 
 Hub:Button("Admin/F3X Panel", function()
