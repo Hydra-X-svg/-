@@ -351,6 +351,10 @@ Hub:Button("Universal Fling GUI", function()
 loadstring(game:HttpGet("https://pastefy.app/ZBUDxLrc/raw"))();
 end)
 
+Hub:Button("Gubby GUI", function()
+loadstring(game:HttpGet("https://pastefy.app/RZiz9Jrg/raw"))();
+end)
+
 Hub:Button("Reach GUI v3", function()
 loadstring(game:HttpGet("https://pastebin.com/raw/iKn1rhZv"))();
 end)
