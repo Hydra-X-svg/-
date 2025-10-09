@@ -390,7 +390,7 @@ loadstring(game:HttpGet("https://pastefy.app/RpSowSmc/raw"))();
 end)
 
 Hub:Button("Mobile Fly", function()
-loadstring(game:HttpGet("https://pastefy.app/RKQQB08G/raw"))();
+loadstring(game:HttpGet("https://pastefy.app/RmTUzgds/raw"))();
 end)
 
 Hub:Button("Spectate Gui", function()
