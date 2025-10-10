@@ -101,7 +101,7 @@ local Home = Window:Tab("Home","rbxassetid://78780430891192")
 local Player = Window:Tab("Player","rbxassetid://112609464524168")
 local Visual = Window:Tab("Visuals","rbxassetid://133040688818305")
 local Hub = Window:Tab("Script/Hub","rbxassetid://9940330045")
-Home:InfoLabel("Wellcome back "..player.Name.."!")
+Home:InfoLabel("Wellcome back "..player.DisplayName.."!")
 Home:Section("Map Info")
 Home:Label("Creator: "..game.MarketplaceService:GetProductInfo(game.PlaceId).Creator.Name.."")
 Home:Button("Name: "..game.MarketplaceService:GetProductInfo(game.PlaceId).Name.."", function()
@@ -444,18 +444,18 @@ loadstring(game:HttpGet("https://pastefy.app/NN2mvsL1/raw"))();
 end)
 
 -- Toggle
-local gui = Instance.new("ScreenGui", game.CoreGui)
-local Toggle = Instance.new("TextButton", gui)
-Toggle.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
-Toggle.BackgroundTransparency = 0.9
-Toggle.Position = UDim2.new(0, 0, 0, 80)
-Toggle.Size = UDim2.new(0, 60, 0, 30)
-Toggle.Text = "Open"
-Toggle.TextSize = 24
-Toggle.TextColor3 = Color3.fromRGB(40, 40, 40)
-Toggle.Font = Enum.Font.SourceSans
-Toggle.Active = true
-Toggle.Draggable = true
+local gui=Instance.new("ScreenGui",game.CoreGui)
+local Toggle=Instance.new("TextButton",gui)
+Toggle.BackgroundColor3=Color3.fromRGB(24,24,24)
+Toggle.BackgroundTransparency=0.9
+Toggle.Position=UDim2.new(0,0,0,80)
+Toggle.Size=UDim2.new(0,60,0,30)
+Toggle.Text="Open"
+Toggle.TextSize=24
+Toggle.TextColor3=Color3.fromRGB(40,40,40)
+Toggle.Font=Enum.Font.SourceSans
+Toggle.Active=true
+Toggle.Draggable=true
 Instance.new("UICorner",Toggle).CornerRadius=UDim.new(0,3)
 local Uis=Instance.new("UIStroke",Toggle)
 Uis.Color=Color3.new(1,1,1)
