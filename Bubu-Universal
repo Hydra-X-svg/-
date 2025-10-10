@@ -1,5 +1,3 @@
-local userInputService = game:GetService("UserInputService")
-local runService = game:GetService("RunService")
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
 local function isNumber(str)
@@ -7,7 +5,6 @@ local function isNumber(str)
     return true
   end
 end
-
 getgenv().HitboxSize = 13
 getgenv().HitboxTransparency = 0.9
 getgenv().HitboxStatus = false
@@ -19,34 +16,8 @@ getgenv().TPWalk = false
 getgenv().X = nil
 getgenv().Y = nil
 getgenv().Z = nil
-
-local Library = loadstring(game:HttpGet("https://pastefy.app/Y5sM87LT/raw"))();
-local Window = Library:Create("Window")
-
-function god()
-    for _, part in pairs(workspace:GetDescendants()) do
-        if part:IsA("BasePart") then
-            if string.find(part.Name:lower(), "kill") or string.find(part.Name:lower(), "lava") or part.Material == Enum.Material.Neon then
-                part.CanTouch = false
-                part.CanCollide = true
-                part.Transparency = 0.5
-            end
-        end
-    end
-end
-
-function ungod()
-    for _, part in pairs(workspace:GetDescendants()) do
-        if part:IsA("BasePart") then
-            if string.find(part.Name:lower(), "kill") or string.find(part.Name:lower(), "lava") or part.Material == Enum.Material.Neon then
-                part.CanTouch = true
-                part.CanCollide = true
-                part.Transparency = 0
-            end
-        end
-    end
-end
-
+local userInputService = game:GetService("UserInputService")
+local runService = game:GetService("RunService")
 local espEnabled = false
 local espObjects = {}
 local function applyESP(character)
@@ -124,7 +95,8 @@ function toggleESP()
         espObjects = {}
     end
 end
-
+local Library = loadstring(game:HttpGet("https://pastefy.app/Y5sM87LT/raw"))();
+local Window = Library:Create("Window")
 local Home = Window:Tab("Home","rbxassetid://78780430891192")
 local Player = Window:Tab("Player","rbxassetid://112609464524168")
 local Visual = Window:Tab("Visuals","rbxassetid://133040688818305")
@@ -377,10 +349,28 @@ end
 end)
 
 Visual:Toggle("Killbrick", function(s)
-if s == true then
-    god()
-elseif s == false then
-    ungod()
+getgenv().god = s
+if god == true then
+    for _, part in pairs(workspace:GetDescendants()) do
+        if part:IsA("BasePart") then
+            if string.find(part.Name:lower(), "kill") or string.find(part.Name:lower(), "lava") or part.Material == Enum.Material.Neon then
+                part.CanTouch = false
+                part.CanCollide = true
+                part.Transparency = 0.5
+            end
+        end
+    end
+end
+if god == false then
+    for _, part in pairs(workspace:GetDescendants()) do
+        if part:IsA("BasePart") then
+            if string.find(part.Name:lower(), "kill") or string.find(part.Name:lower(), "lava") or part.Material == Enum.Material.Neon then
+                part.CanTouch = true
+                part.CanCollide = true
+                part.Transparency = 0
+            end
+        end
+    end
 end
 end)
 
@@ -455,9 +445,7 @@ end)
 
 -- Toggle
 local gui = Instance.new("ScreenGui", game.CoreGui)
-gui.Name = "Toggle"
 local Toggle = Instance.new("TextButton", gui)
-Toggle.Name = "Toggle"
 Toggle.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
 Toggle.BackgroundTransparency = 0.9
 Toggle.Position = UDim2.new(0, 0, 0, 80)
