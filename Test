@@ -1,1 +1,454 @@
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Hydra-X-svg/-/refs/heads/main/Test"))()
+local Players=game:GetService("Players")
+local player=Players.LocalPlayer
+local function isNumber(str)
+  if tonumber(str) ~= nil or str=='inf' then
+    return true
+  end
+end
+getgenv().HitboxSize=13
+getgenv().HitboxTransparency=0.9
+getgenv().HitboxStatus=false
+getgenv().TeamCheck=false
+getgenv().Walkspeed=player.Character.Humanoid.WalkSpeed
+getgenv().Jumppower=player.Character.Humanoid.JumpPower
+getgenv().TPSpeed=3
+getgenv().TPWalk=false
+getgenv().X=nil
+getgenv().Y=nil
+getgenv().Z=nil
+local userInputService = game:GetService("UserInputService")
+local runService = game:GetService("RunService")
+local espEnabled = false
+local espObjects = {}
+local function applyESP(character)
+    if character and character:FindFirstChild("HumanoidRootPart") then
+        local billboard = Instance.new("BillboardGui", character)
+        billboard.Adornee = character:FindFirstChild("Head")
+        billboard.Size = UDim2.new(0, 180, 0, 40)
+        billboard.StudsOffset = Vector3.new(0, 2, 0)
+        billboard.AlwaysOnTop = true
+
+        local textLabel = Instance.new("TextLabel", billboard)
+        textLabel.Size = UDim2.new(1, 0, 1, 0)
+        textLabel.BackgroundTransparency = 1
+        textLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+        textLabel.Font = Enum.Font.GothamBold
+        textLabel.TextSize = 14
+        textLabel.TextStrokeTransparency = 0.5
+        textLabel.Text = "Loading..."
+        espObjects[character] = {highlight, billboard, textLabel}
+    end
+end
+
+local function updateESP()
+    for _, plr in pairs(game.Players:GetPlayers()) do
+
+        if plr ~= player and plr.Character and plr.Character:FindFirstChild("HumanoidRootPart") then
+            local char = plr.Character
+            local rootPart = char:FindFirstChild("HumanoidRootPart")
+            local humanoid = char:FindFirstChild("Humanoid")
+            local espData = espObjects[char]
+
+            if rootPart and humanoid and espData then
+                local distance = (rootPart.Position - player.Character.HumanoidRootPart.Position).Magnitude
+                local health = math.floor(humanoid.Health)
+                local maxHealth = math.floor(humanoid.MaxHealth)
+                espData[3].Text = string.format("%.1fm | %d/%d HP | %s", distance, health, maxHealth, plr.Name)
+            end
+        end
+    end
+end
+
+local function refreshESP()
+    for _, data in pairs(espObjects) do
+        for _, obj in pairs(data) do
+            obj:Destroy()
+        end
+    end
+
+    espObjects = {}
+
+    for _, plr in pairs(game.Players:GetPlayers()) do
+        if plr ~= player and plr.Character then
+            applyESP(plr.Character)
+        end
+    end
+end
+
+function toggleESP()
+    espEnabled = not espEnabled
+
+    if espEnabled then
+        refreshESP()
+
+        runService.RenderStepped:Connect(function()
+            if espEnabled then
+                updateESP()
+            end
+        end)
+    else
+        for _, data in pairs(espObjects) do
+            for _, obj in pairs(data) do
+                obj:Destroy()
+            end
+        end
+        espObjects = {}
+    end
+end
+local Library=loadstring(game:HttpGet("https://pastefy.app/Y5sM87LT/raw"))();
+local Window=Library:Create("Window")
+local Home=Window:Tab("Home","rbxassetid://78780430891192")
+local Player=Window:Tab("Player","rbxassetid://112609464524168")
+local Visual=Window:Tab("Visuals","rbxassetid://133040688818305")
+local Hub=Window:Tab("Script/Hub","rbxassetid://9940330045")
+Home:InfoLabel("Wellcome back "..player.DisplayName.."!")
+Home:Section("Map Info")
+Home:Label("Creator: "..game.MarketplaceService:GetProductInfo(game.PlaceId).Creator.Name)
+Home:Button("Name: "..game.MarketplaceService:GetProductInfo(game.PlaceId).Name.."",function()
+setclipboard(game.MarketplaceService:GetProductInfo(game.PlaceId).Name)
+end)
+Home:Button("ID: "..game.PlaceId.."",function()
+setclipboard(game.PlaceId)
+end)
+Home:Button("Job ID: \n"..game.JobId.."",function()
+setclipboard(game.JobId)
+end)
+Home:Button("Server Players Info",function()
+loadstring(game:HttpGet("https://pastefy.app/ZjO86qyb/raw"))();
+end)
+Home:Button("Scan Server",function()
+loadstring(game:HttpGet("https://pastefy.app/R4uJrolf/raw"))();
+end)
+Home:Section("Setting")
+Home:Keybind("Toggle UI",Enum.KeyCode.F,function()
+Library:ToggleUI()
+end)
+Home:Button("Rejoin",function()
+game:GetService("TeleportService"):Teleport(game.PlaceId,player)
+end)
+
+Player:InfoLabel("some script might be error!")
+Player:Section("About you")
+Player:Label("Today:")
+Player:Label("Name: "..player.DisplayName.." (@"..player.Name..")")
+Player:Label("ID: "..player.UserId)
+Player:Label("Acc Age: "..player.AccountAge)
+Player:Label("Language: "..game.LocalizationService.RobloxLocaleId)
+Player:Label("Client ID: \n"..game:GetService("RbxAnalyticsService"):GetClientId())
+Player:Label("MemberShip: "..player.MembershipType.Name)
+Player:Section("LocalPlayer")
+Player:Button("FPS Boost",function()
+loadstring(game:HttpGet("https://pastefy.app/Uu0LK378/raw"))();
+end)
+
+Player:Button("Anti-bang",function()
+loadstring(game:HttpGet("https://pastefy.app/EYXzo3lX/raw"))();
+end)
+
+Player:TextBox("WalkSpeed",function(v)
+    getgenv().Walkspeed=v
+    pcall(function()
+        player.Character.Humanoid.WalkSpeed=v
+    end)
+end)
+
+Player:TextBox("JumpPower",function(v)
+    getgenv().Jumppower=v
+    pcall(function()
+        player.Character.Humanoid.JumpPower=v
+    end)
+end)
+
+Player:TextBox("TP Speed",function(v)
+getgenv().TPSpeed=v
+end)
+
+Player:Toggle("Loop WalkSpeed",function(s)
+    getgenv().loopW=s
+    game:GetService("RunService").Heartbeat:Connect(function()
+        if loopW==true then
+            pcall(function()
+                player.Character.Humanoid.WalkSpeed=Walkspeed
+            end)
+        end
+    end)
+end)
+
+Player:Toggle("Loop JumpPower",function(s)
+    getgenv().loopJ=s
+    game:GetService("RunService").Heartbeat:Connect(function()
+        if loopJ==true then
+            pcall(function()
+                player.Character.Humanoid.JumpPower=Jumppower
+            end)
+        end
+    end)
+end)
+
+Player:Toggle("TP Walk",function(s)
+getgenv().TPWalk=s
+local hb=game:GetService("RunService").Heartbeat
+local chr=player.Character
+local hum=chr and chr:FindFirstChildWhichIsA("Humanoid")
+while getgenv().TPWalk and hb:Wait() and chr and hum and hum.Parent do
+  if hum.MoveDirection.Magnitude > 0 then
+    if getgenv().TPSpeed and isNumber(getgenv().TPSpeed) then
+      chr:TranslateBy(hum.MoveDirection * tonumber(getgenv().TPSpeed))
+    else
+      chr:TranslateBy(hum.MoveDirection)
+    end
+  end
+end
+end)
+
+Player:Slider("Fov",game.Workspace.CurrentCamera.FieldOfView,120,function(v)
+game.Workspace.CurrentCamera.FieldOfView=v
+end)
+
+Player:Toggle("Noclip",function(s)
+    getgenv().Noclip=s
+    game:GetService("RunService").Heartbeat:Connect(function()
+        if Noclip==true then
+            game:GetService("RunService").Stepped:wait()
+            playerCharacter.Head.CanCollide=false
+            player.Character.Torso.CanCollide=false
+        end
+    end)
+end)
+
+Player:Toggle("Inf Jump",function(s)
+getgenv().InfJ=s
+    game:GetService("UserInputService").JumpRequest:connect(function()
+        if InfJ==true then
+            player.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
+        end
+    end)
+end)
+
+Player:Button("Copy Position",function()
+setclipboard(""..math.floor(player.Character.HumanoidRootPart.Position.X)..","..math.floor(player.Character.HumanoidRootPart.Position.Y)..","..math.floor(player.Character.HumanoidRootPart.Position.Z).."")
+end)
+Visual:InfoLabel("some script might be error!")
+Visual:Section("Visuals")
+Visual:TextBox("Hitbox Size",function(v)
+getgenv().HitboxSize=v
+end)
+
+Visual:TextBox("Hitbox Transparency",function(n)
+getgenv().HitboxTransparency=n
+end)
+
+Visual:Toggle("Hitbox ",function(s)
+	getgenv().HitboxStatus=s
+    game:GetService('RunService').RenderStepped:connect(function()
+		if HitboxStatus==true and TeamCheck==false then
+			for i,v in next, game:GetService('Players'):GetPlayers() do
+				if v.Name ~= player.Name then
+					pcall(function()
+						v.Character.HumanoidRootPart.Size=Vector3.new(HitboxSize,HitboxSize,HitboxSize)
+						v.Character.HumanoidRootPart.Transparency=HitboxTransparency
+						v.Character.HumanoidRootPart.BrickColor=BrickColor.new("Really black")
+						v.Character.HumanoidRootPart.Material="Neon"
+						v.Character.HumanoidRootPart.CanCollide=false
+					end)
+				end
+			end
+		elseif HitboxStatus==true and TeamCheck==true then
+			for i,v in next, game:GetService('Players'):GetPlayers() do
+				if player.Team ~= v.Team then
+					pcall(function()
+						v.Character.HumanoidRootPart.Size=Vector3.new(HitboxSize,HitboxSize,HitboxSize)
+						v.Character.HumanoidRootPart.Transparency=HitboxTransparency1
+						v.Character.HumanoidRootPart.BrickColor=BrickColor.new("Really black")
+						v.Character.HumanoidRootPart.Material="Neon"
+						v.Character.HumanoidRootPart.CanCollide=false
+					end)
+				end
+			end
+		else
+		    for i,v in next, game:GetService('Players'):GetPlayers() do
+				if v.Name ~= player.Name then
+					pcall(function()
+						v.Character.HumanoidRootPart.Size=Vector3.new(2,2,1)
+						v.Character.HumanoidRootPart.Transparency=1
+						v.Character.HumanoidRootPart.BrickColor=BrickColor.new("Medium stone grey")
+						v.Character.HumanoidRootPart.Material="Plastic"
+						v.Character.HumanoidRootPart.CanCollide=false
+					end)
+				end
+			end
+		end
+	end)
+end)
+
+Visual:Toggle("Team Check",function(s)
+getgenv().TeamCheck=s
+end)
+Visual:Label("Sword Reach Script")
+Visual:TextBox("X | front/back",function(v)
+getgenv().X=v
+end)
+Visual:TextBox("Y | Left/Right",function(v)
+getgenv().Y=v
+end)
+Visual:TextBox("Z | Up/Down",function(v)
+getgenv().Z=v
+end)
+
+Visual:Button("Block Reach",function()
+local o=Instance.new("SelectionBox",player.Character:FindFirstChildOfClass("Tool").Handle)
+o.Adornee=player.Character:FindFirstChildOfClass("Tool").Handle
+o.Color3=Color3.new(0,0,0)
+o.Transparency=0.9
+player.Character:FindFirstChildOfClass("Tool").Handle.Shape="Block"
+player.Character:FindFirstChildOfClass("Tool").Handle.Size=Vector3.new(X,Y,Z)
+player.Character:FindFirstChildOfClass("Tool").Handle.Massless=true
+end)
+
+Visual:Button("Ball Reach",function()
+local b=Instance.new("SelectionSphere",player.Character:FindFirstChildOfClass("Tool").Handle)
+b.Adornee=player.Character:FindFirstChildOfClass("Tool").Handle
+b.Color3=Color3.new(0,0,0)
+b.Transparency=0.9
+player.Character:FindFirstChildOfClass("Tool").Handle.Shape="Ball"
+player.Character:FindFirstChildOfClass("Tool").Handle.Size=Vector3.new(X,Y,Z)
+player.Character:FindFirstChildOfClass("Tool").Handle.Massless=true
+end)
+
+Visual:Button("Clear Reach",function()
+player.Character:FindFirstChildOfClass("Tool").Handle.SelectionBox:Destroy()
+player.Character:FindFirstChildOfClass("Tool").Handle.SelectionSphere:Destroy()
+end)
+
+Visual:Toggle("ESP",function(s)
+getgenv().enabled=s
+getgenv().filluseteamcolor=true
+getgenv().outlineuseteamcolor=true
+getgenv().fillcolor=Color3.new(0,0,0)
+getgenv().outlinecolor=Color3.new(1,1,1)
+getgenv().filltrans=0.5
+getgenv().outlinetrans=0
+loadstring(game:HttpGet("https://pastefy.app/aJ3BALWS/raw"))();
+end)
+
+Visual:Toggle("Billboard Text",function(s)
+if s==true then
+toggleESP()
+elseif s==false then
+toggleESP()
+end
+end)
+
+Visual:Toggle("Killbrick",function(s)
+getgenv().god=s
+if god==true then
+    for _, part in pairs(workspace:GetDescendants()) do
+        if part:IsA("BasePart") then
+            if string.find(part.Name:lower(),"kill") or string.find(part.Name:lower(),"lava") or part.Material==Enum.Material.Neon then
+                part.CanTouch=false
+                part.CanCollide=true
+                part.Transparency=0.8
+            end
+        end
+    end
+end
+if god==false then
+    for _, part in pairs(workspace:GetDescendants()) do
+        if part:IsA("BasePart") then
+            if string.find(part.Name:lower(),"kill") or string.find(part.Name:lower(),"lava") or part.Material==Enum.Material.Neon then
+                part.CanTouch=true
+                part.CanCollide=true
+                part.Transparency=0
+            end
+        end
+    end
+end
+end)
+Hub:InfoLabel("some script might be error!")
+Hub:Section("Universal")
+Hub:Label("Credits to owner of the Script/Hub/Gui!")
+Hub:Button("Universal Fling GUI",function()
+loadstring(game:HttpGet("https://pastefy.app/ZBUDxLrc/raw"))();
+end)
+
+Hub:Button("Gubby GUI",function()
+loadstring(game:HttpGet("https://pastefy.app/RZiz9Jrg/raw"))();
+end)
+
+Hub:Button("Slicer FE V8.0.0",function()
+loadstring(game:HttpGet("https://pastefy.app/RjcxZ9hE/raw"))();
+end)
+
+Hub:Button("Emote (Beta) | R15",function()
+loadstring(game:HttpGet("https://api.droply.fun/raw/Emotes.lua"))()
+end)
+
+Hub:Button("P.Shader Ultimate",function()
+loadstring(game:HttpGet("https://pastefy.app/Y2VVS5DC/raw"))();
+end)
+
+Hub:Section("Game Hub")
+Hub:Button("Six Hub | NSS",function()
+loadstring(game:HttpGet("https://pastefy.app/KvIrfhdW/raw"))();
+end)
+
+Hub:Button("MinhNhat Hub | TSB",function()
+loadstring(game:HttpGet("https://pastefy.app/mzb1Xf1I/raw"))();
+end)
+
+Hub:Button("Fur Infection Outbreak",function()
+loadstring(game:HttpGet("https://pastefy.app/w9UImTxb/raw"))();
+end)
+
+Hub:Button("[2x💪] Get Big Simulator",function()
+loadstring(game:HttpGet("https://pastefy.app/yLSy7HFi/raw"))();
+end)
+
+Hub:Section("Random Script")
+Hub:Button("Free Cam",function()
+loadstring(game:HttpGet("https://pastefy.app/RpSowSmc/raw"))();
+end)
+
+Hub:Button("Mobile Fly",function()
+loadstring(game:HttpGet("https://pastefy.app/RmTUzgds/raw"))();
+end)
+
+Hub:Button("Spectate Gui",function()
+loadstring(game:HttpGet("https://pastefy.app/gGIJypXm/raw"))();
+end)
+
+Hub:Button("Ping & FPS Watermark",function()
+loadstring(game:HttpGet("https://pastefy.app/lkK3efKG/raw"))();
+end)
+
+Hub:Button("Nox ss",function()
+loadstring(game:HttpGet("https://pastefy.app/nnbXkxc8/raw"))();
+end)
+
+Hub:Button("Destruction_Hex GUI",function()
+loadstring(game:HttpGet("https://pastefy.app/ZitGFpAy/raw"))();
+end)
+
+Hub:Button("Admin/F3X Panel",function()
+loadstring(game:HttpGet("https://pastefy.app/NN2mvsL1/raw"))();
+end)
+
+-- Toggle
+g=Instance.new("ScreenGui",game.CoreGui)
+t=Instance.new("TextButton",g)
+t.Position=UDim2.new(0,2,0,80)
+t.Size=UDim2.new(0,60,0,30)
+t.Text="Open"
+t.TextSize=24
+t.TextColor3=Color3.fromRGB(40,40,40)
+t.Font=Enum.Font.SourceSans
+t.Active=true
+t.Draggable=true
+t.BackgroundTransparency=0.9
+Instance.new("UICorner",t).CornerRadius=UDim.new(0,3)
+s=Instance.new("UIStroke",t)
+s.Color=Color3.new(1,1,1)
+s.ApplyStrokeMode=Enum.ApplyStrokeMode.Border
+t.MouseButton1Click:Connect(function()
+Library:ToggleUI()
+end)
