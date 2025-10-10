@@ -16,6 +16,9 @@ getgenv().Walkspeed = player.Character.Humanoid.WalkSpeed
 getgenv().Jumppower = player.Character.Humanoid.JumpPower
 getgenv().TPSpeed = 3
 getgenv().TPWalk = false
+getgenv().X = nil
+getgenv().Y = nil
+getgenv().Z = nil
 
 local Library = loadstring(game:HttpGet("https://pastefy.app/Y5sM87LT/raw"))();
 local Window = Library:Create("Window")
@@ -270,7 +273,7 @@ Visual:TextBox("Hitbox Transparency", function(n)
     getgenv().HitboxTransparency = n
 end)
 
-Visual:Toggle("Status: ", function(s)
+Visual:Toggle("Hitbox ", function(s)
 	getgenv().HitboxStatus = s
     game:GetService('RunService').RenderStepped:connect(function()
 		if HitboxStatus == true and TeamCheck == false then
@@ -313,6 +316,47 @@ Visual:Toggle("Status: ", function(s)
 	end)
 end)
 
+Visual:Toggle("Team Check", function(s)
+    getgenv().TeamCheck = s
+end)
+Visual:Label("Sword Reach Script")
+Visual:TextBox("X | front/back", function(v)
+getgenv().X = v
+end)
+
+Visual:TextBox("Y | Left/Right", function(v)
+getgenv().Y = v
+end)
+
+Visual:TextBox("Z | Up/Down", function(v)
+getgenv().Z = v
+end)
+
+Visual:Button("Block Reach", function()
+local box = Instance.new("SelectionBox", player.Character:FindFirstChildOfClass("Tool").Handle)
+box.Adornee = player.Character:FindFirstChildOfClass("Tool").Handle
+box.Color3 = Color3.new(0, 0, 0)
+box.Transparency = 0.9
+player.Character:FindFirstChildOfClass("Tool").Handle.Shape = "Block"
+player.Character:FindFirstChildOfClass("Tool").Handle.Size = Vector3.new(X,Y,Z)
+player.Character:FindFirstChildOfClass("Tool").Handle.Massless = true
+end)
+
+Visual:Button("Ball Reach", function()
+local ball = Instance.new("SelectionSphere", player.Character:FindFirstChildOfClass("Tool").Handle)
+ball.Adornee = player.Character:FindFirstChildOfClass("Tool").Handle
+ball.Color3 = Color3.new(0, 0, 0)
+ball.Transparency = 0.9
+player.Character:FindFirstChildOfClass("Tool").Handle.Shape = "Ball"
+player.Character:FindFirstChildOfClass("Tool").Handle.Size = Vector3.new(X,Y,Z)
+player.Character:FindFirstChildOfClass("Tool").Handle.Massless = true
+end)
+
+Visual:Button("Clear Reach", function()
+player.Character:FindFirstChildOfClass("Tool").Handle.SelectionBox:Destroy()
+player.Character:FindFirstChildOfClass("Tool").Handle.SelectionSphere:Destroy()
+end)
+
 Visual:Toggle("ESP", function(s)
 getgenv().enabled = s
 getgenv().filluseteamcolor = true
@@ -322,10 +366,6 @@ getgenv().outlinecolor = Color3.new(1, 1, 1)
 getgenv().filltrans = 0.5
 getgenv().outlinetrans = 0
 loadstring(game:HttpGet("https://pastefy.app/aJ3BALWS/raw"))();
-end)
-
-Visual:Toggle("Team Check", function(s)
-    getgenv().TeamCheck = s
 end)
 
 Visual:Toggle("Billboard Text", function(s)
@@ -353,10 +393,6 @@ end)
 
 Hub:Button("Gubby GUI", function()
 loadstring(game:HttpGet("https://pastefy.app/RZiz9Jrg/raw"))();
-end)
-
-Hub:Button("Reach GUI v3", function()
-loadstring(game:HttpGet("https://pastebin.com/raw/iKn1rhZv"))();
 end)
 
 Hub:Button("Slicer FE V8.0.0", function()
@@ -432,10 +468,10 @@ Toggle.TextColor3 = Color3.fromRGB(40, 40, 40)
 Toggle.Font = Enum.Font.SourceSans
 Toggle.Active = true
 Toggle.Draggable = true
-Instance.new("UICorner", Toggle).CornerRadius = UDim.new(0, 3)
-local Uis = Instance.new("UIStroke", Toggle)
-Uis.Color = Color3.new(1, 1, 1)
-Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Instance.new("UICorner",Toggle).CornerRadius=UDim.new(0,3)
+local Uis=Instance.new("UIStroke",Toggle)
+Uis.Color=Color3.new(1,1,1)
+Uis.ApplyStrokeMode=Enum.ApplyStrokeMode.Border
 Toggle.MouseButton1Click:Connect(function()
-    Library:ToggleUI()
+Library:ToggleUI()
 end)
