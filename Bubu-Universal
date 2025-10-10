@@ -430,7 +430,7 @@ loadstring(game:HttpGet("https://pastefy.app/ZitGFpAy/raw"))();
 end)
 
 Hub:Button("Admin/F3X Panel",function()
-loadstring(game:HttpGet("https://pastefy.app/NN2mvsL1/raw"))();
+loadstring(game:HttpGet("https://pastefy.app/fg08s8DA/raw"))();
 end)
 
 -- Toggle
