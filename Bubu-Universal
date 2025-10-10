@@ -444,22 +444,21 @@ loadstring(game:HttpGet("https://pastefy.app/NN2mvsL1/raw"))();
 end)
 
 -- Toggle
-local gui=Instance.new("ScreenGui",game.CoreGui)
-local Toggle=Instance.new("TextButton",gui)
-Toggle.BackgroundColor3=Color3.fromRGB(24,24,24)
-Toggle.BackgroundTransparency=0.9
-Toggle.Position=UDim2.new(0,0,0,80)
-Toggle.Size=UDim2.new(0,60,0,30)
-Toggle.Text="Open"
-Toggle.TextSize=24
-Toggle.TextColor3=Color3.fromRGB(40,40,40)
-Toggle.Font=Enum.Font.SourceSans
-Toggle.Active=true
-Toggle.Draggable=true
-Instance.new("UICorner",Toggle).CornerRadius=UDim.new(0,3)
-local Uis=Instance.new("UIStroke",Toggle)
-Uis.Color=Color3.new(1,1,1)
-Uis.ApplyStrokeMode=Enum.ApplyStrokeMode.Border
-Toggle.MouseButton1Click:Connect(function()
+g=Instance.new("ScreenGui",game.CoreGui)
+t=Instance.new("TextButton",g)
+t.Position=UDim2.new(0,2,0,80)
+t.Size=UDim2.new(0,60,0,30)
+t.Text="Open"
+t.TextSize=24
+t.TextColor3=Color3.fromRGB(40,40,40)
+t.Font=Enum.Font.SourceSans
+t.Active=true
+t.Draggable=true
+t.BackgroundTransparency=0.9
+Instance.new("UICorner",t).CornerRadius=UDim.new(0,3)
+s=Instance.new("UIStroke",t)
+s.Color=Color3.new(1,1,1)
+s.ApplyStrokeMode=Enum.ApplyStrokeMode.Border
+t.MouseButton1Click:Connect(function()
 Library:ToggleUI()
 end)
