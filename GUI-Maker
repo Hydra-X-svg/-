@@ -1,5 +1,25 @@
 -- [GUI Maker]
-local gui = Instance.new("ScreenGui", game.CoreGui)
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+local guis = {
+    {name="ColorPickerGui", url="https://raw.githubusercontent.com/Hydra-X-svg/-/refs/heads/main/Color-Picker"}
+}
+
+local loadedGuis = {}
+local function getMainFrame(gui)
+    if not gui then return nil end
+    if gui.Name == "ColorPickerGui" then
+        return gui:FindFirstChild("ColorPalette")
+    else
+        for _, obj in ipairs(gui:GetChildren()) do
+            if obj:IsA("Frame") then
+                return obj
+            end
+        end
+    end
+end
+local gui = Instance.new("ScreenGui", playerGui)
 gui.Name = "Project"
 local Toggle = Instance.new("ImageButton", gui)
 Toggle.Name = "OpenButton"
@@ -58,112 +78,145 @@ KP_6.Size = UDim2.new(0, 40, 0, 1)
 KP_6.BackgroundColor3 = Color3.new(255, 255, 255)
 KP_6.BorderSizePixel = 0
 local KP_7 = Instance.new("Frame", KP)
-KP_7.Position = UDim2.new(0.8, -8, 0.0, 0)
+KP_7.Position = UDim2.new(0.7, 5, 0.0, 0)
 KP_7.Size = UDim2.new(0, 1, 0, 55)
 KP_7.BackgroundColor3 = Color3.new(255, 255, 255)
 KP_7.BorderSizePixel = 0
-local KP_8 = Instance.new("Frame", KP)
-KP_8.Position = UDim2.new(0.5, -8, 0.0, 0)
-KP_8.Size = UDim2.new(0, 1, 0, 55)
-KP_8.BackgroundColor3 = Color3.new(255, 255, 255)
-KP_8.BorderSizePixel = 0
 
-local Box = Instance.new("TextBox", frame)
-Box.Position = UDim2.new(0, 40, 0.0, 55)
-Box.Size = UDim2.new(0, 742, 0, 272)
-Box.BackgroundColor3 = Color3.new(255, 255, 255)
-Box.BackgroundTransparency = 1
-Box.TextSize = 13
-Box.TextColor3 = Color3.new(1, 1, 1)
-Box.Font = Enum.Font.Gotham
-Box.BorderSizePixel = 0
-Box.Text = ""
-Box.PlaceholderText = "-- GUI Maker"
-Box.ClearTextOnFocus = false
-Box.MultiLine = true
-Box.TextWrapped = true
-Box.TextXAlignment = Enum.TextXAlignment.Left
-Box.TextYAlignment = Enum.TextYAlignment.Top
+local box = Instance.new("TextBox", frame)
+box.Position = UDim2.new(0, 40, 0.0, 55)
+box.Size = UDim2.new(0, 742, 0, 272)
+box.BackgroundColor3 = Color3.new(255, 255, 255)
+box.BackgroundTransparency = 1
+box.TextSize = 13
+box.TextColor3 = Color3.new(1, 1, 1)
+box.Font = Enum.Font.Gotham
+box.BorderSizePixel = 0
+box.Text = ""
+box.PlaceholderText = "-- GUI Maker"
+box.ClearTextOnFocus = false
+box.MultiLine = true
+box.TextWrapped = true
+box.TextXAlignment = Enum.TextXAlignment.Left
+box.TextYAlignment = Enum.TextYAlignment.Top
 
-local Exe = Instance.new("TextButton", KP)
-Exe.Position = UDim2.new(0.9, 0, 0, 7)
-Exe.Size = UDim2.new(0, 60, 0, 40)
-Exe.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Exe.Text = "Execute"
-Exe.Font = Enum.Font.Gotham
-Exe.TextColor3 = Color3.new(1, 1, 1)
-Exe.TextSize = 16
-Instance.new("UICorner", Exe).CornerRadius = UDim.new(0, 5)
+local exe = Instance.new("TextButton", KP)
+exe.Position = UDim2.new(0.9, 6, 0, 7)
+exe.Size = UDim2.new(0, 60, 0, 40)
+exe.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+exe.Text = "Execute"
+exe.Font = Enum.Font.Gotham
+exe.TextColor3 = Color3.new(1, 1, 1)
+exe.TextSize = 16
+Instance.new("UICorner", exe).CornerRadius = UDim.new(0, 5)
+local Uis = Instance.new("UIStroke", exe)
+Uis.Color = Color3.new(255, 255, 255)
+Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 
-local Clear = Instance.new("TextButton", KP)
-Clear.Position = UDim2.new(0.9, -70, 0, 7)
-Clear.Size = UDim2.new(0, 60, 0, 40)
-Clear.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Clear.Text = "Clear"
-Clear.Font = Enum.Font.Gotham
-Clear.TextColor3 = Color3.new(1, 1, 1)
-Clear.TextSize = 16
-Instance.new("UICorner", Clear).CornerRadius = UDim.new(0, 5)
+local clear = Instance.new("TextButton", KP)
+clear.Position = UDim2.new(0.9, -66, 0, 7)
+clear.Size = UDim2.new(0, 60, 0, 40)
+clear.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+clear.Text = "Clear"
+clear.Font = Enum.Font.Gotham
+clear.TextColor3 = Color3.new(1, 1, 1)
+clear.TextSize = 16
+Instance.new("UICorner", clear).CornerRadius = UDim.new(0, 5)
+local Uis = Instance.new("UIStroke", clear)
+Uis.Color = Color3.new(255, 255, 255)
+Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 
-local Copy = Instance.new("TextButton", KP)
-Copy.Position = UDim2.new(0.8, -84, 0, 7)
-Copy.Size = UDim2.new(0, 60, 0, 40)
-Copy.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Copy.Text = "Copy"
-Copy.Font = Enum.Font.Gotham
-Copy.TextColor3 = Color3.new(1, 1, 1)
-Copy.TextSize = 16
-Instance.new("UICorner", Copy).CornerRadius = UDim.new(0, 5)
+local cut = Instance.new("TextButton", KP)
+cut.Position = UDim2.new(0.8, -61, 0, 7)
+cut.Size = UDim2.new(0, 60, 0, 40)
+cut.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+cut.Text = "Cut"
+cut.Font = Enum.Font.Gotham
+cut.TextColor3 = Color3.new(1, 1, 1)
+cut.TextSize = 16
+Instance.new("UICorner", cut).CornerRadius = UDim.new(0, 5)
+local Uis = Instance.new("UIStroke", cut)
+Uis.Color = Color3.new(255, 255, 255)
+Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 
-local Cut = Instance.new("TextButton", KP)
-Cut.Position = UDim2.new(0.6, 2, 0, 7)
-Cut.Size = UDim2.new(0, 60, 0, 40)
-Cut.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Cut.Text = "Cut"
-Cut.Font = Enum.Font.Gotham
-Cut.TextColor3 = Color3.new(1, 1, 1)
-Cut.TextSize = 16
-Instance.new("UICorner", Cut).CornerRadius = UDim.new(0, 5)
+local c = Instance.new("ImageButton", frame)
+c.Position = UDim2.new(0, 7, 1, -145)
+c.Size = UDim2.new(0, 26, 0, 26)
+c.BackgroundColor3 = Color3.new(0, 0, 0)
+c.Image = "rbxassetid://4728126418"
+Instance.new("UICorner",c).CornerRadius = UDim.new(0, 3)
+Instance.new("UIStroke",c).Color=Color3.new(1, 1, 1)
 
-local file = Instance.new("TextButton", KP)
-file.Position = UDim2.new(0.5, 9, 0, 7)
-file.Size = UDim2.new(0, 60, 0, 40)
-file.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-file.Text = "+"
-file.Font = Enum.Font.Gotham
-file.TextColor3 = Color3.new(1, 1, 1)
-file.TextSize = 28
-Instance.new("UICorner", file).CornerRadius = UDim.new(0, 5)
+for _, guiInfo in ipairs(guis) do
+local paint = Instance.new("ImageButton", frame)
+paint.Position = UDim2.new(0, 7, 1, -110)
+paint.Size = UDim2.new(0, 26, 0, 26)
+paint.BackgroundColor3 = Color3.new(0, 0, 0)
+paint.Image = "rbxassetid://12334709462"
+Instance.new("UICorner",paint).CornerRadius = UDim.new(0, 3)
+Instance.new("UIStroke",paint).Color=Color3.new(1 ,1, 1)
+paint.MouseButton1Click:Connect(function()
+    local existingGui = playerGui:FindFirstChild(guiInfo.name)
+        if existingGui then
+            local mainFrame = getMainFrame(existingGui)
+            if mainFrame then
+                mainFrame.Visible = not mainFrame.Visible
+            end
+        else
+            local success, err = pcall(function()
+                local source = game:HttpGet(guiInfo.url)
+                loadstring(source)()
+            end)
+            if not success then
+                warn("Error when load GUI  "..guiInfo.name..": "..err)
+            end
+        end
+    end)
+end
+local plus = Instance.new("TextButton", KP_3)
+plus.Position = UDim2.new(0,7, 1, -75)
+plus.Size = UDim2.new(0, 26, 0, 26)
+plus.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+plus.Text = "+"
+plus.Font = Enum.Font.Gotham
+plus.TextColor3 = Color3.new(1, 1, 1)
+plus.TextSize = 28
+Instance.new("UICorner", plus).CornerRadius = UDim.new(0, 3)
+local Uis = Instance.new("UIStroke", plus)
+Uis.Color = Color3.new(255, 255, 255)
+Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 
-local Close = Instance.new("TextButton", KP_3)
-Close.Position = UDim2.new(0, 20, 1, -20)
-Close.Size = UDim2.new(0, 25, 0, 25)
-Close.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Close.Text = "X"
-Close.TextSize = 11
-Close.TextColor3 = Color3.new(1, 1, 1)
-Close.AnchorPoint = Vector2.new(0.5, 0.5)
-Instance.new("UICorner", Close).CornerRadius = UDim.new(0, 5)
+local x = Instance.new("TextButton", KP_3)
+x.Position = UDim2.new(0, 7, 1, -33)
+x.Size = UDim2.new(0, 26, 0, 26)
+x.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+x.Text = "X"
+x.TextSize = 11
+x.TextColor3 = Color3.new(1, 1, 1)
+Instance.new("UICorner", x).CornerRadius = UDim.new(0, 3)
+local Uis = Instance.new("UIStroke", x)
+Uis.Color = Color3.new(255, 255, 255)
+Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 
-local Yes = Instance.new("TextButton", KP_4)
-Yes.Position = UDim2.new(0.1, -2, 0, 40)
-Yes.Size = UDim2.new(0, 30, 0, 20)
-Yes.BackgroundColor3 = Color3.fromRGB(31, 128, 29)
-Yes.Text = "Yes"
-Yes.Font = Enum.Font.Gotham
-Yes.TextColor3 = Color3.new(1, 1, 1)
-Yes.TextSize = 10
-Instance.new("UICorner", Yes).CornerRadius = UDim.new(0, 5)
+local yes = Instance.new("TextButton", KP_4)
+yes.Position = UDim2.new(0.1, -2, 0, 40)
+yes.Size = UDim2.new(0, 30, 0, 20)
+yes.BackgroundColor3 = Color3.fromRGB(31, 128, 29)
+yes.Text = "Yes"
+yes.Font = Enum.Font.Gotham
+yes.TextColor3 = Color3.new(1, 1, 1)
+yes.TextSize = 10
+Instance.new("UICorner", yes).CornerRadius = UDim.new(0, 5)
 
-local No = Instance.new("TextButton", KP_4)
-No.Position = UDim2.new(0.7, 0, 0, 40)
-No.Size = UDim2.new(0, 30, 0, 20)
-No.BackgroundColor3 = Color3.fromRGB(196, 40, 28)
-No.Text = "No"
-No.Font = Enum.Font.Gotham
-No.TextColor3 = Color3.new(1, 1, 1)
-No.TextSize = 10
-Instance.new("UICorner", No).CornerRadius = UDim.new(0, 5)
+local no = Instance.new("TextButton", KP_4)
+no.Position = UDim2.new(0.7, 0, 0, 40)
+no.Size = UDim2.new(0, 30, 0, 20)
+no.BackgroundColor3 = Color3.fromRGB(196, 40, 28)
+no.Text = "No"
+no.Font = Enum.Font.Gotham
+no.TextColor3 = Color3.new(1, 1, 1)
+no.TextSize = 10
+Instance.new("UICorner", no).CornerRadius = UDim.new(0, 5)
 
 local title = Instance.new("TextLabel", KP_4)
 title.Text = "Are You Sure?"
@@ -174,28 +227,6 @@ title.BackgroundTransparency = 1
 title.Size = UDim2.new(0 , 30, 0, 30)
 title.Position = UDim2.new(0.5, -15, 0.0, 2)
 
-local Uis = Instance.new("UIStroke", Exe)
-Uis.Color = Color3.new(255, 255, 255)
-Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-local Uis = Instance.new("UIStroke", Clear)
-Uis.Color = Color3.new(255, 255, 255)
-Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-local Uis = Instance.new("UIStroke", Copy)
-Uis.Color = Color3.new(255, 255, 255)
-Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-local Uis = Instance.new("UIStroke", Cut)
-Uis.Color = Color3.new(255, 255, 255)
-Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-local Uis = Instance.new("UIStroke", file)
-Uis.Color = Color3.new(255, 255, 255)
-Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-local Uis = Instance.new("UIStroke", Color)
-Uis.Color = Color3.new(255, 255, 255)
-Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-local Uis = Instance.new("UIStroke", Close)
-Uis.Color = Color3.new(255, 255, 255)
-Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-
 local KP9 = Instance.new("Frame", gui)
 KP9.Position = UDim2.new(0.9, -70, 0, 0)
 KP9.Size = UDim2.new(0, 140, 0, 180)
@@ -204,7 +235,6 @@ KP9.BackgroundTransparency = 0
 KP9.Active = true
 KP9.Draggable = true
 KP9.Visible = false
-KP9.BorderSizePixel = 0
 Instance.new("UIStroke", KP9).Color =  Color3.new(5, 5, 5)
 Instance.new("UICorner", KP9).CornerRadius = UDim.new(0, 5)
 
@@ -366,56 +396,56 @@ Instance.new("UICorner", Btn12).CornerRadius = UDim.new(0, 3)
 
 -- Function
 Toggle.MouseButton1Click:Connect(function()
-		  frame.Visible = true
-		  Toggle.Visible = false
+frame.Visible = true
+Toggle.Visible = false
 end)
 
-Close.MouseButton1Click:Connect(function()
-		  frame.Visible = false
-		  Toggle.Visible = true
-       KP9.Visible = false
+x.MouseButton1Click:Connect(function()
+frame.Visible = false
+Toggle.Visible = true
+KP9.Visible = false
 end)
 
-Exe.MouseButton1Click:Connect(function()
-		  assert(loadstring(Box.Text))()
+exe.MouseButton1Click:Connect(function()
+assert(loadstring(box.Text))()
 end)
 
-Clear.MouseButton1Click:Connect(function()
+clear.MouseButton1Click:Connect(function()
 if KP_4.Visible then
-		  KP_4.Visible = false
-      Box.Visible = true
-   else
-		  KP_4.Visible = true
-      Box.Visible = false
-   end
-end)
-
-Copy.MouseButton1Click:Connect(function()
-		  setclipboard(Box.Text)
-end)
-
-Cut.MouseButton1Click:Connect(function()
-		  setclipboard(Box.Text)
-		  Box.Text = ""
-end)
-
-file.MouseButton1Click:Connect(function()
-if KP9.Visible then
-        KP9.Visible = false
+	 KP_4.Visible = false
+   box.Visible = true
 else
-        KP9.Visible = true
-    end
+   KP_4.Visible = true
+   box.Visible = false
+end
 end)
 
-Yes.MouseButton1Click:Connect(function()
-		  KP_4.Visible = false
-		  Box.Text = ""
-       Box.Visible = true
+cut.MouseButton1Click:Connect(function()
+setclipboard(box.Text)
+box.Text = ""
 end)
 
-No.MouseButton1Click:Connect(function()
-		  KP_4.Visible = false
-       Box.Visible = true
+c.MouseButton1Click:Connect(function()
+game.StarterGui:SetCore("DevConsoleVisible",true)
+end)
+
+plus.MouseButton1Click:Connect(function()
+if KP9.Visible then
+   KP9.Visible = false
+else
+   KP9.Visible = true
+end
+end)
+
+yes.MouseButton1Click:Connect(function()
+KP_4.Visible = false
+box.Text = ""
+box.Visible = true
+end)
+
+no.MouseButton1Click:Connect(function()
+KP_4.Visible = false
+box.Visible = true
 end)
 
 Btn.MouseButton1Click:Connect(function()
