@@ -4,8 +4,9 @@ local Players = game:GetService("Players")
 local player = game.Players.LocalPlayer
 local char = player.Character
 local backpack = player.Backpack
+pcall(function() player:WaitForChild("PlayerGui"):FindFirstChild("Admin/F3X Panel"):Destroy() end)
 local gui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
-gui.Name = "Project"
+gui.Name = "Admin/F3X Panel"
 gui.ResetOnSpawn = false
 
 local frame = Instance.new("Frame", gui)
@@ -47,7 +48,6 @@ toggle.TextSize = 19
 
 local Uis = Instance.new("UIStroke", toggle)
 Uis.Color = Color3.new(1, 1, 1)
-Uis.Thickness = 1
 Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 Instance.new("UICorner", toggle).CornerRadius = UDim.new(0, 3)
 
@@ -59,21 +59,6 @@ scroll.ScrollBarThickness = 0
 scroll.CanvasSize = UDim2.new(0, 0, 4, 0)
 scroll.BackgroundTransparency = 0
 Instance.new("UIStroke", scroll).Color =  Color3.new(0, 0, 0)
-
-local cmdb2 = Instance.new("TextButton", frame2)
-cmdb2.Position = UDim2.new(0, 118, 0, 188)
-cmdb2.Size = UDim2.new(0, 30, 0, 30)
-cmdb2.BackgroundColor3 = Color3.new(0, 0, 0)
-cmdb2.Text = "Cmdbar2"
-cmdb2.Font = Enum.Font.Gotham
-cmdb2.TextColor3 = Color3.new(255, 255, 255)
-cmdb2.TextSize = 6
-
-local Uis = Instance.new("UIStroke", cmdb2)
-Uis.Color = Color3.new(255, 255, 255)
-Uis.Thickness = 1
-Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-Instance.new("UICorner", cmdb2).CornerRadius = UDim.new(0, 1)
 
 local Box = Instance.new("TextBox", frame2)
 Box.PlaceholderText = "Text/ID..."
@@ -89,210 +74,38 @@ Box.TextWrapped = true
 
 local Uis = Instance.new("UIStroke", Box)
 Uis.Color = Color3.new(1, 1, 1)
-Uis.Thickness = 1
 Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 Instance.new("UICorner", Box).CornerRadius = UDim.new(0, 2)
 
-local f3x = Instance.new("TextButton", frame2)
-f3x.Position = UDim2.new(0, 2, 0, 188)
-f3x.Size = UDim2.new(0, 30, 0, 30)
-f3x.BackgroundColor3 = Color3.new(0, 0, 0)
-f3x.Text = "F3X"
-f3x.Font = Enum.Font.Gotham
-f3x.TextColor3 = Color3.new(255, 255, 255)
-f3x.TextSize = 14
+local function createTextButton(position, size, textSize, text, parent)
+    local btn = Instance.new("TextButton")
+    btn.Name = "Button"
+    btn.Position = position
+    btn.Size = size
+    btn.BackgroundColor3 = Color3.new(0,0,0)
+    btn.TextSize = textSize
+    btn.Text = text
+    btn.TextColor3 = Color3.new(1,1,1)
+    btn.Font = Enum.Font.SourceSans
+    btn.Parent = parent
+    Instance.new("UICorner",btn).CornerRadius=UDim.new(0,3)
+    local Uis = Instance.new("UIStroke", btn)
+    Uis.Color = Color3.new(1,1,1)
+    Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+    return btn
+end
 
-local Uis = Instance.new("UIStroke", f3x)
-Uis.Color = Color3.new(255, 255, 255)
-Uis.Thickness = 1
-Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-Instance.new("UICorner", f3x).CornerRadius = UDim.new(0, 1)
-
-local Sky = Instance.new("TextButton", scroll)
-Sky.Position = UDim2.new(0, 3, 0, 3)
-Sky.Size = UDim2.new(0, 70, 0, 35)
-Sky.BackgroundColor3 = Color3.new(0, 0, 0)
-Sky.Text = "Skybox"
-Sky.Font = Enum.Font.Gotham
-Sky.TextColor3 = Color3.new(255, 255, 255)
-Sky.TextSize = 14
-
-local Uis = Instance.new("UIStroke", Sky)
-Uis.Color = Color3.new(255, 255, 255)
-Uis.Thickness = 1
-Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-Instance.new("UICorner", Sky).CornerRadius = UDim.new(0, 3)
-
-local Decal = Instance.new("TextButton", scroll)
-Decal.Position = UDim2.new(0, 76, 0, 3)
-Decal.Size = UDim2.new(0, 70, 0, 35)
-Decal.BackgroundColor3 = Color3.new(0, 0, 0)
-Decal.Text = "Decal"
-Decal.Font = Enum.Font.Gotham
-Decal.TextColor3 = Color3.new(255, 255, 255)
-Decal.TextSize = 14
-
-local Uis = Instance.new("UIStroke", Decal)
-Uis.Color = Color3.new(255, 255, 255)
-Uis.Thickness = 1
-Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-Instance.new("UICorner", Decal).CornerRadius = UDim.new(0, 3)
-
-local s = Instance.new("TextButton", scroll)
-s.Position = UDim2.new(0, 3, 0, 41)
-s.Size = UDim2.new(0, 70, 0, 35)
-s.BackgroundColor3 = Color3.new(0, 0, 0)
-s.Text = "Sound"
-s.Font = Enum.Font.Gotham
-s.TextColor3 = Color3.new(255, 255, 255)
-s.TextSize = 14
-
-local Uis = Instance.new("UIStroke", s)
-Uis.Color = Color3.new(255, 255, 255)
-Uis.Thickness = 1
-Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-Instance.new("UICorner", s).CornerRadius = UDim.new(0, 3)
-
-local board = Instance.new("TextButton", scroll)
-board.Position = UDim2.new(0, 76, 0, 41)
-board.Size = UDim2.new(0, 70, 0, 35)
-board.BackgroundColor3 = Color3.new(0, 0, 0)
-board.Text = "Billboard"
-board.Font = Enum.Font.Gotham
-board.TextColor3 = Color3.new(255, 255, 255)
-board.TextSize = 14
-
-local Uis = Instance.new("UIStroke", board)
-Uis.Color = Color3.new(255, 255, 255)
-Uis.Thickness = 1
-Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-Instance.new("UICorner", board).CornerRadius = UDim.new(0, 3)
-
-local chr = Instance.new("TextButton", scroll)
-chr.Position = UDim2.new(0, 3, 0, 79)
-chr.Size = UDim2.new(0, 70, 0, 35)
-chr.BackgroundColor3 = Color3.new(0, 0, 0)
-chr.Text = "Char All"
-chr.Font = Enum.Font.Gotham
-chr.TextColor3 = Color3.new(255, 255, 255)
-chr.TextSize = 14
-
-local Uis = Instance.new("UIStroke", chr)
-Uis.Color = Color3.new(255, 255, 255)
-Uis.Thickness = 1
-Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-Instance.new("UICorner", chr).CornerRadius = UDim.new(0, 3)
-
-local base = Instance.new("TextButton", scroll)
-base.Position = UDim2.new(0, 76, 0, 79)
-base.Size = UDim2.new(0, 70, 0, 35)
-base.BackgroundColor3 = Color3.new(0, 0, 0)
-base.Text = "Baseplate"
-base.Font = Enum.Font.Gotham
-base.TextColor3 = Color3.new(255, 255, 255)
-base.TextSize = 14
-
-local Uis = Instance.new("UIStroke", base)
-Uis.Color = Color3.new(255, 255, 255)
-Uis.Thickness = 1
-Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-Instance.new("UICorner", base).CornerRadius = UDim.new(0, 3)
-
-local kill = Instance.new("TextButton", scroll)
-kill.Position = UDim2.new(0, 3, 0, 117)
-kill.Size = UDim2.new(0, 70, 0, 35)
-kill.BackgroundColor3 = Color3.new(0, 0, 0)
-kill.Text = "Kill All"
-kill.Font = Enum.Font.Gotham
-kill.TextColor3 = Color3.new(255, 255, 255)
-kill.TextSize = 14
-
-local Uis = Instance.new("UIStroke", kill)
-Uis.Color = Color3.new(255, 255, 255)
-Uis.Thickness = 1
-Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-Instance.new("UICorner", kill).CornerRadius = UDim.new(0, 3)
-
-local color = Instance.new("TextButton", scroll)
-color.Position = UDim2.new(0, 76, 0, 117)
-color.Size = UDim2.new(0, 70, 0, 35)
-color.BackgroundColor3 = Color3.new(0, 0, 0)
-color.Text = "Color Part"
-color.Font = Enum.Font.Gotham
-color.TextColor3 = Color3.new(255, 255, 255)
-color.TextSize = 14
-
-local Uis = Instance.new("UIStroke", color)
-Uis.Color = Color3.new(255, 255, 255)
-Uis.Thickness = 1
-Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-Instance.new("UICorner", color).CornerRadius = UDim.new(0, 3)
-
-local unc = Instance.new("TextButton", scroll)
-unc.Position = UDim2.new(0, 3, 0, 155)
-unc.Size = UDim2.new(0, 143, 0, 35)
-unc.BackgroundColor3 = Color3.new(0, 0, 0)
-unc.Text = "UnAnchor"
-unc.Font = Enum.Font.Gotham
-unc.TextColor3 = Color3.new(255, 255, 255)
-unc.TextSize = 14
-
-local Uis = Instance.new("UIStroke", unc)
-Uis.Color = Color3.new(255, 255, 255)
-Uis.Thickness = 1
-Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-Instance.new("UICorner", unc).CornerRadius = UDim.new(0, 3)
-
-local delete = Instance.new("TextButton", scroll)
-delete.Position = UDim2.new(0, 3, 0, 193)
-delete.Size = UDim2.new(0, 70, 0, 35)
-delete.BackgroundColor3 = Color3.new(0, 0, 0)
-delete.Text = "Delete Map"
-delete.Font = Enum.Font.Gotham
-delete.TextColor3 = Color3.new(255, 255, 255)
-delete.TextSize = 12
-
-local Uis = Instance.new("UIStroke", delete)
-Uis.Color = Color3.new(255, 255, 255)
-Uis.Thickness = 1
-Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-Instance.new("UICorner", delete).CornerRadius = UDim.new(0, 3)
-
-local nuke = Instance.new("TextButton", scroll)
-nuke.Position = UDim2.new(0, 76, 0, 193)
-nuke.Size = UDim2.new(0, 70, 0, 35)
-nuke.BackgroundColor3 = Color3.new(0, 0, 0)
-nuke.Text = "Nuke"
-nuke.Font = Enum.Font.Gotham
-nuke.TextColor3 = Color3.new(255, 255, 255)
-nuke.TextSize = 14
-
-local Uis = Instance.new("UIStroke", nuke)
-Uis.Color = Color3.new(255, 255, 255)
-Uis.Thickness = 1
-Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-Instance.new("UICorner", nuke).CornerRadius = UDim.new(0, 3)
-
--- Function
-toggle.MouseButton1Click:Connect(function()
-if frame2.Visible then
-    frame2.Visible = false
-    frame:TweenSize(UDim2.new(0, 150, 0, 35), "Out", "Quart", 0.4, true)
-else
-    frame:TweenSize(UDim2.new(0, 150, 0, 220), "Out", "Quart", 0.4, true)
-wait(0.2)
-    frame2.Visible = true
-    end
-end)
-
-f3x.MouseButton1Click:Connect(function()
-		RequestCommand:InvokeServer(";btools")
-end)
-
+local cmdb2 = createTextButton(UDim2.new(0, 118, 0, 188), UDim2.new(0, 30, 0, 30), 8, "Cmdbar2", frame2)
 cmdb2.MouseButton1Click:Connect(function()
-		RequestCommand:InvokeServer(";cmdbar2")
+RequestCommand:InvokeServer(";cmdbar2")
 end)
 
+local f3x = createTextButton(UDim2.new(0, 2, 0, 188), UDim2.new(0, 30, 0, 30), 14, "F3X", frame2)
+f3x.MouseButton1Click:Connect(function()
+RequestCommand:InvokeServer(";btools")
+end)
+
+local Sky = createTextButton(UDim2.new(0, 3, 0, 3), UDim2.new(0, 70, 0, 35), 14, "Skybox", scroll)
 Sky.MouseButton1Click:Connect(function()
 local function getf3x()
          for _, v in ipairs(backpack:GetChildren()) do
@@ -364,6 +177,7 @@ local function getf3x()
    sky()
 end)
 
+local Decal = createTextButton(UDim2.new(0, 76, 0, 3), UDim2.new(0, 70, 0, 35), 14, "Decal", scroll)
 Decal.MouseButton1Click:Connect(function()
 local function getf3x()
          for _, v in ipairs(backpack:GetChildren()) do
@@ -435,41 +249,72 @@ local function getf3x()
    decalspam()
 end)
 
+local s = createTextButton(UDim2.new(0, 3, 0, 41), UDim2.new(0, 70, 0, 35), 14, "Sound", scroll)
 s.MouseButton1Click:Connect(function()
-		RequestCommand:InvokeServer(";music "..Box.Text)
+RequestCommand:InvokeServer(";music "..Box.Text)
 end)
 
+local board = createTextButton(UDim2.new(0, 76, 0, 41), UDim2.new(0, 70, 0, 35), 14, "Billboard", scroll)
 board.MouseButton1Click:Connect(function()
-		RequestCommand:InvokeServer(";name all "..Box.Text)
-		RequestCommand:InvokeServer(";titler all "..Box.Text)
-		RequestCommand:InvokeServer(";ctag all "..Box.Text.." red")
-		RequestCommand:InvokeServer(";cname all "..Box.Text.." red")
+RequestCommand:InvokeServer(";name all "..Box.Text)
+RequestCommand:InvokeServer(";titler all "..Box.Text)
+RequestCommand:InvokeServer(";ctag all "..Box.Text.." red")
+RequestCommand:InvokeServer(";cname all "..Box.Text.." red")
 end)
 
+local chr = createTextButton(UDim2.new(0, 3, 0, 79), UDim2.new(0, 70, 0, 35), 14, "Char all", scroll)
 chr.MouseButton1Click:Connect(function()
-		RequestCommand:InvokeServer(";char all "..Box.Text)
+RequestCommand:InvokeServer(";char all "..Box.Text)
 end)
 
+local base = createTextButton(UDim2.new(0, 76, 0, 79), UDim2.new(0, 70, 0, 35), 14, "Baseplate", scroll)
 base.MouseButton1Click:Connect(function()
 loadstring(game:HttpGet("https://pastefy.app/A9Yzicrs/raw"))();
 end)
 
+local kill = createTextButton(UDim2.new(0, 3, 0, 117), UDim2.new(0, 70, 0, 35), 14, "Kill all", scroll)
 kill.MouseButton1Click:Connect(function()
 loadstring(game:HttpGet("https://pastefy.app/bsfsgJnD/raw"))();
 end)
 
+local color = createTextButton(UDim2.new(0, 76, 0, 117), UDim2.new(0, 70, 0, 35), 13, "Loop Color", scroll)
 color.MouseButton1Click:Connect(function()
 loadstring(game:HttpGet("https://pastefy.app/kzTbADqG/raw"))();
 end)
 
+local unc = createTextButton(UDim2.new(0, 3, 0, 155), UDim2.new(0, 143, 0, 35), 14, "UnAnchor", scroll)
 unc.MouseButton1Click:Connect(function()
 loadstring(game:HttpGet("https://pastefy.app/loZZ2WYK/raw"))();
 end)
 
+local delete = createTextButton(UDim2.new(0, 3, 0, 193), UDim2.new(0, 70, 0, 35), 13, "Delete map", scroll)
 delete.MouseButton1Click:Connect(function()
 loadstring(game:HttpGet("https://pastefy.app/pnJkjxAs/raw"))();
 end)
 
+local nuke = createTextButton(UDim2.new(0, 76, 0, 193), UDim2.new(0, 70, 0, 35), 14, "Nuke", scroll)
 nuke.MouseButton1Click:Connect(function()
 
+end)
+
+local spooky = createTextButton(UDim2.new(0, 3, 0, 231), UDim2.new(0, 70, 0, 35), 10, "Spooky Skeleton", scroll)
+spooky.MouseButton1Click:Connect(function()
+loadstring(game:HttpGet("https://pastefy.app/nPiBPG7n/raw"))()
+end)
+
+local hell = createTextButton(UDim2.new(0, 76, 0, 231), UDim2.new(0, 70, 0, 35), 16, "666", scroll)
+hell.MouseButton1Click:Connect(function()
+
+end)
+
+-- Function
+toggle.MouseButton1Click:Connect(function()
+if frame2.Visible then
+    frame2.Visible = false
+    frame:TweenSize(UDim2.new(0, 150, 0, 35), "Out", "Quart", 0.4, true)
+else
+    frame:TweenSize(UDim2.new(0, 150, 0, 220), "Out", "Quart", 0.4, true)
+wait(0.2)
+    frame2.Visible = true
+    end
 end)
