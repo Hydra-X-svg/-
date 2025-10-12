@@ -21,6 +21,7 @@ local function getMainFrame(gui)
 end
 local gui = Instance.new("ScreenGui", playerGui)
 gui.Name = "Project"
+gui.ResetOnSpawn = false
 local Toggle = Instance.new("ImageButton", gui)
 Toggle.Name = "OpenButton"
 Toggle.Size = UDim2.new(0, 50, 0, 50)
