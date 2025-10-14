@@ -1,5 +1,3 @@
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local RequestCommand = ReplicatedStorage:WaitForChild("HDAdminHDClient").Signals.RequestCommandSilent
 local Players = game:GetService("Players")
 local player = game.Players.LocalPlayer
 local char = player.Character
@@ -56,12 +54,12 @@ scroll.Size = UDim2.new(0, 148, 0, 146)
 scroll.Position = UDim2.new(0, 1, 0, 37)
 scroll.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 scroll.ScrollBarThickness = 0
-scroll.CanvasSize = UDim2.new(0, 0, 1, 80)
+scroll.CanvasSize = UDim2.new(0, 0, 1, 87)
 scroll.BackgroundTransparency = 0
 Instance.new("UIStroke", scroll).Color =  Color3.new(0, 0, 0)
 
 local Box = Instance.new("TextBox", frame2)
-Box.PlaceholderText = "Text/ID..."
+Box.PlaceholderText = "Sky/Decal ID..."
 Box.Position = UDim2.new(0, 35, 0, 188)
 Box.Size = UDim2.new(0, 80, 0, 30)
 Box.TextSize = 12
@@ -97,20 +95,20 @@ end
 
 local cmdb2 = createTextButton(UDim2.new(0, 118, 0, 188), UDim2.new(0, 30, 0, 30), 8, "Cmdbar2", frame2)
 cmdb2.MouseButton1Click:Connect(function()
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local RequestCommand = ReplicatedStorage:WaitForChild("HDAdminHDClient").Signals.RequestCommandSilent
 RequestCommand:InvokeServer(";cmdbar2")
 end)
 
 local f3x = createTextButton(UDim2.new(0, 2, 0, 188), UDim2.new(0, 30, 0, 30), 14, "F3X", frame2)
 f3x.MouseButton1Click:Connect(function()
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local RequestCommand = ReplicatedStorage:WaitForChild("HDAdminHDClient").Signals.RequestCommandSilent
 RequestCommand:InvokeServer(";btools")
 end)
 
 local Sky = createTextButton(UDim2.new(0, 3, 0, 3), UDim2.new(0, 70, 0, 35), 14, "Skybox", scroll)
 Sky.MouseButton1Click:Connect(function()
-   local ReplicatedStorage = game:GetService("ReplicatedStorage")
-   local RequestCommand = ReplicatedStorage:WaitForChild("HDAdminHDClient").Signals.RequestCommandSilent
-	local player = game.Players.LocalPlayer
-	local char = player.Character
 	local tool
 	for i,v in player:GetDescendants() do
 		if v.Name == "SyncAPI" then
@@ -370,15 +368,6 @@ Sky.MouseButton1Click:Connect(function()
 		end
 	end
 	Sky(Box.Text)
-	local RunService = game:GetService("RunService")
-	local speed = 5
-	RunService.Heartbeat:Connect(function(dt)
-		local sky = workspace:FindFirstChild("Skybox")
-		if sky and sky:IsA("BasePart") then
-			local newCF = sky.CFrame * CFrame.Angles(0, math.rad(speed), 0.1)
-			MovePart(sky,newCF)
-		end
-	end)
 end)
 
 local Decal = createTextButton(UDim2.new(0, 76, 0, 3), UDim2.new(0, 70, 0, 35), 14, "Decal", scroll)
@@ -453,12 +442,9 @@ local function getf3x()
    decalspam()
 end)
 
-local name = createTextButton(UDim2.new(0, 3, 0, 41), UDim2.new(0, 70, 0, 35), 14, "Name all", scroll)
-name.MouseButton1Click:Connect(function()
-RequestCommand:InvokeServer(";name all "..Box.Text)
-RequestCommand:InvokeServer(";titler all "..Box.Text)
-RequestCommand:InvokeServer(";ctag all "..Box.Text.." red")
-RequestCommand:InvokeServer(";cname all "..Box.Text.." red")
+local board = createTextButton(UDim2.new(0, 3, 0, 41), UDim2.new(0, 70, 0, 35), 14, "Billboard", scroll)
+board.MouseButton1Click:Connect(function()
+
 end)
 
 local color = createTextButton(UDim2.new(0, 76, 0, 41), UDim2.new(0, 70, 0, 35), 13, "Loop Color", scroll)
@@ -493,17 +479,27 @@ end)
 
 local spooky = createTextButton(UDim2.new(0, 3, 0, 193), UDim2.new(0, 70, 0, 35), 10, "Spooky Skeleton", scroll)
 spooky.MouseButton1Click:Connect(function()
-loadstring(game:HttpGet("https://pastefy.app/nPiBPG7n/raw"))()
+loadstring(game:HttpGet("https://pastefy.app/DLC8iX0x/raw"))();
 end)
 
 local hell = createTextButton(UDim2.new(0, 76, 0, 193), UDim2.new(0, 70, 0, 35), 16, "666", scroll)
 hell.MouseButton1Click:Connect(function()
-loadstring(game:HttpGet("https://pastefy.app/BWuRqBWo/raw"))();
+loadstring(game:HttpGet("https://pastefy.app/MUqtgjT4/raw"))();
 end)
 
 local dream = createTextButton(UDim2.new(0, 3, 0, 231), UDim2.new(0, 70, 0, 35), 12, "Dream Core", scroll)
 dream.MouseButton1Click:Connect(function()
-loadstring(game:HttpGet("https://pastefy.app/M7SqHwK1/raw"))();
+loadstring(game:HttpGet("https://pastefy.app/7P40DdDp/raw"))();
+end)
+
+local noot = createTextButton(UDim2.new(0, 76, 0, 231), UDim2.new(0, 70, 0, 35), 12, "Noot-Noot", scroll)
+noot.MouseButton1Click:Connect(function()
+loadstring(game:HttpGet("https://pastefy.app/MkWSZPIV/raw"))();
+end)
+
+local realm = createTextButton(UDim2.new(0, 3, 0, 269), UDim2.new(0, 143, 0, 35), 16, "Realm!", scroll)
+realm.MouseButton1Click:Connect(function()
+
 end)
 
 -- Function
