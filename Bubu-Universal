@@ -388,6 +388,14 @@ Hub:Button("P.Shader Ultimate",function()
 loadstring(game:HttpGet("https://pastefy.app/Y2VVS5DC/raw"))();
 end)
 
+Hub:Button("EpikGuy GUI v2",function()
+loadstring(game:HttpGet("https://pastebin.com/raw/YxquFEAR"))();
+end)
+
+Hub:Button("",function()
+loadstring(game:HttpGet(""))();
+end)
+
 Hub:Section("Game Hub")
 Hub:Button("Six Hub | NSS",function()
 loadstring(game:HttpGet("https://pastefy.app/KvIrfhdW/raw"))();
