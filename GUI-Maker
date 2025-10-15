@@ -78,18 +78,9 @@ KP_7.Size = UDim2.new(0, 1, 0, 55)
 KP_7.BackgroundColor3 = Color3.new(255, 255, 255)
 KP_7.BorderSizePixel = 0
 
-local scroll = Instance.new("ScrollingFrame", frame)
-scroll.Position = UDim2.new(0, 42, 0, 55)
-scroll.Size = UDim2.new(0, 740, 0, 273)
-scroll.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-scroll.ScrollBarThickness = 0
-scroll.CanvasSize = UDim2.new(0, 0, 0, 20)
-scroll.BackgroundTransparency = 1
-Instance.new("UIStroke", scroll).Color =  Color3.new(5, 5, 5)
-
-local box = Instance.new("TextBox", scroll)
-box.Position = UDim2.new(0, 40, 0.0, 0)
-box.Size = UDim2.new(0, 703, 0, 999)
+local box = Instance.new("TextBox", frame)
+box.Position = UDim2.new(0, 40, 0, 55)
+box.Size = UDim2.new(0, 742, 0, 272)
 box.BackgroundColor3 = Color3.new(255, 255, 255)
 box.BackgroundTransparency = 1
 box.TextSize = 13
@@ -103,27 +94,6 @@ box.MultiLine = true
 box.TextWrapped = true
 box.TextXAlignment = Enum.TextXAlignment.Left
 box.TextYAlignment = Enum.TextYAlignment.Top
-
-local number = Instance.new("TextLabel", scroll)
-number.Position = UDim2.new(0, 0, 0, 0)
-number.Size = UDim2.new(0, 40, 999, 0)
-number.BackgroundColor3 = Color3.new(0, 0, 0)
-number.BorderColor3 = Color3.new(1, 1, 1)
-number.Text = "1."
-number.TextColor3 = Color3.new(1, 1, 1)
-number.TextSize = 14
-number.Font = Enum.Font.Code
-number.TextYAlignment = Enum.TextYAlignment.Top
-
-box:GetPropertyChangedSignal("Text"):Connect(function()
-    local lines = box.Text:split("\n")
-    local lineText = ""
-    for i = 1, #lines do
-        lineText = lineText .. tostring(i)..".\n"
-    end
-    number.Text = lineText
-    scroll.CanvasSize = UDim2.new(0, 0, 0, #lines * 20)
-end)
 
 local function createTextButton(position, size, textSize, text, parent)
     local btn = Instance.new("TextButton")
