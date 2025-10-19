@@ -1,0 +1,192 @@
+local receiver=Instance.new("BindableFunction")
+receiver.OnInvoke=function(btn) 
+if btn=="Click Detector" then
+Click()
+elseif btn=="Touch Detector" then
+Touch()
+   end
+end
+
+game:GetService("StarterGui"):SetCore("SendNotification", {
+    Title="Hey!",
+    Text="Please select which GUI you want to use",
+    Icon=game.Players:GetUserThumbnailAsync(game.Players:GetUserIdFromNameAsync("ihalknsohan99992"),Enum.ThumbnailType.HeadShot,Enum.ThumbnailSize.Size420x420),
+    Duration=9e9,
+    Button1="Click Detector",
+    Button2="Touch Detector",
+    Callback=receiver,
+})
+
+local TweenService = game:GetService("TweenService")
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local Camera = workspace.CurrentCamera
+pcall(function() LocalPlayer:WaitForChild("PlayerGui"):FindFirstChild("Touch & Click Detector"):Destroy() end)
+local function createDetectorGUI(name, dataTable, fireFunction)
+	local gui = Instance.new("ScreenGui", LocalPlayer:WaitForChild("PlayerGui"))
+    gui.Name = "Touch & Click Detector"
+    gui.ResetOnSpawn = false
+	local Frame = Instance.new("Frame", gui)
+	Frame.Size = UDim2.new(0, 350, 0, 300)
+	Frame.Position = UDim2.new(0.5, -175, 0.5, -150)
+	Frame.BackgroundColor3 = Color3.new(1, 1, 1)
+	Frame.Active = true
+	Frame.Draggable = true
+	Instance.new("UICorner", Frame)
+    Instance.new("UIStroke",Frame).Color=Color3.new(0,0,0)
+
+	local Title = Instance.new("TextLabel", Frame)
+	Title.Size = UDim2.new(1, 0, 0, 30)
+	Title.Text = name
+	Title.Font = Enum.Font.GothamBold
+	Title.TextColor3 = Color3.new(0, 0, 0)
+	Title.BackgroundTransparency = 1
+
+	local FireAllBtn = Instance.new("TextButton", Frame)
+	FireAllBtn.Size = UDim2.new(0, 120, 0, 25)
+	FireAllBtn.Position = UDim2.new(0, 14, 0, 5)
+	FireAllBtn.Text = "Fire ALL"
+	FireAllBtn.BackgroundColor3 = Color3.fromRGB(255, 200, 100)
+	FireAllBtn.TextColor3 = Color3.new(0, 0, 0)
+	FireAllBtn.Font = Enum.Font.GothamBold
+	FireAllBtn.TextSize = 13
+	Instance.new("UICorner",FireAllBtn).CornerRadius=UDim.new(0,3)
+	FireAllBtn.MouseButton1Click:Connect(function()
+		for _, part in ipairs(dataTable) do
+			fireFunction(part)
+		end
+	end)
+
+	local Scroll = Instance.new("ScrollingFrame", Frame)
+	Scroll.Size = UDim2.new(1, -20, 1, -50)
+	Scroll.Position = UDim2.new(0, 10, 0, 35)
+	Scroll.CanvasSize = UDim2.new(0, 0, 0, #dataTable * 50)
+	Scroll.ScrollBarThickness = 0
+	Scroll.BackgroundTransparency = 1
+
+	local MiniBtn = Instance.new("TextButton", Frame)
+	MiniBtn.Size = UDim2.new(0, 20, 0, 20)
+	MiniBtn.Position = UDim2.new(1, -50, 0, 8)
+	MiniBtn.Text = "-"
+	MiniBtn.BackgroundColor3 = Color3.fromRGB(255, 100, 100)
+	MiniBtn.TextColor3 = Color3.new(1, 1, 1)
+	Instance.new("UICorner", MiniBtn)
+	MiniBtn.MouseButton1Click:Connect(function()
+    if Scroll.Visible then
+		Frame:TweenSize(UDim2.new(0, 350, 0, 36), "Out", "Quart", 0.4, true)
+       Scroll.Visible = false
+else
+		Frame:TweenSize(UDim2.new(0, 350, 0, 300), "Out", "Quart", 0.4, true)
+       Scroll.Visible = true
+       end
+	end)
+
+	local CloseBtn = Instance.new("TextButton", Frame)
+	CloseBtn.Size = UDim2.new(0, 20, 0, 20)
+	CloseBtn.Position = UDim2.new(1, -25, 0, 8)
+	CloseBtn.Text = "X"
+	CloseBtn.BackgroundColor3 = Color3.fromRGB(255, 100, 100)
+	CloseBtn.TextColor3 = Color3.new(1, 1, 1)
+	Instance.new("UICorner", CloseBtn)
+	CloseBtn.MouseButton1Click:Connect(function()
+		gui:Destroy()
+	end)
+
+	for i, part in ipairs(dataTable) do
+		local Holder = Instance.new("Frame", Scroll)
+		Holder.Size = UDim2.new(1, -10, 0, 40)
+		Holder.Position = UDim2.new(0, 5, 0, (i - 1) * 45)
+		Holder.BackgroundColor3 = Color3.fromRGB(240, 240, 240)
+		Instance.new("UICorner",Holder).CornerRadius=UDim.new(0,3)
+		local NameLabel = Instance.new("TextLabel", Holder)
+		NameLabel.Size = UDim2.new(0.45, 0, 1, 0)
+		NameLabel.Text = "  "..part.Name
+		NameLabel.TextColor3 = Color3.new(0, 0, 0)
+		NameLabel.BackgroundTransparency = 1
+		NameLabel.TextXAlignment = Enum.TextXAlignment.Left
+		local FireBtn = Instance.new("TextButton", Holder)
+		FireBtn.Size = UDim2.new(0.25, -30, 1, -10)
+		FireBtn.Position = UDim2.new(0.45, 64, 0, 5)
+		FireBtn.Text = "Fire"
+		FireBtn.BackgroundColor3 = Color3.fromRGB(100, 200, 100)
+		FireBtn.TextColor3 = Color3.new(0, 0, 0)
+		Instance.new("UICorner",FireBtn).CornerRadius=UDim.new(0,3)
+		local ViewBtn = Instance.new("TextButton", Holder)
+		ViewBtn.Size = UDim2.new(0.25, -30, 1, -10)
+		ViewBtn.Position = UDim2.new(0.7, 40, 0, 5)
+		ViewBtn.Text = "View"
+		ViewBtn.BackgroundColor3 = Color3.fromRGB(100, 200, 100)
+		ViewBtn.TextColor3 = Color3.new(0, 0, 0)
+		Instance.new("UICorner",ViewBtn).CornerRadius=UDim.new(0,3)
+		local Spectating = false
+		FireBtn.MouseButton1Click:Connect(function()
+			fireFunction(part)
+		end)
+
+        local cam = Workspace.Camera
+        local after = cam.CameraSubject
+		ViewBtn.MouseButton1Click:Connect(function()
+			if not Spectating then
+				cam.CameraType = Enum.CameraType.Custom
+                cam.CameraSubject = part
+                ViewBtn.Text = "UnView"
+				ViewBtn.BackgroundColor3 = Color3.fromRGB(255, 100, 100)
+				Spectating = true
+			else
+                ViewBtn.Text = "View"
+				ViewBtn.BackgroundColor3 = Color3.fromRGB(100, 200, 100)
+				cam.CameraSubject = after
+				Spectating = false
+			end
+		end)
+	end
+end
+
+local function fireClickDetector(part)
+	for _, child in ipairs(part:GetChildren()) do
+		if child:IsA("ClickDetector") then
+			fireclickdetector(child)
+		end
+	end
+end
+
+local function fireTouchTransmitter(part)
+	local humanoidRoot = LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+	if not humanoidRoot then return end
+	for _, child in ipairs(part:GetChildren()) do
+		if child:IsA("TouchTransmitter") then
+			firetouchinterest(humanoidRoot, part, 0)
+			task.wait()
+			firetouchinterest(humanoidRoot, part, 1)
+		end
+	end
+end
+
+function Click()
+	local list = {}
+	for _, obj in ipairs(workspace:GetDescendants()) do
+		if obj:IsA("ClickDetector") and obj.Parent then
+			table.insert(list, obj.Parent)
+		end
+	end
+	createDetectorGUI("Click Detectors", list, fireClickDetector)
+end
+
+function Touch()
+	local list = {}
+	for _, obj in ipairs(workspace:GetDescendants()) do
+		if obj:IsA("TouchTransmitter") and obj.Parent then
+			table.insert(list, obj.Parent)
+		end
+	end
+	createDetectorGUI("Touch Detectors", list, fireTouchTransmitter)
+end
+
+local receiver=Instance.new("BindableFunction")
+receiver.OnInvoke=function(btn) 
+if btn=="Click Detector" then
+Click()
+elseif btn=="Touch Detector" then
+Touch()
+   end
+end
