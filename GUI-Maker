@@ -180,13 +180,6 @@ paint.MouseButton1Click:Connect(function()
     end)
 end
 
-local x = createTextButton(UDim2.new(0, 7, 1, -33), UDim2.new(0, 26, 0, 25), 20, "X", frame)
-x.MouseButton1Click:Connect(function()
-frame.Visible = false
-Toggle.Visible = true
-KP9.Visible = false
-end)
-
 local yes = createTextButton(UDim2.new(0.1, -2, 0, 40), UDim2.new(0, 30, 0, 20), 14, "Yes", KP_4)
 yes.MouseButton1Click:Connect(function()
 KP_4.Visible = false
@@ -248,6 +241,13 @@ if KP9.Visible then
 else
    KP9.Visible = true
 end
+end)
+
+local x = createTextButton(UDim2.new(0, 7, 1, -33), UDim2.new(0, 26, 0, 25), 20, "X", frame)
+x.MouseButton1Click:Connect(function()
+frame.Visible = false
+Toggle.Visible = true
+KP9.Visible = false
 end)
 
 local btn = createTextButton(UDim2.new(0, 5, 0, 6), UDim2.new(0, 70, 0, 35), 14, "ScreenGui", scroll2)
