@@ -252,7 +252,7 @@ end)
 
 local btn = createTextButton(UDim2.new(0, 5, 0, 6), UDim2.new(0, 70, 0, 35), 14, "ScreenGui", scroll2)
 btn.MouseButton1Click:Connect(function()
-setclipboard('local Players = game:GetService("Players")\nlocal player = Players.LocalPlayer\nlocal gui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))\ngui.Name = "Project"\ngui.ResetOnSpawn = false\n\n')
+setclipboard('local Players = game:GetService("Players")\nlocal player = Players.LocalPlayer\npcall(function() player:WaitForChild("PlayerGui"):FindFirstChild("Project"):Destroy() end)\nlocal gui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))\ngui.Name = "Project"\ngui.ResetOnSpawn = false\n\n')
 end)
 
 local btn2 = createTextButton(UDim2.new(0, 5, 0, 48), UDim2.new(0, 70, 0, 35), 18, "Frame", scroll2)
