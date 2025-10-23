@@ -138,6 +138,13 @@ else
 end)
 
 local exe = createTextButton(UDim2.new(0, 10, 0, 103), UDim2.new(0, 60, 0, 35), "exe", 16, "Execute", KP2)
+function execute(s)
+	if game:GetService("JointsService"):FindFirstChild("_FEBYPASS32") then
+		local Execute=game:GetService("JointsService"):FindFirstChild("_FEBYPASS32"):FireServer(tostring(s)) -- execute
+	else
+		warn("Failed to loadstring: Error 404")
+	end
+end
 exe.MouseButton1Click:Connect(function()
 	local function b_G_V12(see)
 		local a = function(ree)
