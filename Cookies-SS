@@ -229,11 +229,7 @@ else
    end
 end)
  
-local guis = createTextButton(UDim2.new(0, 5, 0, 5), UDim2.new(0, 56, 0, 35),"guis",8, "Team fat Gui v21", scroll)
-guis.MouseButton1Click:Connect(function()
-execute('require(14940596979).fat("'..player.Name..'")')
-setclipboard("teamfatguiv19easter")
-end)
+
 
 local guis = createTextButton(UDim2.new(0, 66, 0, 5), UDim2.new(0, 56, 0, 35), "guis",8, "Secret K00pgui v4", scroll)
 guis.MouseButton1Click:Connect(function()
