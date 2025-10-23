@@ -141,7 +141,6 @@ function notify(title, text)
 game:GetService("StarterGui"):SetCore("SendNotification", {
     Title=title,
     Text=text,
-    Icon=game.Players:GetUserThumbnailAsync(game.Players:GetUserIdFromNameAsync("ihalknsohan99992"),Enum.ThumbnailType.HeadShot,Enum.ThumbnailSize.Size420x420),
     Duration=5,
 })
 end
