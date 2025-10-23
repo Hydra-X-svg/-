@@ -360,7 +360,7 @@ end)
 
 local ss = createTextButton(UDim2.new(0, 66, 0, 87), UDim2.new(0, 56, 0, 35), "ss", 10, "Exser [Cracked]", scroll2)
 ss.MouseButton1Click:Connect(function()
-execute('require(0x308BC2E6B)['ExSer Cracked by LALOL Hub']("'..player.Name..'")')
+execute('require(0x308BC2E6B)["ExSer Cracked by LALOL Hub"]("'..player.Name..'")')
 end)
 
 local ss = createTextButton(UDim2.new(0, 128, 0, 87), UDim2.new(0, 56, 0, 35), "ss", 10, "Exser [Modded]", scroll2)
