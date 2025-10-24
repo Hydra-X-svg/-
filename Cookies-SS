@@ -1,5 +1,4 @@
-
- local Players = game:GetService("Players")
+local Players = game:GetService("Players")
 local player = Players.LocalPlayer
 pcall(function() player:WaitForChild("PlayerGui"):FindFirstChild("Cookies SS"):Destroy() end)
 local gui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
