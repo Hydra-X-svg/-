@@ -20,6 +20,7 @@ line.BorderSizePixel = 0
 local KP = Instance.new("Frame", frame)
 KP.Position = UDim2.new(0, 0, 0, 40)
 KP.Size = UDim2.new(0, 250, 0, 150)
+KP.Visible = false
 KP.BackgroundTransparency = 1
 local KP2 = Instance.new("Frame", KP)
 KP2.Position = UDim2.new(0, 0, 0, 0)
@@ -100,6 +101,7 @@ x.MouseButton1Click:Connect(function()
 gui:Destroy()
 end)
 
+function add()
 local mini = createTextButton(UDim2.new(0, 190, 0, 10), UDim2.new(0, 20, 0, 20), "mini", 16, "-", frame)
 mini.MouseButton1Click:Connect(function()
 if KP.Visible then
@@ -136,24 +138,21 @@ else
    scroll3.Visible = false
    end
 end)
-
-function notify(title, text)
-game:GetService("StarterGui"):SetCore("SendNotification", {
-    Title=title,
-    Text=text,
-    Duration=5,
-})
 end
 
-local exe = createTextButton(UDim2.new(0, 10, 0, 103), UDim2.new(0, 60, 0, 35), "exe", 16, "Execute", KP2)
-function execute(s)
-	if game:GetService("JointsService"):FindFirstChild("_FEBYPASS32") then
-		local Execute=game:GetService("JointsService"):FindFirstChild("_FEBYPASS32"):FireServer(tostring(s)) -- execute
-	else
-		notify("Something Was Wrong", "Failed to loadstring: Error 404")
-	end
-end
-exe.MouseButton1Click:Connect(function()
+local btn2 = Instance.new("TextButton", frame)
+btn2.Position = UDim2.new(0, 40, 0, 80)
+btn2.Size = UDim2.new(0, 170, 0, 70)
+btn2.BackgroundColor3 = Color3.new(0,0,0)
+btn2.TextSize = 16
+btn2.Text = "Inject"
+btn2.TextColor3 = Color3.new(1,1,1)
+btn2.Font = Enum.Font.SourceSans
+Instance.new("UICorner",btn2).CornerRadius=UDim.new(0,3)
+local Uis = Instance.new("UIStroke", btn2)
+Uis.Color = Color3.new(1,1,1)
+Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+btn2.MouseButton1Click:Connect(function()
 	local function b_G_V12(see)
 		local a = function(ree)
 			ree:FireServer([[
@@ -182,12 +181,35 @@ exe.MouseButton1Click:Connect(function()
 	local timetoken = 0
 	local maxtime = 5
 	repeat wait(0.1) timetoken += 0.1 until game:GetService("JointsService"):FindFirstChild("_FEBYPASS32") or timetoken >= maxtime
+   KP.Visible = true
+   btn2.Visible = false
+   add()
+end)
+
+function notify(title, text)
+game:GetService("StarterGui"):SetCore("SendNotification", {
+    Title=title,
+    Text=text,
+    Duration=5,
+})
+end
+
+local exe = createTextButton(UDim2.new(0, 10, 0, 103), UDim2.new(0, 60, 0, 35), "exe", 16, "Execute", KP2)
+exe.MouseButton1Click:Connect(function()
 	if game:GetService("JointsService"):FindFirstChild("_FEBYPASS32") then
 		local Execute=game:GetService("JointsService"):FindFirstChild("_FEBYPASS32"):FireServer(box.Text)
 	else
 		notify("Something Was Wrong", "Failed to loadstring: Error 404")
    end
 end)
+
+function execute(s)
+	if game:GetService("JointsService"):FindFirstChild("_FEBYPASS32") then
+		local Execute=game:GetService("JointsService"):FindFirstChild("_FEBYPASS32"):FireServer(tostring(s)) -- execute
+	else
+		notify("Something Was Wrong", "Failed to loadstring: Error 404")
+	end
+end
 
 local clear = createTextButton(UDim2.new(0, 83, 0, 103), UDim2.new(0, 60, 0, 35), "clear", 16, "Clear", KP2)
 clear.MouseButton1Click:Connect(function()
@@ -249,7 +271,7 @@ execute('require(16965754044):load("'..player.Name..'")')
 setclipboard("Zelow")
 end)
 
-local guis = createTextButton(UDim2.new(0, 128, 0, 5), UDim2.new(0, 56, 0, 35), "guis",10, "H01PK Gui V21", scroll)
+local guis = createTextButton(UDim2.unew(0, 128, 0, 5), UDim2.new(0, 56, 0, 35), "guis",10, "H01PK Gui V21", scroll)
 guis.MouseButton1Click:Connect(function()
 execute('require(0x4af2144545ce).ALLNIGGAITISKINGV44LEAKKKkh01pkOnTOP("'..player.Name..'")')
 end)
