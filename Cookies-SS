@@ -174,6 +174,10 @@ btn2.TextColor3 = Color3.new(1,1,1)
 btn2.Font = Enum.Font.SourceSans
 Instance.new("UICorner",btn2).CornerRadius=UDim.new(0,3)
 btn2.MouseButton1Click:Connect(function()
+if game:WaitForChild("JointsService"):FindFirstChild("_FEBYPASS32") then
+   notify("Already Injected!", "Seem like the code already run!")
+   btn2:Destroy()
+else
 	local function b_G_V12(see)
 		local a = function(ree)
 			ree:FireServer([[
@@ -202,13 +206,14 @@ btn2.MouseButton1Click:Connect(function()
 	local maxtime = 5
 	repeat wait(0.1) timetoken += 0.1 until game:GetService("JointsService"):FindFirstChild("_FEBYPASS32") or timetoken >= maxtime
    btn2:Destroy()
+   end
 end)
 
 function execute(s)
 	if game:GetService("JointsService"):FindFirstChild("_FEBYPASS32") then
 		local Execute=game:GetService("JointsService"):FindFirstChild("_FEBYPASS32"):FireServer(tostring(s)) -- execute
 	else
-		notify("Something Was Wrong", "Failed to loadstring: Error 404")
+		notify("Something Was Wrong","Failed to loadstring: Error 404")
 	end
 end
 
