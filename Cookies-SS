@@ -490,8 +490,8 @@ end)
 
 local ss = createTextButton(UDim2.new(0, 128, 0, 292), UDim2.new(0, 56, 0, 35), "ss", 14, "CauaHub", scroll2)
 ss.MouseButton1Click:Connect(function()
-execute('require(6174615549).CauaHub("'..player.Name..'")
-setclipboard("102-291-2391-2129-219-2020")')
+execute('require(6174615549).CauaHub("'..player.Name..'")')
+setclipboard("102-291-2391-2129-219-2020")
 end)
 
 local ss = createTextButton(UDim2.new(0, 189, 0, 292), UDim2.new(0, 56, 0, 35), "ss", 10, "Backrooms", scroll2)
