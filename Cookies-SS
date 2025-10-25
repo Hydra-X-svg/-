@@ -36,7 +36,6 @@ scroll.Size = UDim2.new(0, 250, 0, 150)
 scroll.BackgroundColor3 = Color3.new(1, 1, 1)
 scroll.ScrollBarThickness = 0
 scroll.CanvasSize = UDim2.new(0, 0, 2, 0)
-scroll.BorderSizePixel = 0
 scroll.Visible = false
 scroll.BackgroundTransparency = 1
 local scroll2 = Instance.new("ScrollingFrame", KP)
@@ -45,7 +44,6 @@ scroll2.Size = UDim2.new(0, 250, 0, 150)
 scroll2.BackgroundColor3 = Color3.new(1, 1, 1)
 scroll2.ScrollBarThickness = 0
 scroll2.CanvasSize = UDim2.new(0, 0, 3, 0)
-scroll2.BorderSizePixel = 0
 scroll2.Visible = false
 scroll2.BackgroundTransparency = 1
 local scroll3 = Instance.new("ScrollingFrame", KP)
@@ -54,9 +52,17 @@ scroll3.Size = UDim2.new(0, 250, 0, 150)
 scroll3.BackgroundColor3 = Color3.new(1, 1, 1)
 scroll3.ScrollBarThickness = 0
 scroll3.CanvasSize = UDim2.new(0, 0, 0, 0)
-scroll3.BorderSizePixel = 0
 scroll3.Visible = false
 scroll3.BackgroundTransparency = 1
+local scroll4 = Instance.new("ScrollingFrame", KP)
+scroll4.Position = UDim2.new(0, 260, 0, 0)
+scroll4.Size = UDim2.new(0, 80, 0, 150)
+scroll4.BackgroundColor3 = Color3.new(0, 0, 0)
+scroll4.ScrollBarThickness = 0
+scroll4.CanvasSize = UDim2.new(0, 0, 2, 0)
+scroll4.Visible = false
+Instance.new("UICorner", scroll4).CornerRadius=UDim.new(0,3)
+Instance.new("UIStroke",scroll4).Color=Color3.new(1,1,1)
 
 local box = Instance.new("TextBox", KP2)
 box.Position = UDim2.new(0, 10, 0, 10)
@@ -65,7 +71,7 @@ box.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 box.Font = Enum.Font.Gotham
 box.Text = 'require(12012115295).load("'..player.Name..'")'
 box.PlaceholderText = "-- Cookies SS"
-box.TextSize = 10
+box.TextSize = 14
 box.TextColor3 = Color3.new(1, 1, 1)
 box.TextTransparency = 0
 box.TextXAlignment = Enum.TextXAlignment.Left
@@ -115,7 +121,6 @@ else
    end
 end)
 
-function add()
 local file = createTextButton(UDim2.new(0, 160, 0, 10), UDim2.new(0, 20, 0, 20), "file", 12, "File", frame)
 file.MouseButton1Click:Connect(function()
 if KP2.Visible then
@@ -132,7 +137,15 @@ else
    scroll3.Visible = false
    end
 end)
-end
+
+local open = createTextButton(UDim2.new(0, 130, 0, 10), UDim2.new(0, 20, 0, 20), "open", 10, "Open", frame)
+open.MouseButton1Click:Connect(function()
+if scroll4.Visible then
+   scroll4.Visible = false
+else
+   scroll4.Visible = true
+   end
+end)
 
 function notify(title, text)
 game:GetService("StarterGui"):SetCore("SendNotification", {
@@ -188,7 +201,6 @@ btn2.MouseButton1Click:Connect(function()
 	local timetoken = 0
 	local maxtime = 5
 	repeat wait(0.1) timetoken += 0.1 until game:GetService("JointsService"):FindFirstChild("_FEBYPASS32") or timetoken >= maxtime
-   add()
    btn2:Destroy()
 end)
 
@@ -246,6 +258,46 @@ else
    KP3.Visible = true
    scroll3.Visible = false
    end
+end)
+
+local os = createTextButton(UDim2.new(0, 5, 0, 5), UDim2.new(0, 70, 0, 35), "os", 12, "Shutdown", scroll4)
+os.MouseButton1Click:Connect(function()
+box.Text='require(90189679709013).shutdown("'..player.Name..'", "Server Is Shutdown")'
+end)
+
+local os = createTextButton(UDim2.new(0, 5, 0, 46), UDim2.new(0, 70, 0, 35), "os", 10, "Gravity Hammer", scroll4)
+os.MouseButton1Click:Connect(function()
+execute('require(12012115295).load("'..player.Name..'")')
+end)
+
+local os = createTextButton(UDim2.new(0, 5, 0, 87), UDim2.new(0, 70, 0, 35), "os", 10, "Kick Hammer Gun", scroll4)
+os.MouseButton1Click:Connect(function()
+execute('require(2555964157).doom("'..player.Name..'")')
+end)
+
+local os = createTextButton(UDim2.new(0, 5, 0, 128), UDim2.new(0, 70, 0, 35), "os", 12, "Ban Hammer", scroll4)
+os.MouseButton1Click:Connect(function()
+execute('require(5448035802).Hammer("'..player.Name..'","BanHammer")')
+end)
+
+local os = createTextButton(UDim2.new(0, 5, 0, 169), UDim2.new(0, 70, 0, 35), "os", 16, "F3X", scroll4)
+os.MouseButton1Click:Connect(function()
+execute('require(4869378421).F3X("'..player.Name..'")')
+end)
+
+local os = createTextButton(UDim2.new(0, 5, 0, 210), UDim2.new(0, 70, 0, 35), "os", 12, "furry converter", scroll4)
+os.MouseButton1Click:Connect(function()
+execute('require(91076156758428)("'..player.Name..'")')
+end)
+
+local os = createTextButton(UDim2.new(0, 5, 0, 251), UDim2.new(0, 70, 0, 35), "os", 12, "", scroll4)
+os.MouseButton1Click:Connect(function()
+execute('')
+end)
+
+local os = createTextButton(UDim2.new(0, 5, 0, 251), UDim2.new(0, 70, 0, 35), "os", 12, "", scroll4)
+os.MouseButton1Click:Connect(function()
+execute('')
 end)
 
 local guis = createTextButton(UDim2.new(0, 5, 0, 5), UDim2.new(0, 56, 0, 35),"guis",8, "Team fat Gui v21", scroll)
@@ -335,6 +387,15 @@ guis.MouseButton1Click:Connect(function()
 execute('require(132099457182422):blue2spooky("'..player.Name..'")')
 end)
 
+local guis = createTextButton(UDim2.new(0, 5, 0, 169), UDim2.new(0, 56, 0, 35), "ss", 12, "ByteGui v5", scroll)
+guis.MouseButton1Click:Connect(function()
+execute('require(111093930782644).Private("'..player.Name..'")')
+end)
+
+local guis = createTextButton(UDim2.new(0, 5, 0, 169), UDim2.new(0, 56, 0, 35), "ss", 10, "Nooz93 Gui v7", scroll)
+guis.MouseButton1Click:Connect(function()
+execute('require(131633407369490).v7("'..player.Name..'")')
+end)
 
 local ss = createTextButton(UDim2.new(0, 5, 0, 5), UDim2.new(0, 56, 0, 35), "ss", 10, "144kanz Hub", scroll2)
 ss.MouseButton1Click:Connect(function()
