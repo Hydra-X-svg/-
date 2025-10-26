@@ -1,8 +1,12 @@
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
 pcall(function() player:WaitForChild("PlayerGui"):FindFirstChild("Cookies SS"):Destroy() end)
-local gui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
+local gui = Instance.new("ScreenGui", game:GetService("CoreGui"))
 gui.Name = "Cookies SS"
+gui.DisplayOrder = 999
+gui.IgnoreGuiInset = true
+gui.ScreenInsets = Enum.ScreenInsets.DeviceSafeInsets
+gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 gui.ResetOnSpawn = false
 local frame = Instance.new("Frame", gui)
 frame.Position = UDim2.new(0, 270, 0, 50)
@@ -55,11 +59,11 @@ scroll3.CanvasSize = UDim2.new(0, 0, 0, 0)
 scroll3.Visible = false
 scroll3.BackgroundTransparency = 1
 local scroll4 = Instance.new("ScrollingFrame", KP)
-scroll4.Position = UDim2.new(0, 260, 0, 0)
-scroll4.Size = UDim2.new(0, 80, 0, 150)
+scroll4.Position = UDim2.new(0, 0, 0,  155)
+scroll4.Size = UDim2.new(0, 250, 0, 45)
 scroll4.BackgroundColor3 = Color3.new(0, 0, 0)
 scroll4.ScrollBarThickness = 0
-scroll4.CanvasSize = UDim2.new(0, 0, 2, 0)
+scroll4.CanvasSize = UDim2.new(4, 0, 0, 0)
 scroll4.Visible = false
 Instance.new("UICorner", scroll4).CornerRadius=UDim.new(0,3)
 Instance.new("UIStroke",scroll4).Color=Color3.new(1,1,1)
@@ -174,10 +178,6 @@ btn2.TextColor3 = Color3.new(1,1,1)
 btn2.Font = Enum.Font.SourceSans
 Instance.new("UICorner",btn2).CornerRadius=UDim.new(0,3)
 btn2.MouseButton1Click:Connect(function()
-if game:WaitForChild("JointsService"):FindFirstChild("_FEBYPASS32") then
-   notify("Already Injected!", "Seem like the code already run!")
-   btn2:Destroy()
-else
 	local function b_G_V12(see)
 		local a = function(ree)
 			ree:FireServer([[
@@ -206,14 +206,13 @@ else
 	local maxtime = 5
 	repeat wait(0.1) timetoken += 0.1 until game:GetService("JointsService"):FindFirstChild("_FEBYPASS32") or timetoken >= maxtime
    btn2:Destroy()
-   end
 end)
 
 function execute(s)
 	if game:GetService("JointsService"):FindFirstChild("_FEBYPASS32") then
 		local Execute=game:GetService("JointsService"):FindFirstChild("_FEBYPASS32"):FireServer(tostring(s)) -- execute
 	else
-		notify("Something Was Wrong","Failed to loadstring: Error 404")
+		notify("Something Was Wrong", "Failed to loadstring: Error 404")
 	end
 end
 
@@ -270,37 +269,57 @@ os.MouseButton1Click:Connect(function()
 box.Text='require(90189679709013).shutdown("'..player.Name..'", "Server Is Shutdown")'
 end)
 
-local os = createTextButton(UDim2.new(0, 5, 0, 46), UDim2.new(0, 70, 0, 35), "os", 10, "Gravity Hammer", scroll4)
+local os = createTextButton(UDim2.new(0, 81, 0, 5), UDim2.new(0, 70, 0, 35), "os", 10, "Gravity Hammer", scroll4)
 os.MouseButton1Click:Connect(function()
 execute('require(12012115295).load("'..player.Name..'")')
 end)
 
-local os = createTextButton(UDim2.new(0, 5, 0, 87), UDim2.new(0, 70, 0, 35), "os", 10, "Kick Hammer Gun", scroll4)
+local os = createTextButton(UDim2.new(0, 157, 0, 5), UDim2.new(0, 70, 0, 35), "os", 10, "Kick Hammer Gun", scroll4)
 os.MouseButton1Click:Connect(function()
 execute('require(2555964157).doom("'..player.Name..'")')
 end)
 
-local os = createTextButton(UDim2.new(0, 5, 0, 128), UDim2.new(0, 70, 0, 35), "os", 12, "Ban Hammer", scroll4)
+local os = createTextButton(UDim2.new(0, 233, 0, 5), UDim2.new(0, 70, 0, 35), "os", 12, "Ban Hammer", scroll4)
 os.MouseButton1Click:Connect(function()
 execute('require(5448035802).Hammer("'..player.Name..'","BanHammer")')
 end)
 
-local os = createTextButton(UDim2.new(0, 5, 0, 169), UDim2.new(0, 70, 0, 35), "os", 16, "F3X", scroll4)
+local os = createTextButton(UDim2.new(0, 309, 0, 5), UDim2.new(0, 70, 0, 35), "os", 16, "F3X", scroll4)
 os.MouseButton1Click:Connect(function()
 execute('require(4869378421).F3X("'..player.Name..'")')
 end)
 
-local os = createTextButton(UDim2.new(0, 5, 0, 210), UDim2.new(0, 70, 0, 35), "os", 12, "furry converter", scroll4)
+local os = createTextButton(UDim2.new(0, 385, 0, 5), UDim2.new(0, 70, 0, 35), "os", 12, "furry converter", scroll4)
 os.MouseButton1Click:Connect(function()
 execute('require(91076156758428)("'..player.Name..'")')
 end)
 
-local os = createTextButton(UDim2.new(0, 5, 0, 251), UDim2.new(0, 70, 0, 35), "os", 12, "", scroll4)
+local os = createTextButton(UDim2.new(0, 461, 0, 5), UDim2.new(0, 70, 0, 35), "os", 14, "volt bike", scroll4)
+os.MouseButton1Click:Connect(function()
+execute('require(4021975182).load("'..player.Name..'")')
+end)
+
+local os = createTextButton(UDim2.new(0, 537, 0, 5), UDim2.new(0, 70, 0, 35), "os", 12, "", scroll4)
 os.MouseButton1Click:Connect(function()
 execute('')
 end)
 
-local os = createTextButton(UDim2.new(0, 5, 0, 251), UDim2.new(0, 70, 0, 35), "os", 12, "", scroll4)
+local os = createTextButton(UDim2.new(0, 613, 0, 5), UDim2.new(0, 70, 0, 35), "os", 12, "Yuta Movement", scroll4)
+os.MouseButton1Click:Connect(function()
+execute('require(89529616632600)("'..player.Name..'")", "Yuta")')
+end)
+
+local os = createTextButton(UDim2.new(0, 689, 0, 5), UDim2.new(0, 70, 0, 35), "os", 12, "Ichigo Movement", scroll4)
+os.MouseButton1Click:Connect(function()
+execute('require(89529616632600)("'..player.Name..'", "Ichigo")')
+end)
+
+local os = createTextButton(UDim2.new(0, 765, 0, 5), UDim2.new(0, 70, 0, 35), "os", 12, "Aizen Movement", scroll4)
+os.MouseButton1Click:Connect(function()
+execute('require(89529616632600)("'..player.Name..'", "Aizen")')
+end)
+
+local os = createTextButton(UDim2.new(0, 841, 0, 5), UDim2.new(0, 70, 0, 35), "os", 12, "", scroll4)
 os.MouseButton1Click:Connect(function()
 execute('')
 end)
