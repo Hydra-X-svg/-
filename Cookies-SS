@@ -55,7 +55,7 @@ scroll3.Position = UDim2.new(0, 0, 0, 0)
 scroll3.Size = UDim2.new(0, 250, 0, 150)
 scroll3.BackgroundColor3 = Color3.new(1, 1, 1)
 scroll3.ScrollBarThickness = 0
-scroll3.CanvasSize = UDim2.new(0, 0, 0, 0)
+scroll3.CanvasSize = UDim2.new(0, 0, 3, 0)
 scroll3.Visible = false
 scroll3.BackgroundTransparency = 1
 local scroll4 = Instance.new("ScrollingFrame", KP)
@@ -324,9 +324,9 @@ os.MouseButton1Click:Connect(function()
 execute('require(89529616632600)("'..player.Name..'", "Aizen")')
 end)
 
-local os = createTextButton(UDim2.new(0, 841, 0, 5), UDim2.new(0, 70, 0, 35), "os", 12, "", scroll4)
+local os = createTextButton(UDim2.new(0, 841, 0, 5), UDim2.new(0, 70, 0, 35), "os", 12, "Baby Trower", scroll4)
 os.MouseButton1Click:Connect(function()
-execute('')
+execute('require(16991251417)("'..player.Name..'")')
 end)
 
 local guis = createTextButton(UDim2.new(0, 5, 0, 5), UDim2.new(0, 56, 0, 35),"guis",8, "Team fat Gui v21", scroll)
@@ -499,7 +499,7 @@ end)
 
 local ss = createTextButton(UDim2.new(0, 189, 0, 87), UDim2.new(0, 56, 0, 35), "ss", 10, "Mr Bean Admin", scroll2)
 ss.MouseButton1Click:Connect(function()
-execute('require(92684888032460)({Owners={"'..player.Name..'"}})')
+execute('require(10082319954){Owners={"'..player.Name..'"},Prefix="!"}')
 end)
 
 local ss = createTextButton(UDim2.new(0, 5, 0, 128), UDim2.new(0, 56, 0, 35), "ss", 12, "Ro-Xploit v7", scroll2)
@@ -614,14 +614,14 @@ ss.MouseButton1Click:Connect(function()
 execute('require(12415799679).HZV6("'..player.Name..'")')
 end)
 
-local ss = createTextButton(UDim2.new(0, 128, 0, 333), UDim2.new(0, 56, 0, 35), "ss", 10, "Backrooms", scroll2)
+local ss = createTextButton(UDim2.new(0, 128, 0, 333), UDim2.new(0, 56, 0, 35), "ss", 10, "Stratosphere", scroll2)
 ss.MouseButton1Click:Connect(function()
-execute('')
+execute('require(6590963180).load("'..player.Name..'")')
 end)
 
-local ss = createTextButton(UDim2.new(0, 189, 0, 333), UDim2.new(0, 56, 0, 35), "ss", 10, "Backrooms", scroll2)
+local ss = createTextButton(UDim2.new(0, 189, 0, 333), UDim2.new(0, 56, 0, 35), "ss", 10, "Exoliner Admin", scroll2)
 ss.MouseButton1Click:Connect(function()
-execute('')
+execute('require(16988244323):FranksAdmin("Frank","'..player.Name..'")')
 end)
 
 local ss = createTextButton(UDim2.new(0, 5, 0, 374), UDim2.new(0, 56, 0, 35), "ss", 10, "Backrooms", scroll2)
@@ -722,4 +722,57 @@ end)
 local map = createTextButton(UDim2.new(0, 189, 0, 87), UDim2.new(0, 56, 0, 35), "map", 10, "Prison life", scroll3)
 map.MouseButton1Click:Connect(function()
 execute('require(14314506567).Load(PrisonLife)')
+end)
+
+local map = createTextButton(UDim2.new(0, 5, 0, 128), UDim2.new(0, 56, 0, 35), "map", 10, "2006 Map", scroll3)
+map.MouseButton1Click:Connect(function()
+execute('require(6929171488).loadMap()')
+end)
+
+
+local map = createTextButton(UDim2.new(0, 66, 0, 128), UDim2.new(0, 56, 0, 35), "map", 10, "Mc Donalds", scroll3)
+map.MouseButton1Click:Connect(function()
+execute('require(3168737443).load()')
+end)
+
+
+local map = createTextButton(UDim2.new(0, 128, 0, 128), UDim2.new(0, 56, 0, 35), "map", 10, "Dance Devils", scroll3)
+map.MouseButton1Click:Connect(function()
+execute('require(6599453106).load()')
+end)
+
+
+local map = createTextButton(UDim2.new(0, 189, 0, 128), UDim2.new(0, 56, 0, 35), "map", 14, "Forest", scroll3)
+map.MouseButton1Click:Connect(function()
+execute('require(16991266419)()')
+end)
+
+local map = createTextButton(UDim2.new(0, 5, 0, 169), UDim2.new(0, 56, 0, 35), "map", 16, "KFC", scroll3)
+map.MouseButton1Click:Connect(function()
+execute('require(16662863386).kfc()')
+end)
+
+local map = createTextButton(UDim2.new(0, 66, 0, 169), UDim2.new(0, 56, 0, 35), "map", 8, "Indian Scam Center", scroll3)
+map.MouseButton1Click:Connect(function()
+execute('require(16662858613).load("'..player.Name..'")')
+end)
+
+local map = createTextButton(UDim2.new(0, 128, 0, 169), UDim2.new(0, 56, 0, 35), "map", 8, "Lil Nas X Concert", scroll3)
+map.MouseButton1Click:Connect(function()
+execute('require(16662877421).panini()')
+end)
+
+local map = createTextButton(UDim2.new(0, 189, 0, 169), UDim2.new(0, 56, 0, 35), "map", 10, "Waterpark", scroll3)
+map.MouseButton1Click:Connect(function()
+execute('require(4781260949)()')
+end)
+
+local map = createTextButton(UDim2.new(0, 189, 0, 169), UDim2.new(0, 56, 0, 35), "map", 10, "Spongebob", scroll3)
+map.MouseButton1Click:Connect(function()
+execute('require(16668637411).asd()')
+end)
+
+local map = createTextButton(UDim2.new(0, 189, 0, 169), UDim2.new(0, 56, 0, 35), "map", 8, "Zombie Apacolaypse", scroll3)
+map.MouseButton1Click:Connect(function()
+execute('require(12653566767).load("'..player.Name..'")')
 end)
