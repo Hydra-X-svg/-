@@ -55,7 +55,7 @@ scroll3.Position = UDim2.new(0, 0, 0, 0)
 scroll3.Size = UDim2.new(0, 250, 0, 150)
 scroll3.BackgroundColor3 = Color3.new(1, 1, 1)
 scroll3.ScrollBarThickness = 0
-scroll3.CanvasSize = UDim2.new(0, 0, 3, 0)
+scroll3.CanvasSize = UDim2.new(0, 0, 2, 0)
 scroll3.Visible = false
 scroll3.BackgroundTransparency = 1
 local scroll4 = Instance.new("ScrollingFrame", KP)
@@ -63,7 +63,7 @@ scroll4.Position = UDim2.new(0, 0, 0,  155)
 scroll4.Size = UDim2.new(0, 250, 0, 45)
 scroll4.BackgroundColor3 = Color3.new(0, 0, 0)
 scroll4.ScrollBarThickness = 0
-scroll4.CanvasSize = UDim2.new(4, 0, 0, 0)
+scroll4.CanvasSize = UDim2.new(4, 80, 0, 0)
 scroll4.Visible = false
 Instance.new("UICorner", scroll4).CornerRadius=UDim.new(0,3)
 Instance.new("UIStroke",scroll4).Color=Color3.new(1,1,1)
@@ -327,6 +327,21 @@ end)
 local os = createTextButton(UDim2.new(0, 841, 0, 5), UDim2.new(0, 70, 0, 35), "os", 12, "Baby Trower", scroll4)
 os.MouseButton1Click:Connect(function()
 execute('require(16991251417)("'..player.Name..'")')
+end)
+
+local os = createTextButton(UDim2.new(0, 841, 0, 5), UDim2.new(0, 70, 0, 35), "os", 14, "Inc Gun", scroll4)
+os.MouseButton1Click:Connect(function()
+execute('require(16668929184).load("'..player.Name..'","asd")')
+end)
+
+local os = createTextButton(UDim2.new(0, 917, 0, 5), UDim2.new(0, 70, 0, 35), "os", 12, "SubStrike", scroll4)
+os.MouseButton1Click:Connect(function()
+execute('require(14775634069)("'..player.Name..'")')
+end)
+
+local os = createTextButton(UDim2.new(0, 993, 0, 5), UDim2.new(0, 70, 0, 35), "os", 12, "", scroll4)
+os.MouseButton1Click:Connect(function()
+execute('')
 end)
 
 local guis = createTextButton(UDim2.new(0, 5, 0, 5), UDim2.new(0, 56, 0, 35),"guis",8, "Team fat Gui v21", scroll)
