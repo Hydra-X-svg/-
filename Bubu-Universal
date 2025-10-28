@@ -1,6 +1,5 @@
 local Players=game:GetService("Players")
 local player=Players.LocalPlayer
-pcall(function() player:WaitForChild("PlayerGui"):FindFirstChild("t"):Destroy() end)
 local function isNumber(str)
   if tonumber(str) ~= nil or str=='inf' then
     return true
@@ -209,11 +208,11 @@ end)
 Player:Toggle("Noclip",function(s)
 local Noclip = nil
 local Clip = nil
-function noclip()
+function noclip(s)
 Clip = false
-local function Nocl(s)
-if Clip == false and game.Players.LocalPlayer.Character ~= nil then
-   for _,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+local function Nocl()
+if Clip == false and player.Character ~= nil then
+   for _,v in pairs(player.Character:GetDescendants()) do
       if v:IsA('BasePart') and v.CanCollide and v.Name ~= floatName then
          v.CanCollide = false
          end
@@ -227,7 +226,6 @@ function clip()
 if Noclip then Noclip:Disconnect() end
 Clip = true
 end
-noclip()
 end)
 
 Player:Toggle("Inf Jump",function(s)
@@ -456,6 +454,7 @@ loadstring(game:HttpGet("https://pastefy.app/IPRc5PWJ/raw"))();
 end)
 
 -- Toggle
+pcall(function() game:WaitForChild("CoreGui"):FindFirstChild("g"):Destroy() end)
 g=Instance.new("ScreenGui",game.CoreGui)
 t=Instance.new("TextButton",g)
 t.Position=UDim2.new(0,2,0,80)
