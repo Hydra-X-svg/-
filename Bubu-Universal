@@ -13,7 +13,6 @@ getgenv().Walkspeed=player.Character.Humanoid.WalkSpeed
 getgenv().Jumppower=player.Character.Humanoid.JumpPower
 getgenv().TPSpeed=3
 getgenv().TPWalk=false
-getgenv().toggle=false
 getgenv().X=nil
 getgenv().Y=nil
 getgenv().Z=nil
@@ -217,8 +216,14 @@ if toggle == true and player.Character ~= nil then
    end
    wait(0.21)
 end
-if toggle == false then
-   v.CanCollide = true
+if toggle == false and player.Character ~= nil then
+   for _,v in pairs(player.Character:GetDescendants()) do
+      if v:IsA('BasePart') and v.CanCollide and v.Name ~= floatName then
+         v.CanCollide = true
+         end
+      end
+   end
+   wait(0.21)
 end
 end)
 
