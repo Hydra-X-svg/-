@@ -13,6 +13,7 @@ getgenv().Walkspeed=player.Character.Humanoid.WalkSpeed
 getgenv().Jumppower=player.Character.Humanoid.JumpPower
 getgenv().TPSpeed=3
 getgenv().TPWalk=false
+getgenv().toggle=false
 getgenv().X=nil
 getgenv().Y=nil
 getgenv().Z=nil
