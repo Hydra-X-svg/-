@@ -206,12 +206,8 @@ game.Workspace.CurrentCamera.FieldOfView=v
 end)
 
 Player:Toggle("Noclip",function(s)
-local Noclip = nil
-local Clip = nil
-function noclip()
-Clip = false
-local function Nocl()
-if Clip == false and player.Character ~= nil then
+getgenv().toggle=s
+if getgenv().toggle == true and player.Character ~= nil then
    for _,v in pairs(player.Character:GetDescendants()) do
       if v:IsA('BasePart') and v.CanCollide and v.Name ~= floatName then
          v.CanCollide = false
@@ -220,13 +216,9 @@ if Clip == false and player.Character ~= nil then
    end
    wait(0.21)
 end
-Noclip = game:GetService('RunService').Stepped:Connect(Nocl)
+if getgenv().toggle == false then
+   v.CanCollide = true
 end
-function clip()
-if Noclip then Noclip:Disconnect() end
-Clip = true
-end
-noclip(s)
 end)
 
 Player:Toggle("Inf Jump",function(s)
