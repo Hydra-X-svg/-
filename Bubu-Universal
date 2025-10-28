@@ -205,10 +205,10 @@ Player:Slider("Fov",game.Workspace.CurrentCamera.FieldOfView,120,function(v)
 game.Workspace.CurrentCamera.FieldOfView=v
 end)
 
-Player:Toggle("Noclip",function(s)
+Player:Toggle("Noclip",function()
 local Noclip = nil
 local Clip = nil
-function noclip(s)
+function noclip()
 Clip = false
 local function Nocl()
 if Clip == false and player.Character ~= nil then
@@ -226,6 +226,7 @@ function clip()
 if Noclip then Noclip:Disconnect() end
 Clip = true
 end
+noclip()
 end)
 
 Player:Toggle("Inf Jump",function(s)
@@ -455,7 +456,7 @@ end)
 
 -- Toggle
 pcall(function() game:WaitForChild("CoreGui"):FindFirstChild("g"):Destroy() end)
-g=Instance.new("ScreenGui",game.CoreGui)
+local g=Instance.new("ScreenGui",game.CoreGui)
 t=Instance.new("TextButton",g)
 t.Position=UDim2.new(0,2,0,80)
 t.Size=UDim2.new(0,60,0,30)
