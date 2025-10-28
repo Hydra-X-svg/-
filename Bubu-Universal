@@ -208,7 +208,7 @@ end)
 
 Player:Toggle("Noclip",function(s)
 getgenv().toggle=s
-if getgenv().toggle == true and player.Character ~= nil then
+if toggle == true and player.Character ~= nil then
    for _,v in pairs(player.Character:GetDescendants()) do
       if v:IsA('BasePart') and v.CanCollide and v.Name ~= floatName then
          v.CanCollide = false
@@ -217,7 +217,7 @@ if getgenv().toggle == true and player.Character ~= nil then
    end
    wait(0.21)
 end
-if getgenv().toggle == false then
+if toggle == false then
    v.CanCollide = true
 end
 end)
