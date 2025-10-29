@@ -206,25 +206,13 @@ game.Workspace.CurrentCamera.FieldOfView=v
 end)
 
 Player:Toggle("Noclip",function(s)
-getgenv().toggle=s
-if toggle == true and player.Character ~= nil then
-   for _,v in pairs(player.Character:GetDescendants()) do
-      if v:IsA('BasePart') and v.CanCollide and v.Name ~= floatName then
-         v.CanCollide = false
-         end
-      end
-   end
-   wait(0.21)
-end
-if toggle == false and player.Character ~= nil then
-   for _,v in pairs(player.Character:GetDescendants()) do
-      if v:IsA('BasePart') and v.CanCollide and v.Name ~= floatName then
-         v.CanCollide = true
-         end
-      end
-   end
-   wait(0.21)
-end
+    getgenv().Noclip = s game:GetService("RunService").Heartbeat:Connect(function()
+        if Noclip == true then
+            game:GetService("RunService").Stepped:wait()
+            player.Character.Head.CanCollide=false
+            player.Character.Torso.CanCollide=false
+        end
+    end)
 end)
 
 Player:Toggle("Inf Jump",function(s)
@@ -453,8 +441,8 @@ loadstring(game:HttpGet("https://pastefy.app/IPRc5PWJ/raw"))();
 end)
 
 -- Toggle
-pcall(function() game:WaitForChild("CoreGui"):FindFirstChild("g"):Destroy() end)
-local g=Instance.new("ScreenGui",game.CoreGui)
+pcall(function()game:WaitForChild("PlayerGui"):FindFirstChild("g"):Destroy()end)
+local g=Instance.new("ScreenGui",game:GetService("PlayerGui"))
 t=Instance.new("TextButton",g)
 t.Position=UDim2.new(0,2,0,80)
 t.Size=UDim2.new(0,60,0,30)
