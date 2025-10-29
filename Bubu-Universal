@@ -440,8 +440,8 @@ Hub:Button("Admin/F3X Panel",function()
 loadstring(game:HttpGet("https://pastefy.app/IPRc5PWJ/raw"))();
 end)
 
-if PlaceId==155615604 then
-
+if game.PlaceId==155615604 then
+loadstring(game:HttpGet("https://pastefy.app/H62FDXjd/raw"))();
 end
 
 -- Toggle
