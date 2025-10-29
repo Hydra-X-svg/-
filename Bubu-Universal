@@ -441,8 +441,10 @@ loadstring(game:HttpGet("https://pastefy.app/IPRc5PWJ/raw"))();
 end)
 
 -- Toggle
-pcall(function()game:WaitForChild("PlayerGui"):FindFirstChild("g"):Destroy()end)
-local g=Instance.new("ScreenGui",game:GetService("PlayerGui"))
+pcall(function() game:WaitForChild("PlayerGui"):FindFirstChild("Toggle"):Destroy() end)
+g=Instance.new("ScreenGui",player:WaitForChild("PlayerGui"))
+g.Name="Toggle"
+g.ResetOnSpawn=false
 t=Instance.new("TextButton",g)
 t.Position=UDim2.new(0,2,0,80)
 t.Size=UDim2.new(0,60,0,30)
