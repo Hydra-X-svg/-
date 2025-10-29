@@ -442,7 +442,7 @@ end)
 
 -- Toggle
 pcall(function() game:WaitForChild("PlayerGui"):FindFirstChild("Toggle"):Destroy() end)
-g=Instance.new("ScreenGui",player:WaitForChild("PlayerGui"))
+local g=Instance.new("ScreenGui",player:WaitForChild("PlayerGui"))
 g.Name="Toggle"
 g.ResetOnSpawn=false
 t=Instance.new("TextButton",g)
