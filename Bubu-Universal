@@ -443,7 +443,7 @@ end)
 local receiver = Instance.new("BindableFunction")
 receiver.OnInvoke = function(btn) 
 if btn == "Yes" then
-loadstring(game:HttpGet("https://pastefy.app/ZAmEh2WD/raw"))();
+loadstring(game:HttpGet("https://pastefy.app/MZZzrLuA/raw"))();
 elseif btn == "No Thanks" then
 
    end
