@@ -440,12 +440,11 @@ Hub:Button("Admin/F3X Panel",function()
 loadstring(game:HttpGet("https://pastefy.app/IPRc5PWJ/raw"))();
 end)
 
-local receiver = Instance.new("BindableFunction")
-receiver.OnInvoke = function(btn) 
-if btn == "Yes" then
-loadstring(game:HttpGet("https://pastefy.app/MZZzrLuA/raw"))();
-elseif btn == "No Thanks" then
-
+local receiver=Instance.new("BindableFunction")
+receiver.OnInvoke=function(btn) 
+if btn=="Yes" then
+loadstring(game:HttpGet("https://pastefy.app/DZp0ipEu/raw"))();
+elseif btn=="No Thanks" then
    end
 end
 
