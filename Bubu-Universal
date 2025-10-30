@@ -11,7 +11,7 @@ getgenv().HitboxStatus=false
 getgenv().TeamCheck=false
 getgenv().Walkspeed=player.Character.Humanoid.WalkSpeed
 getgenv().Jumppower=player.Character.Humanoid.JumpPower
-getgenv().TPSpeed=3
+getgenv().TPSpeed=1
 getgenv().TPWalk=false
 getgenv().X=nil
 getgenv().Y=nil
@@ -454,7 +454,7 @@ game:GetService("StarterGui"):SetCore("SendNotification", {
     Title="Hey!",
     Text="Would you like to remove all door/gate?",
     Icon=game.Players:GetUserThumbnailAsync(game.Players:GetUserIdFromNameAsync("ihalknsohan99992"),Enum.ThumbnailType.HeadShot,Enum.ThumbnailSize.Size420x420),
-    Duration=10,
+    Duration=20,
     Button1="Yes",
     Button2="No Thanks",
     Callback=receiver,
