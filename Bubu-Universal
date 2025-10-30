@@ -440,8 +440,30 @@ Hub:Button("Admin/F3X Panel",function()
 loadstring(game:HttpGet("https://pastefy.app/IPRc5PWJ/raw"))();
 end)
 
+local receiver = Instance.new("BindableFunction")
+receiver.OnInvoke = function(btn) 
+if btn == "Yes" then
+loadstring(game:HttpGet("https://pastefy.app/ZAmEh2WD/raw"))();
+elseif btn == "No Thanks" then
+
+   end
+end
+
+function Notify()
+game:GetService("StarterGui"):SetCore("SendNotification", {
+    Title="Hey!",
+    Text="Would you like to remove all door/gate?",
+    Icon=game.Players:GetUserThumbnailAsync(game.Players:GetUserIdFromNameAsync("ihalknsohan99992"),Enum.ThumbnailType.HeadShot,Enum.ThumbnailSize.Size420x420),
+    Duration=10,
+    Button1="Yes",
+    Button2="No Thanks",
+    Callback=receiver,
+})
+end
+
 if game.PlaceId==155615604 then
 loadstring(game:HttpGet("https://pastefy.app/H62FDXjd/raw"))();
+Notify()
 end
 
 -- Toggle
