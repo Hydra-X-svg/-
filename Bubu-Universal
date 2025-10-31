@@ -387,7 +387,7 @@ loadstring(game:HttpGet("https://pastefy.app/Y2VVS5DC/raw"))();
 end)
 
 Hub:Button("EpikGuy GUI v2",function()
-loadstring(game:HttpGet("https://pastebin.com/raw/YxquFEAR"))();
+loadstring(game:HttpGet("https://pastebin.com/raw/C4fGK6Wb"))();
 end)
 
 Hub:Button("",function()
