@@ -407,8 +407,9 @@ Hub:Button("Fur Infection Outbreak",function()
 loadstring(game:HttpGet("https://pastefy.app/w9UImTxb/raw"))();
 end)
 
-Hub:Button("[2x💪] Get Big Simulator",function()
-loadstring(game:HttpGet("https://pastefy.app/yLSy7HFi/raw"))();
+Hub:Button("Prison Life",function()
+loadstring(game:HttpGet("https://pastefy.app/H62FDXjd/raw"))();
+Notify()
 end)
 
 Hub:Section("Random Script")
@@ -439,31 +440,6 @@ end)
 Hub:Button("Admin/F3X Panel",function()
 loadstring(game:HttpGet("https://pastefy.app/IPRc5PWJ/raw"))();
 end)
-
-local receiver=Instance.new("BindableFunction")
-receiver.OnInvoke=function(btn) 
-if btn=="Yes" then
-loadstring(game:HttpGet("https://pastefy.app/DZp0ipEu/raw"))();
-elseif btn=="No Thanks" then
-   end
-end
-
-function Notify()
-game:GetService("StarterGui"):SetCore("SendNotification", {
-    Title="Hey!",
-    Text="Would you like to remove all door/gate?",
-    Icon=game.Players:GetUserThumbnailAsync(game.Players:GetUserIdFromNameAsync("ihalknsohan99992"),Enum.ThumbnailType.HeadShot,Enum.ThumbnailSize.Size420x420),
-    Duration=20,
-    Button1="Yes",
-    Button2="No Thanks",
-    Callback=receiver,
-})
-end
-
-if game.PlaceId==155615604 then
-loadstring(game:HttpGet("https://pastefy.app/H62FDXjd/raw"))();
-Notify()
-end
 
 -- Toggle
 pcall(function()game:WaitForChild("CoreGui"):FindFirstChild("Toggle"):Destroy()end)
