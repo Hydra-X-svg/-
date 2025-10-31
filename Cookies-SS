@@ -39,6 +39,7 @@ scroll.Position = UDim2.new(0, 0, 0, 0)
 scroll.Size = UDim2.new(0, 250, 0, 150)
 scroll.BackgroundColor3 = Color3.new(1, 1, 1)
 scroll.ScrollBarThickness = 0
+scroll.Selectable = false
 scroll.CanvasSize = UDim2.new(0, 0, 2, 0)
 scroll.Visible = false
 scroll.BackgroundTransparency = 1
