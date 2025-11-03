@@ -21,7 +21,13 @@ colorPalette.BorderSizePixel = 1
 Instance.new("UICorner",colorPalette).CornerRadius=UDim.new(0,3)
 Instance.new("UIStroke",colorPalette).Color=Color3.new(1,1,1)
 
-getgenv().enabled=nil
+if getgenv().enabled==false then 
+    colorPickerGui:Destroy()
+end
+if getgenv().enabled==true then 
+    getgenv().enabled=false
+    getgenv().enabled=true
+end
 if getgenv().enabled then
   colorPalette.Visible=false
 else
