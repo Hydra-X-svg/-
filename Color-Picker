@@ -21,9 +21,10 @@ colorPalette.BorderSizePixel = 1
 Instance.new("UICorner",colorPalette).CornerRadius=UDim.new(0,3)
 Instance.new("UIStroke",colorPalette).Color=Color3.new(1,1,1)
 
-if getgenv().toggle then
+getgenv().enabled=nil
+if getgenv().enabled then
   colorPalette.Visible=false
-elseif toggle==true then
+else
   colorPalette.Visible=true
  end
 end)
