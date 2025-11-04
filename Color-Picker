@@ -20,7 +20,20 @@ colorPalette.Draggable = true
 colorPalette.BorderSizePixel = 1
 Instance.new("UICorner",colorPalette).CornerRadius=UDim.new(0,3)
 Instance.new("UIStroke",colorPalette).Color=Color3.new(1,1,1)
- 
+
+if getgenv().enabled==false then
+ colorPalette.Visible=false
+end
+
+if getgenv().enabled==true then
+ getgenv().enabled=false
+ getgenv().enabled=true
+end
+
+if getgenv().enabled then
+ colorPalette.Visible=true
+end
+
 -- Color palette (image)
 local paletteButton = Instance.new("ImageButton", colorPalette)
 paletteButton.Name = "ColorPalette"
