@@ -498,16 +498,6 @@ guis.MouseButton1Click:Connect(function()
 execute('require(0x488847B83D83).TeamR7J("'..player.Name..'")')
 end)
 
-local guis = createTextButton(UDim2.new(0, 128, 0, 292), UDim2.new(0, 56, 0, 35), "ss", 8, "", scroll)
-guis.MouseButton1Click:Connect(function()
-execute('')
-end)
-
-local guis = createTextButton(UDim2.new(0, 189, 0, 292), UDim2.new(0, 56, 0, 35), "ss", 8, "", scroll)
-guis.MouseButton1Click:Connect(function()
-execute('')
-end)
-
 local ss = createTextButton(UDim2.new(0, 5, 0, 5), UDim2.new(0, 56, 0, 35), "ss", 10, "144kanz Hub", scroll2)
 ss.MouseButton1Click:Connect(function()
 execute('require(0x25b56b8f7+-0x6a72c6b3d+0x812296b09):SHHH144anzHUB("'..player.Name..'")')
