@@ -6,7 +6,6 @@ pcall(function()game:WaitForChild("CoreGui"):FindForChild("GUI Maker"):Destroy()
 local gui=Instance.new("ScreenGui",game:GetService("CoreGui"))
 gui.Name="GUI Maker"
 gui.DisplayOrder=999
-gui.IgnoreGuiInset=true
 gui.ResetOnSpawn=false
 
 local function create(new,pos,size,parent)
