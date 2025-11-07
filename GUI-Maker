@@ -2,8 +2,13 @@
 local plr=game:GetService("Players")
 local Lp=plr.LocalPlayer
 local UserInputService=game:GetService("UserInputService")
+pcall(function()game:WaitForChild("CoreGui"):FindForChild("GUI Maker"):Destroy()end)
 local gui=Instance.new("ScreenGui",game:GetService("CoreGui"))
 gui.Name="GUI Maker"
+gui.DisplayOrder=999
+gui.IgnoreGuiInset=true
+gui.ScreenInsets=Enum.ScreenInsets.DeviceSafeInsets
+gui.ZIndexBehavior=Enum.ZIndexBehavior.Sibling
 gui.ResetOnSpawn=false
 
 local function create(new,pos,size,parent)
