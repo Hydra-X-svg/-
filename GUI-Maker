@@ -7,7 +7,6 @@ local gui=Instance.new("ScreenGui",game:GetService("CoreGui"))
 gui.Name="GUI Maker"
 gui.DisplayOrder=999
 gui.IgnoreGuiInset=true
-gui.ScreenInsets=Enum.ScreenInsets.DeviceSafeInsets
 gui.ZIndexBehavior=Enum.ZIndexBehavior.Sibling
 gui.ResetOnSpawn=false
 
