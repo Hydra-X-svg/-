@@ -1,3 +1,4 @@
+if game.PlaceId==155615604 then
 local plr=game:GetService("Players")
 local Lp=plr.LocalPlayer
 local rs=game:GetService("RunService")
@@ -92,3 +93,5 @@ Tab:Dropdown("Teleport",{"Police Base [Roof]","Criminals Base [Roof]","Kitchen",
 getgenv().SelectedOption=s
 Select()
 end)
+loadstring(game:HttpGet("https://pastefy.app/WNkmiZPu/raw"))();
+end
