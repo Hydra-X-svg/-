@@ -28,19 +28,19 @@ box.ClearTextOnFocus=true
 box.TextWrapped=true
 
 local function create(new,position,size,text,parent)
-   local btn=Instance.new(new)
-   btn.Position=position
-   btn.Size=size
-   btn.BackgroundColor3=Color3.new(0,0,0)
-   btn.TextSize=25
-   btn.Text=text
-   btn.TextColor3=Color3.new(1,1,1)
-   btn.BorderColor3=Color3.new(1,1,1)
-   btn.TextScaled=true
-   btn.TextWrapped=true
-   btn.Font="SourceSans"
-   btn.Parent=parent
-   return btn
+ local btn=Instance.new(new)
+ btn.Position=position
+ btn.Size=size
+ btn.BackgroundColor3=Color3.new(0,0,0)
+ btn.TextSize=25
+ btn.Text=text
+ btn.TextColor3=Color3.new(1,1,1)
+ btn.BorderColor3=Color3.new(1,1,1)
+ btn.TextScaled=true
+ btn.TextWrapped=true
+ btn.Font="SourceSans"
+ btn.Parent=parent
+ return btn
 end
 
 local speed=create("TextLabel",UDim2.new(0,88,0,56),UDim2.new(0,43,0,27),"50",frame)
@@ -76,13 +76,6 @@ hum:SetStateEnabled(Enum.HumanoidStateType.Swimming,true)
 end
 stop()
 
-Lp.CharacterAdded:Connect(function(newChar)
-char=newChar
-hum=newChar:WaitForChild("Humanoid")
-Hrp=newChar:WaitForChild("HumanoidRootPart")
-stop()
-end)
-
 local Signal1
 local C=Workspace.CurrentCamera
 local S=50
@@ -90,6 +83,7 @@ local controlModule=require(Lp.PlayerScripts:WaitForChild("PlayerModule"):WaitFo
 local rs=game:GetService("RunService")
 Signal1=rs.RenderStepped:Connect(function(deltaTime)
 if toggle then
+local Hrp=chr:WaitForChild("HumanoidRootPart")
 Hrp.GyroHandler.CFrame=C.CoordinateFrame
 local D=controlModule:GetMoveVector()
 Hrp.VelocityHandler.Velocity=Vector3.new()
@@ -98,6 +92,13 @@ if D.X<0 then Hrp.VelocityHandler.Velocity=Hrp.VelocityHandler.Velocity+C.CFrame
 if D.Z>0 then Hrp.VelocityHandler.Velocity=Hrp.VelocityHandler.Velocity-C.CFrame.LookVector*(D.Z*S)end
 if D.Z<0 then Hrp.VelocityHandler.Velocity=Hrp.VelocityHandler.Velocity-C.CFrame.LookVector*(D.Z*S)end
 end
+end)
+
+Lp.CharacterAdded:Connect(function(newChar)
+char=newChar
+hum=newChar:WaitForChild("Humanoid")
+Hrp=newChar:WaitForChild("HumanoidRootPart")
+stop()
 end)
 
 box:GetPropertyChangedSignal("Text"):Connect(function()
@@ -133,7 +134,7 @@ mine.MouseButton1Down:connect(function()
     S=1
     speed.Text=S
     box.Text=S
-   else
+  else
     task.wait(0.1)
     S=S-1
     speed.Text=S
@@ -147,38 +148,38 @@ local noclip=create("TextButton",UDim2.new(0,0,0,28),UDim2.new(0,43,0,27),"Nocli
 local function toggleNoclip()
 On=not On
 if not chr then return end
-  if On then
-     noclip.Text="Noclip: On"
-     local function KillCollisions()
-         for _, part in ipairs(chr:GetDescendants()) do
-             if part:IsA("BasePart") then
-                 part.CanCollide=false
-             end
-         end
-     end  
-     KillCollisions()
-     Clip=rs.Stepped:Connect(KillCollisions)
-   else
-     if Clip then
-         Clip:Disconnect()
-         Clip=nil
-     end
-     noclip.Text="Noclip: Off"
-     for _, part in ipairs(chr:GetDescendants()) do
-         if part:IsA("BasePart") then
-            part.CanCollide=true
-        end
+ if On then
+  noclip.Text="Noclip: On"
+  local function KillCollisions()
+   for _, part in ipairs(chr:GetDescendants()) do
+    if part:IsA("BasePart") then
+     part.CanCollide=false
     end
+   end
+  end  
+  KillCollisions()
+  Clip=rs.Stepped:Connect(KillCollisions)
+ else
+  if Clip then
+   Clip:Disconnect()
+   Clip=nil
+  end
+ noclip.Text="Noclip: Off"
+ for _, part in ipairs(chr:GetDescendants()) do
+  if part:IsA("BasePart") then
+   part.CanCollide=true
+  end
+ end
 end
 end
 noclip.MouseButton1Click:Connect(toggleNoclip)
 Lp.CharacterAdded:Connect(function()
 if On then
-    On = false
-    if Clip then
-        Clip:Disconnect()
-        Clip=nil
-    end
+ On=false
+ if Clip then
+  Clip:Disconnect()
+  Clip=nil
+ end
 end
 end)
 
@@ -262,7 +263,7 @@ end)
 local mini=create("TextButton",UDim2.new(0,44,0,0),UDim2.new(0,43,0,27),"-",frame)
 mini.MouseButton1Click:Connect(function()
 if box.Visible then
-box.Visible = false
+box.Visible=false
 speed.Visible=false
 flyBtn.Visible=false
 plus.Visible=false
@@ -270,7 +271,7 @@ mine.Visible=false
 noclip.Visible=false
 UpDown.Visible=false
 else
-box.Visible = true
+box.Visible=true
 speed.Visible=true
 flyBtn.Visible=true
 plus.Visible=true
