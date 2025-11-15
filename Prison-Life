@@ -2,7 +2,23 @@ if game.PlaceId==155615604 then
 local plr=game:GetService("Players")
 local Lp=plr.LocalPlayer
 local rs=game:GetService("RunService")
+local meleeEvent=game:GetService("ReplicatedStorage"):WaitForChild("meleeEvent")
+local aremote=game:GetService("ReplicatedStorage").Remotes.ArrestPlayer
 local Wait=task.wait
+
+function BreakAllToilet()
+local foundToilets=false
+for _, toilet in pairs(workspace:GetDescendants()) do
+ if toilet.Name=="Toilet" and toilet:IsA("Model") then
+  foundToilets=true
+   for i=1,15 do
+    meleeEvent:FireServer(toilet,1)
+   end
+  end
+ end
+ return foundToilets
+end
+
 getgenv().SelectedOption=nil
 function Select()
 local hrp=Lp.Character:WaitForChild("HumanoidRootPart")
@@ -34,6 +50,7 @@ local hrp=Lp.Character:WaitForChild("HumanoidRootPart")
   hrp.CFrame=CFrame.new(824,135,2062)
  end
 end
+
 local Library=loadstring(game:HttpGet("https://raw.githubusercontent.com/GCxF-Pjk/For-Gui-Maker-Aux-Hub/refs/heads/main/Main%20Liblary/Lime.lua"))()
 local Tab=Library:Window(game.MarketplaceService:GetProductInfo(game.PlaceId).Name)
 
@@ -86,6 +103,17 @@ for i,v in pairs(CellDoors:GetDescendants()) do
   v.Transparency=0
  end
 end
+end
+end)
+
+Tab:Toggle("Break All Toilet",function(s)
+getgenv().breakToilet=s
+while getgenv().breakToilet do
+if not Lp.Character then return end
+ if Lp.Character:FindFirstChild("Hammer")~=nil then
+  BreakAllToilet()
+ end
+ task.wait(8)
 end
 end)
 
