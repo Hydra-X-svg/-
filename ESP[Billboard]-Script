@@ -26,8 +26,6 @@ game:GetService("RunService").Heartbeat:Connect(function()
    if chr~=nil then
     local esp=holder:FindFirstChild(v.Name) or Instance.new("Highlight")
     esp.Name=v.Name
-    if uselocalplayer==false and esp.Name==game.Players.LocalPlayer.Name then
-    else
     esp.Parent=holder
     esp.FillColor=v.TeamColor.Color or Color3.new(1,1,1)
     esp.OutlineColor=v.TeamColor.Color or Color3.new(1,1,1)
