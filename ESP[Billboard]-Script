@@ -2,6 +2,22 @@
 getgenv().enabled2=true
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Vcsk/RobloxScripts/main/Highlight-ESP.lua"))()
 ]]
+
+local holder2=game.CoreGui:FindFirstChild("BillboardHolder") or Instance.new("Folder")
+if enabled2==false then
+ holder2:Destroy()
+end
+
+if holder2.Name=="Folder" then
+ holder2.Name="BillboardHolder"
+ holder2.Parent=game.CoreGui
+end
+
+if getgenv().enabled2==true then 
+ getgenv().enabled2=false
+ getgenv().enabled2=true
+end
+
 local plr=game:GetService("Players")
 local Lp=plr.LocalPlayer
 local chr=Lp.Character
@@ -59,33 +75,12 @@ for _,plr in pairs(plr:GetPlayers()) do
  end
 end
 
-local holder2=game.CoreGui:FindFirstChild("ESPHolder") or Instance.new("Folder")
-if enabled2==false then
- holder2:Destroy()
- for _,data in pairs(espObjects) do
-  for _,obj in pairs(data) do
-   obj:Destroy()
-   end
-  end
-  espObjects={}
-end
-
-if holder2.Name=="Folder" then
- holder2.Name="BillboardHolder"
- holder2.Parent=game.CoreGui
-end
-
-if getgenv().enabled2==true then 
- getgenv().enabled2=false
- getgenv().enabled2=true
-end
-
 game:GetService("RunService").Heartbeat:Connect(function()
  if getgenv().enabled2 then
   task.wait()
    refreshESP()
    rs.RenderStepped:Connect(function()
-    if toggleEspText then
+    if getgenv().enabled2 then
      updateESP()
     end
    end)
