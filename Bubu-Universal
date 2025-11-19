@@ -320,8 +320,8 @@ Hub:Button("EpikGuy GUI v2",function()
 loadstring(game:HttpGet("https://pastebin.com/raw/C4fGK6Wb"))();
 end)
 
-Hub:Button("",function()
-loadstring(game:HttpGet(""))();
+Hub:Button("SSP",function()
+loadstring(game:HttpGet("https://pastefy.app/XHqVeb0d/raw"))();
 end)
 
 Hub:Section("Game Hub")
