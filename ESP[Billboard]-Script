@@ -76,17 +76,13 @@ for _,plr in pairs(plr:GetPlayers()) do
 end
 
 game:GetService("RunService").Heartbeat:Connect(function()
- if getgenv().enabled2 then
-  task.wait()
-   refreshESP()
-   rs.RenderStepped:Connect(function()
-    if getgenv().enabled2 then
-     updateESP()
-    end
-   end)
+if getgenv().enabled2 then
+ task.wait()
+ refreshESP()
+ rs.RenderStepped:Connect(function()
+  if getgenv().enabled2 then
+   updateESP()
   end
- end
+ end)
 end
 end)
-
-
