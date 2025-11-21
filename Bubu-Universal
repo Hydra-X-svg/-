@@ -3,39 +3,37 @@ local Lp=plr.LocalPlayer
 local chr=Lp.Character
 local rs=game:GetService("RunService")
 local tool=chr:FindFirstChildOfClass("Tool")
+local userInputService=game:GetService("UserInputService")
 local function isNumber(str)
 if tonumber(str) ~= nil or str=='inf' then
  return true
  end
 end
 
--- esp text
-local userInputService=game:GetService("UserInputService")
-local runService=game:GetService("RunService")
-local espEnabled=false
+-- ESP [Billboard]
 local espObjects={}
 local function applyESP(character)
 if character and character:FindFirstChild("HumanoidRootPart") then
- local billboard=Instance.new("BillboardGui",character)
- billboard.Adornee=character:FindFirstChild("Head")
- billboard.Size=UDim2.new(0,180,0,40)
- billboard.StudsOffset=Vector3.new(0,2,0)
- billboard.AlwaysOnTop=true
- local textLabel=Instance.new("TextLabel",billboard)
- textLabel.Size=UDim2.new(1,0,1,0)
- textLabel.BackgroundTransparency=1
- textLabel.TextColor3=Color3.fromRGB(255,255,255)
- textLabel.Font=Enum.Font.GothamBold
- textLabel.TextSize=14
- textLabel.TextStrokeTransparency=0.5
- textLabel.Text="Loading..."
- espObjects[character]={highlight,billboard,textLabel}
+ local board=Instance.new("BillboardGui",character)
+ board.Size=UDim2.new(0,180,0,40)
+ board.Adornee=character:FindFirstChild("Head")
+ board.StudsOffset=Vector3.new(0,2,0)
+ board.AlwaysOnTop=true
+ local text=Instance.new("TextLabel",board)
+ text.Size=UDim2.new(1,0,1,0)
+ text.Text="Loading..."
+ text.TextColor3=Color3.new(1,1,1)
+ text.TextSize=14
+ text.Font="GothamBold"
+ text.TextStrokeTransparency=0.5
+ text.BackgroundTransparency=1
+ espObjects[character]={highlight,board,text}
  end
 end
 
 local function updateESP()
-for _, plr in pairs(game.Players:GetPlayers()) do
- if plr ~= Lp and plr.Character and plr.Character:FindFirstChild("HumanoidRootPart") then
+for _,plr in pairs(plr:GetPlayers()) do
+ if plr~=Lp and plr.Character and plr.Character:FindFirstChild("HumanoidRootPart") then
   local char=plr.Character
   local rootPart=char:FindFirstChild("HumanoidRootPart")
   local humanoid=char:FindFirstChild("Humanoid")
@@ -44,42 +42,23 @@ for _, plr in pairs(game.Players:GetPlayers()) do
    local distance=(rootPart.Position-Lp.Character.HumanoidRootPart.Position).Magnitude
    local health=math.floor(humanoid.Health)
    local maxHealth=math.floor(humanoid.MaxHealth)
-   espData[3].Text=string.format("%.1fm | %d/%d HP | %s", distance, health, maxHealth, plr.Name)
+   espData[3].Text=string.format("%.1fm | %d/%d HP | %s",distance,health,maxHealth,plr.DisplayName)
    end
   end
  end
 end
 
 local function refreshESP()
-for _, data in pairs(espObjects) do
- for _, obj in pairs(data) do
+for _,data in pairs(espObjects) do
+ for _,obj in pairs(data) do
   obj:Destroy()
  end
 end
 espObjects={}
-for _, plr in pairs(game.Players:GetPlayers()) do
- if plr ~= Lp and plr.Character then
+for _,plr in pairs(plr:GetPlayers()) do
+ if plr~=Lp and plr.Character then
   applyESP(plr.Character)
   end
- end
-end
-
-function toggleESP()
-espEnabled=not espEnabled
-if espEnabled then
- refreshESP()
- runService.RenderStepped:Connect(function()
-  if espEnabled then
-   updateESP()
-  end
- end)
-else
- for _, data in pairs(espObjects) do
-  for _, obj in pairs(data) do
-   obj:Destroy()
-   end
-  end
-  espObjects={}
  end
 end
 
@@ -260,11 +239,22 @@ getgenv().uselocalplayer=false
 loadstring(game:HttpGet("https://pastefy.app/6G2dvWJD/raw"))();
 end)
 
-Visual:Toggle("Billboard Text",function(s)
-if s==true then
-toggleESP()
+Visual:Toggle("ESP [Billboard]",function(s)
+getgenv().EspBillboard=s
+if EspBillboard then
+ refreshESP()
+ rs.RenderStepped:Connect(function()
+  if EspBillboard then
+   updateESP()
+  end
+ end)
 else
-toggleESP()
+for _,data in pairs(espObjects) do
+ for _,obj in pairs(data) do
+  obj:Destroy()
+  end
+ end
+ espObjects={}
 end
 end)
 
