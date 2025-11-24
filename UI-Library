@@ -366,16 +366,16 @@ function Elements:Section(title)
  Section.Position=UDim2.new(0,0,0.430411309,0)
  Section.Size=UDim2.new(1,0,-0.0561393984,32)
 
- Title_idk.Name = "Title"
- Title_idk.Parent = Section
- Title_idk.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
- Title_idk.BackgroundTransparency = 1.000
- Title_idk.Position = UDim2.new(0.35253039, 0, -0.303296119, 0)
- Title_idk.Size = UDim2.new(0.339169234, -20, 1, 0)
- Title_idk.Font = Enum.Font.Ubuntu
- Title_idk.Text = title
- Title_idk.TextColor3 = Color3.fromRGB(255, 255, 255)
- Title_idk.TextSize = 14.000
+ Title_idk.Name="Title"
+ Title_idk.Parent=Section
+ Title_idk.BackgroundColor3=Color3.fromRGB(255,255,255)
+ Title_idk.BackgroundTransparency=1
+ Title_idk.Position=UDim2.new(0.35253039,0,-0.303296119,0)
+ Title_idk.Size=UDim2.new(0.339169234,-20,1,0)
+ Title_idk.Font="Ubuntu"
+ Title_idk.Text=title
+ Title_idk.TextColor3=Color3.fromRGB(255,255,255)
+ Title_idk.TextSize=14
 
  Thing.Name="Thing"
  Thing.Parent=Section
@@ -502,7 +502,7 @@ function Elements:Button(ButtonName,callback)
   c:TweenSizeAndPosition(UDim2.new(0,size,0,size),UDim2.new(0.5,(-size/2),0.5,(-size/2)),'Out','Quad',len,true,il)
   for i=1,10 do
    c.ImageTransparency=c.ImageTransparency+0.05
-   task.wait(len/12)
+   wait(len/12)
    end
    c:Destroy()
   end
@@ -620,7 +620,7 @@ function Elements:TextBox(TextBoxTitle,callback)
   return
  else
   callback(TextBox_2.Text)
-  task.wait(0.18)
+  wait(0.18)
 	 TextBox.Text=""  
   end
  end)
@@ -727,7 +727,7 @@ function Elements:Toggle(ToggleName,callback)
    c:TweenSizeAndPosition(UDim2.new(0,size,0,size),UDim2.new(0.5,(-size/2),0.5,(-size/2)),'Out','Quad',len,true,nil)
    for i=1,10 do
     c.ImageTransparency=c.ImageTransparency+0.05
-    task.wait(len/12)
+    wait(len/12)
    end
     c:Destroy()
   else
@@ -746,7 +746,7 @@ function Elements:Toggle(ToggleName,callback)
     c:TweenSizeAndPosition(UDim2.new(0,size,0,size),UDim2.new(0.5,(-size/2),0.5,(-size/2)),'Out','Quad',len,true,nil)
     for i=1,10 do
      c.ImageTransparency=c.ImageTransparency+0.05
-     task.wait(len/12)
+     wait(len/12)
     end
     c:Destroy()
    end
@@ -948,7 +948,7 @@ function Elements:Keybind(KeybindTitle,first,callback)
    c:TweenSizeAndPosition(UDim2.new(0,size,0,size),UDim2.new(0.5,(-size/2),0.5,(-size/2)),'Out','Quad',len,true,nil)
    for i=1,10 do
     c.ImageTransparency=c.ImageTransparency+0.05
-    task.wait(len/12)
+    wait(len/12)
    end
    c:Destroy()
   end
@@ -1141,10 +1141,10 @@ function Elements:InfoLabel(InfoText)
  UIPadding_9.PaddingRight=UDim.new(0,6)
  UIPadding_9.PaddingTop=UDim.new(0,6)
 
- Title_4.Name = "Title"
- Title_4.Parent = Info
- Title_4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
- Title_4.BackgroundTransparency = 1.000
+ Title_4.Name="Title"
+ Title_4.Parent=Info
+ Title_4.BackgroundColor3=Color3.fromRGB(255,255,255)
+ Title_4.BackgroundTransparency=1
  Title_4.Size=UDim2.new(1,0,1,0)
  Title_4.Font=Ubuntu
  Title_4.Text=InfoText
