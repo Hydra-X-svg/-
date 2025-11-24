@@ -80,7 +80,7 @@ local Visual=Window:Tab("Visuals","rbxassetid://133040688818305")
 local Hub=Window:Tab("Script/Hub","rbxassetid://9940330045")
 Home:InfoLabel("Wellcome back, "..Lp.DisplayName.."!")
 Home:Section("Map Info")
-
+Home:Label("Creator: "..game.MarketplaceService:GetProductInfo(game.PlaceId).Creator.Name)
 Home:Button("Name: "..game.MarketplaceService:GetProductInfo(game.PlaceId).Name.."",function()
 setclipboard(game.MarketplaceService:GetProductInfo(game.PlaceId).Name)
 end)
