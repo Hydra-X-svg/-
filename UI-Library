@@ -314,7 +314,7 @@ function Library:Create(TitleText)
 		Icon.BackgroundTransparency = 1.000
 		Icon.Position = UDim2.new(0, -24, 0.5, 0)
 		Icon.Size = UDim2.new(0, 20, 0, 20)
-		Icon.Image = "rbxassetid://TabIcon"
+		Icon.Image = "rbxassetid://"..TabIcon
 
 		NewTab.Name = "NewTab"
 		NewTab.Parent = TabsFolder
