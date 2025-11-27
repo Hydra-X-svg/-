@@ -107,9 +107,9 @@ function Library:Create(TitleText)
 	local Fade = Instance.new("Frame")
 	local UIGradient = Instance.new("UIGradient")
 	local TabsFolder = Instance.new("Folder")
- local Toggle = Instance.new("TextButton")
- local UICorner123 = Instance.new("UICorner")
- local UIStroke123 = Instance.new("UIStroke")
+    local Toggle = Instance.new("TextButton")
+    local UICorner123 = Instance.new("UICorner")
+    local UIStroke123 = Instance.new("UIStroke")
 
 	Library:DraggingEnabled(TopBar, Main)
 
@@ -280,26 +280,30 @@ function Library:Create(TitleText)
 	TabsFolder.Name = "TabsFolder"
 	TabsFolder.Parent = ContentContainer
 
- Toggle.Parent = UILibrary
- Toggle.Position = UDim2.new(0, 2, 0, 80)
- Toggle.Size = UDim2.new(0, 60, 0, 30)
- Toggle.Text = "Open"
- Toggle.TextSize = 24
- Toggle.TextColor3 = Color3.fromRGB(40, 40, 40)
- Toggle.Font = Enum.Font.SourceSans
- Toggle.Active = true
- Toggle.Draggable = true
- Toggle.BackgroundTransparency = 0.9
+    Toggle.Parent = UILibrary
+    Toggle.Position = UDim2.new(0, 2, 0, 80)
+    Toggle.Size = UDim2.new(0, 60, 0, 30)
+    Toggle.Text = "Open"
+    Toggle.TextSize = 24
+    Toggle.TextColor3 = Color3.fromRGB(40, 40, 40)
+    Toggle.Font = Enum.Font.SourceSans
+    Toggle.Active = true
+    Toggle.Draggable = true
+    Toggle.BackgroundTransparency = 0.9
 
- UICorner123.Parent = Toggle
- UICorner123.CornerRadius = UDim.new(0, 3)
+    UICorner123.Parent = Toggle
+    UICorner123.CornerRadius = UDim.new(0, 3)
 
- UIStroke123.Parent = Toggle
- UIStroke123.Color = Color3.new(1, 1, 1)
- UIStroke123.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
- Toggle.MouseButton1Click:Connect(function()
-  Library:ToggleUI()
- end)
+    UIStroke123.Parent = Toggle
+    UIStroke123.Color = Color3.new(1, 1, 1)
+    UIStroke123.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+    Toggle.MouseButton1Click:Connect(function()
+    if Main.Visible then
+      Main.Visible = false
+   else
+      Main.Visible = true
+     end
+    end)
 
 	local Tabs = {}
 	
