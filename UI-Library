@@ -66,14 +66,6 @@ end
 
 local LibName = "UI_"..tostring(math.random(1, 100))..tostring(math.random(1,50))..tostring(math.random(1, 100))
 
-function Library:ToggleUI()
- if game:GetService("CoreGui"):FindFirstChild(LibName).UILibrary.Main.Visible then
-  game:GetService("CoreGui"):FindFirstChild(LibName).UILibrary.Main.Visible = false
-else
-  game:GetService("CoreGui"):FindFirstChild(LibName).UILibrary.Main.Visible = true
- end
-end
-
 function Library:DestroyUI()
 	if game:GetService("CoreGui"):FindFirstChild(LibName) then
 		game:GetService("CoreGui"):FindFirstChild(LibName):Destroy()
@@ -112,6 +104,14 @@ function Library:Create(TitleText)
     local UIStroke123 = Instance.new("UIStroke")
 
 	Library:DraggingEnabled(TopBar, Main)
+
+    function Library:ToggleUI()
+    if Main.Visible then
+      Main.Visible = false
+    else
+      Main.Visible = true
+     end
+    end
 
 	UILibrary.Name = LibName
 	UILibrary.Parent = game:GetService("CoreGui")
