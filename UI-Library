@@ -298,11 +298,7 @@ function Library:Create(TitleText)
     UIStroke123.Color = Color3.new(1, 1, 1)
     UIStroke123.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
     Toggle.MouseButton1Click:Connect(function()
-    if Main.Visible then
-      Main.Visible = false
-   else
-      Main.Visible = true
-     end
+    Library:ToggleUI()
     end)
 
 	local Tabs = {}
@@ -330,7 +326,7 @@ function Library:Create(TitleText)
 		Active.Text = TabText
 		Active.TextColor3 = Color3.fromRGB(199, 199, 199)
 		Active.TextSize = 12.000
-		Active.TextXAlignment = Enum.TextXAlignment.Left
+		wActive.TextXAlignment = Enum.TextXAlignment.Left
 
 		UIPadding_3.Parent = Active
 		UIPadding_3.PaddingLeft = UDim.new(0, 28)
