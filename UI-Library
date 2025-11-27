@@ -67,10 +67,10 @@ end
 local LibName = "UI_"..tostring(math.random(1, 100))..tostring(math.random(1,50))..tostring(math.random(1, 100))
 
 function Library:ToggleUI()
- if Main.Visible then
-  Main.Visible = false
+ if game:GetService("CoreGui"):FindFirstChild(LibName).UILibrary.Main.Visible then
+  game:GetService("CoreGui"):FindFirstChild(LibName).UILibrary.Main.Visible = false
 else
-  Main.Visible = true
+  game:GetService("CoreGui"):FindFirstChild(LibName).UILibrary.Main.Visible = true
  end
 end
 
