@@ -280,7 +280,7 @@ function Library:Create(TitleText)
 	TabsFolder.Name = "TabsFolder"
 	TabsFolder.Parent = ContentContainer
 
-    Toggle.Parent = Main
+    Toggle.Parent = UILibrary
     Toggle.Position = UDim2.new(0, 2, 0, 80)
     Toggle.Size = UDim2.new(0, 60 , 0, 30)
     Toggle.Text = "Open"
