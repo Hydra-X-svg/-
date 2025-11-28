@@ -1,7 +1,9 @@
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
 local name = "UI_"..tostring(math.random(1, 100))..tostring(math.random(1,50))..tostring(math.random(1, 100))
-pcall(function()game:WaitForChild("CoreGui"):FindFirstChild(name):Destroy()end)
+if game:GetSevice("CoreGui"):FindFirstChild(name) then
+game:GetSevice("CoreGui"):FindFirstChild(name):Destroy()
+end
 local gui = Instance.new("ScreenGui", game:GetService("CoreGui"))
 gui.Name = name
 gui.DisplayOrder = 999
