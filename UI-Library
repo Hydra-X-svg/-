@@ -66,6 +66,14 @@ end
 
 local LibName = "UI_"..tostring(math.random(1, 100))..tostring(math.random(1,50))..tostring(math.random(1, 100))
 
+function Library:ToggleUI()
+	if game.CoreGui[LibName].Enabled then
+		game.CoreGui[LibName].Enabled = false
+	else
+		game.CoreGui[LibName].Enabled = true
+	end
+end
+
 function Library:DestroyUI()
 	if game:GetService("CoreGui"):FindFirstChild(LibName) then
 		game:GetService("CoreGui"):FindFirstChild(LibName):Destroy()
@@ -99,9 +107,6 @@ function Library:Create(TitleText)
 	local Fade = Instance.new("Frame")
 	local UIGradient = Instance.new("UIGradient")
 	local TabsFolder = Instance.new("Folder")
-    local Toggle = Instance.new("TextButton")
-    local UICorner123 = Instance.new("UICorner")
-    local UIStroke123 = Instance.new("UIStroke")
 
 	Library:DraggingEnabled(TopBar, Main)
 
@@ -272,27 +277,6 @@ function Library:Create(TitleText)
 	TabsFolder.Name = "TabsFolder"
 	TabsFolder.Parent = ContentContainer
 
-    Toggle.Parent = UILibrary
-    Toggle.Position = UDim2.new(0, 2, 0, 80)
-    Toggle.Size = UDim2.new(0, 60, 0, 30)
-    Toggle.Text = "Open"
-    Toggle.TextSize = 24
-    Toggle.TextColor3 = Color3.fromRGB(40, 40, 40)
-    Toggle.Font = Enum.Font.SourceSans
-    Toggle.Active = true
-    Toggle.Draggable = true
-    Toggle.BackgroundTransparency = 0.9
-
-    UICorner123.Parent = Toggle
-    UICorner123.CornerRadius = UDim.new(0, 3)
-
-    UIStroke123.Parent = Toggle
-    UIStroke123.Color = Color3.new(1, 1, 1)
-    UIStroke123.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-    Toggle.MouseButton1Click:Connect(function()
-    Library:ToggleUI()
-    end)
-
 	local Tabs = {}
 	
 	local first = true
@@ -318,7 +302,7 @@ function Library:Create(TitleText)
 		Active.Text = TabText
 		Active.TextColor3 = Color3.fromRGB(199, 199, 199)
 		Active.TextSize = 12.000
-		wActive.TextXAlignment = Enum.TextXAlignment.Left
+		Active.TextXAlignment = Enum.TextXAlignment.Left
 
 		UIPadding_3.Parent = Active
 		UIPadding_3.PaddingLeft = UDim.new(0, 28)
@@ -394,14 +378,7 @@ function Library:Create(TitleText)
 				ImageColor3 = Color3.fromRGB(255, 255, 255)
 			}):Play()
 		end)
-
-        function Library:ToggleUI()
-        if Main.Visible then
-          Main.Visible = false
-        else
-          Main.Visible = true
-         end
-        end
+		
 		local Elements = {}
 		
 		function Elements:Section(title)
