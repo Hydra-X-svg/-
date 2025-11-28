@@ -5,7 +5,7 @@ local rs=game:GetService("RunService")
 local tool=chr:FindFirstChildOfClass("Tool")
 local userInputService=game:GetService("UserInputService")
 local function isNumber(str)
-if tonumber(str) ~= nil or str=='inf' then
+if tonumber(str)~=nil or str=='inf' then
  return true
  end
 end
