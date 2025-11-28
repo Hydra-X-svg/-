@@ -394,7 +394,14 @@ function Library:Create(TitleText)
 				ImageColor3 = Color3.fromRGB(255, 255, 255)
 			}):Play()
 		end)
-		
+
+        function Library:ToggleUI()
+        if Main.Visible then
+          Main.Visible = false
+        else
+          Main.Visible = true
+         end
+        end
 		local Elements = {}
 		
 		function Elements:Section(title)
