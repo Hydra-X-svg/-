@@ -105,14 +105,6 @@ function Library:Create(TitleText)
 
 	Library:DraggingEnabled(TopBar, Main)
 
-    function Library:ToggleUI()
-    if Main.Visible then
-      Main.Visible = false
-    else
-      Main.Visible = true
-     end
-    end
-
 	UILibrary.Name = LibName
 	UILibrary.Parent = game:GetService("CoreGui")
 
