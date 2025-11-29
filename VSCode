@@ -1,0 +1,27 @@
+local plr=game:GetService("Players")
+local Lp=plr.LocalPlayer
+pcall(function()Lp:WaitForChild("PlayerGui"):FindFirstChild("VSCode"):Destroy()end)
+local gui=Instance.new("ScreenGui",Lp:WaitForChild("PlayerGui"))
+gui.Name="VSCode"
+
+local btn=Instance.new("TextButton",gui)
+btn.Position=UDim2.new(0,0,0,0)
+btn.Size=UDim2.new(0.5,0,0.5,0)
+btn.BackgroundColor3=Color3.new(0,0,0)
+btn.Active=true
+btn.Draggable=true
+local Ls=Instance.new("LocalScript",btn)
+
+local box=Instance.new("TextBox",btn)
+box.Name="CodeEditor"
+box.Position=UDim2.new(0,0,0,35)
+box.Size=UDim2.new(1,0,1,-35)
+box.BackgroundColor3=Color3.new(0,0,0)
+
+local script=Ls
+script.Parent.Size=game:GetService("UserInputService").KeyboardEnabled and UDim2.fromScale(0.5,0.5) or UDim2.fromScale(0.8,0.8)
+
+local codeBox=loadstring(game:HttpGet("https://raw.githubusercontent.com/InfernusScripts/Null-Fire/main/Core/Libraries/CodeBox/Main.lua"))()
+local textBox=codeBox:fromTextBox(script.Parent.CodeEditor,codeBox.Themes.VSCode,getfenv().getgenv and getfenv().getgenv())
+textBox.Text=""
+textBox.ShowFooter=false
