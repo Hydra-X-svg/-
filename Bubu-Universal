@@ -328,8 +328,7 @@ loadstring(game:HttpGet("https://pastefy.app/w9UImTxb/raw"))();
 end)
 
 Hub:Button("Prison Life",function()
-loadstring(game:HttpGet("https://pastefy.app/qtAMFSnZ/raw"))();
-Notify()
+loadstring(game:HttpGet("https://pastefy.app/b3EVCN2z/raw"))();
 end)
 
 Hub:Section("Random Script")
