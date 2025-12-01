@@ -235,7 +235,6 @@ end)
 Visual:Toggle("Highlight",function(s)
 getgenv().enabled=s
 loadstring(game:HttpGet("https://pastefy.app/6G2dvWJD/raw"))();
-end
 end)
 
 Visual:Toggle("ESP [Billboard]",function(s)
