@@ -186,6 +186,7 @@ if not game:GetService("CoreGui"):FindFirstChild("ESPHolder") then
 loadstring(game:HttpGet("https://pastefy.app/6G2dvWJD/raw"))();
 else
 getgenv().enabled=s
+end
 end)
 
 Visual:Toggle("ESP [Billboard]",function(s)
@@ -193,6 +194,7 @@ if not game:GetService("CoreGui"):FindFirstChild("ESPHolder") then
 loadstring(game:HttpGet("https://pastefy.app/6G2dvWJD/raw"))();
 else
 getgenv().enabled2=s
+end
 end)
 
 Visual:Label("Sword Reach Script")
