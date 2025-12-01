@@ -68,34 +68,32 @@ if character and character:FindFirstChild("HumanoidRootPart") then
 end
 
 local function updateESP()
-local plr=game.Players
-for _,plr in pairs(game.Players:GetPlayers()) do
- if plr~=game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
-  local char=game.Players.LocalPlayer.Character
+for _,plr in pairs(plr:GetPlayers()) do
+ if plr~=Lp and plr.Character and plr.Character:FindFirstChild("HumanoidRootPart") then
+  local char=plr.Character
   local rootPart=char:FindFirstChild("HumanoidRootPart")
   local humanoid=char:FindFirstChild("Humanoid")
   local espData=espObjects[char]
   if rootPart and humanoid and espData then
-   local distance=(rootPart.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-   local health=math.floor(game.Players.LocalPlayer.Character.Humanoid.Health)
-   local maxHealth=math.floor(game.Players.LocalPlayer.Character.Humanoid.MaxHealth)
-   espData[3].Text=string.format("%.1fm | %d/%d HP | %s",distance,health,maxHealth,game.Players.LocalPlayer.DisplayName)
+   local distance=(rootPart.Position-Lp.Character.HumanoidRootPart.Position).Magnitude
+   local health=math.floor(humanoid.Health)
+   local maxHealth=math.floor(humanoid.MaxHealth)
+   espData[3].Text=string.format("%.1fm | %d/%d HP | %s",distance,health,maxHealth,plr.DisplayName)
    end
   end
  end
 end
 
 local function refreshESP()
-local plr=game.Players
 for _,data in pairs(espObjects) do
  for _,obj in pairs(data) do
   obj:Destroy()
  end
 end
 espObjects={}
-for _,plr in pairs(game.Players:GetPlayers()) do
- if plr~=game.Players.LocalPlayer and game.Players.LocalPlayer.Character then
-  applyESP(game.Players.LocalPlayer.Character)
+for _,plr in pairs(plr:GetPlayers()) do
+ if plr~=Lp and plr.Character then
+  applyESP(plr.Character)
   end
  end
 end
