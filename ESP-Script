@@ -68,6 +68,7 @@ if character and character:FindFirstChild("HumanoidRootPart") then
 end
 
 local function updateESP()
+local plr=game.Players
 for _,plr in pairs(game.Players:GetPlayers()) do
  if plr~=game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
   local char=game.Players.LocalPlayer.Character
@@ -85,6 +86,7 @@ for _,plr in pairs(game.Players:GetPlayers()) do
 end
 
 local function refreshESP()
+local plr=game.Players
 for _,data in pairs(espObjects) do
  for _,obj in pairs(data) do
   obj:Destroy()
