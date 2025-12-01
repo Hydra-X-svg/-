@@ -65,6 +65,7 @@ function Library:tween(object, goal, callback)
 end
 
 local LibName = "UI_"..tostring(math.random(1, 100))..tostring(math.random(1,50))..tostring(math.random(1, 100))
+pcall(function()game.CoreGui[LibName]:Destroy()end)
 
 function Library:ToggleUI()
 	if game.CoreGui[LibName].Enabled then
