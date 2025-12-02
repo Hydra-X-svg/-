@@ -103,10 +103,10 @@ Home:Button("Rejoin",function()
 
 end)
 Home:Button("ServerHop",function()
-game:GetService("TeleportService"):Teleport(game.PlaceId,Lp)
+
 end)
 Home:Button("goto NewServer",function()
-
+loadstring(game:HttpGet("https://pastefy.app/UMVDB81V/raw"))();
 end)
 
 Player:InfoLabel("some script might be error!")
