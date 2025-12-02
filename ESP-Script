@@ -19,21 +19,22 @@ if getgenv().enabled==true then
 end
 
 game:GetService("RunService").Heartbeat:Connect(function()
- if getgenv().enabled then
-  task.wait()
-  for _,v in pairs(game.Players:GetChildren()) do
-   local chr=v.Character
-   if chr~=nil then
-    local esp=holder:FindFirstChild(v.Name) or Instance.new("Highlight")
-    esp.Name=v.Name
-    esp.Parent=holder
-    esp.FillColor=v.TeamColor.Color or Color3.new(1,1,1)
-    esp.OutlineColor=v.TeamColor.Color or Color3.new(1,1,1)
-    esp.FillTransparency=0.9
-    esp.OutlineTransparency=0
-    esp.Adornee=chr
-    esp.DepthMode=Enum.HighlightDepthMode.AlwaysOnTop
+if getgenv().enabled then
+ task.wait()
+ for _,v in pairs(game.Players:GetChildren()) do
+  local chr=v.Character
+  if chr~=nil then
+   local esp=holder:FindFirstChild(v.Name) or Instance.new("Highlight")
+   esp.Name=v.Name
+   esp.Parent=holder
+   esp.FillColor=v.TeamColor.Color or Color3.new(1,1,1)
+   esp.OutlineColor=v.TeamColor.Color or Color3.new(1,1,1)
+   esp.FillTransparency=0.9
+   esp.OutlineTransparency=0
+   esp.Adornee=chr
+   esp.DepthMode=Enum.HighlightDepthMode.AlwaysOnTop
    end
   end
  end
 end
+end)
