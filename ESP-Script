@@ -18,6 +18,11 @@ if getgenv().enabled==true then
  getgenv().enabled=true
 end
 
+getgenv().a=false
+if a==false and holder:FindFirstChild(game.Players.LocalPlayer.Name) then
+ holder:FindFirstChild(game.Players.LocalPlayer.Name):Destroy()
+end
+
 game:GetService("RunService").Heartbeat:Connect(function()
 if getgenv().enabled then
  task.wait()
@@ -26,6 +31,7 @@ if getgenv().enabled then
   if chr~=nil then
    local esp=holder:FindFirstChild(v.Name) or Instance.new("Highlight")
    esp.Name=v.Name
+   if a==false and esp.Name==game.Players.LocalPlayer.Name then else
    esp.Parent=holder
    esp.FillColor=v.TeamColor.Color or Color3.new(1,1,1)
    esp.OutlineColor=v.TeamColor.Color or Color3.new(1,1,1)
