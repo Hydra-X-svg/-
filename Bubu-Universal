@@ -177,7 +177,7 @@ Player:Slider("Fov",game.Workspace.CurrentCamera.FieldOfView,160,function(v)
 game.Workspace.CurrentCamera.FieldOfView=v
 end)
 
-Player:Slider("Cam Resolution",1,0,function(v)
+Player:Slider("Cam Resolution",0,1,function(v)
 local Camera=workspace.CurrentCamera
 if getgenv().StretchActive==nil then
  game:GetService("RunService").RenderStepped:Connect(function()
