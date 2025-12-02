@@ -105,6 +105,9 @@ end)
 Home:Button("ServerHop",function()
 game:GetService("TeleportService"):Teleport(game.PlaceId,Lp)
 end)
+Home:Button("goto NewServer",function()
+
+end)
 
 Player:InfoLabel("some script might be error!")
 Player:Section("About you")
