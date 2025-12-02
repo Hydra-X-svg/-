@@ -100,10 +100,10 @@ Home:Keybind("Toggle UI",Enum.KeyCode.F,function()
 Library:ToggleUI()
 end)
 Home:Button("Rejoin",function()
-
+loadstring(game:HttpGet("https://pastefy.app/ZEmwcdQ3/raw"))();
 end)
 Home:Button("ServerHop",function()
-
+loadstring(game:HttpGet("https://pastefy.app/qa8R6guD/raw"))();
 end)
 Home:Button("goto NewServer",function()
 loadstring(game:HttpGet("https://pastefy.app/UMVDB81V/raw"))();
