@@ -179,13 +179,16 @@ end)
 
 Player:TextBox("Cam Resolution",function(v)
 local Camera=workspace.CurrentCamera
-getgenv().setResolution=v
 getgenv().Resolution=v
 if getgenv().setResolution==nil then
  game:GetService("RunService").RenderStepped:Connect(function()
   Camera.CFrame=Camera.CFrame*CFrame.new(0,0,0,1,0,0,0,getgenv().Resolution,0,0,0,1)
  end)
 end
+end)
+
+Player:Button("Set Resolution",function()
+getgenv().setResolution=true
 end)
 
 Player:Slider("Brightness",0,3,function(v)
