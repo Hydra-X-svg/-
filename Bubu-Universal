@@ -179,7 +179,7 @@ end)
 
 Player:TextBox("Cam Resolution",function(v)
 local Camera=workspace.CurrentCamera
-getgenv().setResolution=true
+getgenv().setResolution=v
 getgenv().Resolution=v
 if getgenv().setResolution==nil then
  game:GetService("RunService").RenderStepped:Connect(function()
