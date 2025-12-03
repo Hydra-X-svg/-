@@ -177,20 +177,6 @@ Player:Slider("Fov",70,120,function(v)
 game.Workspace.CurrentCamera.FieldOfView=v
 end)
 
-Player:TextBox("Cam Resolution",function(v)
-local Camera=workspace.CurrentCamera
-getgenv().Resolution=v
-if getgenv().setResolution==nil then
- game:GetService("RunService").RenderStepped:Connect(function()
-  Camera.CFrame=Camera.CFrame*CFrame.new(0,0,0,1,0,0,0,getgenv().Resolution,0,0,0,1)
- end)
-end
-end)
-
-Player:Button("Set Resolution",function()
-getgenv().setResolution=true
-end)
-
 Player:Slider("Brightness",0,3,function(v)
 game:GetService("Lighting").ExposureCompensation=v
 end)
@@ -372,14 +358,6 @@ end)
 
 Hub:Button("FPS Boost",function()
 loadstring(game:HttpGet("https://pastefy.app/Uu0LK378/raw"))();
-end)
-
-Hub:Button("Anti-bang",function()
-loadstring(game:HttpGet("https://pastefy.app/EYXzo3lX/raw"))();
-end)
-
-Hub:Button("Nox ss",function()
-loadstring(game:HttpGet("https://pastefy.app/nnbXkxc8/raw"))();
 end)
 
 Hub:Button("Destruction_Hex GUI",function()
