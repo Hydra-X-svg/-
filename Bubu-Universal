@@ -178,14 +178,7 @@ game.Workspace.CurrentCamera.FieldOfView=v
 end)
 
 Player:TextBox("Cam Resolution",function(v)
-local Camera=workspace.CurrentCamera
-local Resolution=v
-getgenv().StretchActive=true
-if getgenv().StretchActive==nil then
- game:GetService("RunService").RenderStepped:Connect(function()
- Camera.CFrame=Camera.CFrame*CFrame.new(0,0,0,1,0,0,0,Resolution,0,0,0,1)
- end)
-end
+
 end)
 
 Player:Slider("Brightness",0,3,function(v)
