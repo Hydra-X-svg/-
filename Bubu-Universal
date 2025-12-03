@@ -177,7 +177,7 @@ Player:Slider("Fov",70,120,function(v)
 game.Workspace.CurrentCamera.FieldOfView=v
 end)
 
-Player:Slider("Cam Resolution",0,1,function(v)
+Player:TextBox("Cam Resolution",function(v)
 local Camera=workspace.CurrentCamera
 getgenv().setResolution=true
 getgenv().Resolution=v
