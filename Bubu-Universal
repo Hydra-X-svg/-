@@ -177,8 +177,15 @@ Player:Slider("Fov",70,120,function(v)
 game.Workspace.CurrentCamera.FieldOfView=v
 end)
 
-Player:TextBox("Cam Resolution",function(v)
-
+Player:Slider("Cam Resolution",0,1,function(v)
+local Camera=workspace.CurrentCamera
+getgenv().setResolution=true
+getgenv().Resolution=v
+if getgenv().setResolution==nil then
+ game:GetService("RunService").RenderStepped:Connect(function()
+  Camera.CFrame=Camera.CFrame*CFrame.new(0,0,0,1,0,0,0,getgenv().Resolution,0,0,0,1)
+ end)
+end
 end)
 
 Player:Slider("Brightness",0,3,function(v)
