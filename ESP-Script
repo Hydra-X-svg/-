@@ -3,7 +3,7 @@ getgenv().enabled=true
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Vcsk/RobloxScripts/main/Highlight-ESP.lua"))()
 ]]
 
-local holder=game:GetService("CoreGu"):FindFirstChild("ESPHolder") or Instance.new("Folder")
+local holder=game:GetService("CoreGui"):FindFirstChild("ESPHolder") or Instance.new("Folder")
 getgenv().enabled=true
 if enabled==false then
  holder:Destroy()
