@@ -4,7 +4,6 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Vcsk/RobloxScripts/ma
 ]]
 
 local holder=game:GetService("CoreGui"):FindFirstChild("ESPHolder") or Instance.new("Folder")
-getgenv().enabled=true
 if enabled==false then
  holder:Destroy()
 end
