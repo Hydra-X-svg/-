@@ -3,6 +3,7 @@ local Lp=plr.LocalPlayer
 local chr=Lp.Character
 local rs=game:GetService("RunService")
 local tool=chr:FindFirstChildOfClass("Tool")
+local map=game.MarketplaceService:GetProductInfo(game.PlaceId)
 local function isNumber(str)
 if tonumber(str)~=nil or str=='inf' then
  return true
@@ -63,27 +64,27 @@ end
 
 getgenv().HitboxSize=10
 getgenv().HitboxStatus=false
-getgenv().Ws=Lp.Character.Humanoid.WalkSpeed
-getgenv().Jp=Lp.Character.Humanoid.JumpPower
 getgenv().TPSpeed=1
 getgenv().TPWalk=false
 getgenv().X=nil
 getgenv().Y=nil
 getgenv().Z=nil
+getgenv().skyId=0
+getgenv().decalId=0
 
 local Library=loadstring(game:HttpGet("https://raw.githubusercontent.com/Hydra-X-svg/-/refs/heads/main/UI-Library"))()
 local Window=Library:Create("Window")
 local Home=Window:Tab("Home","rbxassetid://78780430891192")
-local Player=Window:Tab("Player","rbxassetid://112609464524168")
 local Visual=Window:Tab("Visuals","rbxassetid://133040688818305")
+local Admin=Window:Tab("F3X Panel","rbxassetid://6767454852")
 local Hub=Window:Tab("Script/Hub","rbxassetid://9940330045")
 Home:InfoLabel("Wellcome back, "..Lp.DisplayName.."!")
 Home:Section("Map Info")
-Home:Label("Creator: "..game.MarketplaceService:GetProductInfo(game.PlaceId).Creator.Name)
-Home:Button("Name: "..game.MarketplaceService:GetProductInfo(game.PlaceId).Name.."",function()
-setclipboard(game.MarketplaceService:GetProductInfo(game.PlaceId).Name)
+Home:Label("Creator: "..map.Creator.Name)
+Home:Button("Name: "..map.Name,function()
+setclipboard(map.Name)
 end)
-Home:Button("ID: "..game.PlaceId.."",function()
+Home:Button("ID: "..game.PlaceId,function()
 setclipboard(game.PlaceId)
 end)
 Home:Button("Server Players Info",function()
@@ -99,107 +100,11 @@ end)
 Home:Button("Rejoin",function()
 loadstring(game:HttpGet("https://pastefy.app/ZEmwcdQ3/raw"))();
 end)
-Home:Button("ServerHop",function()
-loadstring(game:HttpGet("https://pastefy.app/qa8R6guD/raw"))();
-end)
-Home:Button("goto NewServer",function()
+Home:Button("Small Server",function()
 loadstring(game:HttpGet("https://pastefy.app/UMVDB81V/raw"))();
 end)
-
-Player:InfoLabel("some script might be error!")
-Player:Section("About you")
-Player:Label("Today:")
-Player:Label("Name: "..Lp.DisplayName.." (@"..Lp.Name..")")
-Player:Label("ID: "..Lp.UserId)
-Player:Label("Acc Age: "..Lp.AccountAge)
-Player:Label("Language: "..game.LocalizationService.RobloxLocaleId)
-Player:Section("LocalPlayer")
-Player:TextBox("WalkSpeed",function(v)
-getgenv().Ws=v
-pcall(function()
-Lp.Character.Humanoid.WalkSpeed=v
-end)
-end)
-
-Player:Toggle("Loop WalkSpeed",function(s)
-getgenv().loopW=s
-rs.Heartbeat:Connect(function()
- if loopW==true then
-  pcall(function()
-   Lp.Character.Humanoid.WalkSpeed=Ws
-   end)
-  end
- end)
-end)
-
-Player:TextBox("JumpPower",function(v)
-getgenv().Jp=v
-pcall(function()
-Lp.Character.Humanoid.JumpPower=v
-end)
-end)
-
-Player:Toggle("Loop JumpPower",function(s)
-getgenv().loopJ=s
-rs.Heartbeat:Connect(function()
- if loopJ==true then
-  pcall(function()
-   Lp.Character.Humanoid.JumpPower=Jp
-   end)
-  end
- end)
-end)
-
-Player:TextBox("TP Speed",function(v)
-getgenv().TPSpeed=v
-end)
-
-Player:Toggle("TP Walk",function(s)
-getgenv().TPWalk=s
-local chr=Lp.Character
-local hb=rs.Heartbeat
-local hum=chr and chr:FindFirstChildWhichIsA("Humanoid")
-while getgenv().TPWalk and hb:Wait() and chr and hum and hum.Parent do
- if hum.MoveDirection.Magnitude>0 then
-  if getgenv().TPSpeed and isNumber(getgenv().TPSpeed) then
-   Lp.Character:TranslateBy(hum.MoveDirection*tonumber(getgenv().TPSpeed))
- else
-   Lp.Character:TranslateBy(hum.MoveDirection)
-  end
- end
-end
-end)
-
-Player:Slider("Fov",70,120,function(v)
-game.Workspace.CurrentCamera.FieldOfView=v
-end)
-
-Player:Slider("Brightness",0,3,function(v)
-game:GetService("Lighting").ExposureCompensation=v
-end)
-
-Player:Toggle("Noclip",function(s)
-getgenv().Noclip=s
-rs.Heartbeat:Connect(function()
- if Noclip==true then
-  rs.Stepped:wait()
-   Lp.Character.Head.CanCollide=false
-   Lp.Character.Torso.CanCollide=false
-  end
- end)
-end)
-
-Player:Toggle("Inf Jump",function(s)
-getgenv().InfJ=s
-game:GetService("UserInputService").JumpRequest:connect(function()
- if InfJ==true then
-   Lp.Character:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping")
-  end
- end)
-end)
-
-Player:Button("Copy Position",function()
-setclipboard(""..math.floor(chr.HumanoidRootPart.Position.X)..","..math.floor(chr.HumanoidRootPart.Position.Y)..","..math.floor(chr.HumanoidRootPart.Position.Z).."")
+Home:Button("ServerHop",function()
+loadstring(game:HttpGet("https://pastefy.app/qa8R6guD/raw"))();
 end)
 
 Visual:InfoLabel("some script might be error!")
@@ -247,9 +152,9 @@ end)
 Visual:Toggle("ESP [Billboard]",function(s)
 getgenv().EspBillboard=s
 if EspBillboard then
- refreshESP()
  rs.RenderStepped:Connect(function()
   if EspBillboard then
+   refreshESP()
    updateESP()
   end
  end)
@@ -263,29 +168,259 @@ for _,data in pairs(espObjects) do
 end
 end)
 
-Visual:Label("Sword Reach Script")
-Visual:TextBox("X | Front/Back",function(v)
-getgenv().X=v
-end)
-Visual:TextBox("Y | Left/Right",function(v)
-getgenv().Y=v
-end)
-Visual:TextBox("Z | Up/Down",function(v)
-getgenv().Z=v
+Visual:Section("LocalPlayer")
+Visual:TextBox("TP-Speed",function(v)
+getgenv().TPSpeed=v
 end)
 
-Visual:Button("Block Reach",function()
-local o=Instance.new("SelectionBox",tool.Handle)
-o.Adornee=tool.Handle
-o.Color3=Color3.new(0,0,0)
-o.Transparency=0.9
-tool.Handle.Shape="Block"
-tool.Handle.Size=Vector3.new(X,Y,Z)
-tool.Handle.Massless=true
+Visual:Toggle("TP-Walk",function(s)
+getgenv().TPWalk=s
+local chr=Lp.Character
+local hb=rs.Heartbeat
+local hum=chr and chr:FindFirstChildWhichIsA("Humanoid")
+while getgenv().TPWalk and hb:Wait() and chr and hum and hum.Parent do
+ if hum.MoveDirection.Magnitude>0 then
+  if getgenv().TPSpeed and isNumber(getgenv().TPSpeed) then
+   Lp.Character:TranslateBy(hum.MoveDirection*tonumber(getgenv().TPSpeed))
+ else
+   Lp.Character:TranslateBy(hum.MoveDirection)
+  end
+ end
+end
 end)
 
-Visual:Button("Clear Reach",function()
-tool.Handle.SelectionBox:Destroy()
+Visual:Toggle("Noclip",function(s)
+getgenv().Noclip=s
+if Noclip then
+ rs.Heartbeat:Connect(function()
+ if Noclip then
+  Lp.Character.Head.CanCollide=false
+  Lp.Character.Torso.CanCollide=false
+else
+  Lp.Character.Head.CanCollide=true
+  Lp.Character.Torso.CanCollide=true
+  end
+ end)
+end
+end)
+
+Visual:Toggle("Inf Jump",function(s)
+getgenv().InfJ=s
+game:GetService("UserInputService").JumpRequest:connect(function()
+ if InfJ==true then
+   Lp.Character:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping")
+  end
+ end)
+end)
+
+Visual:Slider("Fov",70,120,function(v)
+game.Workspace.CurrentCamera.FieldOfView=v
+end)
+
+Visual:Slider("Brightness",0,3,function(v)
+game.Lighting.ExposureCompensation=v
+end)
+
+Visual:Button("Copy Position",function()
+setclipboard(""..math.floor(chr.HumanoidRootPart.Position.X)..","..math.floor(chr.HumanoidRootPart.Position.Y)..","..math.floor(chr.HumanoidRootPart.Position.Z).."")
+end)
+
+Admin:InfoLabel("some script might be error!")
+Admin:Section("F3X Panel")
+Admin:Label("idk why i'am adding this, but it's useful")
+Admin:TextBox("CommadBar",function(v)
+game.ReplicatedStorage.HDAdminHDClient.Signals.RequestCommandSilent:InvokeServer(";"..v)
+end)
+Admin:Label("this script only work with [F3X/Btools]")
+Admin:TextBox("Custom Skybox",function(v)
+getgenv().skyId=v
+end)
+Admin:Button("Set Skybox",function()
+local tool
+for i,v in Lp:GetDescendants() do
+ if v.Name=="SyncAPI" then
+  tool=v.Parent
+ end
+end
+for i,v in game.ReplicatedStorage:GetDescendants() do
+ if v.Name=="SyncAPI" then
+ tool=v.Parent
+ end
+end
+function _(args)
+	tool.SyncAPI.ServerEndpoint:InvokeServer(unpack(args))
+end
+function SetCollision(part,boolean)
+local args={[1]="SyncCollision",[2]={[1]={["Part"]=part,["CanCollide"]=boolean}}}
+_(args)
+end
+function SetAnchor(boolean,part)
+local args={[1]="SyncAnchor",[2]={[1]={["Part"]=part,["Anchored"]=boolean}}}
+_(args)
+end
+function CreatePart(cf,parent)
+local args={[1]="CreatePart",[2]="Normal",[3]=cf,[4]=parent}
+_(args)
+end
+function DestroyPart(part)
+local args={[1]="Remove",[2]={[1]=part}}
+_(args)
+end
+function MovePart(part,cf)
+local args={[1]="SyncMove",[2]={[1]={["Part"]=part,["CFrame"]=cf}}}
+_(args)
+end
+function Resize(part,size,cf)
+local args={[1]="SyncResize",[2]={[1]={["Part"]=part,["CFrame"]=cf,["Size"]=size}}}
+_(args)
+end
+function AddMesh(part)
+local args={[1]="CreateMeshes",[2]={[1]={["Part"]=part}}}
+_(args)
+end
+function SetMesh(part,meshid)
+local args={[1]="SyncMesh",[2]={[1]={["Part"]=part,["MeshId"]="rbxassetid://"..meshid}}}
+_(args)
+end
+function SetTexture(part,texid)
+local args={[1]="SyncMesh",[2]={[1]={["Part"]=part,["TextureId"]="rbxassetid://"..texid}}}
+_(args)
+end
+function SetName(part,stringg)
+local args={[1]="SetName",[2]={[1]=part},[3]=stringg}
+_(args)
+end
+function MeshResize(part,size)
+local args={[1]="SyncMesh",[2]={[1]={["Part"]=part,["Scale"]=size}}}
+_(args)
+end
+function Weld(part1,part2,lead)
+local args={[1]="CreateWelds",[2]={[1]=part1,[2]=part2},[3]=lead}
+_(args)
+end
+function SetLocked(part,boolean)
+local args={[1]="SetLocked",[2]={[1]=part},[3]=boolean}
+_(args)
+end
+function SetTrans(part,int)
+local args={[1]="SyncMaterial",[2]={[1]={["Part"]=part,["Transparency"]=int}}}
+_(args)
+end
+function CreateSpotlight(part)
+local args={[1]="CreateLights",[2]={[1]={["Part"]=part,["LightType"]="SpotLight"}}}
+_(args)
+end
+function SyncLighting(part,brightness)
+local args={[1]="SyncLighting",[2]={[1]={["Part"]=part,["LightType"]="SpotLight",["Brightness"]=brightness}}}
+_(args)
+end
+function Color(part,color)
+local args={[1]="SyncColor",[2]={[1]={["Part"]=part,["Color"]=color --[[Color3]],["UnionColoring"]=false}}}
+_(args)
+end
+function SpawnDecal(part,side)
+local args={[1]="CreateTextures",[2]={[1]={["Part"]=part,["Face"]=side,["TextureType"]="Decal"}}}
+_(args)
+end
+function AddDecal(part,asset,side)
+local args={[1]="SyncTexture",[2]={[1]={["Part"]=part,["Face"]=side,["TextureType"]="Decal",["Texture"]="rbxassetid://"..asset}}}
+_(args)
+end
+function Sky(id)
+ e=chr.HumanoidRootPart.CFrame.x
+ f=chr.HumanoidRootPart.CFrame.y
+ g=chr.HumanoidRootPart.CFrame.z
+ CreatePart(CFrame.new(math.floor(e),math.floor(f),math.floor(g))+Vector3.new(0,6,0),workspace)
+ for i,v in game.Workspace:GetDescendants() do
+  if v:IsA("BasePart") and v.CFrame.x==math.floor(e) and v.CFrame.z==math.floor(g) then
+   SetName(v,"Skybox")
+   AddMesh(v)
+   SetMesh(v,"111891702759441")
+   SetTexture(v,id)
+   MeshResize(v,Vector3.new(9999,9999,9999))
+   SetLocked(v,true)
+  end
+ end
+end
+Sky(getgenv().skyId)
+end)
+Admin:TextBox("Custom Decal",function(v)
+getgenv().decalId=v
+end)
+
+Admin:Button("Set Decal",function()
+local function getf3x()
+for _,v in ipairs(Lp.Backpack:GetChildren()) do
+ if v:FindFirstChild("SyncAPI") then
+  return v
+ end
+end
+for _,v in ipairs(Lp.Character:GetChildren()) do
+ if v:FindFirstChild("SyncAPI") then
+  return v
+ end
+end
+return nil
+end
+local f3x=getf3x()
+local function createdecal(part,side)
+local args={[1]="CreateTextures",[2]={[1]={["Part"]=part,["Face"]=side,["TextureType"]="Decal"}}}
+f3x.SyncAPI.ServerEndpoint:InvokeServer(unpack(args))
+end
+local function setdecal(part,asset,side)
+local args={[1]="SyncTexture",[2]={[1]={["Part"]=part,["Face"]=side,["TextureType"]="Decal",["Texture"]="rbxassetid://"..asset}}}
+f3x.SyncAPI.ServerEndpoint:InvokeServer(unpack(args))
+end
+local function decal(id)
+ for _,v in ipairs(workspace:GetDescendants()) do
+  if v:IsA("BasePart") or v:IsA("UnionOperation") then
+   spawn(function()
+    createdecal(v,Enum.NormalId.Front)
+    createdecal(v,Enum.NormalId.Back)
+    createdecal(v,Enum.NormalId.Left)
+    createdecal(v,Enum.NormalId.Right)
+    createdecal(v,Enum.NormalId.Bottom)
+    createdecal(v,Enum.NormalId.Top)
+    setdecal(v,id,Enum.NormalId.Front)
+    setdecal(v,id,Enum.NormalId.Back)
+    setdecal(v,id,Enum.NormalId.Left)
+    setdecal(v,id,Enum.NormalId.Right)
+    setdecal(v,id,Enum.NormalId.Bottom)
+    setdecal(v,id,Enum.NormalId.Top)
+   end)
+  end
+ end
+end
+decal(getgenv().decalId)
+end)
+
+Admin:Button("Create Baseplate",function()
+loadstring(game:HttpGet("https://pastefy.app/A9Yzicrs/raw"))();
+end)
+Admin:Button("UnAnchor Map",function()
+loadstring(game:HttpGet("https://pastefy.app/loZZ2WYK/raw"))();
+end)
+Admin:Button("Delete Map",function()
+loadstring(game:HttpGet("https://pastefy.app/pnJkjxAs/raw"))();
+end)
+Admin:Label("Be careful with these script!")
+Admin:Button("Kill All",function()
+loadstring(game:HttpGet("https://pastefy.app/bsfsgJnD/raw"))();
+end)
+Admin:Button("Loop Color",function()
+loadstring(game:HttpGet("https://pastefy.app/kzTbADqG/raw"))();
+end)
+Admin:Button("Spooky Skeleton",function()
+loadstring(game:HttpGet("https://pastefy.app/DLC8iX0x/raw"))();
+end)
+Admin:Button("666",function()
+loadstring(game:HttpGet("https://pastefy.app/MUqtgjT4/raw"))();
+end)
+Admin:Button("Dream Core",function()
+loadstring(game:HttpGet("https://pastefy.app/7P40DdDp/raw"))();
+end)
+Admin:Button("Noot-Noot! (LAG WARNING)",function()
+loadstring(game:HttpGet("https://pastefy.app/MkWSZPIV/raw"))();
 end)
 
 Hub:InfoLabel("some script might be error!")
@@ -341,10 +476,6 @@ Hub:Button("Free Cam",function()
 loadstring(game:HttpGet("https://pastefy.app/RpSowSmc/raw"))();
 end)
 
-Hub:Button("Mobile Fly",function()
-loadstring(game:HttpGet("https://pastefy.app/RmTUzgds/raw"))();
-end)
-
 Hub:Button("Spectate Gui",function()
 loadstring(game:HttpGet("https://pastefy.app/gGIJypXm/raw"))();
 end)
@@ -359,8 +490,4 @@ end)
 
 Hub:Button("Destruction_Hex GUI",function()
 loadstring(game:HttpGet("https://pastefy.app/ZitGFpAy/raw"))();
-end)
-
-Hub:Button("Admin/F3X Panel",function()
-loadstring(game:HttpGet("https://pastefy.app/IPRc5PWJ/raw"))();
 end)
