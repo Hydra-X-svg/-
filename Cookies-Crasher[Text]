@@ -4,22 +4,22 @@ s.Looped=true
 s.Pitch=0.5
 s.Volume=10
 s:Play()
-while wait do task.wait()
-Instance.new("Tool",game.Players.LocalPlayer.Backpack).Name="⚠️ COOKIES VIRUS ⚠️"
-h=Instance.new("Hint",Workspace)
-text="COOKIES VIRUS ⚠️ COOKIES VIRUS ⚠️COOKIES VIRUS ⚠️ COOKIES VIRUS ⚠️ "
-warn("⚠️ COOKIES VIRUS ⚠️")
-	for _, v in pairs(game:GetDescendants()) do
-		if v:IsA("TextLabel") or v:IsA("TextBox") or v:IsA("TextButton") then
-			v.Text="⚠️ COOKIES VIRUS ⚠️"
-			task.spawn(function()
-				while true do
-					v.TextColor3=Color3.fromHSV(tick()%5/5,1,1)
-              h.Text=text
-	           text=text:sub(2)..text:sub(1,1)
-					task.wait(0.1)
-				end
-			end)
-		end
-	end
+while task.wait() do
+ h=Instance.new("Hint",Workspace)
+ text="COOKIES VIRUS ⚠️ COOKIES VIRUS ⚠️COOKIES VIRUS ⚠️ COOKIES VIRUS ⚠️ "
+ warn("⚠️ COOKIES VIRUS ⚠️")
+ Instance.new("Tool",game.Players.LocalPlayer.Backpack).Name="⚠️ COOKIES VIRUS ⚠️"
+ for _,v in pairs(game:GetDescendants()) do
+  if v:IsA("TextLabel") or v:IsA("TextBox") or v:IsA("TextButton") then
+   v.Text="⚠️ COOKIES VIRUS ⚠️"
+   task.spawn(function()
+   while true do
+    v.TextColor3=Color3.fromHSV(tick()%5/5,1,1)
+    h.Text=text
+    text=text:sub(2)..text:sub(1,1)
+    task.wait(0.1)
+   end
+  end)
+ end
+end
 end
