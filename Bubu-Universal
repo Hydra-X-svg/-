@@ -1,8 +1,6 @@
 local plr=game:GetService("Players")
 local Lp=plr.LocalPlayer
-local chr=Lp.Character
 local rs=game:GetService("RunService")
-local tool=chr:FindFirstChildOfClass("Tool")
 local map=game.MarketplaceService:GetProductInfo(game.PlaceId)
 local function isNumber(str)
 if tonumber(str)~=nil or str=='inf' then
@@ -63,20 +61,14 @@ for _,plr in pairs(plr:GetPlayers()) do
 end
 
 getgenv().HitboxSize=10
-getgenv().HitboxStatus=false
+getgenv().Hitbox=false
 getgenv().TPSpeed=1
 getgenv().TPWalk=false
-getgenv().X=nil
-getgenv().Y=nil
-getgenv().Z=nil
-getgenv().skyId=0
-getgenv().decalId=0
 
 local Library=loadstring(game:HttpGet("https://raw.githubusercontent.com/Hydra-X-svg/-/refs/heads/main/UI-Library"))()
 local Window=Library:Create("Window")
 local Home=Window:Tab("Home","rbxassetid://78780430891192")
 local Visual=Window:Tab("Visuals","rbxassetid://133040688818305")
-local Admin=Window:Tab("F3X Panel","rbxassetid://6767454852")
 local Hub=Window:Tab("Script/Hub","rbxassetid://9940330045")
 Home:InfoLabel("Wellcome back, "..Lp.DisplayName.."!")
 Home:Section("Map Info")
@@ -114,17 +106,17 @@ getgenv().HitboxSize=v
 end)
 
 Visual:Toggle("Hitbox",function(s)
-getgenv().HitboxStatus=s
+getgenv().Hitbox=s
 rs.RenderStepped:connect(function()
- if HitboxStatus==true then
-  for i,v in next,plr:GetPlayers() do
-   if v.Name~=Lp.Name then
-    pcall(function()
-     v.Character.HumanoidRootPart.Size=Vector3.new(HitboxSize,HitboxSize,HitboxSize)
-     v.Character.HumanoidRootPart.Transparency=0.9
-     v.Character.HumanoidRootPart.BrickColor=BrickColor.new("Really black")
-     v.Character.HumanoidRootPart.Material="Neon"
-     v.Character.HumanoidRootPart.CanCollide=false
+if Hitbox==true then
+ for i,v in next,plr:GetPlayers() do
+  if v.Name~=Lp.Name then
+   pcall(function()
+    v.Character.HumanoidRootPart.Size=Vector3.new(HitboxSize,HitboxSize,HitboxSize)
+    v.Character.HumanoidRootPart.Transparency=0.9
+    v.Character.HumanoidRootPart.BrickColor=BrickColor.new("Really black")
+    v.Character.HumanoidRootPart.Material="Neon"
+    v.Character.HumanoidRootPart.CanCollide=false
    end)
   end
  end
@@ -137,11 +129,11 @@ else
     v.Character.HumanoidRootPart.BrickColor=BrickColor.new("Medium stone grey")
     v.Character.HumanoidRootPart.Material="Plastic"
     v.Character.HumanoidRootPart.CanCollide=false
-     end)
-    end
+    end)
    end
   end
- end)
+ end
+end)
 end)
 
 Visual:Toggle("Highlight",function(s)
@@ -207,10 +199,10 @@ end)
 Visual:Toggle("Inf Jump",function(s)
 getgenv().InfJ=s
 game:GetService("UserInputService").JumpRequest:connect(function()
- if InfJ==true then
-   Lp.Character:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping")
-  end
- end)
+if InfJ==true then
+  Lp.Character:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping")
+ end
+end)
 end)
 
 Visual:Slider("Fov",70,120,function(v)
@@ -222,218 +214,12 @@ game.Lighting.ExposureCompensation=v
 end)
 
 Visual:Button("Copy Position",function()
-setclipboard(""..math.floor(chr.HumanoidRootPart.Position.X)..","..math.floor(chr.HumanoidRootPart.Position.Y)..","..math.floor(chr.HumanoidRootPart.Position.Z).."")
-end)
-
-Admin:InfoLabel("some script might be error!")
-Admin:Section("F3X Panel")
-Admin:Label("idk why i'am adding this, but it's useful")
-Admin:TextBox("CommadBar",function(v)
-game.ReplicatedStorage.HDAdminHDClient.Signals.RequestCommandSilent:InvokeServer(";"..v)
-end)
-Admin:Label("this script only work with [F3X/Btools]")
-Admin:TextBox("Custom Skybox",function(v)
-getgenv().skyId=v
-end)
-Admin:Button("Set Skybox",function()
-local tool
-for i,v in Lp:GetDescendants() do
- if v.Name=="SyncAPI" then
-  tool=v.Parent
- end
-end
-for i,v in game.ReplicatedStorage:GetDescendants() do
- if v.Name=="SyncAPI" then
- tool=v.Parent
- end
-end
-function _(args)
-	tool.SyncAPI.ServerEndpoint:InvokeServer(unpack(args))
-end
-function SetCollision(part,boolean)
-local args={[1]="SyncCollision",[2]={[1]={["Part"]=part,["CanCollide"]=boolean}}}
-_(args)
-end
-function SetAnchor(boolean,part)
-local args={[1]="SyncAnchor",[2]={[1]={["Part"]=part,["Anchored"]=boolean}}}
-_(args)
-end
-function CreatePart(cf,parent)
-local args={[1]="CreatePart",[2]="Normal",[3]=cf,[4]=parent}
-_(args)
-end
-function DestroyPart(part)
-local args={[1]="Remove",[2]={[1]=part}}
-_(args)
-end
-function MovePart(part,cf)
-local args={[1]="SyncMove",[2]={[1]={["Part"]=part,["CFrame"]=cf}}}
-_(args)
-end
-function Resize(part,size,cf)
-local args={[1]="SyncResize",[2]={[1]={["Part"]=part,["CFrame"]=cf,["Size"]=size}}}
-_(args)
-end
-function AddMesh(part)
-local args={[1]="CreateMeshes",[2]={[1]={["Part"]=part}}}
-_(args)
-end
-function SetMesh(part,meshid)
-local args={[1]="SyncMesh",[2]={[1]={["Part"]=part,["MeshId"]="rbxassetid://"..meshid}}}
-_(args)
-end
-function SetTexture(part,texid)
-local args={[1]="SyncMesh",[2]={[1]={["Part"]=part,["TextureId"]="rbxassetid://"..texid}}}
-_(args)
-end
-function SetName(part,stringg)
-local args={[1]="SetName",[2]={[1]=part},[3]=stringg}
-_(args)
-end
-function MeshResize(part,size)
-local args={[1]="SyncMesh",[2]={[1]={["Part"]=part,["Scale"]=size}}}
-_(args)
-end
-function Weld(part1,part2,lead)
-local args={[1]="CreateWelds",[2]={[1]=part1,[2]=part2},[3]=lead}
-_(args)
-end
-function SetLocked(part,boolean)
-local args={[1]="SetLocked",[2]={[1]=part},[3]=boolean}
-_(args)
-end
-function SetTrans(part,int)
-local args={[1]="SyncMaterial",[2]={[1]={["Part"]=part,["Transparency"]=int}}}
-_(args)
-end
-function CreateSpotlight(part)
-local args={[1]="CreateLights",[2]={[1]={["Part"]=part,["LightType"]="SpotLight"}}}
-_(args)
-end
-function SyncLighting(part,brightness)
-local args={[1]="SyncLighting",[2]={[1]={["Part"]=part,["LightType"]="SpotLight",["Brightness"]=brightness}}}
-_(args)
-end
-function Color(part,color)
-local args={[1]="SyncColor",[2]={[1]={["Part"]=part,["Color"]=color --[[Color3]],["UnionColoring"]=false}}}
-_(args)
-end
-function SpawnDecal(part,side)
-local args={[1]="CreateTextures",[2]={[1]={["Part"]=part,["Face"]=side,["TextureType"]="Decal"}}}
-_(args)
-end
-function AddDecal(part,asset,side)
-local args={[1]="SyncTexture",[2]={[1]={["Part"]=part,["Face"]=side,["TextureType"]="Decal",["Texture"]="rbxassetid://"..asset}}}
-_(args)
-end
-function Sky(id)
- e=chr.HumanoidRootPart.CFrame.x
- f=chr.HumanoidRootPart.CFrame.y
- g=chr.HumanoidRootPart.CFrame.z
- CreatePart(CFrame.new(math.floor(e),math.floor(f),math.floor(g))+Vector3.new(0,6,0),workspace)
- for i,v in game.Workspace:GetDescendants() do
-  if v:IsA("BasePart") and v.CFrame.x==math.floor(e) and v.CFrame.z==math.floor(g) then
-   SetName(v,"Skybox")
-   AddMesh(v)
-   SetMesh(v,"111891702759441")
-   SetTexture(v,id)
-   MeshResize(v,Vector3.new(9999,9999,9999))
-   SetLocked(v,true)
-  end
- end
-end
-Sky(getgenv().skyId)
-end)
-Admin:TextBox("Custom Decal",function(v)
-getgenv().decalId=v
-end)
-
-Admin:Button("Set Decal",function()
-local function getf3x()
-for _,v in ipairs(Lp.Backpack:GetChildren()) do
- if v:FindFirstChild("SyncAPI") then
-  return v
- end
-end
-for _,v in ipairs(Lp.Character:GetChildren()) do
- if v:FindFirstChild("SyncAPI") then
-  return v
- end
-end
-return nil
-end
-local f3x=getf3x()
-local function createdecal(part,side)
-local args={[1]="CreateTextures",[2]={[1]={["Part"]=part,["Face"]=side,["TextureType"]="Decal"}}}
-f3x.SyncAPI.ServerEndpoint:InvokeServer(unpack(args))
-end
-local function setdecal(part,asset,side)
-local args={[1]="SyncTexture",[2]={[1]={["Part"]=part,["Face"]=side,["TextureType"]="Decal",["Texture"]="rbxassetid://"..asset}}}
-f3x.SyncAPI.ServerEndpoint:InvokeServer(unpack(args))
-end
-local function decal(id)
- for _,v in ipairs(workspace:GetDescendants()) do
-  if v:IsA("BasePart") or v:IsA("UnionOperation") then
-   spawn(function()
-    createdecal(v,Enum.NormalId.Front)
-    createdecal(v,Enum.NormalId.Back)
-    createdecal(v,Enum.NormalId.Left)
-    createdecal(v,Enum.NormalId.Right)
-    createdecal(v,Enum.NormalId.Bottom)
-    createdecal(v,Enum.NormalId.Top)
-    setdecal(v,id,Enum.NormalId.Front)
-    setdecal(v,id,Enum.NormalId.Back)
-    setdecal(v,id,Enum.NormalId.Left)
-    setdecal(v,id,Enum.NormalId.Right)
-    setdecal(v,id,Enum.NormalId.Bottom)
-    setdecal(v,id,Enum.NormalId.Top)
-   end)
-  end
- end
-end
-decal(getgenv().decalId)
-end)
-
-Admin:Button("Create Baseplate",function()
-loadstring(game:HttpGet("https://pastefy.app/A9Yzicrs/raw"))();
-end)
-Admin:Button("UnAnchor Map",function()
-loadstring(game:HttpGet("https://pastefy.app/loZZ2WYK/raw"))();
-end)
-Admin:Button("Delete Map",function()
-loadstring(game:HttpGet("https://pastefy.app/pnJkjxAs/raw"))();
-end)
-Admin:Label("Be careful with these script!")
-Admin:Button("Kill All",function()
-loadstring(game:HttpGet("https://pastefy.app/bsfsgJnD/raw"))();
-end)
-Admin:Button("Loop Color",function()
-loadstring(game:HttpGet("https://pastefy.app/kzTbADqG/raw"))();
-end)
-Admin:Button("Spooky Skeleton",function()
-loadstring(game:HttpGet("https://pastefy.app/DLC8iX0x/raw"))();
-end)
-Admin:Button("666",function()
-loadstring(game:HttpGet("https://pastefy.app/MUqtgjT4/raw"))();
-end)
-Admin:Button("Dream Core",function()
-loadstring(game:HttpGet("https://pastefy.app/7P40DdDp/raw"))();
-end)
-Admin:Button("Noot-Noot! (LAG WARNING)",function()
-loadstring(game:HttpGet("https://pastefy.app/MkWSZPIV/raw"))();
+setclipboard(math.floor(Lp.Character.HumanoidRootPart.Position.X)..","..math.floor(Lp.Character.HumanoidRootPart.Position.Y)..","..math.floor(Lp.Character.HumanoidRootPart.Position.Z))
 end)
 
 Hub:InfoLabel("some script might be error!")
 Hub:Section("Universal")
 Hub:Label("Credits to owner of the Script/Hub/Gui!")
-Hub:Button("Universal Fling GUI",function()
-loadstring(game:HttpGet("https://pastefy.app/ZBUDxLrc/raw"))();
-end)
-
-Hub:Button("Debug Tools",function()
-loadstring(game:HttpGet("https://pastefy.app/47zYRvOO/raw"))();
-end)
-
 Hub:Button("Gubby GUI",function()
 loadstring(game:HttpGet("https://pastefy.app/RZiz9Jrg/raw"))();
 end)
@@ -444,10 +230,6 @@ end)
 
 Hub:Button("Emote (Beta) | R15",function()
 loadstring(game:HttpGet("https://api.droply.fun/raw/Emotes.lua"))()
-end)
-
-Hub:Button("P.Shader Ultimate",function()
-loadstring(game:HttpGet("https://pastefy.app/Y2VVS5DC/raw"))();
 end)
 
 Hub:Button("EpikGuy GUI v2",function()
@@ -467,19 +249,11 @@ Hub:Button("MinhNhat Hub | TSB",function()
 loadstring(game:HttpGet("https://pastefy.app/mzb1Xf1I/raw"))();
 end)
 
-Hub:Button("Fur Infection Outbreak",function()
-loadstring(game:HttpGet("https://pastefy.app/w9UImTxb/raw"))();
-end)
-
 Hub:Button("Prison Life",function()
 loadstring(game:HttpGet("https://pastefy.app/b3EVCN2z/raw"))();
 end)
 
 Hub:Section("Random Script")
-Hub:Button("Free Cam",function()
-loadstring(game:HttpGet("https://pastefy.app/RpSowSmc/raw"))();
-end)
-
 Hub:Button("Spectate Gui",function()
 loadstring(game:HttpGet("https://pastefy.app/gGIJypXm/raw"))();
 end)
@@ -494,4 +268,8 @@ end)
 
 Hub:Button("Destruction_Hex GUI",function()
 loadstring(game:HttpGet("https://pastefy.app/ZitGFpAy/raw"))();
+end)
+
+Hub:Button("F3X Gui",function()
+loadstring(game:HttpGet("https://pastefy.app/wxknqycd/raw"))();
 end)
