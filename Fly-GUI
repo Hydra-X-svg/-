@@ -1,9 +1,11 @@
 local plr=game:GetService("Players")
 local Lp=plr.LocalPlayer
+local rs=game:GetService("RunService")
+local C=Workspace.CurrentCamera
+local S=50
+local toggle=false
+local controlModule=require(Lp.PlayerScripts:WaitForChild("PlayerModule"):WaitForChild("ControlModule"))
 pcall(function()game:WaitForChild("CoreGui"):FindFirstChild("flyGui"):Destroy()end)
-local chr=Lp.Character or Lp.CharacterAdded:Wait()
-local hum=chr:WaitForChild("Humanoid")
-local Hrp=chr:WaitForChild("HumanoidRootPart")
 local gui=Instance.new("ScreenGui",game:GetService("CoreGui"))
 gui.Name="flyGui"
 gui.ResetOnSpawn=false
@@ -28,7 +30,7 @@ box.ClearTextOnFocus=true
 box.TextWrapped=true
 
 local function create(new,position,size,text,parent)
- local btn=Instance.new(new)
+ local btn=Instance.new(new,parent)
  btn.Position=position
  btn.Size=size
  btn.BackgroundColor3=Color3.new(0,0,0)
@@ -39,28 +41,58 @@ local function create(new,position,size,text,parent)
  btn.TextScaled=true
  btn.TextWrapped=true
  btn.Font="SourceSans"
- btn.Parent=parent
  return btn
 end
-
 local speed=create("TextLabel",UDim2.new(0,88,0,56),UDim2.new(0,43,0,27),"50",frame)
 local title=create("TextLabel",UDim2.new(0,88,0,0),UDim2.new(0,84,0,27),"FLY GUI",frame)
-local toggle=false
-local bv=Instance.new("BodyVelocity",Hrp)
+local bv=Instance.new("BodyVelocity",Lp.Character.HumanoidRootPart)
 bv.Name="VelocityHandler"
-bv.MaxForce=Vector3.new(9e9,9e9,9e9)
+bv.MaxForce=Vector3.new(0,0,0)
 bv.Velocity=Vector3.new(0,0,0)
-local bg=Instance.new("BodyGyro",Hrp)
+local bg=Instance.new("BodyGyro",Lp.Character.HumanoidRootPart)
 bg.Name="GyroHandler"
-bg.CFrame=Hrp.CFrame
 bg.MaxTorque=Vector3.new(9e9,9e9,9e9)
 bg.P=1000
 bg.D=50
-function stop()
-Hrp.VelocityHandler.MaxForce=Vector3.new(0,0,0)
-Hrp.GyroHandler.MaxTorque=Vector3.new(0,0,0)
+
+local Signal1
+Signal1=Lp.CharacterAdded:Connect(function(NewChar)
+local bv=Instance.new("BodyVelocity",NewChar:WaitForChild("Humanoid").RootPart)
+bv.Name="VelocityHandler"
+bv.MaxForce=Vector3.new(0,0,0)
+bv.Velocity=Vector3.new(0,0,0)
+local bg=Instance.new("BodyGyro",NewChar:WaitForChild("Humanoid").RootPart)
+bg.Name="GyroHandler"
+bg.MaxTorque=Vector3.new(9e9,9e9,9e9)
+bg.P=1000
+bg.D=50
+end)
+
+local Signal2
+Signal2=rs.RenderStepped:Connect(function()
+local hum=Lp.Character.Humanoid
+local hrp=Lp.Character.HumanoidRootPart
+if Lp.Character and Lp.Character:FindFirstChildOfClass("Humanoid") and hrp and hrp:FindFirstChild("VelocityHandler") and hrp:FindFirstChild("GyroHandler") then
+if toggle then
+hrp.VelocityHandler.MaxForce=Vector3.new(9e9,9e9,9e9)
+hrp.GyroHandler.MaxTorque=Vector3.new(9e9,9e9,9e9)
+hum.PlatformStand=true
+hum:SetStateEnabled(Enum.HumanoidStateType.Climbing,false)
+hum:SetStateEnabled(Enum.HumanoidStateType.FallingDown,false)
+hum:SetStateEnabled(Enum.HumanoidStateType.Flying,false)
+hum:SetStateEnabled(Enum.HumanoidStateType.Freefall,false)
+hum:SetStateEnabled(Enum.HumanoidStateType.GettingUp,false)
+hum:SetStateEnabled(Enum.HumanoidStateType.Jumping,false)
+hum:SetStateEnabled(Enum.HumanoidStateType.Landed,false)
+hum:SetStateEnabled(Enum.HumanoidStateType.Physics,false)
+hum:SetStateEnabled(Enum.HumanoidStateType.Running,false)
+hum:SetStateEnabled(Enum.HumanoidStateType.RunningNoPhysics,false)
+hum:SetStateEnabled(Enum.HumanoidStateType.Seated,false)
+hum:SetStateEnabled(Enum.HumanoidStateType.Swimming,false)
+elseif toggle==false then
+hrp.VelocityHandler.MaxForce=Vector3.new(0,0,0)
+hrp.GyroHandler.MaxTorque=Vector3.new(0,0,0)
 hum.PlatformStand=false
-chr.Animate.Disabled=false
 hum:SetStateEnabled(Enum.HumanoidStateType.Climbing,true)
 hum:SetStateEnabled(Enum.HumanoidStateType.FallingDown,true)
 hum:SetStateEnabled(Enum.HumanoidStateType.Flying,true)
@@ -73,38 +105,16 @@ hum:SetStateEnabled(Enum.HumanoidStateType.Running,true)
 hum:SetStateEnabled(Enum.HumanoidStateType.RunningNoPhysics,true)
 hum:SetStateEnabled(Enum.HumanoidStateType.Seated,true)
 hum:SetStateEnabled(Enum.HumanoidStateType.Swimming,true)
+return
 end
-stop()
 
-local Signal1
-local C=Workspace.CurrentCamera
-local S=50
-local controlModule=require(Lp.PlayerScripts:WaitForChild("PlayerModule"):WaitForChild("ControlModule"))
-local rs=game:GetService("RunService")
-Signal1=rs.RenderStepped:Connect(function(deltaTime)
-if toggle then
-local Hrp=chr:WaitForChild("HumanoidRootPart")
-Hrp.GyroHandler.CFrame=C.CoordinateFrame
+hrp.GyroHandler.CFrame=C.CoordinateFrame
 local D=controlModule:GetMoveVector()
-Hrp.VelocityHandler.Velocity=Vector3.new()
-if D.X>0 then Hrp.VelocityHandler.Velocity=Hrp.VelocityHandler.Velocity+C.CFrame.RightVector*(D.X*S)end
-if D.X<0 then Hrp.VelocityHandler.Velocity=Hrp.VelocityHandler.Velocity+C.CFrame.RightVector*(D.X*S)end
-if D.Z>0 then Hrp.VelocityHandler.Velocity=Hrp.VelocityHandler.Velocity-C.CFrame.LookVector*(D.Z*S)end
-if D.Z<0 then Hrp.VelocityHandler.Velocity=Hrp.VelocityHandler.Velocity-C.CFrame.LookVector*(D.Z*S)end
-end
-end)
-
-Lp.CharacterAdded:Connect(function(newChar)
-char=newChar
-hum=newChar:WaitForChild("Humanoid")
-Hrp=newChar:WaitForChild("HumanoidRootPart")
-stop()
-end)
-
-box:GetPropertyChangedSignal("Text"):Connect(function()
-if tonumber(box.Text) then
-S=tonumber(box.Text)
-speed.Text=box.Text
+hrp.VelocityHandler.Velocity=Vector3.new()
+if D.X>0 then hrp.VelocityHandler.Velocity=hrp.VelocityHandler.Velocity+C.CFrame.RightVector*(D.X*S)end
+if D.X<0 then hrp.VelocityHandler.Velocity=hrp.VelocityHandler.Velocity+C.CFrame.RightVector*(D.X*S)end
+if D.Z>0 then hrp.VelocityHandler.Velocity=hrp.VelocityHandler.Velocity-C.CFrame.LookVector*(D.Z*S)end
+if D.Z<0 then hrp.VelocityHandler.Velocity=hrp.VelocityHandler.Velocity-C.CFrame.LookVector*(D.Z*S)end
 end
 end)
 
@@ -130,7 +140,7 @@ mine.MouseButton1Down:connect(function()
    if S==1 then 
     speed.Text="cannot be less than 1"
     box.Text=speed.Text
-    wait()
+    task.wait()
     S=1
     speed.Text=S
     box.Text=S
@@ -144,42 +154,22 @@ mine.MouseButton1Down:connect(function()
  end)
 end)
 mine.MouseLeave:connect(function()if down then down:Disconnect()down=nil;end;end)
+
 local noclip=create("TextButton",UDim2.new(0,0,0,28),UDim2.new(0,43,0,27),"Noclip: Off",frame)
-local function toggleNoclip()
-On=not On
-if not chr then return end
- if On then
-  noclip.Text="Noclip: On"
-  local function KillCollisions()
-   for _, part in ipairs(chr:GetDescendants()) do
-    if part:IsA("BasePart") then
-     part.CanCollide=false
-    end
-   end
-  end  
-  KillCollisions()
-  Clip=rs.Stepped:Connect(KillCollisions)
- else
-  if Clip then
-   Clip:Disconnect()
-   Clip=nil
+noclip.MouseButton1Click:Connect(function(s)
+getgenv().Noclip=s
+if Noclip then
+ rs.Heartbeat:Connect(function()
+ if Noclip then
+  noclip.Text="On"
+  Lp.Character.Head.CanCollide=false
+  Lp.Character.Torso.CanCollide=false
+else
+  noclip.Text="Off"
+  Lp.Character.Head.CanCollide=true
+  Lp.Character.Torso.CanCollide=true
   end
- noclip.Text="Noclip: Off"
- for _, part in ipairs(chr:GetDescendants()) do
-  if part:IsA("BasePart") then
-   part.CanCollide=true
-  end
- end
-end
-end
-noclip.MouseButton1Click:Connect(toggleNoclip)
-Lp.CharacterAdded:Connect(function()
-if On then
- On=false
- if Clip then
-  Clip:Disconnect()
-  Clip=nil
- end
+ end)
 end
 end)
 
@@ -191,7 +181,7 @@ if toggle then
  up2=Up.MouseEnter:connect(function()
   while up2 do
    task.wait()
-   Hrp.CFrame=Hrp.CFrame*CFrame.new(0,1,0)
+   Lp.Character.HumanoidRootPart.CFrame=Lp.Character.HumanoidRootPart.CFrame*CFrame.new(0,1,0)
    end
   end)
  end
@@ -206,7 +196,7 @@ if toggle then
  down2=Down.MouseEnter:connect(function()
   while down2 do
    task.wait()
-   Hrp.CFrame=Hrp.CFrame*CFrame.new(0,-1,0)
+   Lp.Character.HumanoidRootPart.CFrame=Lp.Character.HumanoidRootPart.CFrame*CFrame.new(0,-1,0)
    end
   end)
  end
@@ -222,42 +212,17 @@ if toggle then
 else
   Up.Visible=true
   Down.Visible=true
-  end
  end
+end
 end)
 
 local flyBtn=create("TextButton",UDim2.new(0,132,0,56),UDim2.new(0,40,0,27),"Fly",frame)
 flyBtn.MouseButton1Click:Connect(function()
 toggle=not toggle
-if toggle==true then
-Hrp.VelocityHandler.MaxForce=Vector3.new(9e9,9e9,9e9)
-Hrp.GyroHandler.MaxTorque=Vector3.new(9e9,9e9,9e9)
-hum.PlatformStand=true
-chr.Animate.Disabled=true
-hum:SetStateEnabled(Enum.HumanoidStateType.Climbing,false)
-hum:SetStateEnabled(Enum.HumanoidStateType.FallingDown,false)
-hum:SetStateEnabled(Enum.HumanoidStateType.Flying,false)
-hum:SetStateEnabled(Enum.HumanoidStateType.Freefall,false)
-hum:SetStateEnabled(Enum.HumanoidStateType.GettingUp,false)
-hum:SetStateEnabled(Enum.HumanoidStateType.Jumping,false)
-hum:SetStateEnabled(Enum.HumanoidStateType.Landed,false)
-hum:SetStateEnabled(Enum.HumanoidStateType.Physics,false)
-hum:SetStateEnabled(Enum.HumanoidStateType.Running,false)
-hum:SetStateEnabled(Enum.HumanoidStateType.RunningNoPhysics,false)
-hum:SetStateEnabled(Enum.HumanoidStateType.Seated,false)
-hum:SetStateEnabled(Enum.HumanoidStateType.Swimming,false)
-elseif toggle==false then
-Up.Visible=false
-Down.Visible=false
-stop()
+if toggle==false then
+ Up.Visible=false
+ Down.Visible=false
 end
-end)
-
-local x=create("TextButton",UDim2.new(0,0,0,0),UDim2.new(0,43,0,27),"X",frame)
-x.MouseButton1Click:Connect(function()
-stop()
-Signal1:Disconnect()
-gui:Destroy()
 end)
 
 local mini=create("TextButton",UDim2.new(0,44,0,0),UDim2.new(0,43,0,27),"-",frame)
@@ -279,4 +244,21 @@ mine.Visible=true
 noclip.Visible=true
 UpDown.Visible=true
 end
+end)
+
+local Signal3
+Signal3=box:GetPropertyChangedSignal("Text"):Connect(function()
+if tonumber(box.Text) then
+S=tonumber(box.Text)
+speed.Text=box.Text
+end
+end)
+
+local x=create("TextButton",UDim2.new(0,0,0,0),UDim2.new(0,43,0,27),"×",frame)
+x.MouseButton1Click:Connect(function()
+Signal1:Disconnect()
+Signal2:Disconnect()
+Signal3:Disconnect()
+Lp.Character.Humanoid.Health=0
+gui:Destroy()
 end)
