@@ -1,7 +1,7 @@
-while wait do task.wait()
-	for _, v in pairs(game:GetDescendants()) do
-		if v:IsA("ImageButton") or v:IsA("ImageLabel") then
-         v.Image="rbxassetid://13948965891"
-		end
-	end
+while task.wait() do
+ for _,v in pairs(game:GetDescendants()) do
+  if v:IsA("ImageButton") or v:IsA("ImageLabel") then
+   v.Image="rbxassetid://13948965891"
+  end
+ end
 end
