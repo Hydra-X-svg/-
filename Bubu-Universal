@@ -269,3 +269,8 @@ end)
 Hub:Button("F3X Gui",function()
 loadstring(game:HttpGet("https://pastefy.app/wxknqycd/raw"))();
 end)
+
+-- Prison Life
+if game.PlaceId==155615604 then
+loadstring(game:HttpGet("https://pastefy.app/b3EVCN2z/raw"))();
+end
