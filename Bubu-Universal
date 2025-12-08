@@ -32,14 +32,14 @@ end
 local function updateESP()
 for _,plr in pairs(plr:GetPlayers()) do
  if plr~=Lp and plr.Character and plr.Character:FindFirstChild("HumanoidRootPart") then
-  local char=plr.Character
-  local rootPart=char:FindFirstChild("HumanoidRootPart")
-  local humanoid=char:FindFirstChild("Humanoid")
-  local espData=espObjects[char]
-  if rootPart and humanoid and espData then
-   local distance=(rootPart.Position-Lp.Character.HumanoidRootPart.Position).Magnitude
-   local health=math.floor(humanoid.Health)
-   local maxHealth=math.floor(humanoid.MaxHealth)
+  local chr=plr.Character
+  local hrp=chr:FindFirstChild("HumanoidRootPart")
+  local hum=chr:FindFirstChild("Humanoid")
+  local espData=espObjects[chr]
+  if hrp and hum and espData then
+   local distance=(hrp.Position-Lp.Character.HumanoidRootPart.Position).Magnitude
+   local health=math.floor(hum.Health)
+   local maxHealth=math.floor(hum.MaxHealth)
    espData[3].Text=string.format("%.1fm | %d/%d HP | %s",distance,health,maxHealth,plr.DisplayName)
    end
   end
