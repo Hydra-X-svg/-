@@ -220,8 +220,8 @@ end)
 Hub:InfoLabel("some script might be error!")
 Hub:Section("Universal")
 Hub:Label("Credits to owner of the Script/Hub/Gui!")
-Hub:Button("Gubby GUI",function()
-loadstring(game:HttpGet("https://pastefy.app/RZiz9Jrg/raw"))();
+Hub:Button("Game Hub v3",function()
+loadstring(game:HttpGet("https://pastefy.app/GjV9uqPO/raw"))();
 end)
 
 Hub:Button("Slicer FE V8.0.0",function()
@@ -247,10 +247,6 @@ end)
 
 Hub:Button("MinhNhat Hub | TSB",function()
 loadstring(game:HttpGet("https://pastefy.app/mzb1Xf1I/raw"))();
-end)
-
-Hub:Button("Prison Life",function()
-loadstring(game:HttpGet("https://pastefy.app/b3EVCN2z/raw"))();
 end)
 
 Hub:Section("Random Script")
