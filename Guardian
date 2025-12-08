@@ -512,4 +512,77 @@ if hookmetamethod then
 				options.Output("Script attempted to place a basic bee egg, potentially a fake dupe. Attempt denied.")
 				return
 			elseif cGame.PlaceId==8737899170 and options.PetSim99 and self==bank99 and method=="InvokeServer" then
-				options.Output("Script attempt
+				options.Output("Script attempted to access the bank. Attempt denied.")
+				return
+			end
+		end
+		return old1(self,...)
+	end))
+	if getproperties then
+		repeat task.wait()until #Char:GetChildren()>0
+		for i,v in next,Char:GetChildren() do
+			savedProps[v]={}
+			for i2,v2 in next,getproperties(v) do
+				if typeof(v2)~="Vector3" and typeof(v2)~="CFrame" then
+					savedProps[v][i2]=v2
+				end
+			end
+		end
+		old2=hookmetamethod(game,"__index",newcclosure(function(self,b,...)
+			local outerProp = rawget(savedProps,self)
+			local prop = rawget(outerProp,b)
+			if not checkcaller() and outerProp and prop and rawget(options,"BasicAntiCheatBypass") then
+				return prop
+			end
+			return old2(self,b,...)
+		end))
+	end
+end
+if is_sirhurt_closure then
+    local namecallSirhurt=(function()
+        local actual={}
+        for i,v in next,namecall do
+            for i2,v2 in next,v do
+                table.insert(actual,i.."."..i2)
+            end
+        end
+        return actual
+    end)()
+    for i,v in next, namecallSirhurt do
+        local oldSir
+        oldSir=hookfunction(v:split(".")[1]=="DataModel" and cGame[v:split(".")[2]] or cGame[v:split(".")[1]][v:split(".")[2]],function(...)
+            if options.MaliciousNamecalls.Enabled then
+                options.Output(("Malicious function%s attempted execution. Attempt denied."):format(options.MaliciousNamecalls.ShowNamecall and " game."..(i~="DataModeL"and i.."."..i2) or i2 or "")) 
+                if not checkcaller() then
+		    return oldSir(...)
+		end
+		return nil
+            end
+            return oldSir(...)
+        end)
+    end
+    
+end
+
+if options.ClearTrace then
+    for i,v in next,getgc()do
+        if typeof(v)=="function" and execlosure(v) then
+            v=nil
+        end
+    end
+end
+if options.Error then
+    for i,v in next,getconnections(cGame:GetService("ScriptContext").Error) do
+	v:Disable()
+    end
+end
+if options.Message then
+    for i,v in next,getconnections(cGame:GetService("LogService").MessageOut) do
+	v:Disable()
+    end
+end
+if options.AntiIdle then
+    for i,v in next,getconnections(LocalPlayer.Idled) do
+	v:Disable()
+    end
+end
