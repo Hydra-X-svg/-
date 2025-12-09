@@ -265,79 +265,79 @@ else
    end
 end)
 
-local os = createTextButton(UDim2.new(0, 5, 0, 5), UDim2.new(0, 70, 0, 35), "os", 12, "Shutdown", scroll4)
+local os=createTextButton(UDim2.new(0,5,0,5),UDim2.new(0,70,0,35),"os",12,"Shutdown",scroll4)
 os.MouseButton1Click:Connect(function()
-box.Text='require(90189679709013).shutdown("'..player.Name..'", "Server Is Shutdown")'
+box.Text='require(90189679709013).shutdown("'..player.Name..'","Server Is Shutdown")'
 end)
 
-local os = createTextButton(UDim2.new(0, 81, 0, 5), UDim2.new(0, 70, 0, 35), "os", 10, "Gravity Hammer", scroll4)
+local os=createTextButton(UDim2.new(0,81,0,5),UDim2.new(0,70,0,35),"os",10,"Gravity Hammer",scroll4)
 os.MouseButton1Click:Connect(function()
 execute('require(12012115295).load("'..player.Name..'")')
 end)
 
-local os = createTextButton(UDim2.new(0, 157, 0, 5), UDim2.new(0, 70, 0, 35), "os", 10, "Kick Hammer Gun", scroll4)
+local os=createTextButton(UDim2.new(0,157,0,5),UDim2.new(0,70,0,35),"os",10,"Kick Hammer Gun",scroll4)
 os.MouseButton1Click:Connect(function()
 execute('require(2555964157).doom("'..player.Name..'")')
 end)
 
-local os = createTextButton(UDim2.new(0, 233, 0, 5), UDim2.new(0, 70, 0, 35), "os", 12, "Ban Hammer", scroll4)
+local os=createTextButton(UDim2.new(0,233,0,5),UDim2.new(0,70,0,35),"os",12,"Ban Hammer",scroll4)
 os.MouseButton1Click:Connect(function()
 execute('require(5448035802).Hammer("'..player.Name..'","BanHammer")')
 end)
 
-local os = createTextButton(UDim2.new(0, 309, 0, 5), UDim2.new(0, 70, 0, 35), "os", 16, "F3X", scroll4)
+local os=createTextButton(UDim2.new(0,309,0,5),UDim2.new(0,70,0,35),"os",16,"F3X",scroll4)
 os.MouseButton1Click:Connect(function()
 execute('require(4869378421).F3X("'..player.Name..'")')
 end)
 
-local os = createTextButton(UDim2.new(0, 385, 0, 5), UDim2.new(0, 70, 0, 35), "os", 12, "furry converter", scroll4)
+local os=createTextButton(UDim2.new(0,385,0,5),UDim2.new(0,70,0,35),"os",12,"furry converter",scroll4)
 os.MouseButton1Click:Connect(function()
 execute('require(91076156758428)("'..player.Name..'")')
 end)
 
-local os = createTextButton(UDim2.new(0, 461, 0, 5), UDim2.new(0, 70, 0, 35), "os", 14, "volt bike", scroll4)
+local os=createTextButton(UDim2.new(0,461,0,5),UDim2.new(0,70,0,35),"os",14,"volt bike",scroll4)
 os.MouseButton1Click:Connect(function()
 execute('require(4021975182).load("'..player.Name..'")')
 end)
 
-local os = createTextButton(UDim2.new(0, 537, 0, 5), UDim2.new(0, 70, 0, 35), "os", 14, "Hyper Car", scroll4)
+local os=createTextButton(UDim2.new(0,537,0,5),UDim2.new(0,70,0,35),"os",14,"Hyper Car",scroll4)
 os.MouseButton1Click:Connect(function()
 execute('require(5874393699).load("'..player.Name..'")')
 end)
 
-local os = createTextButton(UDim2.new(0, 613, 0, 5), UDim2.new(0, 70, 0, 35), "os", 12, "Yuta Movement", scroll4)
+local os=createTextButton(UDim2.new(0,613,0,5),UDim2.new(0,70,0,35),"os",12,"Neko",scroll4)
 os.MouseButton1Click:Connect(function()
-execute('require(89529616632600)("'..player.Name..'", "Yuta")')
+execute('')
 end)
 
-local os = createTextButton(UDim2.new(0, 689, 0, 5), UDim2.new(0, 70, 0, 35), "os", 10, "Ichigo Movement", scroll4)
+local os=createTextButton(UDim2.new(0,689,0,5),UDim2.new(0,70,0,35),"os",10,"Ichigo Movement",scroll4)
 os.MouseButton1Click:Connect(function()
-execute('require(89529616632600)("'..player.Name..'", "Ichigo")')
+execute('require(89529616632600)("'..player.Name..'","Ichigo")')
 end)
 
-local os = createTextButton(UDim2.new(0, 765, 0, 5), UDim2.new(0, 70, 0, 35), "os", 10, "Aizen Movement", scroll4)
+local os=createTextButton(UDim2.new(0,765,0,5),UDim2.new(0,70,0,35),"os",10,"Aizen Movement",scroll4)
 os.MouseButton1Click:Connect(function()
-execute('require(89529616632600)("'..player.Name..'", "Aizen")')
+execute('require(89529616632600)("'..player.Name..'","Aizen")')
 end)
 
-local os = createTextButton(UDim2.new(0, 841, 0, 5), UDim2.new(0, 70, 0, 35), "os", 12, "Baby Trower", scroll4)
+local os=createTextButton(UDim2.new(0,841,0,5),UDim2.new(0,70,0,35),"os",12,"Baby Trower",scroll4)
 os.MouseButton1Click:Connect(function()
 execute('require(16991251417)("'..player.Name..'")')
 end)
 
-local os = createTextButton(UDim2.new(0, 841, 0, 5), UDim2.new(0, 70, 0, 35), "os", 14, "Inc Gun", scroll4)
+local os=createTextButton(UDim2.new(0,841,0,5),UDim2.new(0, 70, 0, 35),"os",14,"Inc Gun",scroll4)
 os.MouseButton1Click:Connect(function()
 execute('require(16668929184).load("'..player.Name..'","asd")')
 end)
 
-local os = createTextButton(UDim2.new(0, 917, 0, 5), UDim2.new(0, 70, 0, 35), "os", 12, "SubStrike", scroll4)
+local os=createTextButton(UDim2.new(0,917,0,5),UDim2.new(0,70,0,35),"os",12,"Combat Weapon",scroll4)
 os.MouseButton1Click:Connect(function()
-execute('require(14775634069)("'..player.Name..'")')
+execute('require(10051684510).tool("'..player.Name..'","M")')
 end)
 
-local os = createTextButton(UDim2.new(0, 993, 0, 5), UDim2.new(0, 70, 0, 35), "os", 12, "", scroll4)
+local os=createTextButton(UDim2.new(0,993,0,5),UDim2.new(0, 70, 0, 35),"os",12,"SubStrike",scroll4)
 os.MouseButton1Click:Connect(function()
-execute('')
+execute('require(14775634069)("'..player.Name..'")')
 end)
 
 local guis = createTextButton(UDim2.new(0, 5, 0, 5), UDim2.new(0, 56, 0, 35),"guis",8, "Team fat Gui v21", scroll)
