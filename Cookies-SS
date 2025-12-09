@@ -307,9 +307,7 @@ end)
 
 local os=createTextButton(UDim2.new(0,613,0,5),UDim2.new(0,70,0,35),"os",12,"Neko",scroll4)
 os.MouseButton1Click:Connect(function()
-execute('require(128475652583968)(player.Name,"script()")
---[[\nBearNeko\nBunnyNeko\nCerberusNeko\nMaidNeko\nNekoV2\nNekoV6.9
-VNDNeko\nWhiteNeko\nYellowNeko\n]]')
+execute('require(128475652583968)(player.Name,"script()"')
 end)
 
 local os=createTextButton(UDim2.new(0,689,0,5),UDim2.new(0,70,0,35),"os",10,"Ichigo Movement",scroll4)
