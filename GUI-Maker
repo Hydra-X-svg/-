@@ -2,10 +2,10 @@
 local plr=game:GetService("Players")
 local Lp=plr.LocalPlayer
 local UserInputService=game:GetService("UserInputService")
-pcall(function()game:GetService("CoreGui")[""]:FindFirstChild("GUI-Maker")Destroy()end)
-local gui=Instance.new("ScreenGui",game:GetService("CoreGui"))
+pcall(function()game:GetService("CoreGui")["567b00fbbafaef99b82d83912da8c3d3f781eace0472e706b61338b20f88a9c3"]:FindFirstChild("GUI-Maker")Destroy()end)
+local gui=Instance.new("ScreenGui",getfenv().gethui and getfenv().gethui() or game:GetService("CoreGui") or Lp:WaitForChild("PlayerGui"))
 gui.Name="GUI-Maker"
-gui.DisplayOrder=999
+gui.DisplayOrder=math.huge
 gui.ResetOnSpawn=false
 
 local function create(new,pos,size,parent)
