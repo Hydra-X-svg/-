@@ -88,7 +88,7 @@ local function create2(pos,size,textSize,text,parent)
  return btn
 end
 
-local x=create2(UDim2.new(0,220,0,10),UDim2.new(0,20,0,20),16,"X",frame)
+local x=create2(UDim2.new(0,220,0,10),UDim2.new(0,20,0,20),16,"×",frame)
 x.MouseButton1Click:Connect(function()
 gui:Destroy()
 end)
