@@ -62,6 +62,8 @@ end
 
 getgenv().HitboxSize=10
 getgenv().Hitbox=false
+getgenv().Ws=Lp.Character.Humanoid.WalkSpeed
+getgenv().Jp=Lp.Character.Humanoid.JumpPower
 getgenv().TPSpeed=1
 getgenv().TPWalk=false
 
@@ -163,6 +165,42 @@ end)
 Visual:Section("LocalPlayer")
 Visual:TextBox("TP-Speed",function(v)
 getgenv().TPSpeed=v
+end)
+
+Visual:TextBox("WalkSpeed",function(v)
+getgenv().Ws=v
+pcall(function()
+ Lp.Character.Humanoid.WalkSpeed=v
+end)
+end)
+
+Visual:Toggle("Loop WalkSpeed",function(s)
+getgenv().loopW=s
+rs.Heartbeat:Connect(function()
+if loopW==true then
+ pcall(function()
+  Lp.Character.Humanoid.WalkSpeed=Ws
+  end)
+ end
+end)
+end)
+
+Visual:TextBox("JumpPower",function(v)
+getgenv().Jp=v
+pcall(function()
+ Lp.Character.Humanoid.JumpPower=v
+end)
+end)
+
+Visual:Toggle("Loop JumpPower",function(s)
+getgenv().loopJ=s
+rs.Heartbeat:Connect(function()
+if loopJ==true then
+ pcall(function()
+  Lp.Character.Humanoid.JumpPower=Ws
+  end)
+ end
+end)
 end)
 
 Visual:Toggle("TP-Walk",function(s)
