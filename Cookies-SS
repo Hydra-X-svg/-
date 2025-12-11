@@ -687,3 +687,113 @@ local ss=create2(UDim2.new(0,189,0,415),UDim2.new(0,56,0,35),10,"Backrooms",scro
 ss.MouseButton1Click:Connect(function()
 exe('')
 end)
+
+local map=create2(UDim2.new(0,5,0,5),UDim2.new(0,56,0,35),10,"Backrooms",scroll3)
+map.MouseButton1Click:Connect(function()
+exe('require(12313683305).backrooms()')
+end)
+
+local map=create2(UDim2.new(0,66,0,5),UDim2.new(0,56,0,35),8,"Golden Corral's",scroll3)
+map.MouseButton1Click:Connect(function()
+exe('require(91736492445221).goldencorral()')
+end)
+
+local map=create2(UDim2.new(0,128,0,5),UDim2.new(0,56,0,35),12,"Obby Map",scroll3)
+map.MouseButton1Click:Connect(function()
+exe('require(7977633723).thisbacon()')
+end)
+
+local map=create2(UDim2.new(0,189,0,5),UDim2.new(0,56,0,35),8,"Mountain House",scroll3)
+map.MouseButton1Click:Connect(function()
+exe('require(7993365051).CLoad()')
+end)
+
+local map=create2(UDim2.new(0,5,0,46),UDim2.new(0,56,0,35),10,"The Refinary",scroll3)
+map.MouseButton1Click:Connect(function()
+exe('require(14080317322).Refinary()')
+end)
+
+local map=create2(UDim2.new(0,66,0,46),UDim2.new(0,56,0,35),10,"Tantive Space",scroll3)
+map.MouseButton1Click:Connect(function()
+exe('require(4081020916).loadmap()')
+end)
+
+local map=create2(UDim2.new(0,128,0,46),UDim2.new(0,56,0,35),10,"CS:GO Office",scroll3)
+map.MouseButton1Click:Connect(function()
+exe('require(3155301605).loadmap()')
+end)
+
+local map=create2(UDim2.new(0,189,0,46),UDim2.new(0,56,0,35),12,"Guest house",scroll3)
+map.MouseButton1Click:Connect(function()
+exe('require(4063168815).loadmap()')
+end)
+
+local map=create2(UDim2.new(0,5,0,87),UDim2.new(0,56,0,35),10,"Space Elevator",scroll3)
+map.MouseButton1Click:Connect(function()
+exe('require(5702244094).space("'..Lp.Name..'")')
+end)
+
+local map=create2(UDim2.new(0,66,0,87),UDim2.new(0,56,0,35),14,"mosque",scroll3)
+map.MouseButton1Click:Connect(function()
+exe('require(122050532527015).mosque("'..Lp.Name..'")')
+end)
+
+local map=create2(UDim2.new(0,128,0,87),UDim2.new(0,56,0,35),16,"NDS",scroll3)
+map.MouseButton1Click:Connect(function()
+exe('require(14704225060).nds("'..Lp.Name..'")')
+end)
+
+local map=create2(UDim2.new(0,189,0,87),UDim2.new(0, 56, 0,35),10,"Prison life",scroll3)
+map.MouseButton1Click:Connect(function()
+exe('require(14314506567).Load(PrisonLife)')
+end)
+
+local map=create2(UDim2.new(0,5,0,128),UDim2.new(0,56,0,35),10,"2006 Map",scroll3)
+map.MouseButton1Click:Connect(function()
+exe('require(6929171488).loadMap()')
+end)
+
+local map=create2(UDim2.new(0,66,0,128),UDim2.new(0,56,0,35),10,"Mc Donalds",scroll3)
+map.MouseButton1Click:Connect(function()
+exe('require(3168737443).load()')
+end)
+
+local map=create2(UDim2.new(0,128,0,128),UDim2.new(0,56,0,35),10,"Dance Devils",scroll3)
+map.MouseButton1Click:Connect(function()
+exe('require(6599453106).load()')
+end)
+
+local map=create2(UDim2.new(0,189,0,128),UDim2.new(0,56,0,35),14,"Forest",scroll3)
+map.MouseButton1Click:Connect(function()
+exe('require(16991266419)()')
+end)
+
+local map=create2(UDim2.new(0,5,0,169),UDim2.new(0,56,0,35),16,"KFC",scroll3)
+map.MouseButton1Click:Connect(function()
+exe('require(16662863386).kfc()')
+end)
+
+local map=create2(UDim2.new(0,66,0,169),UDim2.new(0,56,0,35),8,"Indian Scam Center",scroll3)
+map.MouseButton1Click:Connect(function()
+exe('require(16662858613).load("'..Lp.Name..'")')
+end)
+
+local map=create2(UDim2.new(0,128,0,169),UDim2.new(0,56,0,35),8,"Lil Nas X Concert",scroll3)
+map.MouseButton1Click:Connect(function()
+exe('require(16662877421).panini()')
+end)
+
+local map=create2(UDim2.new(0,189,0,169),UDim2.new(0,56,0,35),10,"Waterpark",scroll3)
+map.MouseButton1Click:Connect(function()
+exe('require(4781260949)()')
+end)
+
+local map=create2(UDim2.new(0,189,0,169),UDim2.new(0,56,0,35),10,"Spongebob",scroll3)
+map.MouseButton1Click:Connect(function()
+exe('require(16668637411).asd()')
+end)
+
+local map=create2(UDim2.new(0,189,0,169),UDim2.new(0,56,0,35),7,"Zombie Apacolaypse",scroll3)
+map.MouseButton1Click:Connect(function()
+exe('require(12653566767).load("'..Lp.Name..'")')
+end)
