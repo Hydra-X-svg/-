@@ -163,10 +163,6 @@ end
 end)
 
 Visual:Section("LocalPlayer")
-Visual:TextBox("TP-Speed",function(v)
-getgenv().TPSpeed=v
-end)
-
 Visual:TextBox("WalkSpeed",function(v)
 getgenv().Ws=v
 pcall(function()
@@ -201,6 +197,10 @@ if loopJ==true then
   end)
  end
 end)
+end)
+
+Visual:TextBox("TP-Speed",function(v)
+getgenv().TPSpeed=v
 end)
 
 Visual:Toggle("TP-Walk",function(s)
