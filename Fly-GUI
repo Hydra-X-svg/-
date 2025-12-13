@@ -5,8 +5,8 @@ local C=Workspace.CurrentCamera
 local S=50
 local toggle=false
 local controlModule=require(Lp.PlayerScripts:WaitForChild("PlayerModule"):WaitForChild("ControlModule"))
-pcall(function()game:WaitForChild("CoreGui"):FindFirstChild("flyGui"):Destroy()end)
-local gui=Instance.new("ScreenGui",game:GetService("CoreGui"))
+pcall(function()game:GetService("CoreGui"):FindFirstChild("flyGui"):Destroy()end)
+local gui=Instance.new("ScreenGui",game:GetService("CoreGui") or Lp:WaitForChild("PlayerGui"))
 gui.Name="flyGui"
 gui.ResetOnSpawn=false
 
@@ -15,19 +15,6 @@ frame.Position=UDim2.new(0,-43,0,-2)
 frame.Size=UDim2.new(0, 171, 0, 27)
 frame.Active=true
 frame.Draggable=true
-
-local box=Instance.new("TextBox",frame)
-box.Position=UDim2.new(0,88,0,28)
-box.Size=UDim2.new(0,84,0,27)
-box.BackgroundColor3=Color3.new(0,0,0)
-box.BorderColor3=Color3.new(1,1,1)
-box.Font="SourceSans"
-box.Text="50"
-box.PlaceholderText="Number..."
-box.TextSize=12
-box.TextColor3=Color3.new(1,1,1)
-box.ClearTextOnFocus=true
-box.TextWrapped=true
 
 local function create(new,position,size,text,parent)
  local btn=Instance.new(new,parent)
@@ -43,6 +30,10 @@ local function create(new,position,size,text,parent)
  btn.Font="SourceSans"
  return btn
 end
+local box=create("TextBox",UDim2.new(0,88,0,28),UDim2.new(0,84,0,27),"50",frame)
+box.PlaceholderText="Number..."
+box.TextSize=12
+box.ClearTextOnFocus=true
 local speed=create("TextLabel",UDim2.new(0,88,0,56),UDim2.new(0,43,0,27),"50",frame)
 local title=create("TextLabel",UDim2.new(0,88,0,0),UDim2.new(0,84,0,27),"FLY GUI",frame)
 local bv=Instance.new("BodyVelocity",Lp.Character.HumanoidRootPart)
@@ -155,26 +146,7 @@ mine.MouseButton1Down:connect(function()
 end)
 mine.MouseLeave:connect(function()if down then down:Disconnect()down=nil;end;end)
 
-local noclip=create("TextButton",UDim2.new(0,0,0,28),UDim2.new(0,43,0,27),"Noclip: Off",frame)
-noclip.MouseButton1Click:Connect(function(s)
-getgenv().Noclip=s
-if Noclip then
- rs.Heartbeat:Connect(function()
- if Noclip then
-  noclip.Text="On"
-  Lp.Character.Head.CanCollide=false
-  Lp.Character.Torso.CanCollide=false
-else
-  noclip.Text="Off"
-  Lp.Character.Head.CanCollide=true
-  Lp.Character.Torso.CanCollide=true
-  end
- end)
-end
-end)
-
-local Up=create("TextButton",UDim2.new(1,-86,0,190),UDim2.new(0,50,0,50),"↑",gui)
-Up.Visible=false
+local Up=create("TextButton",UDim2.new(0,0,0,28),UDim2.new(0,43,0,27),"↑",frame)
 local up2
 Up.MouseButton1Down:connect(function()
 if toggle then
@@ -188,8 +160,7 @@ if toggle then
 end)
 Up.MouseLeave:connect(function()if up2 then up2:Disconnect()up2=nil;end;end)
 
-local Down=create("TextButton",UDim2.new(1,-86,0,250),UDim2.new(0,50,0,50),"↓",gui)
-Down.Visible=false
+local Down=create("TextButton",UDim2.new(0,0,0,56),UDim2.new(0,43,0,27),"↓",frame)
 local down2
 Down.MouseButton1Down:connect(function()
 if toggle then
@@ -203,54 +174,37 @@ if toggle then
 end)
 Down.MouseLeave:connect(function()if down2 then down2:Disconnect()down2=nil;end;end)
 
-local UpDown=create("TextButton",UDim2.new(0,0,0,56),UDim2.new(0,43,0,27),"Up/Down",frame)
-UpDown.MouseButton1Click:Connect(function()
-if toggle then
- if Up.Visible then
-  Up.Visible=false
-  Down.Visible=false
-else
-  Up.Visible=true
-  Down.Visible=true
- end
-end
-end)
-
 local flyBtn=create("TextButton",UDim2.new(0,132,0,56),UDim2.new(0,40,0,27),"Fly",frame)
 flyBtn.MouseButton1Click:Connect(function()
 toggle=not toggle
-if toggle==false then
- Up.Visible=false
- Down.Visible=false
-end
 end)
 
 local mini=create("TextButton",UDim2.new(0,44,0,0),UDim2.new(0,43,0,27),"-",frame)
 mini.MouseButton1Click:Connect(function()
 if box.Visible then
-box.Visible=false
-speed.Visible=false
-flyBtn.Visible=false
-plus.Visible=false
-mine.Visible=false
-noclip.Visible=false
-UpDown.Visible=false
+ box.Visible=false
+ speed.Visible=false
+ flyBtn.Visible=false
+ plus.Visible=false
+ mine.Visible=false
+ Down.Visible=false
+ Up.Visible=false
 else
-box.Visible=true
-speed.Visible=true
-flyBtn.Visible=true
-plus.Visible=true
-mine.Visible=true
-noclip.Visible=true
-UpDown.Visible=true
+ box.Visible=true
+ speed.Visible=true
+ flyBtn.Visible=true
+ plus.Visible=true
+ mine.Visible=true
+ Down.Visible=true
+ Up.Visible=true
 end
 end)
 
 local Signal3
 Signal3=box:GetPropertyChangedSignal("Text"):Connect(function()
 if tonumber(box.Text) then
-S=tonumber(box.Text)
-speed.Text=box.Text
+ S=tonumber(box.Text)
+ speed.Text=box.Text
 end
 end)
 
@@ -259,6 +213,5 @@ x.MouseButton1Click:Connect(function()
 Signal1:Disconnect()
 Signal2:Disconnect()
 Signal3:Disconnect()
-Lp.Character.Humanoid.Health=0
 gui:Destroy()
 end)
