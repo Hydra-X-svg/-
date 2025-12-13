@@ -4,8 +4,6 @@ local gui=Instance.new("ScreenGui",getfenv().gethui and getfenv().gethui() or ga
 gui.Name="UI_"..tostring(math.random(1,100))..tostring(math.random(1,50))..tostring(math.random(1,100))..tostring(math.random(1,50))..tostring(math.random(1,100))..tostring(math.random(1,50))..tostring(math.random(1,100))
 gui.DisplayOrder=9999
 gui.ResetOnSpawn=false
-gui.IgnoreGuiInset=true
-gui.Enabled=true
 
 local function uis(parent)
  local Uis=Instance.new("UIStroke",parent)
