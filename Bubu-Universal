@@ -280,7 +280,7 @@ end)
 
 Hub:Section("Game Hub")
 Hub:Button("Banana Hub | BF",function()
-
+loadstring(game:HttpGet("https://pastefy.app/V5i59s9H/raw"))()
 end)
 
 Hub:Button("Six Hub | NSS",function()
