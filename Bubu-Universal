@@ -279,6 +279,10 @@ loadstring(game:HttpGet("https://pastefy.app/XHqVeb0d/raw"))();
 end)
 
 Hub:Section("Game Hub")
+Hub:Button("Banana Hub | BF",function()
+
+end)
+
 Hub:Button("Six Hub | NSS",function()
 loadstring(game:HttpGet("https://pastefy.app/KvIrfhdW/raw"))();
 end)
