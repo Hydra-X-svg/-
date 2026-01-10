@@ -314,5 +314,5 @@ end)
 
 -- Prison Life
 if game.PlaceId==155615604 then
-loadstring(game:HttpGet("https://pastefy.app/b3EVCN2z/raw"))();
+loadstring(game:HttpGet("https://pastefy.app/ZaUSG4Tt/raw"))();
 end
